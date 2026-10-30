@@ -77,7 +77,7 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
 <tr><td>B. Nord, ringhiera Est/Ovest, 800 W, 700 €, base 150 W</td><td>387</td><td>93%</td><td>≈97 €</td><td>≈6,9 anni</td></tr>
 <tr><td>C. Sud, staffe inclinate a Sud, 800 W, 600 €, base 300 W, 5% ombra</td><td>1.013</td><td>84%</td><td>≈230 €</td><td>≈2,6 anni</td></tr>
 <tr><td>D. Come A, con detrazione 50% in 10 anni</td><td>607</td><td>92%</td><td>≈150 € + 35 €</td><td>≈3,7 anni</td></tr>
-<tr><td>E. Centro, ringhiera Sud, 400 W, 400 €</td><td>303</td><td>100%</td><td>≈82 €</td><td>≈4,8 anni</td></tr>
+<tr><td>E. Centro, ringhiera Sud, 400 W, 400 €</td><td>303</td><td>100%</td><td>≈82 €</td><td>≈4,7 anni</td></tr>
 <tr><td>F. Come A, ma prezzo 0,22 €/kWh</td><td>607</td><td>92%</td><td>≈123 €</td><td>≈5,5 anni</td></tr>
 <tr><td>G. Come A, ma casa vuota di giorno (base 100 W)</td><td>607</td><td>55%</td><td>≈90 €</td><td>≈7,4 anni</td></tr>
 </table>
@@ -86,7 +86,7 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
 <h2>Cosa ci dicono i numeri</h2>
 <ul>
 <li><b>L'orientamento conta piu' della regione.</b> Passare da ringhiera Est/Ovest a staffe inclinate verso Sud vale piu' che trasferirsi da Milano a Palermo.</li>
-<li><b>Un kit da 400 W puo' essere la scelta piu' furba</b> se il consumo di base e' basso: costa meno e lo autoconsumi tutto, con un rientro quasi uguale.</li>
+<li><b>Un kit da 400 W puo' essere la scelta piu' furba</b> se il consumo di base e' basso: costa meno e lo autoconsumi tutto, con un rientro quasi uguale. Il confronto completo e' in <a href="../fotovoltaico-balcone-400-o-800-w/">400 W o 800 W?</a></li>
 <li><b>La casa vuota di giorno e' il vero nemico.</b> Nello scenario G quasi meta' della produzione regala energia alla rete. Programmare lavatrice, lavastoviglie e scaldabagno nelle ore di sole sposta il risultato piu' di qualsiasi detrazione.</li>
 <li><b>La detrazione aiuta, ma non e' decisiva:</b> su 700 € vale 35 € l'anno per 10 anni e accorcia il rientro di meno di un anno. Serve anche capienza IRPEF.</li>
 </ul>
@@ -102,8 +102,8 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
 
 <h2>Prima di comprare: le verifiche</h2>
 <ul>
-<li>Microinverter <b>certificato CEI 0-21</b> e potenza complessiva non superiore a <b>800 W</b> per l'iter semplificato.</li>
-<li><b>Comunicazione al distributore di rete</b> prima della messa in esercizio (es. tramite Modello Unico semplificato): serve anche perche' il contatore registri correttamente l'energia.</li>
+<li>Microinverter <b>certificato CEI 0-21</b> e potenza <b>inferiore a 800 W</b> per la connessione semplificata (delibera ARERA 315/2020/R/eel; i "Plug &amp; Play" veri e propri arrivano a 350 W).</li>
+<li><b>Comunicazione al distributore di rete</b> prima della messa in esercizio (la <b>Comunicazione Unica</b> prevista da ARERA, senza corrispettivi e con rinuncia alla remunerazione dell'energia immessa): serve anche perche' il contatore registri correttamente l'energia.</li>
 <li>Regolamento di condominio, eventuali vincoli paesaggistici e fissaggio sicuro alla ringhiera contro il vento.</li>
 <li>Calcola il tuo prezzo reale: totale della bolletta diviso kWh consumati. Lo puoi fare in un minuto con il nostro <a href="../../download/tracker-bollette-luce-gas.xlsx" download>tracker bollette gratuito</a>.</li>
 <li>Per la detrazione fiscale verifica l'aliquota vigente e le condizioni sul sito dell'Agenzia delle Entrate: le percentuali cambiano con le leggi di bilancio.</li>
@@ -118,9 +118,9 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
 <ul class="small">
 <li>Rese per zona: PVGIS, Joint Research Centre, Commissione Europea (re.jrc.ec.europa.eu/pvg_tools).</li>
 <li>Perdite di sistema: metodologia PVWatts, National Renewable Energy Laboratory (USA).</li>
-<li>Connessione degli impianti alla rete in bassa tensione: norma CEI 0-21; procedura di comunicazione: ARERA / distributore locale.</li>
+<li>Connessione degli impianti alla rete in bassa tensione: norma CEI 0-21; procedura di comunicazione: ARERA, delibera 315/2020/R/eel e scheda tecnica (consultate il 30 ottobre 2026).</li>
 <li>Profilo mensile della produzione: approssimazione di un profilo PVGIS per il Centro Italia. Variabilita' meteo modellata come meta' dei giorni a 1,5× e meta' a 0,5× della media mensile.</li>
-<li>Lo script di calcolo degli scenari e' pubblicato insieme al codice del sito (licenza MIT).</li>
+<li>Lo script di calcolo degli scenari e' pubblicato: <a href="../../scripts/balcone_scenari.js">balcone_scenari.js</a> (licenza MIT, eseguibile con Node.js).</li>
 </ul>
 <p class="small">Questo articolo e' informativo e non costituisce consulenza finanziaria, fiscale, legale o elettrica. Non contiene link di affiliazione.</p>
 </main>
