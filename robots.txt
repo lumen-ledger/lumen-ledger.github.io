@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://lumen-ledger.github.io/sitemap.xml
