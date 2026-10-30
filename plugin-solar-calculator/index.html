@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Plug-in &amp; Balcony Solar Payback Calculator — Lumen &amp; Ledger</title>
+<meta name="description" content="Free, private calculator: how much will a plug-in (balcony) solar kit save you, and how many years until it pays for itself? Accounts for orientation, shading and how much power your home actually uses while the sun shines.">
+<style>
+:root{--navy:#0F2A3D;--sun:#F2B33D;--paper:#F7F5EF;--green:#2E8B57;--warn:#C2452D;--line:#d9d4c7}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--navy)}
+header{background:var(--navy);color:#fff;padding:28px 20px}
+header h1{margin:0 0 6px;font-size:1.6rem}
+header p{margin:0;opacity:.85;max-width:720px}
+main{max-width:1040px;margin:0 auto;padding:20px;display:grid;gap:20px;grid-template-columns:1fr 1fr}
+@media(max-width:820px){main{grid-template-columns:1fr}}
+section{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px}
+h2{margin:0 0 12px;font-size:1.1rem}
+label{display:block;margin:10px 0 2px;font-weight:600;font-size:.92rem}
+.hint{font-size:.8rem;color:#5b6770;margin:2px 0 0}
+input,select{width:100%;padding:8px;border:1px solid var(--line);border-radius:6px;font:inherit}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kpi{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.kpi div{border:1px solid var(--line);border-radius:8px;padding:10px}
+.kpi b{display:block;font-size:1.5rem}
+.kpi span{font-size:.8rem;color:#5b6770}
+.good b{color:var(--green)}.bad b{color:var(--warn)}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+td,th{padding:4px 6px;border-bottom:1px solid var(--line);text-align:right}
+td:first-child,th:first-child{text-align:left}
+.note{background:#fff8e6;border-left:4px solid var(--sun);padding:10px 12px;font-size:.85rem;margin-top:12px}
+footer{max-width:1040px;margin:0 auto;padding:0 20px 30px;font-size:.8rem;color:#5b6770}
+canvas{width:100%;height:160px;display:block}
+</style>
+</head>
+<body>
+<header>
+  <h1>Plug-in &amp; Balcony Solar Payback Calculator</h1>
+  <p>Estimate yearly savings and payback time for a small plug-in solar kit. Everything runs in your browser — nothing is sent anywhere.</p>
+</header>
+<main>
+<section>
+  <h2>1. Your kit</h2>
+  <div class="row">
+    <div><label for="panelW">Panel power (W, total)</label><input id="panelW" type="number" value="800" min="50" step="10"></div>
+    <div><label for="invW">Inverter / outlet limit (W)</label><input id="invW" type="number" value="800" min="50" step="10"><p class="hint">Many state laws cap plug-in systems at 1,200 W or less. Check yours.</p></div>
+  </div>
+  <div class="row">
+    <div><label for="cost">Total cost ($)</label><input id="cost" type="number" value="900" min="0" step="10"></div>
+    <div><label for="life">Expected life (years)</label><input id="life" type="number" value="20" min="1" max="40"></div>
+  </div>
+
+  <h2 style="margin-top:18px">2. Your location &amp; mounting</h2>
+  <label for="psh">Peak sun hours (yearly average, optimal tilt)</label>
+  <select id="psh">
+    <option value="3.5">≈3.5 — Northern / cloudy (e.g. Pacific NW, upper Midwest, New England)</option>
+    <option value="4.2" selected>≈4.2 — Middle latitudes (e.g. Mid-Atlantic, Midwest)</option>
+    <option value="5.0">≈5.0 — Sunny South / Southeast</option>
+    <option value="5.8">≈5.8 — Desert Southwest</option>
+    <option value="custom">Custom…</option>
+  </select>
+  <input id="pshCustom" type="number" step="0.1" value="4.2" style="display:none;margin-top:6px">
+  <p class="hint">For your exact address, NREL's free PVWatts tool gives a precise figure.</p>
+  <label for="orient">Mounting</label>
+  <select id="orient">
+    <option value="1.00">South-facing, tilted ~30° (best case)</option>
+    <option value="0.88">Flat on the ground / roof</option>
+    <option value="0.85">East or West, tilted ~30°</option>
+    <option value="0.70" selected>South-facing balcony railing (vertical)</option>
+    <option value="0.50">East or West balcony railing (vertical)</option>
+    <option value="0.30">North-facing (not recommended)</option>
+  </select>
+  <label for="shade">Shading loss (%)</label>
+  <input id="shade" type="number" value="10" min="0" max="90">
+  <p class="hint">Trees, neighbouring buildings, the balcony above. 0% = full sun all day.</p>
+
+  <h2 style="margin-top:18px">3. Your home &amp; bill</h2>
+  <label for="base">Daytime baseload (W)</label>
+  <input id="base" type="number" value="300" min="0" step="10">
+  <p class="hint">Power your home draws during the day with nobody actively using things (fridge, router, standby). Read it from your smart meter, or guess 150–400 W for an apartment.</p>
+  <label for="exportPct">Value of power sent back to the grid (% of retail rate)</label>
+  <input id="exportPct" type="number" value="0" min="0" max="100">
+  <p class="hint">Most plug-in setups earn nothing for exported power: keep 0 unless your utility says otherwise.</p>
+  <div class="row">
+    <div><label for="rate">Electricity price ($/kWh)</label><input id="rate" type="number" value="0.18" step="0.01" min="0"><p class="hint">Use the all-in price from your bill (energy + delivery).</p></div>
+    <div><label for="esc">Price increase per year (%)</label><input id="esc" type="number" value="3" step="0.5"></div>
+  </div>
+  <label for="co2">Grid CO₂ intensity (kg per kWh)</label>
+  <input id="co2" type="number" value="0.37" step="0.01" min="0">
+  <p class="hint">Approximate US average; your regional grid may differ (see EPA eGRID).</p>
+</section>
+
+<section>
+  <h2>Results</h2>
+  <div class="kpi">
+    <div id="kPay"><b id="payback">–</b><span>simple payback</span></div>
+    <div class="good"><b id="save1">–</b><span>savings in year 1</span></div>
+    <div><b id="prod">–</b><span>kWh produced per year</span></div>
+    <div><b id="selfc">–</b><span>used directly by your home</span></div>
+    <div class="good"><b id="lifeSave">–</b><span>net gain over lifetime</span></div>
+    <div><b id="co2t">–</b><span>CO₂ avoided over lifetime</span></div>
+  </div>
+  <h2>Typical sunny day vs your baseload</h2>
+  <canvas id="chart" width="600" height="200" aria-label="Chart of solar output across a day compared with baseload"></canvas>
+  <p class="hint"><span style="color:#d39410">■</span> solar output &nbsp; <span style="color:#2E8B57">■</span> part your home uses &nbsp; — baseload</p>
+  <h2 style="margin-top:14px">Year by year</h2>
+  <table id="tbl"><thead><tr><th>Year</th><th>Savings</th><th>Cumulative</th></tr></thead><tbody></tbody></table>
+  <div class="note"><b>How this works.</b> Yearly output = panel W × peak sun hours × 365 × mounting factor × (1 − shading) × 0.86 system efficiency (inverter, wiring, heat), capped by the inverter limit. To estimate how much you use directly, an average day is modelled as a bell curve over ~12 daylight hours and compared hour by hour with your baseload: anything above baseload is exported. Panels lose 0.5% output per year. These are estimates for comparing options, not a guarantee. Check your state law, your utility's rules and your lease before installing.</div>
+</section>
+</main>
+<footer>
+  Made by <a href="../">Lumen &amp; Ledger</a> (more free tools) · Free to use · No cookies, no tracking · Sources for defaults: NREL PVWatts methodology (system losses), EPA eGRID (CO₂ intensity), state legislation trackers for plug-in limits. MIT licensed.
+</footer>
+<script>
+const $=id=>document.getElementById(id);
+const num=id=>Math.max(0,parseFloat($(id).value)||0);
+const money=v=>(v<0?'-':'')+'$'+Math.abs(v).toLocaleString('en-US',{maximumFractionDigits:0});
+const SYS_EFF=0.86, DEGR=0.005, HOURS=12;
+
+// Fraction of daily energy at each step, shaped like sin() over daylight hours.
+function dayCurve(steps){const w=[];let s=0;for(let i=0;i<steps;i++){const v=Math.sin(Math.PI*(i+.5)/steps);w.push(v);s+=v}return w.map(v=>v/s)}
+
+function calc(){
+  $('pshCustom').style.display=$('psh').value==='custom'?'block':'none';
+  const psh=$('psh').value==='custom'?num('pshCustom'):parseFloat($('psh').value);
+  const panelW=num('panelW'),invW=num('invW'),cost=num('cost'),life=Math.round(num('life'))||1;
+  const factor=parseFloat($('orient').value)*(1-Math.min(num('shade'),100)/100);
+  const base=num('base')/1000,rate=num('rate'),esc=num('esc')/100,exp=Math.min(num('exportPct'),100)/100;
+
+  const dailyKWh=panelW/1000*psh*factor*SYS_EFF;
+  const steps=48,curve=dayCurve(steps),dt=HOURS/steps;
+  let used=0,produced=0;const pts=[];
+  for(const w of curve){
+    const p=Math.min(dailyKWh*w/dt,invW/1000); // kW in this step, clipped by inverter
+    produced+=p*dt;used+=Math.min(p,base)*dt;pts.push(p);
+  }
+  const yearProd=produced*365,selfShare=produced?used/produced:0;
+  const yearUsed=yearProd*selfShare,yearExp=yearProd-yearUsed;
+
+  let cum=-cost,payYear=null,rows='',totalKWh=0;
+  for(let y=1;y<=life;y++){
+    const d=Math.pow(1-DEGR,y-1),r=rate*Math.pow(1+esc,y-1);
+    const s=(yearUsed+yearExp*exp)*d*r;totalKWh+=yearProd*d;
+    const prev=cum;cum+=s;
+    if(payYear===null&&cum>=0)payYear=y-1+(-prev)/s;
+    rows+=`<tr><td>${y}</td><td>${money(s)}</td><td>${money(cum)}</td></tr>`;
+  }
+  const s1=(yearUsed+yearExp*exp)*rate;
+  $('payback').textContent=payYear===null?'not within life':payYear.toFixed(1)+' yrs';
+  $('kPay').className=payYear===null||payYear>life*0.75?'bad':'good';
+  $('save1').textContent=money(s1);
+  $('prod').textContent=Math.round(yearProd).toLocaleString('en-US');
+  $('selfc').textContent=Math.round(selfShare*100)+'%';
+  $('lifeSave').textContent=money(cum);
+  $('co2t').textContent=(totalKWh*num('co2')/1000).toFixed(1)+' t';
+  document.querySelector('#tbl tbody').innerHTML=rows;
+  draw(pts,base);
+}
+
+function draw(pts,base){
+  const c=$('chart'),x=c.getContext('2d'),W=c.width,H=c.height,pad=20;
+  x.clearRect(0,0,W,H);
+  const max=Math.max(base,...pts,0.05)*1.15,bw=(W-2*pad)/pts.length,y=v=>H-pad-v/max*(H-2*pad);
+  pts.forEach((p,i)=>{
+    x.fillStyle='#F2B33D';x.fillRect(pad+i*bw,y(p),bw-1,H-pad-y(p));
+    const u=Math.min(p,base);x.fillStyle='#2E8B57';x.fillRect(pad+i*bw,y(u),bw-1,H-pad-y(u));
+  });
+  x.strokeStyle='#0F2A3D';x.setLineDash([5,4]);x.beginPath();x.moveTo(pad,y(base));x.lineTo(W-pad,y(base));x.stroke();x.setLineDash([]);
+  x.fillStyle='#0F2A3D';x.font='12px system-ui';
+  x.fillText('baseload '+Math.round(base*1000)+' W',pad+4,y(base)-4);
+  x.fillText('peak '+Math.round(Math.max(...pts)*1000)+' W',W-pad-90,14);
+  x.fillText('sunrise',pad,H-4);x.fillText('sunset',W-pad-40,H-4);
+}
+document.querySelectorAll('input,select').forEach(e=>e.addEventListener('input',calc));
+calc();
+</script>
+</body>
+</html>
