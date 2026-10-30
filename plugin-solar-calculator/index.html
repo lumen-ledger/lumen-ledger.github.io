@@ -88,6 +88,12 @@ canvas{width:100%;height:160px;display:block}
   <label for="co2">Grid CO₂ intensity (kg per kWh)</label>
   <input id="co2" type="number" value="0.37" step="0.01" min="0">
   <p class="hint">Approximate US average; your regional grid may differ (see EPA eGRID).</p>
+  <label for="model">Self-use model</label>
+  <select id="model">
+    <option value="season" selected>Conservative: seasons + sunny and cloudy days</option>
+    <option value="avg">Single average day (more optimistic)</option>
+  </select>
+  <p class="hint">The conservative model spreads output over 12 months and alternates bright and overcast days, so more of the summer midday surplus goes to the grid.</p>
 </section>
 
 <section>
@@ -100,16 +106,16 @@ canvas{width:100%;height:160px;display:block}
     <div class="good"><b id="lifeSave">–</b><span>net gain over lifetime</span></div>
     <div><b id="co2t">–</b><span>CO₂ avoided over lifetime</span></div>
   </div>
-  <h2>Typical sunny day vs your baseload</h2>
+  <h2>Average day vs your baseload</h2>
   <canvas id="chart" width="600" height="200" aria-label="Chart of solar output across a day compared with baseload"></canvas>
   <p class="hint"><span style="color:#d39410">■</span> solar output &nbsp; <span style="color:#2E8B57">■</span> part your home uses &nbsp; — baseload</p>
   <h2 style="margin-top:14px">Year by year</h2>
   <table id="tbl"><thead><tr><th>Year</th><th>Savings</th><th>Cumulative</th></tr></thead><tbody></tbody></table>
-  <div class="note"><b>How this works.</b> Yearly output = panel W × peak sun hours × 365 × mounting factor × (1 − shading) × 0.86 system efficiency (inverter, wiring, heat), capped by the inverter limit. To estimate how much you use directly, an average day is modelled as a bell curve over ~12 daylight hours and compared hour by hour with your baseload: anything above baseload is exported. Panels lose 0.5% output per year. These are estimates for comparing options, not a guarantee. Check your state law, your utility's rules and your lease before installing.</div>
+  <div class="note"><b>How this works.</b> Yearly output = panel W × peak sun hours × 365 × mounting factor × (1 − shading) × 0.86 system efficiency (inverter, wiring, heat), capped by the inverter limit. To estimate how much you use directly, an average day is modelled as a bell curve over ~12 daylight hours and compared hour by hour with your baseload: anything above baseload is exported. In the conservative model (default) yearly output is split across months using the monthly profile from NREL PVWatts v8 for a south-facing 30° array near 40°N (Columbus, Ohio; TMY weather, queried 2026-10-30), and in each month half the days produce 1.5× the average and half 0.5×. The chart always shows the average day. Panels lose 0.5% output per year. These are estimates for comparing options, not a guarantee. Check your state law, your utility's rules and your lease before installing.</div>
 </section>
 </main>
 <footer>
-  Made by <a href="../">Lumen &amp; Ledger</a> (more free tools) · Free to use · No cookies, no tracking · Sources for defaults: NREL PVWatts methodology (system losses), EPA eGRID (CO₂ intensity), state legislation trackers for plug-in limits. MIT licensed. · <a href="../plug-in-solar-utah/">Utah plug-in solar law</a> · <a href="../about/">About</a> · <a href="../privacy/">Privacy</a>
+  Made by <a href="../">Lumen &amp; Ledger</a> (more free tools) · Free to use · No cookies, no tracking · Sources for defaults: NREL PVWatts v8 (system losses, monthly profile), EPA eGRID (CO₂ intensity), state legislation trackers for plug-in limits. MIT licensed. · <a href="../plug-in-solar-utah/">Utah plug-in solar law</a> · <a href="../about/">About</a> · <a href="../privacy/">Privacy</a>
 </footer>
 <script>
 const $=id=>document.getElementById(id);
@@ -120,6 +126,19 @@ const SYS_EFF=0.86, DEGR=0.005, HOURS=12;
 // Fraction of daily energy at each step, shaped like sin() over daylight hours.
 function dayCurve(steps){const w=[];let s=0;for(let i=0;i<steps;i++){const v=Math.sin(Math.PI*(i+.5)/steps);w.push(v);s+=v}return w.map(v=>v/s)}
 
+// Share of yearly output per month (NREL PVWatts v8, 40.0N 83.0W, 30° tilt, south; queried 2026-10-30).
+const MONTHS=[6.1,6.2,8.0,9.1,10.4,10.3,10.2,10.3,9.7,8.5,6.4,4.7].map(v=>v/99.9);
+
+// Energy produced and used directly in one day of dayKWh, with given curve and load.
+function simDay(dayKWh,curve,dt,invKW,load){
+  let used=0,produced=0;const pts=[];
+  for(const w of curve){
+    const p=Math.min(dayKWh*w/dt,invKW); // kW in this step, clipped by inverter
+    produced+=p*dt;used+=Math.min(p,load)*dt;pts.push(p);
+  }
+  return {used,produced,pts};
+}
+
 function calc(){
   $('pshCustom').style.display=$('psh').value==='custom'?'block':'none';
   const psh=$('psh').value==='custom'?num('pshCustom'):parseFloat($('psh').value);
@@ -127,14 +146,18 @@ function calc(){
   const factor=parseFloat($('orient').value)*(1-Math.min(num('shade'),100)/100);
   const base=num('base')/1000,rate=num('rate'),esc=num('esc')/100,exp=Math.min(num('exportPct'),100)/100;
 
-  const dailyKWh=panelW/1000*psh*factor*SYS_EFF;
+  const yearKWh=panelW/1000*psh*365*factor*SYS_EFF,invKW=invW/1000;
   const steps=48,curve=dayCurve(steps),dt=HOURS/steps;
-  let used=0,produced=0;const pts=[];
-  for(const w of curve){
-    const p=Math.min(dailyKWh*w/dt,invW/1000); // kW in this step, clipped by inverter
-    produced+=p*dt;used+=Math.min(p,base)*dt;pts.push(p);
+  const avgDay=simDay(yearKWh/365,curve,dt,invKW,base),pts=avgDay.pts;
+  let used=avgDay.used*365,produced=avgDay.produced*365;
+  if($('model').value==='season'){
+    used=0;produced=0;
+    for(const m of MONTHS)for(const k of[1.5,0.5]){
+      const d=simDay(yearKWh*m/30.4*k,curve,dt,invKW,base);
+      used+=d.used*15.2;produced+=d.produced*15.2;
+    }
   }
-  const yearProd=produced*365,selfShare=produced?used/produced:0;
+  const yearProd=produced,selfShare=produced?used/produced:0;
   const yearUsed=yearProd*selfShare,yearExp=yearProd-yearUsed;
 
   let cum=-cost,payYear=null,rows='',totalKWh=0;
