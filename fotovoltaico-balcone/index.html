@@ -46,9 +46,9 @@ summary{cursor:pointer;font-weight:600}
   <h2>1. Il tuo kit</h2>
   <div class="row">
     <div><label for="panelW">Potenza pannelli (W, totale)</label><input id="panelW" type="number" value="800" min="50" step="10"><p class="hint">Somma dei Wp di targa dei moduli.</p></div>
-    <div><label for="invW">Potenza microinverter (W)</label><input id="invW" type="number" value="800" min="50" step="10"><p class="hint">Per l'iter semplificato il limite è 800 W, inverter certificato CEI 0-21.</p></div>
+    <div><label for="invW">Potenza microinverter (W)</label><input id="invW" type="number" value="800" min="50" step="10"><p class="hint">Per la Comunicazione Unica (ARERA 315/2020) l'impianto deve avere potenza inferiore a 800 W e inverter certificato CEI 0-21: controlla la potenza nominale in uscita sulla scheda tecnica.</p></div>
   </div>
-  <div class="warn" id="wLimit">Oltre 800 W di inverter non sei più nel perimetro "da balcone": serve una pratica di connessione ordinaria.</div>
+  <div class="warn" id="wLimit">Oltre 800 W non rientri nella procedura semplificata (Comunicazione Unica, ARERA 315/2020, che richiede potenza inferiore a 800 W): serve una pratica di connessione ordinaria.</div>
   <div class="row">
     <div><label for="cost">Costo totale (€)</label><input id="cost" type="number" value="700" min="0" step="10"><p class="hint">Kit + staffe + eventuale elettricista.</p></div>
     <div><label for="life">Durata attesa (anni)</label><input id="life" type="number" value="20" min="1" max="40"></div>
@@ -130,13 +130,13 @@ summary{cursor:pointer;font-weight:600}
   <details>
     <summary>Prima di installare: cosa controllare</summary>
     <ul>
-      <li>Microinverter certificato CEI 0-21 e potenza non superiore a 800 W.</li>
-      <li>Comunicazione al distributore di rete (es. tramite Modello Unico semplificato) prima della messa in esercizio: senza, il contatore può registrare in modo anomalo l'energia immessa.</li>
+      <li>Microinverter certificato CEI 0-21 e potenza dell'impianto inferiore a 800 W (delibera ARERA 315/2020/R/eel). I "Plug &amp; Play" in senso stretto, collegabili a una presa dedicata, arrivano a 350 W.</li>
+      <li>Comunicazione Unica al distributore di rete (modulo predisposto da ARERA) prima della messa in esercizio: vale come titolo per connettere l'impianto; l'energia immessa in rete non viene remunerata.</li>
       <li>Collegamento a una presa/linea dedicata in buono stato; nel dubbio fai verificare l'impianto a un elettricista.</li>
       <li>Regolamento di condominio e vincoli paesaggistici per i pannelli visibili sulla facciata.</li>
       <li>Fissaggio sicuro alla ringhiera (vento): staffe adatte e cavo di sicurezza.</li>
     </ul>
-    <p class="hint">Le regole possono cambiare: verifica sul sito del tuo distributore e di ARERA/GSE.</p>
+    <p class="hint">Fonte: scheda tecnica ARERA della delibera 315/2020/R/eel (consultata il 30 ottobre 2026). Informazione generale, non consulenza: le regole possono cambiare, verifica sul sito del tuo distributore e di ARERA.</p>
   </details>
 </section>
 </main>
