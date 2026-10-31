@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Texas Electricity Facts Label (EFL) explained + plan cost calculator</title>
+<meta name="description" content="How to read a Texas Electricity Facts Label: what the 500/1,000/2,000 kWh prices include, how bill credits distort them, and a calculator that prices two plans on your own 12 months of usage.">
+<link rel="canonical" href="https://lumen-ledger.github.io/texas-electricity-facts-label/">
+<style>
+:root{--navy:#0F2A3D;--sun:#F2B33D;--paper:#F7F5EF;--line:#d9d4c7;--warn:#C2452D}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--navy)}
+header{background:var(--navy);color:#fff;padding:32px 20px}
+.wrap{max-width:760px;margin:0 auto}
+header h1{margin:0;font-size:1.7rem}
+header p{margin:8px 0 0;color:#d6dde2}
+nav{font-size:.9rem;margin-bottom:10px}nav a{color:var(--sun)}
+main{padding:24px 20px}
+h2{font-size:1.15rem;margin:28px 0 6px}
+ul,ol{padding-left:20px}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:10px 0}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#ece8dc}
+.note{border-left:4px solid var(--warn);background:#fff;padding:10px 14px;font-size:.93rem}
+.box{border:1px solid var(--line);background:#fff;padding:14px 16px}
+.box label{display:block;font-size:.9rem;margin-top:8px}
+.box input,.box textarea{width:100%;max-width:220px;padding:6px;font:inherit}
+.box textarea{max-width:100%}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid fieldset{border:1px solid var(--line);padding:6px 12px 12px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.out{font-size:1.05rem;margin-top:12px}
+.btn{display:inline-block;background:var(--sun);color:var(--navy);padding:8px 14px;border-radius:6px;font-weight:600;text-decoration:none}
+footer{padding:20px;font-size:.82rem;color:#5b6770}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="../electricity-price-per-kwh/">Price per kWh by state</a> · <a href="../plugin-solar-calculator/">Solar calculator</a></nav>
+  <h1>Texas Electricity Facts Label (EFL), explained</h1>
+  <p>The EFL shows a plan's price at exactly three usage levels. Your bill depends on your usage every month. Here is how to read the label, and a calculator that prices a plan on your own year.</p>
+</div></header>
+<main class="wrap">
+<p class="note">General information, not legal or financial advice. Rule text: 16 Texas Administrative Code §25.475 (Public Utility Commission of Texas), as last amended effective January 6, 2022, read on <b>2026-10-31</b>. The example plans below are hypothetical: real plans and delivery charges differ. Always check the current EFL of the plan you choose.</p>
+
+<h2>What the rule requires on the label</h2>
+<table>
+<tr><th>Item</th><th>What §25.475 says</th></tr>
+<tr><td>Average price</td><td>In cents per kWh, at 500, 1,000 and 2,000 kWh per month for residential customers (§25.475(g)(2)).</td></tr>
+<tr><td>What it includes (fixed rate plans)</td><td>All recurring charges, excluding state and local sales taxes and the gross receipts tax reimbursement (§25.475(g)(2)). A recurring charge is one expected on every bill (§25.475(b)(9)).</td></tr>
+<tr><td>Variable price plans</td><td>The label shows the average price for the first billing cycle only (§25.475(g)(2)). For residential customers a variable price plan can only be month-to-month (§25.475(b)(11)).</td></tr>
+<tr><td>Fees</td><td>Every fee the retail electric provider (REP) may charge, and whether each one is included in the average price (§25.475(g)(3)).</td></tr>
+<tr><td>Contract</td><td>Length of term, minimum term and any early termination fee (§25.475(g)(4)).</td></tr>
+<tr><td>Where to find it</td><td>A REP that sells residential plans on its website must display the EFL prominently without asking for more than a ZIP code and the type of offer (§25.475(c)(4)(A)).</td></tr>
+</table>
+
+<h2>Fixed, variable, indexed: what can change</h2>
+<ul>
+<li><b>Fixed rate:</b> term of at least three months, same price for the whole term. The price may move only for listed reasons, such as actual changes in the delivery (TDU) charges, ERCOT or Texas Regional Entity fees, or certain legal and regulatory changes (§25.475(b)(5)).</li>
+<li><b>Variable price:</b> the price can change by a method the REP decides (§25.475(b)(11)). The EFL number tells you only about the first month.</li>
+<li><b>Indexed:</b> the price follows a pre-defined formula based on publicly available indices (§25.475(b)(6)).</li>
+</ul>
+
+<h2>Why the three prices can mislead</h2>
+<p>Many plans add a <b>bill credit</b> when usage falls inside a range, or a fee when it falls below a threshold. The EFL is correct at 500, 1,000 and 2,000 kWh, but it says nothing about 999 kWh. Two hypothetical plans with the same delivery charges ($4.39/month + 5.60¢/kWh):</p>
+<table>
+<tr><th></th><th>Plan A (simple)</th><th>Plan B (bill credit)</th></tr>
+<tr><td>Energy charge</td><td>9.4¢/kWh</td><td>14.9¢/kWh</td></tr>
+<tr><td>Base charge</td><td>$9.95/month</td><td>none</td></tr>
+<tr><td>Bill credit</td><td>none</td><td>$100 when usage is 1,000-2,000 kWh</td></tr>
+<tr><td>EFL price at 500 / 1,000 / 2,000 kWh</td><td>17.9 / 16.4 / 15.7¢</td><td>21.4 / <b>10.9</b> / 15.7¢</td></tr>
+<tr><td>Year below (13,500 kWh)</td><td><b>$2,197.08</b> (16.27¢)</td><td><b>$2,220.18</b> (16.45¢)</td></tr>
+</table>
+<p>Plan B looks a third cheaper at 1,000 kWh, yet costs $23.10 more over this year, because the credit applies in only 6 of the 12 months. At 999 kWh Plan B costs $209.18; at 1,000 kWh it costs $109.39. Monthly usage used: 1,150, 950, 800, 720, 900, 1,350, 1,700, 1,750, 1,400, 950, 780, 1,050 kWh. With a different usage pattern the winner can flip, which is why your own numbers matter.</p>
+
+<h2>Price two plans on your own usage</h2>
+<div class="box">
+<p style="margin-top:0">Copy the numbers from each plan's EFL. Delivery (TDU) charges are listed on the EFL too; enter 0 if the EFL already folds them into the energy charge.</p>
+<div class="grid">
+<fieldset id="pa"><legend><b>Plan A</b></legend>
+<label>Energy charge (¢/kWh)<input data-k="energy" type="number" step="0.01" value="9.4"></label>
+<label>Base charge ($/month)<input data-k="base" type="number" step="0.01" value="9.95"></label>
+<label>TDU delivery, fixed ($/month)<input data-k="tduFixed" type="number" step="0.01" value="4.39"></label>
+<label>TDU delivery (¢/kWh)<input data-k="tduRate" type="number" step="0.0001" value="5.60"></label>
+<label>Bill credit ($)<input data-k="credit" type="number" step="0.01" value="0"></label>
+<label>…when usage at least (kWh)<input data-k="creditMin" type="number" step="1" value="0"></label>
+<label>…and at most (kWh, 0 = no limit)<input data-k="creditMax" type="number" step="1" value="0"></label>
+<label>Fee if usage below threshold ($)<input data-k="minFee" type="number" step="0.01" value="0"></label>
+<label>…threshold (kWh)<input data-k="minFeeBelow" type="number" step="1" value="0"></label>
+</fieldset>
+<fieldset id="pb"><legend><b>Plan B</b></legend>
+<label>Energy charge (¢/kWh)<input data-k="energy" type="number" step="0.01" value="14.9"></label>
+<label>Base charge ($/month)<input data-k="base" type="number" step="0.01" value="0"></label>
+<label>TDU delivery, fixed ($/month)<input data-k="tduFixed" type="number" step="0.01" value="4.39"></label>
+<label>TDU delivery (¢/kWh)<input data-k="tduRate" type="number" step="0.0001" value="5.60"></label>
+<label>Bill credit ($)<input data-k="credit" type="number" step="0.01" value="100"></label>
+<label>…when usage at least (kWh)<input data-k="creditMin" type="number" step="1" value="1000"></label>
+<label>…and at most (kWh, 0 = no limit)<input data-k="creditMax" type="number" step="1" value="2000"></label>
+<label>Fee if usage below threshold ($)<input data-k="minFee" type="number" step="0.01" value="0"></label>
+<label>…threshold (kWh)<input data-k="minFeeBelow" type="number" step="1" value="0"></label>
+</fieldset>
+</div>
+<label for="months">Your last 12 months of usage (kWh, separated by commas or spaces; find them on past bills or your provider's account page)</label>
+<textarea id="months" rows="2">1150, 950, 800, 720, 900, 1350, 1700, 1750, 1400, 950, 780, 1050</textarea>
+<div class="out" id="out"></div>
+<p style="font-size:.85rem">Check: the 500/1,000/2,000 kWh prices in the result should match each EFL's table to within 0.1¢. If they do not, a charge is missing or misread. Taxes are excluded, as on the EFL. Runs in your browser; nothing is stored or sent.</p>
+</div>
+
+<h2>Before you sign: checklist</h2>
+<ol>
+<li>Plan type: fixed, variable or indexed. With variable, the EFL price is only the first month.</li>
+<li>Run your 12 months through the calculator. Look at the month-by-month result, not only the total: a credit missed in a mild month can mean a much higher bill.</li>
+<li>Read the fee list (§25.475(g)(3)) and the early termination fee (§25.475(g)(4)).</li>
+<li>Moving? The rule bars an early termination fee caused by relocation if you give a forwarding address and any evidence the REP requires (§25.475(c)(2)(C)).</li>
+<li>Contract end: for fixed rate plans the REP must send at least three written expiration notices in the last third of the term (§25.475(e)(1)(A)), and no termination penalty may apply in the 14 days before the expiration date (§25.475(e)(2)(C)(ii)).</li>
+<li>Changed your mind after switching? You can rescind without fee within three federal business days after receiving the terms of service (§25.475(f)(4)(A)(i)).</li>
+</ol>
+<p>Plans can be compared on Power to Choose, the PUCT's official shopping site (powertochoose.org). Use this page to test the plans you shortlist there.</p>
+
+<h2>Track it after you switch</h2>
+<p>The free <a href="../download/utility-bill-tracker.xlsx" download>Utility Bill Tracker (.xlsx)</a> logs each bill and its all-in price per kWh, so next year you have your 12 months ready. Also on Gumroad as <a href="https://lumenledger.gumroad.com/l/utility-bill-tracker">pay what you want</a>. How Texas compares: <a href="../electricity-price-per-kwh/">average residential price by state</a> (Texas, Jan-Aug 2026: 16.03¢, EIA).</p>
+
+<h2>Sources (checked 2026-10-31)</h2>
+<ul>
+<li>16 Tex. Admin. Code §25.475, General Retail Electric Provider Requirements and Information Disclosures to Residential and Small Commercial Customers; adopted effective 2009-03-16, last amended effective 2022-01-06 (46 TexReg 9269). Official publisher: Public Utility Commission of Texas, <a href="https://www.puc.texas.gov/agency/rulesnlaws/subrules/electric/">substantive rules, chapter 25</a>. The PUCT site refused automated reading on 2026-10-31, so the text was read on the reproduction at <a href="https://www.law.cornell.edu/regulations/texas/16-Tex-Admin-Code-SS-25-475">Cornell LII</a>; check the PUCT version for amendments after that date.</li>
+<li>Texas residential average price: EIA, Electric Power Monthly, Table 5.6.B (see <a href="../electricity-price-per-kwh/">our table</a>).</li>
+<li>Calculation code: <a href="../scripts/efl_calc.js">efl_calc.js</a> (MIT).</li>
+</ul>
+<p>Found an error? Write to lumenledger.tools@proton.me and include the source.</p>
+</main>
+<footer class="wrap">© 2026 Lumen &amp; Ledger · Texts CC BY 4.0 · <a href="../">Tools</a> · <a href="../about/">About</a> · <a href="../privacy/">Privacy</a> · Contact: lumenledger.tools@proton.me</footer>
+<script src="../scripts/efl_calc.js"></script>
+<script>
+function plan(id){var p={};document.querySelectorAll('#'+id+' input').forEach(function(i){p[i.dataset.k]=parseFloat(i.value)||0});return p}
+function usd(x){return '$'+x.toFixed(2)}
+function run(){
+  var A=plan('pa'),B=plan('pb'),out=document.getElementById('out');
+  var m=document.getElementById('months').value.split(/[^0-9.]+/).map(parseFloat).filter(function(x){return x>0});
+  var h='<table><tr><th></th><th>Plan A</th><th>Plan B</th></tr>';
+  [500,1000,2000].forEach(function(u){h+='<tr><td>EFL check, '+u+' kWh</td><td>'+eflAvgCents(A,u).toFixed(1)+'¢</td><td>'+eflAvgCents(B,u).toFixed(1)+'¢</td></tr>'});
+  if(m.length){
+    var ya=eflYear(A,m),yb=eflYear(B,m);
+    h+='<tr><td><b>Your '+m.length+' months ('+ya.kwh.toFixed(0)+' kWh)</b></td><td><b>'+usd(ya.cost)+'</b> ('+ya.avgCents.toFixed(2)+'¢)</td><td><b>'+usd(yb.cost)+'</b> ('+yb.avgCents.toFixed(2)+'¢)</td></tr>';
+    m.forEach(function(u,i){h+='<tr><td>Month '+(i+1)+': '+u+' kWh</td><td>'+usd(eflMonthCost(A,u))+'</td><td>'+usd(eflMonthCost(B,u))+'</td></tr>'});
+    h+='</table>';
+    var d=yb.cost-ya.cost;
+    h+='<p>'+(Math.abs(d)<0.005?'Same cost on this usage.':(d>0?'Plan A':'Plan B')+' costs <b>'+usd(Math.abs(d))+' less</b> on this usage (taxes excluded).')+'</p>';
+  } else h+='</table><p>Enter at least one month of usage.</p>';
+  out.innerHTML=h;
+}
+document.querySelectorAll('.box input,.box textarea').forEach(function(i){i.addEventListener('input',run)});
+run();
+</script>
+</body>
+</html>
