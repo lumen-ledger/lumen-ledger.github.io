@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Space heater &amp; appliance running cost calculator (2026 rates by state)</title>
+<meta name="description" content="What a space heater or any appliance costs per hour, day and month: watts x hours x your rate. Average residential rate for every state (EIA, Jan-Aug 2026) and a table for a 1,500 W heater.">
+<link rel="canonical" href="https://lumen-ledger.github.io/appliance-running-cost/">
+<style>
+:root{--navy:#0F2A3D;--sun:#F2B33D;--paper:#F7F5EF;--line:#d9d4c7;--warn:#C2452D}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--navy)}
+header{background:var(--navy);color:#fff;padding:32px 20px}
+.wrap{max-width:760px;margin:0 auto}
+header h1{margin:0;font-size:1.7rem}
+header p{margin:8px 0 0;color:#d6dde2}
+nav{font-size:.9rem;margin-bottom:10px}nav a{color:var(--sun)}
+main{padding:24px 20px}
+h2{font-size:1.15rem;margin:28px 0 6px}
+ul,ol{padding-left:20px}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:10px 0}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#ece8dc}
+.note{border-left:4px solid var(--warn);background:#fff;padding:10px 14px;font-size:.93rem}
+.box{border:1px solid var(--line);background:#fff;padding:14px 16px}
+.box label{display:block;font-size:.9rem;margin-top:8px}
+.box input,.box select{width:100%;max-width:260px;padding:6px;font:inherit}
+.presets button{margin:4px 4px 0 0;padding:4px 8px;font:inherit;font-size:.85rem;border:1px solid var(--line);background:#f3f0e6;border-radius:4px;cursor:pointer}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.out{font-size:1.05rem;margin-top:12px}
+footer{padding:20px;font-size:.82rem;color:#5b6770}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="../electricity-price-per-kwh/">Price per kWh by state</a> · <a href="../texas-electricity-facts-label/">Texas EFL</a></nav>
+  <h1>What does it cost to run a space heater (or any appliance)?</h1>
+  <p>Cost = watts ÷ 1,000 × hours × your price per kWh. At the U.S. average residential rate of 18.19 cents, a 1,500 W heater on high costs <b>$0.27</b> per hour.</p>
+</div></header>
+<main class="wrap">
+<p class="note">General information, not financial or safety advice. Rates: U.S. Energy Information Administration (EIA), Electric Power Monthly, Table 5.6.B, average residential price January–August 2026 (release 2026-10-23, read 2026-10-31). Your own bill can differ: the average includes fixed charges and taxes, and your rate may vary by month or by usage tier. Use the price per kWh from your bill if you have it (<a href="../electricity-price-per-kwh/">how to find it</a>).</p>
+
+<h2>Calculator</h2>
+<div class="box">
+  <div class="presets">Typical nameplate watts:
+    <button type="button" data-w="1500">Space heater high 1,500</button><button type="button" data-w="750">Space heater low 750</button><button type="button" data-w="100">Electric blanket (double) 100</button><button type="button" data-w="785">Dehumidifier 785</button><button type="button" data-w="1875">Hair dryer 1,875</button><button type="button" data-w="1100">Microwave 1,100</button><button type="button" data-w="50">Laptop 50</button>
+  </div>
+  <div class="grid">
+    <label>Power (watts)<input id="w" type="number" min="0" step="1" value="1500"></label>
+    <label>State average rate (EIA, Jan–Aug 2026)<select id="st"><option value="0.1819" selected>U.S. average (18.19¢)</option><option value="">Custom rate</option><option value="0.1651">Alabama (16.51¢)</option><option value="0.2732">Alaska (27.32¢)</option><option value="0.1536">Arizona (15.36¢)</option><option value="0.1374">Arkansas (13.74¢)</option><option value="0.3258">California (32.58¢)</option><option value="0.1680">Colorado (16.80¢)</option><option value="0.2747">Connecticut (27.47¢)</option><option value="0.1798">Delaware (17.98¢)</option><option value="0.2486">District of Columbia (24.86¢)</option><option value="0.1532">Florida (15.32¢)</option><option value="0.1548">Georgia (15.48¢)</option><option value="0.4641">Hawaii (46.41¢)</option><option value="0.1302">Idaho (13.02¢)</option><option value="0.1923">Illinois (19.23¢)</option><option value="0.1704">Indiana (17.04¢)</option><option value="0.1455">Iowa (14.55¢)</option><option value="0.1526">Kansas (15.26¢)</option><option value="0.1420">Kentucky (14.20¢)</option><option value="0.1327">Louisiana (13.27¢)</option><option value="0.3023">Maine (30.23¢)</option><option value="0.2131">Maryland (21.31¢)</option><option value="0.3019">Massachusetts (30.19¢)</option><option value="0.2173">Michigan (21.73¢)</option><option value="0.1644">Minnesota (16.44¢)</option><option value="0.1506">Mississippi (15.06¢)</option><option value="0.1428">Missouri (14.28¢)</option><option value="0.1413">Montana (14.13¢)</option><option value="0.1292">Nebraska (12.92¢)</option><option value="0.1336">Nevada (13.36¢)</option><option value="0.2691">New Hampshire (26.91¢)</option><option value="0.2409">New Jersey (24.09¢)</option><option value="0.1534">New Mexico (15.34¢)</option><option value="0.2926">New York (29.26¢)</option><option value="0.1494">North Carolina (14.94¢)</option><option value="0.1246">North Dakota (12.46¢)</option><option value="0.1881">Ohio (18.81¢)</option><option value="0.1381">Oklahoma (13.81¢)</option><option value="0.1546">Oregon (15.46¢)</option><option value="0.2113">Pennsylvania (21.13¢)</option><option value="0.2905">Rhode Island (29.05¢)</option><option value="0.1590">South Carolina (15.90¢)</option><option value="0.1458">South Dakota (14.58¢)</option><option value="0.1380">Tennessee (13.80¢)</option><option value="0.1603">Texas (16.03¢)</option><option value="0.1319">Utah (13.19¢)</option><option value="0.2393">Vermont (23.93¢)</option><option value="0.1695">Virginia (16.95¢)</option><option value="0.1442">Washington (14.42¢)</option><option value="0.1558">West Virginia (15.58¢)</option><option value="0.1905">Wisconsin (19.05¢)</option><option value="0.1401">Wyoming (14.01¢)</option></select></label>
+    <label>Hours used per day<input id="h" type="number" min="0" max="24" step="0.5" value="8"></label>
+    <label>Price per kWh ($)<input id="r" type="number" min="0" step="0.001" value="0.1819"></label>
+    <label>Days per month<input id="d" type="number" min="0" max="31" step="1" value="30"></label>
+    <label>Share of time at full power (%)<input id="u" type="number" min="0" max="100" step="5" value="100"></label>
+  </div>
+  <div class="out" id="out" aria-live="polite"></div>
+</div>
+<p>Share of time at full power: 100% is the worst case. A heater with a thermostat switches its element on and off once the room is warm, so it uses less than nameplate × hours; how much less depends on the room, the insulation and the setting. A plug-in usage monitor measures it directly for any 120-volt device.</p>
+
+<h2>Why the formula works</h2>
+<ul>
+<li>The wattage is on the nameplate (bottom or back of the appliance). If only amps are listed: watts = volts × amps; most U.S. outlets are 120 V.</li>
+<li>kWh per day = watts × hours used per day ÷ 1,000. Cost = kWh × your price per kWh.</li>
+<li>The nameplate is the maximum. Appliances that cycle (refrigerators, anything with a thermostat) run at that power only part of the time; for a refrigerator, the Virginia Tech guide suggests dividing the plugged-in time by three as a rough estimate.</li>
+<li>A 1,500 W electric heater turns its 1.5 kWh per hour into about 5,118 Btu of heat per hour (1 kWh = 3,412 Btu). Two 1,500 W resistance heaters on full power draw the same energy per hour, whatever the brand.</li>
+</ul>
+
+<h2>1,500 W space heater: cost by state</h2>
+<p>On high, element on all the time (100% share). Monthly column = 8 hours a day for 30 days (360 kWh). U.S. total at the bottom.</p>
+<table>
+<tr><th>State</th><th>Avg. rate (¢/kWh)</th><th>Per hour</th><th>8 h/day, 30 days</th></tr>
+<tr><td>Alabama</td><td>16.51</td><td>$0.25</td><td>$59.44</td></tr>
+<tr><td>Alaska</td><td>27.32</td><td>$0.41</td><td>$98.35</td></tr>
+<tr><td>Arizona</td><td>15.36</td><td>$0.23</td><td>$55.30</td></tr>
+<tr><td>Arkansas</td><td>13.74</td><td>$0.21</td><td>$49.46</td></tr>
+<tr><td>California</td><td>32.58</td><td>$0.49</td><td>$117.29</td></tr>
+<tr><td>Colorado</td><td>16.80</td><td>$0.25</td><td>$60.48</td></tr>
+<tr><td>Connecticut</td><td>27.47</td><td>$0.41</td><td>$98.89</td></tr>
+<tr><td>Delaware</td><td>17.98</td><td>$0.27</td><td>$64.73</td></tr>
+<tr><td>District of Columbia</td><td>24.86</td><td>$0.37</td><td>$89.50</td></tr>
+<tr><td>Florida</td><td>15.32</td><td>$0.23</td><td>$55.15</td></tr>
+<tr><td>Georgia</td><td>15.48</td><td>$0.23</td><td>$55.73</td></tr>
+<tr><td>Hawaii</td><td>46.41</td><td>$0.70</td><td>$167.08</td></tr>
+<tr><td>Idaho</td><td>13.02</td><td>$0.20</td><td>$46.87</td></tr>
+<tr><td>Illinois</td><td>19.23</td><td>$0.29</td><td>$69.23</td></tr>
+<tr><td>Indiana</td><td>17.04</td><td>$0.26</td><td>$61.34</td></tr>
+<tr><td>Iowa</td><td>14.55</td><td>$0.22</td><td>$52.38</td></tr>
+<tr><td>Kansas</td><td>15.26</td><td>$0.23</td><td>$54.94</td></tr>
+<tr><td>Kentucky</td><td>14.20</td><td>$0.21</td><td>$51.12</td></tr>
+<tr><td>Louisiana</td><td>13.27</td><td>$0.20</td><td>$47.77</td></tr>
+<tr><td>Maine</td><td>30.23</td><td>$0.45</td><td>$108.83</td></tr>
+<tr><td>Maryland</td><td>21.31</td><td>$0.32</td><td>$76.72</td></tr>
+<tr><td>Massachusetts</td><td>30.19</td><td>$0.45</td><td>$108.68</td></tr>
+<tr><td>Michigan</td><td>21.73</td><td>$0.33</td><td>$78.23</td></tr>
+<tr><td>Minnesota</td><td>16.44</td><td>$0.25</td><td>$59.18</td></tr>
+<tr><td>Mississippi</td><td>15.06</td><td>$0.23</td><td>$54.22</td></tr>
+<tr><td>Missouri</td><td>14.28</td><td>$0.21</td><td>$51.41</td></tr>
+<tr><td>Montana</td><td>14.13</td><td>$0.21</td><td>$50.87</td></tr>
+<tr><td>Nebraska</td><td>12.92</td><td>$0.19</td><td>$46.51</td></tr>
+<tr><td>Nevada</td><td>13.36</td><td>$0.20</td><td>$48.10</td></tr>
+<tr><td>New Hampshire</td><td>26.91</td><td>$0.40</td><td>$96.88</td></tr>
+<tr><td>New Jersey</td><td>24.09</td><td>$0.36</td><td>$86.72</td></tr>
+<tr><td>New Mexico</td><td>15.34</td><td>$0.23</td><td>$55.22</td></tr>
+<tr><td>New York</td><td>29.26</td><td>$0.44</td><td>$105.34</td></tr>
+<tr><td>North Carolina</td><td>14.94</td><td>$0.22</td><td>$53.78</td></tr>
+<tr><td>North Dakota</td><td>12.46</td><td>$0.19</td><td>$44.86</td></tr>
+<tr><td>Ohio</td><td>18.81</td><td>$0.28</td><td>$67.72</td></tr>
+<tr><td>Oklahoma</td><td>13.81</td><td>$0.21</td><td>$49.72</td></tr>
+<tr><td>Oregon</td><td>15.46</td><td>$0.23</td><td>$55.66</td></tr>
+<tr><td>Pennsylvania</td><td>21.13</td><td>$0.32</td><td>$76.07</td></tr>
+<tr><td>Rhode Island</td><td>29.05</td><td>$0.44</td><td>$104.58</td></tr>
+<tr><td>South Carolina</td><td>15.90</td><td>$0.24</td><td>$57.24</td></tr>
+<tr><td>South Dakota</td><td>14.58</td><td>$0.22</td><td>$52.49</td></tr>
+<tr><td>Tennessee</td><td>13.80</td><td>$0.21</td><td>$49.68</td></tr>
+<tr><td>Texas</td><td>16.03</td><td>$0.24</td><td>$57.71</td></tr>
+<tr><td>Utah</td><td>13.19</td><td>$0.20</td><td>$47.48</td></tr>
+<tr><td>Vermont</td><td>23.93</td><td>$0.36</td><td>$86.15</td></tr>
+<tr><td>Virginia</td><td>16.95</td><td>$0.25</td><td>$61.02</td></tr>
+<tr><td>Washington</td><td>14.42</td><td>$0.22</td><td>$51.91</td></tr>
+<tr><td>West Virginia</td><td>15.58</td><td>$0.23</td><td>$56.09</td></tr>
+<tr><td>Wisconsin</td><td>19.05</td><td>$0.29</td><td>$68.58</td></tr>
+<tr><td>Wyoming</td><td>14.01</td><td>$0.21</td><td>$50.44</td></tr>
+<tr><td><b>U.S. total</b></td><td>18.19</td><td>$0.27</td><td>$65.48</td></tr>
+</table>
+<p>Highest per hour: Hawaii $0.70, California $0.49, Maine $0.45. Lowest: North Dakota $0.19, Nebraska $0.19, Idaho $0.20. Every row uses the calculator's formula: 1.5 kWh × rate.</p>
+
+<h2>Before you rely on a space heater</h2>
+<p>The U.S. Fire Administration (page last reviewed 2023-05-04) advises keeping anything that can burn at least 3 feet from heat sources including space heaters, and turning space heaters off when leaving the room or going to bed. Follow the manufacturer's instructions for the outlet and cords.</p>
+
+<h2>Sources</h2>
+<ul>
+<li>EIA, Electric Power Monthly, Table 5.6.B (residential, year-to-date August 2026), read 2026-10-31. Full table: <a href="../electricity-price-per-kwh/">price per kWh by state</a>.</li>
+<li>Virginia Cooperative Extension, “Energy Series: Estimating Appliance and Home Electronic Energy Use”, publication 2901-9014, 2020-02-26 (formula, nameplate wattages, cycling note): <a href="https://www.pubs.ext.vt.edu/2901/2901-9014/2901-9014.html">pubs.ext.vt.edu</a>, read 2026-10-31.</li>
+<li>EIA Energy Explained, British thermal units (1 kWh = 3,412 Btu): <a href="https://www.eia.gov/energyexplained/units-and-calculators/british-thermal-units.php">eia.gov</a>, read 2026-10-31.</li>
+<li>U.S. Fire Administration, Heating fire safety: <a href="https://www.usfa.fema.gov/prevention/home-fires/prevent-fires/heating/">usfa.fema.gov</a>, read 2026-10-31.</li>
+</ul>
+<p>See what your appliances add to your bill month by month with the free <a href="../">utility bill tracker</a> (on the home page). Calculator logic: <a href="../scripts/appliance_cost.js">appliance_cost.js</a> (MIT).</p>
+</main>
+<footer class="wrap">© 2026 Lumen &amp; Ledger · Texts CC BY 4.0 · <a href="../">Tools</a> · <a href="../about/">About</a> · <a href="../privacy/">Privacy</a> · Contact: lumenledger.tools@proton.me</footer>
+<script src="../scripts/appliance_cost.js"></script>
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)};
+  function usd(x){return x<10?'$'+x.toFixed(2):'$'+x.toFixed(0)}
+  function num(i){return parseFloat($(i).value)||0}
+  function calc(){
+    var r=ApplianceCost.run({watts:num('w'),hours:num('h'),days:num('d'),duty:num('u'),rate:num('r')});
+    $('out').innerHTML='Per hour: <b>'+usd(r.hour.usd)+'</b> ('+r.hour.kwh.toFixed(2)+' kWh) · Per day: <b>'+usd(r.day.usd)+'</b> ('+r.day.kwh.toFixed(1)+' kWh) · Per month: <b>'+usd(r.month.usd)+'</b> ('+r.month.kwh.toFixed(0)+' kWh)';
+  }
+  $('st').addEventListener('change',function(){if(this.value)$('r').value=this.value;calc()});
+  ['w','h','d','u'].forEach(function(i){$(i).addEventListener('input',calc)});
+  $('r').addEventListener('input',function(){$('st').value='';calc()});
+  document.querySelectorAll('.presets button').forEach(function(b){b.addEventListener('click',function(){$('w').value=b.dataset.w;calc()})});
+  var q=new URLSearchParams(location.search),qr=parseFloat(q.get('rate')),qw=parseFloat(q.get('w'));
+  if(qr>=0.01&&qr<=2){$('r').value=qr;$('st').value=''}
+  if(qw>0&&qw<=20000)$('w').value=qw;
+  calc();
+})();
+</script>
+</body>
+</html>
