@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ricevuta prestazione occasionale: generatore gratuito con calcolo ritenuta e bollo (2026-2027) — Lumen &amp; Ledger</title>
+<meta name="description" content="Compila e stampa (o salva in PDF) la ricevuta per lavoro autonomo occasionale: calcolo da lordo o da netto, ritenuta d'acconto 20%, marca da bollo 2 € sopra 77,47 €, avviso soglia INPS 5.000 €. Gratis, nessun dato inviato.">
+<link rel="canonical" href="https://lumen-ledger.github.io/it/ricevuta-prestazione-occasionale/">
+<style>
+:root{--navy:#0F2A3D;--sun:#F2B33D;--paper:#F7F5EF;--green:#2E8B57;--warn:#C2452D;--line:#d9d4c7}
+*{box-sizing:border-box}
+body{margin:0;font:17px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--navy)}
+header{background:var(--navy);color:#fff;padding:30px 20px}
+.wrap{max-width:860px;margin:0 auto}
+header h1{margin:0 0 8px;font-size:1.75rem;line-height:1.25}
+header p{margin:0;opacity:.88}
+nav{font-size:.9rem;margin-bottom:14px}nav a{color:var(--sun)}
+main{padding:22px 20px}
+h2{font-size:1.25rem;margin:30px 0 8px}
+fieldset{border:1px solid var(--line);background:#fff;border-radius:6px;margin:0 0 14px;padding:10px 14px}
+legend{font-weight:600;padding:0 6px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px}
+@media (max-width:640px){.grid{grid-template-columns:1fr}}
+label{display:block;font-size:.88rem}
+input,select,textarea{width:100%;font:inherit;font-size:.95rem;padding:6px 8px;border:1px solid #b9b4a6;border-radius:4px;background:#fff;color:inherit}
+textarea{min-height:60px}
+.chk{display:flex;gap:8px;align-items:flex-start;font-size:.9rem;margin:6px 0}.chk input{width:auto;margin-top:4px}
+.box{background:#fff8e6;border-left:4px solid var(--sun);padding:12px 14px;margin:14px 0;font-size:.95rem}
+.no{background:#fbecea;border-left:4px solid var(--warn);padding:12px 14px;margin:14px 0;font-size:.95rem}
+.ok{background:#eaf5ee;border-left:4px solid var(--green);padding:12px 14px;margin:14px 0;font-size:.95rem}
+.btn{display:inline-block;background:var(--navy);color:#fff;border:0;text-decoration:none;padding:10px 16px;border-radius:6px;font:inherit;font-weight:600;cursor:pointer}
+.small{font-size:.85rem;color:#5b6770}
+#ricevuta{background:#fff;border:1px solid var(--line);padding:28px 30px;margin:16px 0;color:#111;font-size:.95rem;line-height:1.45}
+#ricevuta h3{text-align:center;margin:0 0 4px;font-size:1.15rem;letter-spacing:.02em}
+#ricevuta .sub{text-align:center;margin:0 0 18px;font-size:.9rem}
+#ricevuta .parti{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+#ricevuta table{width:100%;border-collapse:collapse;margin:12px 0}
+#ricevuta td{padding:5px 4px;border-bottom:1px solid #ddd}
+#ricevuta td.n{text-align:right;white-space:nowrap}
+#ricevuta tr.tot td{font-weight:700;border-top:2px solid #111;border-bottom:0}
+#ricevuta .bollo{float:right;border:1px dashed #888;width:110px;height:70px;font-size:.72rem;color:#666;text-align:center;padding-top:22px;margin:0 0 8px 12px}
+#ricevuta .firma{margin-top:34px;text-align:right}
+table.t{width:100%;border-collapse:collapse;font-size:.9rem;background:#fff;margin:10px 0}
+table.t td,table.t th{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left}
+table.t th{background:#eef0ec}
+footer{padding:20px;font-size:.82rem;color:#5b6770}
+@media print{
+  body{background:#fff}
+  header,footer,.noprint{display:none!important}
+  main{padding:0}
+  #ricevuta{border:0;margin:0;padding:0}
+}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="#come">Come funziona</a> · <a href="#fonti">Fonti</a></nav>
+  <h1>Ricevuta per prestazione occasionale: generatore gratuito</h1>
+  <p>Compila i campi, controlla il calcolo di ritenuta e bollo, poi stampa o salva in PDF. Tutto avviene nel tuo browser: nessun dato viene inviato. Regole verificate il 31 ottobre 2026.</p>
+</div></header>
+<main class="wrap">
+
+<div class="noprint">
+<form id="f" onsubmit="return false">
+<fieldset><legend>Chi riceve il compenso (prestatore)</legend>
+<div class="grid">
+  <label>Nome e cognome<input id="pNome" autocomplete="name"></label>
+  <label>Codice fiscale<input id="pCf" maxlength="16" style="text-transform:uppercase"></label>
+  <label style="grid-column:1/-1">Indirizzo (via, CAP, comune)<input id="pInd" autocomplete="street-address"></label>
+</div>
+<label class="chk"><input type="checkbox" id="ricorda"> Ricorda i miei dati su questo dispositivo (salvati solo nel browser, in localStorage)</label>
+</fieldset>
+
+<fieldset><legend>Chi paga (committente)</legend>
+<div class="grid">
+  <label>Ragione sociale o nome<input id="cNome"></label>
+  <label>Partita IVA o codice fiscale<input id="cCf" style="text-transform:uppercase"></label>
+  <label style="grid-column:1/-1">Indirizzo<input id="cInd"></label>
+  <label style="grid-column:1/-1">Tipo di committente
+    <select id="sost">
+      <option value="1">Impresa, professionista, ente o condominio (sostituto d'imposta): trattiene la ritenuta del 20%</option>
+      <option value="0">Privato cittadino (non sostituto d'imposta): nessuna ritenuta</option>
+    </select></label>
+</div>
+</fieldset>
+
+<fieldset><legend>Prestazione e importi</legend>
+<div class="grid">
+  <label>Numero ricevuta<input id="num" value="1"></label>
+  <label>Data<input id="data" type="date"></label>
+  <label>Luogo<input id="luogo"></label>
+  <label>Periodo o data della prestazione<input id="periodo" placeholder="es. 3-14 novembre 2026"></label>
+  <label style="grid-column:1/-1">Descrizione della prestazione<textarea id="descr">Prestazione di lavoro autonomo occasionale</textarea></label>
+  <label>Calcola a partire da
+    <select id="modo"><option value="lordo">Compenso lordo concordato</option><option value="netto">Netto che vuoi ricevere</option></select></label>
+  <label><span id="lblImp">Compenso lordo (€)</span><input id="imp" type="number" min="0" step="0.01" value="500"></label>
+  <label>Rimborso spese da indicare (€, facoltativo)<input id="spese" type="number" min="0" step="0.01" value="0"></label>
+  <label>Compensi occasionali gia' ricevuti quest'anno (€, da tutti i committenti)<input id="gia" type="number" min="0" step="0.01" value="0"></label>
+</div>
+<label class="chk"><input type="checkbox" id="bolloAdd"> Addebito al committente il costo della marca da bollo (2,00 €, riga separata)</label>
+<label>Modalita' di pagamento (facoltativo)<input id="pag" placeholder="es. bonifico su IBAN IT.."></label>
+</fieldset>
+</form>
+<div id="avvisi"></div>
+<p><button class="btn" onclick="window.print()">Stampa o salva in PDF</button> <span class="small">Nella finestra di stampa scegli "Salva come PDF". Stampa due copie: l'originale (con la marca da bollo, se dovuta) va al committente.</span></p>
+</div>
+
+<div id="ricevuta" aria-live="polite"></div>
+
+<div class="noprint">
+<h2 id="come">Come funziona il calcolo</h2>
+<table class="t">
+<tr><th>Voce</th><th>Regola applicata</th></tr>
+<tr><td>Ritenuta d'acconto</td><td>20% del compenso lordo (piu' le spese indicate in ricevuta) se il committente e' un sostituto d'imposta. Il committente la trattiene e la versa allo Stato; tu la scali dall'IRPEF in dichiarazione. Con un committente privato non c'e' ritenuta.</td></tr>
+<tr><td>Dal netto al lordo</td><td>lordo = netto ÷ 0,80 (es. per ricevere 400 € netti il lordo e' 500 €).</td></tr>
+<tr><td>Marca da bollo</td><td>2,00 € se l'importo della ricevuta supera 77,47 € (fino a 77,47 € compresi non e' dovuta). Va sull'originale consegnato al committente.</td></tr>
+<tr><td>IVA</td><td>Non si applica: manca l'abitualita' dell'attivita'. Per questo la ricevuta riporta "operazione fuori campo IVA".</td></tr>
+<tr><td>Soglia 5.000 €</td><td>Se i redditi annui da lavoro autonomo occasionale superano 5.000 €, scatta l'iscrizione alla Gestione separata INPS. Il generatore ti avvisa; i contributi non sono calcolati qui (aliquote e quote a carico del committente: circolare INPS dell'anno).</td></tr>
+</table>
+
+<div class="box"><b>Esempio.</b> Compenso lordo 500 € a un'impresa: ritenuta 100 €, netto a te 400 €, marca da bollo da 2 € (500 &gt; 77,47). Stesso importo a un privato: nessuna ritenuta, ricevi 500 €, bollo comunque dovuto. Gli esempi sono calcolati con lo script pubblicato <a href="../../scripts/ricevuta_occasionale.js">ricevuta_occasionale.js</a> (MIT, eseguibile con Node.js).</div>
+
+<h2>Cose da sapere prima di emettere la ricevuta</h2>
+<ul>
+<li><b>Il committente impresa deve fare la comunicazione preventiva</b> all'Ispettorato territoriale del lavoro prima che inizi la prestazione (con modalita' telematiche). E' un obbligo suo, non tuo; se omessa la sanzione e' da 500 a 2.500 € per ciascun lavoratore. Restano escluse le attivita' intermediate da piattaforme digitali.</li>
+<li><b>"Occasionale" riguarda come lavori, non solo quanto incassi.</b> Se l'attivita' diventa abituale, continuativa o organizzata, serve la partita IVA anche sotto i 5.000 €. In caso di dubbio chiedi a un commercialista o a un CAF.</li>
+<li><b>Spese.</b> Se indichi un rimborso spese, il generatore lo somma al compenso e applica la ritenuta sul totale. Il trattamento di casi particolari (spese anticipate in nome del committente, bollo addebitato) e' da verificare con chi ti segue: il bollo addebitato e' esposto come riga separata e non entra nella base della ritenuta in questo calcolo.</li>
+<li><b>Dal 1° gennaio 2027 cambiano i riferimenti di legge</b> (nuovo Testo unico IVA e Testo unico versamenti e riscossione): molti fac-simile citano articoli che da quella data risultano abrogati. Per questo la ricevuta generata qui non stampa numeri di articolo, ma solo le diciture. Le regole di calcolo sopra sono quelle in vigore al 31 ottobre 2026; ricontrolleremo i nuovi testi a gennaio 2027.</li>
+</ul>
+
+<h2 id="fonti">Fonti (fonti primarie, consultate il 31 ottobre 2026)</h2>
+<ul class="small">
+<li>Ritenuta 20% sui compensi di lavoro autonomo, anche non abituale: art. 25, primo comma, DPR 29 settembre 1973 n. 600 (aliquota portata al 20% dall'art. 21, comma 11, L. 27 dicembre 1997 n. 449), testo su normattiva.it. Dal 1° gennaio 2027 la materia e' trasferita nel D.Lgs. 24 marzo 2025 n. 33 (Testo unico versamenti e riscossione; decorrenza fissata dal DL 31 dicembre 2025 n. 200).</li>
+<li>Imposta di bollo 2,00 € su ricevute e quietanze, non dovuta fino a 77,47 €: DPR 26 ottobre 1972 n. 642, Tariffa allegato A, parte I, art. 13 e nota 2; applicazione confermata da Agenzia delle Entrate, Risposta a interpello n. 129/2024 (agenziaentrate.gov.it).</li>
+<li>IVA, requisito dell'abitualita': art. 5 DPR 26 ottobre 1972 n. 633; dal 1° gennaio 2027 sostituito dal Testo unico IVA, D.Lgs. 19 gennaio 2026 n. 10 (art. 170-171).</li>
+<li>Soglia 5.000 € e Gestione separata INPS: art. 44, comma 2, DL 30 settembre 2003 n. 269 (normattiva.it).</li>
+<li>Comunicazione preventiva all'Ispettorato e sanzione 500–2.500 €: art. 14, comma 1, D.Lgs. 9 aprile 2008 n. 81, come modificato dal DL 146/2021 (normattiva.it).</li>
+</ul>
+<p class="small">Questo strumento e' informazione generale e non costituisce consulenza fiscale o legale: verifica il tuo caso con un professionista. Nessun dato inserito lascia il tuo dispositivo; non usiamo cookie ne' strumenti di analisi.</p>
+</div>
+</main>
+<footer class="wrap">© 2026 Lumen &amp; Ledger · Codice MIT · Testi CC BY 4.0 · Contatto: lumenledger.tools@proton.me · <a href="../">Tutti gli strumenti</a> · <a href="../chi-siamo/">Chi siamo</a> · <a href="../privacy/">Privacy</a></footer>
+<script src="../../scripts/ricevuta_occasionale.js"></script>
+<script>
+(function(){
+var $=function(id){return document.getElementById(id)};
+var CAMPI=['pNome','pCf','pInd','cNome','cCf','cInd','sost','num','data','luogo','periodo','descr','modo','imp','spese','gia','pag'];
+var PRESTATORE=['pNome','pCf','pInd','luogo','pag'];
+var KEY='ll-ricevuta-occasionale';
+function eur(x){return x.toLocaleString('it-IT',{minimumFractionDigits:2,maximumFractionDigits:2})+' €'}
+function esc(s){return String(s||'').replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function br(s){return esc(s).replace(/\n/g,'<br>')}
+function dataIt(v){if(!v)return'';var p=v.split('-');return p[2]+'/'+p[1]+'/'+p[0]}
+try{var s=JSON.parse(localStorage.getItem(KEY)||'null');if(s){PRESTATORE.forEach(function(k){if(s[k])$(k).value=s[k]});$('ricorda').checked=true}}catch(e){}
+if(!$('data').value)$('data').value=new Date().toISOString().slice(0,10);
+function aggiorna(){
+  var sost=$('sost').value==='1', modo=$('modo').value;
+  $('lblImp').textContent=modo==='netto'?'Netto che vuoi ricevere (€)':'Compenso lordo (€)';
+  var r=calcolaRicevuta({modo:modo,importo:+$('imp').value,spese:+$('spese').value,sostituto:sost,bolloAddebitato:$('bolloAdd').checked,giaRicevuti:+$('gia').value});
+  var a='';
+  if(r.oltreSogliaInps)a+='<div class="no"><b>Superi 5.000 € nell\'anno</b> ('+eur(r.totaleAnno)+' con questa ricevuta): scatta l\'iscrizione alla Gestione separata INPS e il committente deve trattenere e versare i contributi. Verifica aliquote e adempimenti con l\'INPS o un consulente.</div>';
+  else a+='<div class="ok">Totale compensi occasionali nell\'anno con questa ricevuta: <b>'+eur(r.totaleAnno)+'</b> (soglia INPS: 5.000 €).</div>';
+  if(sost)a+='<div class="box">Committente sostituto d\'imposta: se e\' un\'impresa, deve inviare la comunicazione preventiva all\'Ispettorato del lavoro <b>prima</b> dell\'inizio della prestazione.</div>';
+  $('avvisi').innerHTML=a;
+  var righe='<tr><td>Compenso lordo per la prestazione</td><td class="n">'+eur(r.compenso)+'</td></tr>';
+  if(r.spese>0)righe+='<tr><td>Rimborso spese</td><td class="n">'+eur(r.spese)+'</td></tr>';
+  if(r.spese>0)righe+='<tr><td>Totale lordo</td><td class="n">'+eur(r.lordo)+'</td></tr>';
+  righe+=sost?'<tr><td>Ritenuta d\'acconto 20%</td><td class="n">− '+eur(r.ritenuta)+'</td></tr>':'<tr><td>Ritenuta d\'acconto</td><td class="n">non applicata (committente non sostituto d\'imposta)</td></tr>';
+  if(r.addebitoBollo)righe+='<tr><td>Rimborso imposta di bollo</td><td class="n">'+eur(r.addebitoBollo)+'</td></tr>';
+  righe+='<tr class="tot"><td>Netto da pagare</td><td class="n">'+eur(r.netto)+'</td></tr>';
+  var h='';
+  if(r.bollo)h+='<div class="bollo">Marca da bollo<br>2,00 €</div>';
+  h+='<h3>RICEVUTA PER PRESTAZIONE DI LAVORO AUTONOMO OCCASIONALE</h3>';
+  h+='<p class="sub">n. '+esc($('num').value)+' del '+dataIt($('data').value)+'</p>';
+  h+='<div class="parti"><div><b>Prestatore</b><br>'+esc($('pNome').value)+'<br>'+esc($('pInd').value)+'<br>C.F. '+esc($('pCf').value.toUpperCase())+'</div>';
+  h+='<div><b>Committente</b><br>'+esc($('cNome').value)+'<br>'+esc($('cInd').value)+'<br>P.IVA/C.F. '+esc($('cCf').value.toUpperCase())+'</div></div>';
+  h+='<p>Il/la sottoscritto/a dichiara di aver ricevuto la somma indicata a titolo di compenso per la seguente prestazione, svolta in modo occasionale, senza vincolo di subordinazione e senza coordinamento con l\'organizzazione del committente:</p>';
+  h+='<p><i>'+br($('descr').value)+'</i>'+($('periodo').value?'<br>Periodo: '+esc($('periodo').value):'')+'</p>';
+  h+='<table>'+righe+'</table>';
+  h+='<p style="font-size:.85rem">Operazione fuori campo IVA per mancanza del requisito di abitualita\'.';
+  h+=r.bollo?' Imposta di bollo di 2,00 € assolta sull\'originale (importo superiore a 77,47 €).':' Imposta di bollo non dovuta (importo non superiore a 77,47 €).';
+  h+=' Il/la sottoscritto/a dichiara che i compensi per lavoro autonomo occasionale percepiti nell\'anno '+(r.oltreSogliaInps?'superano':'non superano')+' l\'importo di 5.000 €.';
+  if($('pag').value)h+=' Pagamento: '+esc($('pag').value)+'.';
+  h+='</p><p class="firma">'+esc($('luogo').value)+(($('luogo').value&&$('data').value)?', ':'')+dataIt($('data').value)+'<br><br>Firma ______________________________</p>';
+  $('ricevuta').innerHTML=h;
+  if($('ricorda').checked){var o={};PRESTATORE.forEach(function(k){o[k]=$(k).value});try{localStorage.setItem(KEY,JSON.stringify(o))}catch(e){}}
+  else{try{localStorage.removeItem(KEY)}catch(e){}}
+}
+CAMPI.concat(['bolloAdd','ricorda']).forEach(function(k){$(k).addEventListener('input',aggiorna);$(k).addEventListener('change',aggiorna)});
+aggiorna();
+})();
+</script>
+</body>
+</html>
