@@ -66,14 +66,13 @@ canvas{width:100%;height:160px;display:block}
   <div id="pshBox">
   <label for="psh">Peak sun hours (yearly average, optimal tilt)</label>
   <select id="psh">
-    <option value="3.5">≈3.5 — Northern / cloudy (e.g. Pacific NW, upper Midwest, New England)</option>
-    <option value="4.2" selected>≈4.2 — Middle latitudes (e.g. Mid-Atlantic, Midwest)</option>
-    <option value="5.0">≈5.0 — Sunny South / Southeast</option>
-    <option value="5.8">≈5.8 — Desert Southwest</option>
+    <option value="4.0">≈4.0 — Northern / cloudy (e.g. Pacific NW, upper Midwest, New England)</option>
+    <option value="4.6" selected>≈4.6 — Middle latitudes (e.g. Ohio Valley, Mid-Atlantic, Midwest)</option>
+    <option value="5.4">≈5.4 — Sunny / high altitude (e.g. Mountain West, Southeast)</option>
     <option value="custom">Custom…</option>
   </select>
-  <input id="pshCustom" type="number" step="0.1" value="4.2" style="display:none;margin-top:6px">
-  <p class="hint">For your exact address, NREL's free PVWatts tool gives a precise figure.</p>
+  <input id="pshCustom" type="number" step="0.1" value="4.6" style="display:none;margin-top:6px">
+  <p class="hint">Sun hours here = yearly average kWh/m² per day on a south-facing panel tilted 30° (PVWatts calls it "solar radiation"). Reference values from NREL PVWatts v8: Seattle 4.0, Columbus OH 4.6, Salt Lake City 5.4. Desert Southwest or South Florida: pick the Phoenix or Miami preset above. For your exact address, NREL's free PVWatts tool gives the figure.</p>
   </div>
   <label for="orient">Mounting</label>
   <select id="orient">
@@ -125,7 +124,7 @@ canvas{width:100%;height:160px;display:block}
   <p class="hint"><span style="color:#d39410">■</span> solar output &nbsp; <span style="color:#2E8B57">■</span> part your home uses &nbsp; — baseload</p>
   <h2 style="margin-top:14px">Year by year</h2>
   <table id="tbl"><thead><tr><th>Year</th><th>Savings</th><th>Cumulative</th></tr></thead><tbody></tbody></table>
-  <div class="note"><b>How this works.</b> Generic location: yearly output = panel W × peak sun hours × 365 × mounting factor × (1 − shading) × 0.86 system efficiency (inverter, wiring, heat), capped by the inverter limit. City presets: yearly output = panel kW × NREL PVWatts v8 AC output per kW for that city (south-facing, 30° tilt, fixed open rack, standard module, 14% losses, TMY weather; queried 2026-10-31) × mounting factor × (1 − shading), and the conservative model uses that city's own monthly profile. To estimate how much you use directly, an average day is modelled as a bell curve over ~12 daylight hours and compared hour by hour with your baseload: anything above baseload is exported. In the conservative model (default) yearly output is split across months; for the generic location it uses the NREL PVWatts v8 monthly profile of a south-facing 30° array near 40°N (Columbus, Ohio; TMY weather, queried 2026-10-30), and in each month half the days produce 1.5× the average and half 0.5×. The chart always shows the average day. Panels lose 0.5% output per year. These are estimates for comparing options, not a guarantee. Check your state law, your utility's rules and your lease before installing.</div>
+  <div class="note"><b>How this works.</b> Generic location: yearly output = panel W × peak sun hours × 365 × mounting factor × (1 − shading) × 0.77 performance ratio (inverter, wiring, heat, soiling; the ratio between AC output and sun hours that NREL PVWatts v8 gives for Seattle, Salt Lake City and Columbus OH with 14% losses: 0.77, 0.77 and 0.79, queried 2026-10-31), capped by the inverter limit. City presets: yearly output = panel kW × NREL PVWatts v8 AC output per kW for that city (south-facing, 30° tilt, fixed open rack, standard module, 14% losses, TMY weather; queried 2026-10-31) × mounting factor × (1 − shading), and the conservative model uses that city's own monthly profile. To estimate how much you use directly, an average day is modelled as a bell curve over ~12 daylight hours and compared hour by hour with your baseload: anything above baseload is exported. In the conservative model (default) yearly output is split across months; for the generic location it uses the NREL PVWatts v8 monthly profile of a south-facing 30° array near 40°N (Columbus, Ohio; TMY weather, queried 2026-10-30), and in each month half the days produce 1.5× the average and half 0.5×. The chart always shows the average day. Panels lose 0.5% output per year. These are estimates for comparing options, not a guarantee. Check your state law, your utility's rules and your lease before installing.</div>
 </section>
 </main>
 <footer>
@@ -135,7 +134,7 @@ canvas{width:100%;height:160px;display:block}
 const $=id=>document.getElementById(id);
 const num=id=>Math.max(0,parseFloat($(id).value)||0);
 const money=v=>(v<0?'-':'')+'$'+Math.abs(v).toLocaleString('en-US',{maximumFractionDigits:0});
-const SYS_EFF=0.86, DEGR=0.005, HOURS=12;
+const SYS_EFF=0.77, DEGR=0.005, HOURS=12;
 
 // Fraction of daily energy at each step, shaped like sin() over daylight hours.
 function dayCurve(steps){const w=[];let s=0;for(let i=0;i<steps;i++){const v=Math.sin(Math.PI*(i+.5)/steps);w.push(v);s+=v}return w.map(v=>v/s)}
