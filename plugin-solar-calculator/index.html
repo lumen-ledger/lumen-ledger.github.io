@@ -155,7 +155,7 @@ mia:{y:1542,m:[8.1,8.2,9.9,9.0,8.6,7.5,8.2,8.4,8.0,8.4,8.0,7.6]}};
 const locParam=new URLSearchParams(location.search).get('loc');
 if(locParam&&CITIES[locParam])document.getElementById('loc').value=locParam;
 const rateParam=parseFloat(new URLSearchParams(location.search).get('rate'));
-if(rateParam>=0.01&&rateParam<=2)document.getElementById('rate').value=rateParam.toFixed(4).replace(/.?0+$/,'');
+if(rateParam>=0.01&&rateParam<=2)document.getElementById('rate').value=rateParam.toFixed(4).replace(/\.?0+$/,'');
 
 // Energy produced and used directly in one day of dayKWh, with given curve and load.
 function simDay(dayKWh,curve,dt,invKW,load){
