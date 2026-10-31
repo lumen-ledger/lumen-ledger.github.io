@@ -49,24 +49,24 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
 <tr><th>Citta'</th><th>Resa a 30° Sud (kWh/kWp/anno)</th></tr>
 <tr><td>Torino</td><td>1.339</td></tr>
 <tr><td>Bologna</td><td>1.351</td></tr>
-<tr><td>Milano</td><td>1.354</td></tr>
-<tr><td>Roma</td><td>1.492</td></tr>
+<tr><td>Milano (<a href="../../fotovoltaico-balcone/?loc=milano">calcola</a>)</td><td>1.354</td></tr>
+<tr><td>Roma (<a href="../../fotovoltaico-balcone/?loc=roma">calcola</a>)</td><td>1.492</td></tr>
 <tr><td>Napoli</td><td>1.529</td></tr>
-<tr><td>Palermo</td><td>1.531</td></tr>
+<tr><td>Palermo (<a href="../../fotovoltaico-balcone/?loc=palermo">calcola</a>)</td><td>1.531</td></tr>
 <tr><td>Cagliari</td><td>1.583</td></tr>
 </table>
 <p class="small">Nel calcolatore e negli scenari usiamo valori arrotondati: Nord 1.350, Centro 1.490, Sud e Sicilia 1.530, Sardegna 1.580. In montagna o in zone nebbiose la resa puo' essere molto piu' bassa: controlla il tuo indirizzo su PVGIS.</p>
-<p>Su un balcone pero' i pannelli stanno quasi sempre in verticale sulla ringhiera, e questo pesa molto. Quote calcolate con PVGIS per Roma (stessa resa annua, montaggi diversi):</p>
+<p>Su un balcone pero' i pannelli stanno quasi sempre in verticale sulla ringhiera, e questo pesa molto. Quote calcolate con PVGIS per tre citta' (stessa resa annua, montaggi diversi); calcolatore e scenari usano la colonna di Roma:</p>
 <table>
-<tr><th>Montaggio</th><th>Quota della resa a 30° Sud</th></tr>
-<tr><td>Staffe inclinate ~30°, esposizione Sud</td><td>100%</td></tr>
-<tr><td>Orizzontale (tetto piano)</td><td>85%</td></tr>
-<tr><td>Staffe inclinate ~30°, Est o Ovest</td><td>81%</td></tr>
-<tr><td>Ringhiera verticale, Sud</td><td>67%</td></tr>
-<tr><td>Ringhiera verticale, Est o Ovest</td><td>49%</td></tr>
-<tr><td>Ringhiera verticale, Nord</td><td>13% (sconsigliato)</td></tr>
+<tr><th>Montaggio</th><th>Milano</th><th>Roma</th><th>Palermo</th></tr>
+<tr><td>Staffe inclinate ~30°, esposizione Sud</td><td>100%</td><td>100%</td><td>100%</td></tr>
+<tr><td>Orizzontale (tetto piano)</td><td>83%</td><td>85%</td><td>88%</td></tr>
+<tr><td>Staffe inclinate ~30°, Est o Ovest</td><td>78%</td><td>81%</td><td>83%</td></tr>
+<tr><td>Ringhiera verticale, Sud</td><td>71%</td><td>67%</td><td>62%</td></tr>
+<tr><td>Ringhiera verticale, Est o Ovest</td><td>46%</td><td>49%</td><td>48%</td></tr>
+<tr><td>Ringhiera verticale, Nord (sconsigliato)</td><td>14%</td><td>13%</td><td>14%</td></tr>
 </table>
-<p>Un pannello verticale a Sud ha anche un andamento diverso durante l'anno: con il sole basso produce di piu' in inverno che in estate (PVGIS, Roma: circa 92 kWh a gennaio contro 59 a giugno per 1 kWp), e questo aiuta l'autoconsumo. Dalla resa va poi tolta l'ombra di palazzi, alberi o del balcone di sopra.</p>
+<p>Un pannello verticale a Sud ha anche un andamento diverso durante l'anno: con il sole basso produce di piu' in inverno che in estate (PVGIS, Roma: circa 92 kWh a gennaio contro 59 a giugno per 1 kWp), e questo aiuta l'autoconsumo. Piu' si va a nord, piu' il sole e' basso e piu' la ringhiera a Sud recupera: per 1 kWp in verticale a Sud PVGIS da' 956 kWh/anno a Milano e 951 a Palermo, praticamente lo stesso valore, anche se a 30° Palermo produce il 13% in piu'. Per una ringhiera al Nord, quindi, la zona Nord del calcolatore (fattore di Roma) e' prudente di circa il 6%: scegli la citta' nel menu per il valore esatto. Dalla resa va poi tolta l'ombra di palazzi, alberi o del balcone di sopra.</p>
 <p><b>Esempio:</b> 0,8 kWp × 1.490 (Centro) × 0,67 (ringhiera Sud) × 0,90 (10% di ombra) ≈ <b>719 kWh/anno</b>.</p>
 
 <h2>Quanta di quell'energia usi davvero</h2>
@@ -123,7 +123,7 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
 <li>Rese per zona: PVGIS, Joint Research Centre, Commissione Europea (re.jrc.ec.europa.eu/pvg_tools).</li>
 <li>Perdite di sistema: 14%, valore predefinito di PVGIS.</li>
 <li>Connessione degli impianti alla rete in bassa tensione: norma CEI 0-21; procedura di comunicazione: ARERA, delibera 315/2020/R/eel e scheda tecnica (consultate il 30 ottobre 2026).</li>
-<li>Profilo mensile della produzione e quote per montaggio: PVGIS v5.3 per Roma (30° Sud, orizzontale, 30° Est, verticale Sud/Est/Nord), consultato il 31 ottobre 2026. Variabilita' meteo modellata come meta' dei giorni a 1,5× e meta' a 0,5× della media mensile.</li>
+<li>Profilo mensile della produzione e quote per montaggio: PVGIS v5.3 per Roma, Milano (45,464 N 9,190 E) e Palermo (38,116 N 13,361 E) (30° Sud, orizzontale, 30° Est, verticale Sud/Est/Nord), consultato il 31 ottobre 2026. Variabilita' meteo modellata come meta' dei giorni a 1,5× e meta' a 0,5× della media mensile.</li>
 <li>Lo script di calcolo degli scenari e' pubblicato: <a href="../../scripts/balcone_scenari.js">balcone_scenari.js</a> (licenza MIT, eseguibile con Node.js).</li>
 </ul>
 <p class="small">Questo articolo e' informativo e non costituisce consulenza finanziaria, fiscale, legale o elettrica. Non contiene link di affiliazione.</p>
