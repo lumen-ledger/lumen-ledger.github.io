@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What do you pay per kWh? Find it on your bill + 2026 state averages</title>
+<meta name="description" content="How to work out your real electricity price per kWh from your bill (average vs per-kWh price), with a small calculator and EIA residential averages for every state, Jan-Aug 2026.">
+<link rel="canonical" href="https://lumen-ledger.github.io/electricity-price-per-kwh/">
+<style>
+:root{--navy:#0F2A3D;--sun:#F2B33D;--paper:#F7F5EF;--line:#d9d4c7;--warn:#C2452D}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--navy)}
+header{background:var(--navy);color:#fff;padding:32px 20px}
+.wrap{max-width:760px;margin:0 auto}
+header h1{margin:0;font-size:1.7rem}
+header p{margin:8px 0 0;color:#d6dde2}
+nav{font-size:.9rem;margin-bottom:10px}nav a{color:var(--sun)}
+main{padding:24px 20px}
+h2{font-size:1.15rem;margin:28px 0 6px}
+ul,ol{padding-left:20px}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:10px 0}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#ece8dc}
+.note{border-left:4px solid var(--warn);background:#fff;padding:10px 14px;font-size:.93rem}
+.box{border:1px solid var(--line);background:#fff;padding:14px 16px}
+.box label{display:block;font-size:.9rem;margin-top:8px}
+.box input{width:100%;max-width:220px;padding:6px;font:inherit}
+.out{font-size:1.05rem;margin-top:12px}
+.btn{display:inline-block;background:var(--sun);color:var(--navy);padding:8px 14px;border-radius:6px;font-weight:600;text-decoration:none}
+footer{padding:20px;font-size:.82rem;color:#5b6770}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="../plugin-solar-calculator/">Solar calculator</a> · <a href="../is-plug-in-solar-legal/">Plug-in solar by state</a></nav>
+  <h1>What do you actually pay per kWh?</h1>
+  <p>Two numbers hide in every electric bill: the average price and the price of one more (or one less) kWh. Here is how to find both, plus the 2026 average for every state.</p>
+</div></header>
+<main class="wrap">
+<p class="note">General information, not financial advice. State averages from the US Energy Information Administration (EIA), Electric Power Monthly, Table 5.6.B, released 2026-10-23, read on <b>2026-10-31</b>. 2026 values are preliminary and EIA may revise them.</p>
+
+<h2>Two prices, two different questions</h2>
+<table>
+<tr><th>Price</th><th>How to compute it</th><th>Use it for</th></tr>
+<tr><td>Average price</td><td>Total bill ÷ kWh used</td><td>Comparing months, comparing with the state average, budgeting</td></tr>
+<tr><td>Per-kWh price</td><td>(Total bill − fixed monthly charges) ÷ kWh used</td><td>What you save by using less: solar, efficient appliances, shifting use</td></tr>
+</table>
+<p>Fixed charges (often called "customer charge", "basic service charge" or "facilities charge") stay the same whether you use 100 kWh or 1,000 kWh. Cutting your use does not cut them, so they do not belong in a savings estimate.</p>
+
+<h2>Worked example</h2>
+<p>A bill of <b>$142.30</b> for <b>750 kWh</b>, with a fixed customer charge of <b>$12.00</b>:</p>
+<ul>
+<li>Average price: 142.30 ÷ 750 = <b>$0.1897/kWh</b> (19.0¢)</li>
+<li>Per-kWh price: (142.30 − 12.00) ÷ 750 = <b>$0.1737/kWh</b> (17.4¢)</li>
+</ul>
+<p>Using the average price in a savings estimate would overstate every kWh saved by 9.2% in this example.</p>
+
+<h2>Calculate yours</h2>
+<div class="box">
+<label for="bill">Total amount of the bill ($)</label><input id="bill" type="number" value="142.30" step="0.01" min="0">
+<label for="kwh">kWh used in the billing period</label><input id="kwh" type="number" value="750" step="1" min="1">
+<label for="fixed">Fixed charges on the bill ($, not tied to kWh)</label><input id="fixed" type="number" value="12.00" step="0.01" min="0">
+<p class="out" id="out"></p>
+<p><a class="btn" id="go" href="../plugin-solar-calculator/">Use this price in the plug-in solar calculator</a></p>
+<p style="font-size:.85rem">Runs in your browser. Nothing is stored or sent.</p>
+</div>
+
+<h2>Where to find the numbers on your bill</h2>
+<ol>
+<li><b>kWh used:</b> usually in a "usage" or "meter reading" box (current reading − previous reading). Check the number of days: billing periods vary, often between about 28 and 33 days.</li>
+<li><b>Fixed charges:</b> a line with a dollar amount and no kWh next to it, often near the top of the delivery section.</li>
+<li><b>Per-kWh lines:</b> supply (generation) and delivery (distribution) each have a rate per kWh. Add them up and compare with your result above; riders and fuel adjustments are often per kWh too.</li>
+<li><b>Taxes and fees:</b> a tax charged as a percentage of the bill grows with use, so it belongs in the per-kWh price. A flat fee does not.</li>
+</ol>
+
+<h2>When one per-kWh number is not enough</h2>
+<ul>
+<li><b>Tiered rates:</b> if the price changes above a monthly threshold, a kWh you save comes off the top tier you reach first. Use that tier's rate.</li>
+<li><b>Time-of-use rates:</b> solar saves during daytime hours. Use the rates of the hours when it produces, not the peak or off-peak rate alone.</li>
+<li><b>Minimum bills:</b> some utilities charge a minimum amount. Savings stop when you hit it.</li>
+<li><b>Seasonal prices:</b> summer and winter rates can differ. Compute the per-kWh price for one summer and one winter bill.</li>
+</ul>
+
+<h2>Average residential price by state, January-August 2026</h2>
+<p>Highest: Hawaii 46.41, California 32.58, Maine 30.23 (cents/kWh). Lowest: North Dakota 12.46, Nebraska 12.92, Idaho 13.02. The US average rose 6.8% versus the same months of 2025. These are averages across all residential customers in each state, fixed charges included, so your own price can be well above or below them. "use" opens the solar calculator with that price.</p>
+<table>
+<tr><th>State</th><th>2026 (¢/kWh)</th><th>2025 (¢/kWh)</th><th>Change</th><th>Calculator</th></tr>
+<tr><td>Alabama</td><td>16.51</td><td>16.01</td><td>+3.1%</td><td><a href="../plugin-solar-calculator/?rate=0.1651">use</a></td></tr>
+<tr><td>Alaska</td><td>27.32</td><td>26.07</td><td>+4.8%</td><td><a href="../plugin-solar-calculator/?rate=0.2732">use</a></td></tr>
+<tr><td>Arizona</td><td>15.36</td><td>15.18</td><td>+1.2%</td><td><a href="../plugin-solar-calculator/?rate=0.1536">use</a></td></tr>
+<tr><td>Arkansas</td><td>13.74</td><td>12.74</td><td>+7.8%</td><td><a href="../plugin-solar-calculator/?rate=0.1374">use</a></td></tr>
+<tr><td>California</td><td>32.58</td><td>31.11</td><td>+4.7%</td><td><a href="../plugin-solar-calculator/?rate=0.3258">use</a></td></tr>
+<tr><td>Colorado</td><td>16.80</td><td>15.47</td><td>+8.6%</td><td><a href="../plugin-solar-calculator/?rate=0.1680">use</a></td></tr>
+<tr><td>Connecticut</td><td>27.47</td><td>30.21</td><td>-9.1%</td><td><a href="../plugin-solar-calculator/?rate=0.2747">use</a></td></tr>
+<tr><td>Delaware</td><td>17.98</td><td>16.79</td><td>+7.1%</td><td><a href="../plugin-solar-calculator/?rate=0.1798">use</a></td></tr>
+<tr><td>District of Columbia</td><td>24.86</td><td>21.22</td><td>+17.2%</td><td><a href="../plugin-solar-calculator/?rate=0.2486">use</a></td></tr>
+<tr><td>Florida</td><td>15.32</td><td>15.04</td><td>+1.9%</td><td><a href="../plugin-solar-calculator/?rate=0.1532">use</a></td></tr>
+<tr><td>Georgia</td><td>15.48</td><td>14.86</td><td>+4.2%</td><td><a href="../plugin-solar-calculator/?rate=0.1548">use</a></td></tr>
+<tr><td>Hawaii</td><td>46.41</td><td>40.46</td><td>+14.7%</td><td><a href="../plugin-solar-calculator/?rate=0.4641">use</a></td></tr>
+<tr><td>Idaho</td><td>13.02</td><td>11.65</td><td>+11.8%</td><td><a href="../plugin-solar-calculator/?rate=0.1302">use</a></td></tr>
+<tr><td>Illinois</td><td>19.23</td><td>17.44</td><td>+10.3%</td><td><a href="../plugin-solar-calculator/?rate=0.1923">use</a></td></tr>
+<tr><td>Indiana</td><td>17.04</td><td>15.69</td><td>+8.6%</td><td><a href="../plugin-solar-calculator/?rate=0.1704">use</a></td></tr>
+<tr><td>Iowa</td><td>14.55</td><td>13.72</td><td>+6.0%</td><td><a href="../plugin-solar-calculator/?rate=0.1455">use</a></td></tr>
+<tr><td>Kansas</td><td>15.26</td><td>14.27</td><td>+6.9%</td><td><a href="../plugin-solar-calculator/?rate=0.1526">use</a></td></tr>
+<tr><td>Kentucky</td><td>14.20</td><td>13.04</td><td>+8.9%</td><td><a href="../plugin-solar-calculator/?rate=0.1420">use</a></td></tr>
+<tr><td>Louisiana</td><td>13.27</td><td>12.54</td><td>+5.8%</td><td><a href="../plugin-solar-calculator/?rate=0.1327">use</a></td></tr>
+<tr><td>Maine</td><td>30.23</td><td>27.47</td><td>+10.0%</td><td><a href="../plugin-solar-calculator/?rate=0.3023">use</a></td></tr>
+<tr><td>Maryland</td><td>21.31</td><td>18.93</td><td>+12.6%</td><td><a href="../plugin-solar-calculator/?rate=0.2131">use</a></td></tr>
+<tr><td>Massachusetts</td><td>30.19</td><td>30.21</td><td>-0.1%</td><td><a href="../plugin-solar-calculator/?rate=0.3019">use</a></td></tr>
+<tr><td>Michigan</td><td>21.73</td><td>19.94</td><td>+9.0%</td><td><a href="../plugin-solar-calculator/?rate=0.2173">use</a></td></tr>
+<tr><td>Minnesota</td><td>16.44</td><td>15.78</td><td>+4.2%</td><td><a href="../plugin-solar-calculator/?rate=0.1644">use</a></td></tr>
+<tr><td>Mississippi</td><td>15.06</td><td>13.87</td><td>+8.6%</td><td><a href="../plugin-solar-calculator/?rate=0.1506">use</a></td></tr>
+<tr><td>Missouri</td><td>14.28</td><td>13.32</td><td>+7.2%</td><td><a href="../plugin-solar-calculator/?rate=0.1428">use</a></td></tr>
+<tr><td>Montana</td><td>14.13</td><td>12.76</td><td>+10.7%</td><td><a href="../plugin-solar-calculator/?rate=0.1413">use</a></td></tr>
+<tr><td>Nebraska</td><td>12.92</td><td>11.94</td><td>+8.2%</td><td><a href="../plugin-solar-calculator/?rate=0.1292">use</a></td></tr>
+<tr><td>Nevada</td><td>13.36</td><td>13.10</td><td>+2.0%</td><td><a href="../plugin-solar-calculator/?rate=0.1336">use</a></td></tr>
+<tr><td>New Hampshire</td><td>26.91</td><td>23.40</td><td>+15.0%</td><td><a href="../plugin-solar-calculator/?rate=0.2691">use</a></td></tr>
+<tr><td>New Jersey</td><td>24.09</td><td>22.32</td><td>+7.9%</td><td><a href="../plugin-solar-calculator/?rate=0.2409">use</a></td></tr>
+<tr><td>New Mexico</td><td>15.34</td><td>14.68</td><td>+4.5%</td><td><a href="../plugin-solar-calculator/?rate=0.1534">use</a></td></tr>
+<tr><td>New York</td><td>29.26</td><td>26.10</td><td>+12.1%</td><td><a href="../plugin-solar-calculator/?rate=0.2926">use</a></td></tr>
+<tr><td>North Carolina</td><td>14.94</td><td>13.81</td><td>+8.2%</td><td><a href="../plugin-solar-calculator/?rate=0.1494">use</a></td></tr>
+<tr><td>North Dakota</td><td>12.46</td><td>11.67</td><td>+6.8%</td><td><a href="../plugin-solar-calculator/?rate=0.1246">use</a></td></tr>
+<tr><td>Ohio</td><td>18.81</td><td>16.64</td><td>+13.0%</td><td><a href="../plugin-solar-calculator/?rate=0.1881">use</a></td></tr>
+<tr><td>Oklahoma</td><td>13.81</td><td>12.95</td><td>+6.6%</td><td><a href="../plugin-solar-calculator/?rate=0.1381">use</a></td></tr>
+<tr><td>Oregon</td><td>15.46</td><td>15.37</td><td>+0.6%</td><td><a href="../plugin-solar-calculator/?rate=0.1546">use</a></td></tr>
+<tr><td>Pennsylvania</td><td>21.13</td><td>18.86</td><td>+12.0%</td><td><a href="../plugin-solar-calculator/?rate=0.2113">use</a></td></tr>
+<tr><td>Rhode Island</td><td>29.05</td><td>29.09</td><td>-0.1%</td><td><a href="../plugin-solar-calculator/?rate=0.2905">use</a></td></tr>
+<tr><td>South Carolina</td><td>15.90</td><td>14.98</td><td>+6.1%</td><td><a href="../plugin-solar-calculator/?rate=0.1590">use</a></td></tr>
+<tr><td>South Dakota</td><td>14.58</td><td>13.20</td><td>+10.5%</td><td><a href="../plugin-solar-calculator/?rate=0.1458">use</a></td></tr>
+<tr><td>Tennessee</td><td>13.80</td><td>13.24</td><td>+4.2%</td><td><a href="../plugin-solar-calculator/?rate=0.1380">use</a></td></tr>
+<tr><td>Texas</td><td>16.03</td><td>15.18</td><td>+5.6%</td><td><a href="../plugin-solar-calculator/?rate=0.1603">use</a></td></tr>
+<tr><td>Utah</td><td>13.19</td><td>12.84</td><td>+2.7%</td><td><a href="../plugin-solar-calculator/?rate=0.1319">use</a></td></tr>
+<tr><td>Vermont</td><td>23.93</td><td>22.30</td><td>+7.3%</td><td><a href="../plugin-solar-calculator/?rate=0.2393">use</a></td></tr>
+<tr><td>Virginia</td><td>16.95</td><td>15.00</td><td>+13.0%</td><td><a href="../plugin-solar-calculator/?rate=0.1695">use</a></td></tr>
+<tr><td>Washington</td><td>14.42</td><td>12.91</td><td>+11.7%</td><td><a href="../plugin-solar-calculator/?rate=0.1442">use</a></td></tr>
+<tr><td>West Virginia</td><td>15.58</td><td>15.37</td><td>+1.4%</td><td><a href="../plugin-solar-calculator/?rate=0.1558">use</a></td></tr>
+<tr><td>Wisconsin</td><td>19.05</td><td>18.02</td><td>+5.7%</td><td><a href="../plugin-solar-calculator/?rate=0.1905">use</a></td></tr>
+<tr><td>Wyoming</td><td>14.01</td><td>13.08</td><td>+7.1%</td><td><a href="../plugin-solar-calculator/?rate=0.1401">use</a></td></tr>
+<tr><td><b>U.S. total</b></td><td>18.19</td><td>17.03</td><td>+6.8%</td><td><a href="../plugin-solar-calculator/?rate=0.1819">use</a></td></tr>
+</table>
+<p style="font-size:.85rem">Columns: residential average price, year-to-date through August of each year. Source: EIA, Electric Power Monthly, Table 5.6.B.</p>
+
+<h2>Track it month by month</h2>
+<p>The free <a href="../download/utility-bill-tracker.xlsx" download>Utility Bill Tracker (.xlsx)</a> logs each bill and shows your all-in price per kWh, so you can follow it over time. Also on Gumroad as <a href="https://lumenledger.gumroad.com/l/utility-bill-tracker">pay what you want</a>.</p>
+
+<h2>Sources (checked 2026-10-31)</h2>
+<ul>
+<li>EIA, Electric Power Monthly, Table 5.6.B, Average Price of Electricity to Ultimate Customers by End-Use Sector, by State, year-to-date through August 2026 and 2025: <a href="https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_5_6_b">eia.gov</a></li>
+<li>Same data for August 2026 alone (Table 5.6.A): <a href="https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_5_6_a">eia.gov</a></li>
+</ul>
+<p>Found an error? Write to lumenledger.tools@proton.me and include the source.</p>
+</main>
+<footer class="wrap">© 2026 Lumen &amp; Ledger · Texts CC BY 4.0 · <a href="../">Tools</a> · <a href="../about/">About</a> · <a href="../privacy/">Privacy</a> · Contact: lumenledger.tools@proton.me</footer>
+<script>
+function v(id){return parseFloat(document.getElementById(id).value)||0}
+function run(){
+  var bill=v('bill'),kwh=v('kwh'),fixed=v('fixed'),out=document.getElementById('out'),go=document.getElementById('go');
+  if(kwh<=0||bill<=0||fixed<0||fixed>=bill){out.textContent='Enter a bill amount, kWh above 0 and fixed charges below the bill total.';go.href='../plugin-solar-calculator/';return}
+  var avg=bill/kwh,per=(bill-fixed)/kwh;
+  out.innerHTML='Average price: <b>$'+avg.toFixed(4)+'/kWh</b> ('+(avg*100).toFixed(1)+'¢) · Per-kWh price: <b>$'+per.toFixed(4)+'/kWh</b> ('+(per*100).toFixed(1)+'¢)';
+  go.href='../plugin-solar-calculator/?rate='+per.toFixed(4);
+}
+['bill','kwh','fixed'].forEach(function(id){document.getElementById(id).addEventListener('input',run)});
+run();
+</script>
+</body>
+</html>

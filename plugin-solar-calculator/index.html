@@ -95,7 +95,7 @@ canvas{width:100%;height:160px;display:block}
   <input id="exportPct" type="number" value="0" min="0" max="100">
   <p class="hint">Most plug-in setups earn nothing for exported power: keep 0 unless your utility says otherwise.</p>
   <div class="row">
-    <div><label for="rate">Electricity price ($/kWh)</label><input id="rate" type="number" value="0.18" step="0.01" min="0"><p class="hint">Use the all-in price from your bill (energy + delivery).</p></div>
+    <div><label for="rate">Electricity price ($/kWh)</label><input id="rate" type="number" value="0.18" step="0.01" min="0"><p class="hint">Use the per-kWh price from your bill (energy + delivery). <a href="../electricity-price-per-kwh/">How to find it</a>.</p></div>
     <div><label for="esc">Price increase per year (%)</label><input id="esc" type="number" value="3" step="0.5"></div>
   </div>
   <label for="co2">Grid CO₂ intensity (kg per kWh)</label>
@@ -128,7 +128,7 @@ canvas{width:100%;height:160px;display:block}
 </section>
 </main>
 <footer>
-  Made by <a href="../">Lumen &amp; Ledger</a> (more free tools) · Free to use · No cookies, no tracking · Sources for defaults: NREL PVWatts v8 (system losses, monthly profile), EPA eGRID (CO₂ intensity), state legislation trackers for plug-in limits. MIT licensed. · <a href="../is-plug-in-solar-legal/">Is plug-in solar legal in my state?</a> · <a href="../plug-in-solar-utah/">Utah plug-in solar law</a> · <a href="../plug-in-solar-virginia/">Virginia plug-in solar law</a> · <a href="../plug-in-solar-maine/">Maine plug-in solar law</a> · <a href="../about/">About</a> · <a href="../privacy/">Privacy</a>
+  Made by <a href="../">Lumen &amp; Ledger</a> (more free tools) · Free to use · No cookies, no tracking · Sources for defaults: NREL PVWatts v8 (system losses, monthly profile), EPA eGRID (CO₂ intensity), state legislation trackers for plug-in limits. MIT licensed. · <a href="../is-plug-in-solar-legal/">Is plug-in solar legal in my state?</a> · <a href="../plug-in-solar-utah/">Utah plug-in solar law</a> · <a href="../plug-in-solar-virginia/">Virginia plug-in solar law</a> · <a href="../plug-in-solar-maine/">Maine plug-in solar law</a> · <a href="../electricity-price-per-kwh/">Find your price per kWh</a> · <a href="../about/">About</a> · <a href="../privacy/">Privacy</a>
 </footer>
 <script>
 const $=id=>document.getElementById(id);
@@ -154,6 +154,8 @@ phx:{y:1791,m:[7.3,7.3,8.9,9.5,9.6,9.1,8.3,8.4,8.4,8.3,7.6,7.3]},
 mia:{y:1542,m:[8.1,8.2,9.9,9.0,8.6,7.5,8.2,8.4,8.0,8.4,8.0,7.6]}};
 const locParam=new URLSearchParams(location.search).get('loc');
 if(locParam&&CITIES[locParam])document.getElementById('loc').value=locParam;
+const rateParam=parseFloat(new URLSearchParams(location.search).get('rate'));
+if(rateParam>=0.01&&rateParam<=2)document.getElementById('rate').value=rateParam.toFixed(4).replace(/.?0+$/,'');
 
 // Energy produced and used directly in one day of dayKWh, with given curve and load.
 function simDay(dayKWh,curve,dt,invKW,load){
