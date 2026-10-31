@@ -62,26 +62,26 @@ summary{cursor:pointer;font-weight:600}
   <p class="hint">Il fotovoltaico può rientrare nelle detrazioni per interventi edilizi; aliquote e requisiti cambiano con la legge di bilancio. Verifica sul sito dell'Agenzia delle Entrate prima di contarci.</p>
 
   <h2 style="margin-top:18px">2. Dove e come lo monti</h2>
-  <label for="yield">Zona (produzione annua per kWp, inclinazione ottimale)</label>
+  <label for="yield">Zona (kWh prodotti in un anno per kWp, pannello a Sud inclinato 30°, perdite già incluse)</label>
   <select id="yield">
-    <option value="1150">≈1.150 kWh/kWp — Nord, zone alpine o nebbiose</option>
-    <option value="1250">≈1.250 kWh/kWp — Nord (Pianura Padana)</option>
-    <option value="1400" selected>≈1.400 kWh/kWp — Centro</option>
-    <option value="1550">≈1.550 kWh/kWp — Sud</option>
-    <option value="1650">≈1.650 kWh/kWp — Sicilia, Sardegna meridionale</option>
+    <option value="1350">≈1.350 kWh/kWp — Nord (Milano, Torino, Bologna)</option>
+    <option value="1490" selected>≈1.490 kWh/kWp — Centro (Roma)</option>
+    <option value="1530">≈1.530 kWh/kWp — Sud e Sicilia (Napoli, Palermo)</option>
+    <option value="1580">≈1.580 kWh/kWp — Sardegna (Cagliari)</option>
     <option value="custom">Valore personalizzato…</option>
   </select>
-  <input id="yieldCustom" type="number" step="10" value="1400" style="display:none;margin-top:6px">
-  <p class="hint">Per il valore esatto del tuo indirizzo usa PVGIS (strumento gratuito del Centro Comune di Ricerca UE).</p>
+  <input id="yieldCustom" type="number" step="10" value="1490" style="display:none;margin-top:6px">
+  <p class="hint">Valori PVGIS (Centro Comune di Ricerca UE, database SARAH3, perdite di sistema 14%, consultato il 31 ottobre 2026). In montagna, in valli nebbiose o per il valore esatto del tuo indirizzo usa PVGIS con inclinazione 30° e azimut 0, e inserisci qui la "produzione annua".</p>
   <label for="orient">Montaggio</label>
   <select id="orient">
-    <option value="1.00">Sud, inclinato ~30° (caso migliore)</option>
-    <option value="0.88">Orizzontale (a terra / tetto piano)</option>
-    <option value="0.85">Est o Ovest, inclinato ~30°</option>
-    <option value="0.70" selected>Ringhiera del balcone esposta a Sud (verticale)</option>
-    <option value="0.50">Ringhiera esposta a Est o Ovest (verticale)</option>
-    <option value="0.30">Esposizione Nord (sconsigliato)</option>
+    <option value="1.00" data-p="s30">Sud, inclinato ~30° (caso migliore)</option>
+    <option value="0.85" data-p="h">Orizzontale (a terra / tetto piano)</option>
+    <option value="0.81" data-p="e30">Est o Ovest, inclinato ~30°</option>
+    <option value="0.67" data-p="s90" selected>Ringhiera del balcone esposta a Sud (verticale)</option>
+    <option value="0.49" data-p="e90">Ringhiera esposta a Est o Ovest (verticale)</option>
+    <option value="0.13" data-p="n90">Ringhiera esposta a Nord (sconsigliato)</option>
   </select>
+  <p class="hint">Quota della resa a 30° Sud e andamento mensile ricavati da PVGIS per Roma. Un pannello verticale a Sud produce poco d'estate e relativamente molto d'inverno, quando il sole è basso.</p>
   <label for="shade">Perdita per ombreggiamento (%)</label>
   <input id="shade" type="number" value="10" min="0" max="90">
   <p class="hint">Alberi, palazzi di fronte, il balcone del piano di sopra. 0% = sole pieno tutto il giorno.</p>
@@ -126,7 +126,7 @@ summary{cursor:pointer;font-weight:600}
   <p class="hint"><span style="color:#d39410">■</span> produzione &nbsp; <span style="color:#2E8B57">■</span> quota usata in casa &nbsp; — consumo di base</p>
   <h2 style="margin-top:14px">Anno per anno</h2>
   <table id="tbl"><thead><tr><th>Anno</th><th>Risparmio</th><th>Detrazione</th><th>Cumulato</th></tr></thead><tbody></tbody></table>
-  <div class="note"><b>Come funziona.</b> Produzione annua = kWp × resa della zona × fattore di montaggio × (1 − ombra) × 0,86 (perdite di inverter, cavi, temperatura). Le rese di zona sono già valori a inclinazione ottimale, quindi il fattore di montaggio le riduce per balconi e pareti. Per stimare l'autoconsumo la giornata è modellata come una curva a campana su ~12 ore di luce e confrontata, mezz'ora per mezz'ora, con il consumo di base più i consumi spostati: la parte eccedente va in rete, limitata dall'inverter. Nel modello prudente (predefinito) la produzione è ripartita sui mesi secondo un profilo PVGIS approssimato per il Centro Italia e, in ogni mese, metà dei giorni produce 1,5× la media e metà 0,5×. Il grafico mostra sempre la giornata media. I pannelli perdono lo 0,5% di resa all'anno. Sono stime per confrontare opzioni, non garanzie.</div>
+  <div class="note"><b>Come funziona.</b> Produzione annua = kWp × resa della zona × fattore di montaggio × (1 − ombra). Le rese di zona sono valori PVGIS per pannelli a Sud inclinati di 30° e includono già il 14% di perdite (inverter, cavi, temperatura); il fattore di montaggio le riduce per balconi e pareti. Per stimare l'autoconsumo la giornata è modellata come una curva a campana su ~12 ore di luce e confrontata, mezz'ora per mezz'ora, con il consumo di base più i consumi spostati: la parte eccedente va in rete, limitata dall'inverter. Nel modello prudente (predefinito) la produzione è ripartita sui mesi secondo il profilo PVGIS del montaggio scelto (Roma) e, in ogni mese, metà dei giorni produce 1,5× la media e metà 0,5×. Il grafico mostra sempre la giornata media. I pannelli perdono lo 0,5% di resa all'anno. Sono stime per confrontare opzioni, non garanzie.</div>
   <details>
     <summary>Prima di installare: cosa controllare</summary>
     <ul>
@@ -141,19 +141,27 @@ summary{cursor:pointer;font-weight:600}
 </section>
 </main>
 <footer>
-  Realizzato da <a href="../it/">Lumen &amp; Ledger</a> (altri strumenti) · <a href="../it/fotovoltaico-balcone-conviene/">Conviene? 7 scenari calcolati</a> · <a href="../it/fotovoltaico-balcone-400-o-800-w/">400 W o 800 W?</a> · Gratuito · Nessun cookie, nessun tracciamento · Fonti dei valori predefiniti: PVGIS (JRC, Commissione Europea) per le rese, metodologia PVWatts per le perdite di sistema, ISPRA per i fattori di emissione, norma CEI 0-21 per la connessione. Licenza MIT. · <a href="../it/chi-siamo/">Chi siamo</a> · <a href="../it/privacy/">Privacy</a>
+  Realizzato da <a href="../it/">Lumen &amp; Ledger</a> (altri strumenti) · <a href="../it/fotovoltaico-balcone-conviene/">Conviene? 7 scenari calcolati</a> · <a href="../it/fotovoltaico-balcone-400-o-800-w/">400 W o 800 W?</a> · Gratuito · Nessun cookie, nessun tracciamento · Fonti dei valori predefiniti: PVGIS v5.3 (JRC, Commissione Europea) per rese, perdite di sistema e profili mensili (consultato il 31 ottobre 2026), ISPRA per i fattori di emissione, norma CEI 0-21 per la connessione. Licenza MIT. · <a href="../it/chi-siamo/">Chi siamo</a> · <a href="../it/privacy/">Privacy</a>
 </footer>
 <script>
 const $=id=>document.getElementById(id);
 const num=id=>Math.max(0,parseFloat($(id).value)||0);
 const eur=v=>(v<0?'-':'')+Math.abs(v).toLocaleString('it-IT',{maximumFractionDigits:0})+' €';
-const SYS_EFF=0.86, DEGR=0.005, HOURS=12, DETR_YEARS=10;
+const DEGR=0.005, HOURS=12, DETR_YEARS=10;
 
 // Frazione dell'energia giornaliera in ogni intervallo, a forma di sin() sulle ore di luce.
 function dayCurve(steps){const w=[];let s=0;for(let i=0;i<steps;i++){const v=Math.sin(Math.PI*(i+.5)/steps);w.push(v);s+=v}return w.map(v=>v/s)}
 
-// Quota mensile della produzione annua (profilo PVGIS approssimato, Centro Italia).
-const MONTHS=[4.5,6,8.5,9.5,11,11.5,12,11,9,7,5,4.5].map(v=>v/99.5);
+// Produzione mensile (kWh, gen-dic) per 1 kWp a Roma secondo PVGIS v5.3 (SARAH3, perdite 14%, 2026-10-31),
+// per ogni montaggio; normalizzata in quote dell'anno.
+const PROFILES={
+  s30:[84.02,97.12,124.79,138.78,150.92,156.83,169.7,160.85,133.09,114.53,82.81,78.29],
+  h:[46.85,64.8,100.05,126.97,152.18,164.7,174.76,152.07,111.38,81.65,50.21,41.14],
+  e30:[48.06,63.4,97.12,120.22,142.11,153.49,160.98,142.0,106.32,79.72,49.26,42.06],
+  s90:[91.77,92.17,94.9,80.92,66.79,58.8,65.14,81.68,92.19,101.58,85.63,88.76],
+  e90:[34.02,41.11,60.7,71.12,80.12,85.94,90.33,83.7,64.3,51.06,31.82,29.47],
+  n90:[6.84,9.23,15.31,20.25,28.42,31.99,27.32,20.15,15.1,11.83,7.88,6.26]};
+const share=a=>{const t=a.reduce((x,y)=>x+y,0);return a.map(v=>v/t)};
 
 // Energia prodotta e autoconsumata in un giorno da dayKWh, con curva e carico dati.
 function simDay(dayKWh,curve,dt,invKW,load){
@@ -176,7 +184,8 @@ function calc(){
   // Consumi spostati distribuiti uniformemente nelle ore di luce, sommati al carico di base.
   const base=num('base')/1000,load=base+num('shift')/HOURS;
 
-  const yearKWh=panelW/1000*yld*factor*SYS_EFF,invKW=invW/1000;
+  const yearKWh=panelW/1000*yld*factor,invKW=invW/1000;
+  const MONTHS=share(PROFILES[$('orient').selectedOptions[0].dataset.p]);
   const avgDay=simDay(yearKWh/365,curve,dt,invKW,load),pts=avgDay.pts;
   let used=avgDay.used*365,produced=avgDay.produced*365;
   if($('model').value==='season'){

@@ -32,11 +32,11 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
 <header><div class="wrap">
   <nav><a href="../">Lumen &amp; Ledger</a> · <a href="../../fotovoltaico-balcone/">Calcolatore</a></nav>
   <h1>Fotovoltaico da balcone: conviene? Il calcolo con numeri reali</h1>
-  <p>Sette scenari calcolati, le ipotesi dietro ogni numero e i casi in cui la risposta e' no. Aggiornato a ottobre 2026.</p>
+  <p>Sette scenari calcolati, le ipotesi dietro ogni numero e i casi in cui la risposta e' no. Aggiornato il 31 ottobre 2026 con le rese PVGIS per citta'.</p>
 </div></header>
 <main class="wrap">
 
-<div class="box"><b>In breve.</b> Un kit da 800 W montato sulla ringhiera di un balcone esposto a Sud, nel Centro Italia, produce circa <b>600 kWh l'anno</b> e fa risparmiare <b>140–165 € l'anno</b> a 0,27 €/kWh. Con una spesa di 700 € rientri in <b>4–5 anni</b>. Conviene molto meno se il balcone guarda a Est/Ovest, se e' in ombra o se in casa di giorno non consuma quasi niente: in quei casi il rientro sale a 6–8 anni.</div>
+<div class="box"><b>In breve.</b> Un kit da 800 W montato sulla ringhiera di un balcone esposto a Sud, nel Centro Italia, produce circa <b>720 kWh l'anno</b> e fa risparmiare circa <b>175 € l'anno</b> a 0,27 €/kWh (circa 145 € a 0,22 €/kWh). Con una spesa di 700 € rientri in <b>4–5 anni</b>. Conviene molto meno se il balcone guarda a Est/Ovest, se e' in ombra o se in casa di giorno non consuma quasi niente: in quei casi il rientro sale a 6–7 anni, e oltre con prezzi bassi.</div>
 
 <h2>Come funziona il risparmio (e perche' non e' "gratis")</h2>
 <p>Un impianto da balcone non accumula energia: la produce e la immette nella presa di casa. Se in quel momento frigo, router, lavatrice o pompa di calore la stanno usando, quei kWh non li compri dalla rete e risparmi il prezzo pieno della bolletta (materia energia, trasporto, oneri e IVA). Se invece in casa non serve, l'energia finisce in rete e, senza un contratto di ritiro dedicato con il GSE, non ti viene pagata.</p>
@@ -44,42 +44,46 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
 <p style="text-align:center"><b>kWh autoconsumati × prezzo dell'energia (€/kWh, tutto incluso)</b></p>
 
 <h2>Quanto produce un kit da 800 W</h2>
-<p>La produzione dipende da tre cose: la zona, il modo in cui e' montato e l'ombra. Le rese di riferimento (kWh per ogni kWp installato, con inclinazione ottimale) vengono da PVGIS, lo strumento gratuito del Centro Comune di Ricerca della Commissione Europea:</p>
+<p>La produzione dipende da tre cose: la zona, il modo in cui e' montato e l'ombra. Le rese di riferimento (kWh prodotti in un anno per ogni kWp installato, pannello a Sud inclinato di 30°, gia' al netto del 14% di perdite di inverter, cavi e temperatura) vengono da PVGIS, lo strumento gratuito del Centro Comune di Ricerca della Commissione Europea (versione 5.3, database SARAH3, consultato il 31 ottobre 2026):</p>
 <table>
-<tr><th>Zona</th><th>Resa ottimale (kWh/kWp/anno)</th></tr>
-<tr><td>Nord, zone alpine o nebbiose</td><td>≈1.150</td></tr>
-<tr><td>Nord, Pianura Padana</td><td>≈1.250</td></tr>
-<tr><td>Centro</td><td>≈1.400</td></tr>
-<tr><td>Sud</td><td>≈1.550</td></tr>
-<tr><td>Sicilia, Sardegna meridionale</td><td>≈1.650</td></tr>
+<tr><th>Citta'</th><th>Resa a 30° Sud (kWh/kWp/anno)</th></tr>
+<tr><td>Torino</td><td>1.339</td></tr>
+<tr><td>Bologna</td><td>1.351</td></tr>
+<tr><td>Milano</td><td>1.354</td></tr>
+<tr><td>Roma</td><td>1.492</td></tr>
+<tr><td>Napoli</td><td>1.529</td></tr>
+<tr><td>Palermo</td><td>1.531</td></tr>
+<tr><td>Cagliari</td><td>1.583</td></tr>
 </table>
-<p>Su un balcone pero' i pannelli stanno quasi sempre in verticale sulla ringhiera, e questo pesa molto:</p>
+<p class="small">Nel calcolatore e negli scenari usiamo valori arrotondati: Nord 1.350, Centro 1.490, Sud e Sicilia 1.530, Sardegna 1.580. In montagna o in zone nebbiose la resa puo' essere molto piu' bassa: controlla il tuo indirizzo su PVGIS.</p>
+<p>Su un balcone pero' i pannelli stanno quasi sempre in verticale sulla ringhiera, e questo pesa molto. Quote calcolate con PVGIS per Roma (stessa resa annua, montaggi diversi):</p>
 <table>
-<tr><th>Montaggio</th><th>Quota della resa ottimale</th></tr>
+<tr><th>Montaggio</th><th>Quota della resa a 30° Sud</th></tr>
 <tr><td>Staffe inclinate ~30°, esposizione Sud</td><td>100%</td></tr>
-<tr><td>Staffe inclinate ~30°, Est o Ovest</td><td>≈85%</td></tr>
-<tr><td>Ringhiera verticale, Sud</td><td>≈70%</td></tr>
-<tr><td>Ringhiera verticale, Est o Ovest</td><td>≈50%</td></tr>
-<tr><td>Esposizione Nord</td><td>≈30% (sconsigliato)</td></tr>
+<tr><td>Orizzontale (tetto piano)</td><td>85%</td></tr>
+<tr><td>Staffe inclinate ~30°, Est o Ovest</td><td>81%</td></tr>
+<tr><td>Ringhiera verticale, Sud</td><td>67%</td></tr>
+<tr><td>Ringhiera verticale, Est o Ovest</td><td>49%</td></tr>
+<tr><td>Ringhiera verticale, Nord</td><td>13% (sconsigliato)</td></tr>
 </table>
-<p>A questo si tolgono le perdite di sistema (inverter, cavi, temperatura: circa 14%, come nella metodologia PVWatts) e l'ombra di palazzi, alberi o del balcone di sopra.</p>
-<p><b>Esempio:</b> 0,8 kWp × 1.400 × 0,70 (ringhiera Sud) × 0,90 (10% di ombra) × 0,86 ≈ <b>607 kWh/anno</b>.</p>
+<p>Un pannello verticale a Sud ha anche un andamento diverso durante l'anno: con il sole basso produce di piu' in inverno che in estate (PVGIS, Roma: circa 92 kWh a gennaio contro 59 a giugno per 1 kWp), e questo aiuta l'autoconsumo. Dalla resa va poi tolta l'ombra di palazzi, alberi o del balcone di sopra.</p>
+<p><b>Esempio:</b> 0,8 kWp × 1.490 (Centro) × 0,67 (ringhiera Sud) × 0,90 (10% di ombra) ≈ <b>719 kWh/anno</b>.</p>
 
 <h2>Quanta di quell'energia usi davvero</h2>
 <p>Un appartamento ha un consumo di base diurno di 150–350 W (frigo, router, stand-by, caldaia): lo leggi sul contatore elettronico o con una presa smart quando in casa non e' acceso nulla. Un kit da 800 W in verticale supera raramente i 400–500 W di picco, quindi buona parte della produzione viene assorbita dal consumo di base.</p>
-<p>Abbiamo stimato l'autoconsumo in due modi: con una giornata media e con un modello piu' prudente (oggi predefinito nel <a href="../../fotovoltaico-balcone/">calcolatore</a>) che tiene conto delle stagioni e dell'alternanza tra giornate di sole e nuvolose. In estate, nelle giornate limpide, la produzione di mezzogiorno supera piu' spesso il consumo di casa, e quell'eccedenza va persa. Nella tabella usiamo il valore prudente.</p>
+<p>Abbiamo stimato l'autoconsumo in due modi: con una giornata media e con un modello piu' prudente (oggi predefinito nel <a href="../../fotovoltaico-balcone/">calcolatore</a>) che tiene conto dell'andamento mensile del montaggio scelto e dell'alternanza tra giornate di sole e nuvolose. In estate, nelle giornate limpide, la produzione di mezzogiorno supera piu' spesso il consumo di casa, e quell'eccedenza va persa. Nella tabella usiamo il valore prudente.</p>
 
 <h2>Sette scenari a confronto</h2>
 <p class="small">Ipotesi comuni: prezzo 0,27 €/kWh tutto incluso, +2% l'anno; 10% di ombra salvo dove indicato; degrado pannelli 0,5%/anno; durata 20 anni; energia immessa non remunerata; nessuna detrazione salvo dove indicato. Risparmio e rientro sono calcolati con l'autoconsumo prudente.</p>
 <table>
 <tr><th>Scenario</th><th>kWh/anno</th><th>Autoconsumo</th><th>Risparmio 1° anno</th><th>Rientro</th></tr>
-<tr><td>A. Centro, ringhiera Sud, 800 W, 700 €, base 250 W</td><td>607</td><td>92%</td><td>≈150 €</td><td>≈4,5 anni</td></tr>
-<tr><td>B. Nord, ringhiera Est/Ovest, 800 W, 700 €, base 150 W</td><td>387</td><td>93%</td><td>≈97 €</td><td>≈6,9 anni</td></tr>
-<tr><td>C. Sud, staffe inclinate a Sud, 800 W, 600 €, base 300 W, 5% ombra</td><td>1.013</td><td>84%</td><td>≈230 €</td><td>≈2,6 anni</td></tr>
-<tr><td>D. Come A, con detrazione 50% in 10 anni</td><td>607</td><td>92%</td><td>≈150 € + 35 €</td><td>≈3,7 anni</td></tr>
-<tr><td>E. Centro, ringhiera Sud, 400 W, 400 €</td><td>303</td><td>100%</td><td>≈82 €</td><td>≈4,7 anni</td></tr>
-<tr><td>F. Come A, ma prezzo 0,22 €/kWh</td><td>607</td><td>92%</td><td>≈123 €</td><td>≈5,5 anni</td></tr>
-<tr><td>G. Come A, ma casa vuota di giorno (base 100 W)</td><td>607</td><td>55%</td><td>≈90 €</td><td>≈7,4 anni</td></tr>
+<tr><td>A. Centro, ringhiera Sud, 800 W, 700 €, base 250 W</td><td>719</td><td>90%</td><td>≈175 €</td><td>≈3,9 anni</td></tr>
+<tr><td>B. Nord, ringhiera Est/Ovest, 800 W, 700 €, base 150 W</td><td>476</td><td>85%</td><td>≈110 €</td><td>≈6,1 anni</td></tr>
+<tr><td>C. Sud, staffe inclinate a Sud, 800 W, 600 €, base 300 W, 5% ombra</td><td>1.161</td><td>81%</td><td>≈255 €</td><td>≈2,3 anni</td></tr>
+<tr><td>D. Come A, con detrazione 50% in 10 anni</td><td>719</td><td>90%</td><td>≈175 € + 35 €</td><td>≈3,3 anni</td></tr>
+<tr><td>E. Centro, ringhiera Sud, 400 W, 400 €</td><td>359</td><td>100%</td><td>≈97 €</td><td>≈4,0 anni</td></tr>
+<tr><td>F. Come A, ma prezzo 0,22 €/kWh</td><td>719</td><td>90%</td><td>≈143 €</td><td>≈4,8 anni</td></tr>
+<tr><td>G. Come A, ma casa vuota di giorno (base 100 W)</td><td>719</td><td>50%</td><td>≈97 €</td><td>≈6,9 anni</td></tr>
 </table>
 <p class="small">Rientro = anni necessari perche' i risparmi cumulati (con aumento del prezzo e degrado) coprano la spesa iniziale. Valori arrotondati.</p>
 
@@ -87,14 +91,14 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
 <ul>
 <li><b>L'orientamento conta piu' della regione.</b> Passare da ringhiera Est/Ovest a staffe inclinate verso Sud vale piu' che trasferirsi da Milano a Palermo.</li>
 <li><b>Un kit da 400 W puo' essere la scelta piu' furba</b> se il consumo di base e' basso: costa meno e lo autoconsumi tutto, con un rientro quasi uguale. Il confronto completo e' in <a href="../fotovoltaico-balcone-400-o-800-w/">400 W o 800 W?</a></li>
-<li><b>La casa vuota di giorno e' il vero nemico.</b> Nello scenario G quasi meta' della produzione regala energia alla rete. Programmare lavatrice, lavastoviglie e scaldabagno nelle ore di sole sposta il risultato piu' di qualsiasi detrazione.</li>
+<li><b>La casa vuota di giorno e' il vero nemico.</b> Nello scenario G meta' della produzione regala energia alla rete. Programmare lavatrice, lavastoviglie e scaldabagno nelle ore di sole sposta il risultato piu' di qualsiasi detrazione.</li>
 <li><b>La detrazione aiuta, ma non e' decisiva:</b> su 700 € vale 35 € l'anno per 10 anni e accorcia il rientro di meno di un anno. Serve anche capienza IRPEF.</li>
 </ul>
 
 <div class="no"><b>Quando NON conviene.</b>
 <ul style="margin:6px 0 0">
 <li>Balcone esposto a Nord o in ombra per buona parte del giorno.</li>
-<li>Contratto con prezzo molto basso (sotto 0,18 €/kWh tutto incluso): il rientro supera facilmente gli 8 anni.</li>
+<li>Contratto con prezzo molto basso: a 0,18 €/kWh tutto incluso il rientro dello scenario A sale a circa 6 anni, quello di B (Est/Ovest) a 9 e quello di G (casa vuota) a 10.</li>
 <li>Prevedi di traslocare entro 2–3 anni e non puoi portare il kit con te.</li>
 <li>Il condominio o un vincolo paesaggistico vieta i pannelli visibili in facciata.</li>
 <li>L'impianto elettrico di casa e' vecchio o la presa non e' su una linea in buono stato.</li>
@@ -112,14 +116,14 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
 <h2>Fai il calcolo per casa tua</h2>
 <p>Il calcolatore gratuito usa lo stesso modello di questo articolo: inserisci zona, montaggio, ombra, consumo di base e prezzo, e vedi produzione, autoconsumo, risparmio e rientro anno per anno. Gira tutto nel browser, nessun dato viene inviato.</p>
 <p><a class="btn" href="../../fotovoltaico-balcone/">Apri il calcolatore fotovoltaico da balcone</a></p>
-<p class="small">Nota: il calcolatore usa una giornata media e tende quindi a sovrastimare l'autoconsumo di qualche punto rispetto alla tabella qui sopra quando la produzione e' alta rispetto ai consumi.</p>
+<p class="small">Con i valori predefiniti (Centro, ringhiera Sud, modello prudente) il calcolatore riproduce lo scenario A: 719 kWh, 90%, rientro 3,9 anni.</p>
 
 <h2>Fonti e metodo</h2>
 <ul class="small">
 <li>Rese per zona: PVGIS, Joint Research Centre, Commissione Europea (re.jrc.ec.europa.eu/pvg_tools).</li>
-<li>Perdite di sistema: metodologia PVWatts, National Renewable Energy Laboratory (USA).</li>
+<li>Perdite di sistema: 14%, valore predefinito di PVGIS.</li>
 <li>Connessione degli impianti alla rete in bassa tensione: norma CEI 0-21; procedura di comunicazione: ARERA, delibera 315/2020/R/eel e scheda tecnica (consultate il 30 ottobre 2026).</li>
-<li>Profilo mensile della produzione: approssimazione di un profilo PVGIS per il Centro Italia. Variabilita' meteo modellata come meta' dei giorni a 1,5× e meta' a 0,5× della media mensile.</li>
+<li>Profilo mensile della produzione e quote per montaggio: PVGIS v5.3 per Roma (30° Sud, orizzontale, 30° Est, verticale Sud/Est/Nord), consultato il 31 ottobre 2026. Variabilita' meteo modellata come meta' dei giorni a 1,5× e meta' a 0,5× della media mensile.</li>
 <li>Lo script di calcolo degli scenari e' pubblicato: <a href="../../scripts/balcone_scenari.js">balcone_scenari.js</a> (licenza MIT, eseguibile con Node.js).</li>
 </ul>
 <p class="small">Questo articolo e' informativo e non costituisce consulenza finanziaria, fiscale, legale o elettrica. Non contiene link di affiliazione.</p>
