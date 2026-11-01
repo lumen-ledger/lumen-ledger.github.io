@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Turkey thaw &amp; roast time planner: when to start (Thanksgiving 2026)</title>
+<meta name="description" content="Enter your turkey's weight and dinner time: get the day to start thawing in the fridge or cold water, when it goes in the oven at 325 °F, when to start checking for 165 °F, and a calendar file. Times from extension tables based on USDA.">
+<link rel="canonical" href="https://lumen-ledger.github.io/thanksgiving-turkey-planner/">
+<style>
+:root{--navy:#0F2A3D;--sun:#F2B33D;--paper:#F7F5EF;--line:#d9d4c7;--warn:#C2452D}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--navy)}
+header{background:var(--navy);color:#fff;padding:32px 20px}
+.wrap{max-width:760px;margin:0 auto}
+header h1{margin:0;font-size:1.7rem}
+header p{margin:8px 0 0;color:#d6dde2}
+nav{font-size:.9rem;margin-bottom:10px}nav a{color:var(--sun)}
+main{padding:24px 20px}
+h2{font-size:1.15rem;margin:28px 0 6px}
+ul,ol{padding-left:20px}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:10px 0}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#ece8dc}
+.note{border-left:4px solid var(--warn);background:#fff;padding:10px 14px;font-size:.93rem}
+.box{border:1px solid var(--line);background:#fff;padding:14px 16px}
+.box label{display:block;font-size:.9rem;margin-top:8px}
+.box input,.box select{width:100%;max-width:260px;padding:6px;font:inherit}
+.presets button{margin:4px 4px 0 0;padding:4px 8px;font:inherit;font-size:.85rem;border:1px solid var(--line);background:#f3f0e6;border-radius:4px;cursor:pointer}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.out{font-size:1.05rem;margin-top:12px}
+footer{padding:20px;font-size:.82rem;color:#5b6770}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="#planner">Planner</a> · <a href="#tables">Tables</a> · <a href="#sources">Sources</a></nav>
+  <h1>Turkey planner: when to start thawing, when it goes in the oven</h1>
+  <p>Weight + dinner time → thaw start, oven time at 325 °F, first thermometer check. Example: a 16 lb turkey for a 3:00 pm dinner on Thursday, November 26, 2026 goes in the fridge to thaw by <b>Saturday, November 21</b> and in the oven by <b>10:25 AM</b>.</p>
+</div></header>
+<main class="wrap">
+<p class="note">General information, not food-safety advice for your situation. Times are approximate: the turkey is done only when a food thermometer reads <b>165 °F</b> in the thickest part of the breast, the innermost part of the thigh and the wing. Tables from University of Georgia Extension Circular 1226 (reviewed 2026-09-15), which is based on USDA FSIS guidance, read 2026-10-31. The USDA and FoodSafety.gov pages refused automated reading that day, so check them before cooking: <a href="https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/poultry/lets-talk-turkey-roasting">USDA FSIS “Let's Talk Turkey”</a>.</p>
+
+<h2 id="planner">Planner</h2>
+<div class="box">
+  <div class="grid">
+    <label>Turkey weight (lb)<input id="lb" type="number" min="4" max="24" step="0.5" value="16"></label>
+    <label>Cut<select id="cut"><option value="whole">Whole turkey (8–24 lb)</option><option value="breast">Turkey breast (4–8 lb)</option></select></label>
+    <label>Dinner date<input id="dd" type="date" value="2026-11-26"></label>
+    <label>Dinner time (carving)<input id="dt" type="time" value="15:00"></label>
+    <label>Thawing<select id="th"><option value="fridge">Refrigerator (40 °F or below)</option><option value="water">Cold water, changed every 30 min</option><option value="none">Fresh or already thawed</option><option value="frozen">Cook from frozen (no thawing)</option></select></label>
+  </div>
+  <div class="out" id="out" aria-live="polite"></div>
+  <p><button type="button" id="ics">Download calendar file (.ics)</button> <small>Built in your browser; nothing is sent anywhere.</small></p>
+</div>
+<p>How the plan is built: the turkey comes out of the oven 20 minutes before dinner to rest. It goes in early enough for the <b>longest</b> roasting time in its weight row, and you start checking the temperature at the <b>shortest</b> time. If it reaches 165 °F early, cover it with foil while it waits. Thawing starts early enough for the longest time in the thawing row. When a weight sits on the border of two rows (for example 12 or 16 lb), the planner uses the shortest and longest times across both rows.</p>
+<ul>
+<li><b>Refrigerator:</b> the safest method. Keep the turkey in its wrapper on a tray on the bottom shelf. Starting a day early is fine.</li>
+<li><b>Cold water:</b> keep the turkey in a leak-proof bag, submerged in cold tap water. Change the water every 30 minutes, and cook it right after it thaws. A 20 lb turkey means 10–12 hours of water changes.</li>
+<li><b>From frozen:</b> it is safe, but it takes at least 50% longer. Remove the giblet bag with tongs once the turkey has partly thawed in the oven. The planner multiplies the time by 1.5, which is a minimum.</li>
+<li>Never thaw a turkey on the counter: its surface stays in the 40–140 °F danger zone, where bacteria multiply fast.</li>
+<li>Bake the stuffing in a separate dish until it reaches 165 °F in the center.</li>
+</ul>
+
+<h2 id="tables">Tables used</h2>
+<p>Roasting at 325 °F, fresh or thawed, <b>unstuffed</b>:</p>
+<table><tr><th>Weight</th><th>Time</th></tr><tr><td>Breast 4–6 lb</td><td>1 h 30 min – 2 h 15 min</td></tr><tr><td>Breast 6–8 lb</td><td>2 h 15 min – 3 h 15 min</td></tr><tr><td>8–12 lb</td><td>2 h 45 min – 3 h</td></tr><tr><td>12–14 lb</td><td>3 h – 3 h 45 min</td></tr><tr><td>14–18 lb</td><td>3 h 45 min – 4 h 15 min</td></tr><tr><td>18–20 lb</td><td>4 h 15 min – 4 h 30 min</td></tr><tr><td>20–24 lb</td><td>4 h 30 min – 5 h</td></tr></table>
+<p>Thawing:</p>
+<table><tr><th>Weight</th><th>Refrigerator (40 °F)</th><th>Cold water</th></tr><tr><td>4–12 lb</td><td>1–3 days</td><td>2–6 hours</td></tr><tr><td>12–16 lb</td><td>3–4 days</td><td>6–8 hours</td></tr><tr><td>16–20 lb</td><td>4–5 days</td><td>8–10 hours</td></tr><tr><td>20–24 lb</td><td>5–6 days</td><td>10–12 hours</td></tr></table>
+<p>Microwave thawing: about 6 minutes per pound on the weight-based defrost setting. Follow your microwave's manual and cook the turkey immediately afterwards.</p>
+
+<h2>After dinner</h2>
+<ul>
+<li>Refrigerate leftovers within 2 hours (1 hour above 90 °F), in shallow containers.</li>
+<li>Use turkey, stuffing and gravy within 3–4 days, or freeze them (best within 2–6 months).</li>
+<li>Reheat leftovers to 165 °F.</li>
+</ul>
+
+<h2 id="whole-dinner">Planning the rest of the dinner</h2>
+<p>The turkey sets the oven schedule; the side dishes have to fit around it. The free <a href="../download/thanksgiving-dinner-planner.xlsx" download>Thanksgiving Dinner Planner (.xlsx)</a> works backwards from dinner time to the start of every dish, flags oven conflicts at different temperatures, and keeps the guest list and shopping budget. Same file on <a href="https://lumenledger.gumroad.com/l/thanksgiving-dinner-planner">Gumroad, pay what you want</a> (from $0). For gifts and holiday spending: <a href="../holiday-budget-planner/">holiday budget planner</a>.</p>
+
+<h2 id="sources">Sources</h2>
+<ul>
+<li>University of Georgia Extension, Circular 1226 “Food Safety Tips for Preparing a Holiday Turkey” (published with full review 2026-09-15). It cites USDA FSIS, “Your Safe Thanksgiving Guide” (2025). Source of the roasting, thawing, temperature, resting and leftover figures: <a href="https://fieldreport.caes.uga.edu/publications/C1226/food-safety-tips-for-preparing-a-holiday-turkey/">fieldreport.caes.uga.edu</a>, read 2026-10-31.</li>
+<li>University of Nebraska–Lincoln Extension, “How to Thaw a Turkey” (reviewed 2026). It has the same thawing table and the “at least 50 percent longer” rule for cooking from frozen: <a href="https://food.unl.edu/how-thaw-turkey">food.unl.edu</a>, read 2026-10-31.</li>
+<li>USDA FSIS, “Let's Talk Turkey—A Consumer Guide to Safely Roasting a Turkey”: <a href="https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/poultry/lets-talk-turkey-roasting">fsis.usda.gov</a> (could not be read automatically on 2026-10-31). For questions, the USDA runs the Meat and Poultry Hotline.</li>
+</ul>
+<p>Planner logic: <a href="../scripts/turkey_plan.js">turkey_plan.js</a> (MIT). More free tools on the <a href="../">home page</a>.</p>
+</main>
+<footer class="wrap">© 2026 Lumen &amp; Ledger · Texts CC BY 4.0 · <a href="../">Tools</a> · <a href="../about/">About</a> · <a href="../privacy/">Privacy</a> · Contact: lumenledger.tools@proton.me</footer>
+<script src="../scripts/turkey_plan.js"></script>
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)},last=null;
+  function hm(m){var h=Math.floor(m/60),r=m%60;return h+' h'+(r?' '+r+' min':'')}
+  function when(d){return d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'})+', '+d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}
+  function calc(){
+    var lb=parseFloat($('lb').value)||0,s=($('dd').value||'2026-11-26').split('-'),t=($('dt').value||'15:00').split(':');
+    var serve=new Date(+s[0],+s[1]-1,+s[2],+t[0],+t[1]);
+    var p=TurkeyPlan.plan({lb:lb,cut:$('cut').value,thaw:$('th').value,serve:serve});last=p;
+    if(p.error){$('out').innerHTML='Weight outside the published table ('+p.range[0]+'–'+p.range[1]+' lb for this cut). Check the USDA FSIS guide and use a food thermometer.';return}
+    var h='<ol>';
+    if(p.thawStart)h+='<li>Start thawing ('+(p.thawDays?p.thawDays.min+'–'+p.thawDays.max+' days in the fridge':p.thawHours.min+'–'+p.thawHours.max+' hours in cold water, then cook right away')+') by <b>'+when(p.thawStart)+'</b></li>';
+    h+='<li>Into the oven at 325 °F: <b>'+when(p.ovenIn)+'</b> (roast '+(p.frozen?'at least ':'')+hm(p.roastMin)+'–'+hm(p.roastMax)+')</li>';
+    h+='<li>Start checking for 165 °F: <b>'+when(p.checkFrom)+'</b></li>';
+    h+='<li>Out of the oven, rest '+p.rest+' min: <b>'+when(p.ovenOut)+'</b></li>';
+    h+='<li>Carve and serve: <b>'+when(p.serve)+'</b></li></ol>';
+    $('out').innerHTML=h;
+  }
+  function ics(){
+    if(!last||last.error)return;
+    function z(d){return d.toISOString().replace(/[-:]/g,'').slice(0,15)+'Z'}
+    var ev=[],n=0,nl='\r\n';
+    function add(d,title){ev.push(['BEGIN:VEVENT','UID:turkey-'+(n++)+'-'+z(d)+'@lumen-ledger.github.io','DTSTAMP:'+z(new Date()),'DTSTART:'+z(d),'DTEND:'+z(new Date(d.getTime()+15*60000)),'SUMMARY:'+title,'END:VEVENT'].join(nl))}
+    if(last.thawStart)add(last.thawStart,last.thawDays?'Turkey: move to fridge to thaw':'Turkey: start cold-water thaw (change water every 30 min)');
+    add(last.ovenIn,'Turkey: into the oven at 325 F');
+    add(last.checkFrom,'Turkey: check for 165 F (breast\\, thigh\\, wing)');
+    add(last.ovenOut,'Turkey: out of the oven\\, rest 20 min');
+    var txt=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Lumen and Ledger//Turkey planner//EN'].concat(ev,['END:VCALENDAR']).join(nl)+nl;
+    var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:'text/calendar'}));a.download='turkey-plan.ics';document.body.appendChild(a);a.click();a.remove();
+  }
+  ['lb','cut','dd','dt','th'].forEach(function(i){$(i).addEventListener('input',calc);$(i).addEventListener('change',calc)});
+  $('ics').addEventListener('click',ics);
+  var q=new URLSearchParams(location.search),ql=parseFloat(q.get('lb'));if(ql>=4&&ql<=24)$('lb').value=ql;
+  calc();
+})();
+</script>
+</body>
+</html>

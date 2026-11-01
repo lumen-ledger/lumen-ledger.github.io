@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free holiday budget planner (Excel / Google Sheets) + gift budget calculator</title>
+<meta name="description" content="Free holiday budget spreadsheet: budget per gift recipient, planned vs actual per category, money left, total charged to credit cards, return deadlines, change vs last year. Plus a quick calculator for your gift budget per person.">
+<link rel="canonical" href="https://lumen-ledger.github.io/holiday-budget-planner/">
+<style>
+:root{--navy:#0F2A3D;--sun:#F2B33D;--paper:#F7F5EF;--line:#d9d4c7;--warn:#C2452D}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--navy)}
+header{background:var(--navy);color:#fff;padding:32px 20px}
+.wrap{max-width:760px;margin:0 auto}
+header h1{margin:0;font-size:1.7rem}
+header p{margin:8px 0 0;color:#d6dde2}
+nav{font-size:.9rem;margin-bottom:10px}nav a{color:var(--sun)}
+main{padding:24px 20px}
+h2{font-size:1.15rem;margin:28px 0 6px}
+ul,ol{padding-left:20px}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:10px 0}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#ece8dc}
+.note{border-left:4px solid var(--warn);background:#fff;padding:10px 14px;font-size:.93rem}
+.box{border:1px solid var(--line);background:#fff;padding:14px 16px}
+.box label{display:block;font-size:.9rem;margin-top:8px}
+.box input,.box select{width:100%;max-width:260px;padding:6px;font:inherit}
+.presets button{margin:4px 4px 0 0;padding:4px 8px;font:inherit;font-size:.85rem;border:1px solid var(--line);background:#f3f0e6;border-radius:4px;cursor:pointer}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.out{font-size:1.05rem;margin-top:12px}
+footer{padding:20px;font-size:.82rem;color:#5b6770}
+</head>
+<body>
+<header><div class="wrap">
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="#calc">Calculator</a> · <a href="#sheets">What is inside</a> · <a href="#example">Example</a> · <a href="#download">Download</a></nav>
+  <h1>Holiday budget planner: one spreadsheet for gifts, food, travel</h1>
+  <p>Set one number for the whole season, split it by category and by person, then log what you actually spend. Example: a $1,500 budget with $1,165 planned and $584.63 spent leaves <b>$915.37</b> (39% used), and $436.24 of it is on credit cards.</p>
+</div></header>
+<main class="wrap">
+
+<h2 id="calc">Quick calculator: how much per gift?</h2>
+<div class="box">
+  <div class="grid">
+    <label>Total holiday budget ($)<input id="tot" type="number" min="0" step="10" value="1500"></label>
+    <label>Everything except gifts ($)<input id="oth" type="number" min="0" step="10" value="895"></label>
+    <label>People on your gift list<input id="ppl" type="number" min="1" step="1" value="12"></label>
+    <label>Kept aside for surprises (%)<input id="buf" type="number" min="0" max="50" step="1" value="10"></label>
+  </div>
+  <div class="out" id="out" aria-live="polite"></div>
+  <p><small>Runs in your browser; nothing is sent anywhere.</small></p>
+</div>
+<p>"Everything except gifts" is food and hosting, travel, decorations, cards and postage, wrapping and shipping, events, donations. In the example, $895 is the sum of those rows on the Setup sheet. The calculator is plain arithmetic on your numbers: (total − other spending) × (1 − reserve) ÷ people.</p>
+
+<h2 id="sheets">What is inside the file</h2>
+<table>
+<tr><th>Sheet</th><th>What you do there</th></tr>
+<tr><td>Start here</td><td>Short instructions. Input cells are highlighted, everything else is calculated.</td></tr>
+<tr><td>Setup</td><td>Year, total budget, planned amount for 9 categories (Gifts, Food &amp; hosting, Travel, Decorations, Cards &amp; postage, Wrapping &amp; shipping, Events &amp; outings, Donations, Other), last year's actual (optional), payment methods.</td></tr>
+<tr><td>Gifts</td><td>150 rows: recipient, group (Family, Kids, Friends, Work, Hosts, Other), budget, gift idea, price, shipping/wrap, status (Idea → Ordered → Bought → Wrapped → Given, or Returned), store, paid with, return-by date.</td></tr>
+<tr><td>Other spending</td><td>300 rows: date, category, what, amount, paid with.</td></tr>
+<tr><td>Summary</td><td>Planned vs actual per category with % used (red over 100%), money left, total on credit cards, spending per group of people, count of gifts by status, change vs last year.</td></tr>
+</table>
+<p>Return-by dates turn orange 14 days ahead, so an unwanted purchase does not slip past the store's window. No macros, no add-ins: it opens in Excel, LibreOffice Calc and Google Sheets (File → Import).</p>
+
+<h2 id="example">Worked example (the sample data in the file)</h2>
+<p>The file ships with sample rows so you can see every formula working; delete them before you start. With the sample data:</p>
+<table>
+<tr><th>Category</th><th>Planned</th><th>Actual</th><th>% used</th></tr>
+<tr><td>Gifts (4 people)</td><td>$270.00</td><td>$196.98</td><td>73%</td></tr>
+<tr><td>Food &amp; hosting</td><td>$300.00</td><td>$186.25</td><td>62%</td></tr>
+<tr><td>Travel</td><td>$250.00</td><td>$128.00</td><td>51%</td></tr>
+<tr><td>Decorations</td><td>$60.00</td><td>$42.00</td><td>70%</td></tr>
+<tr><td>Cards &amp; postage</td><td>$25.00</td><td>$31.40</td><td><b>126%</b> (shown in red)</td></tr>
+<tr><td><b>All categories</b></td><td><b>$1,165.00</b></td><td><b>$584.63</b></td><td>50% of plan</td></tr>
+</table>
+<ul>
+<li>Budget $1,500 − planned $1,165 = <b>$335</b> not yet assigned to any category.</li>
+<li>Budget $1,500 − spent $584.63 = <b>$915.37</b> left, 39% of the budget used.</li>
+<li>Credit cards: $71.49 + $50.50 + $186.25 + $128.00 = <b>$436.24</b>, the amount to set aside for the next statement.</li>
+<li>By group: Friends had a $40 budget and $50.50 spent, so the sheet shows −$10.50.</li>
+</ul>
+<p>The values above were recalculated with an independent formula engine on 2026-10-31, not only in a spreadsheet app.</p>
+
+<h2 id="tips">How to use it without overthinking</h2>
+<ol>
+<li>Start from the total you can pay in cash or pay off in full on the next statement, not from the gift list.</li>
+<li>Fill the non-gift categories first: food, travel and shipping are harder to cut later than a gift.</li>
+<li>Give each person a budget on the Gifts sheet before shopping; the Summary compares the gift total with the Gifts category.</li>
+<li>Log purchases the day you make them, including shipping and wrapping, and pick the payment method so the credit-card total stays accurate.</li>
+<li>Next year, copy this year's actuals into "Last year actual" and the Summary shows the change.</li>
+</ol>
+
+<h2 id="download">Download</h2>
+<div class="box">
+  <p><a href="../download/holiday-budget-planner.xlsx" download><b>Download holiday-budget-planner.xlsx</b></a> (free, CC BY 4.0, no sign-up).</p>
+  <p>Want to support the project? <a href="https://lumenledger.gumroad.com/l/holiday-budget-planner">Same file on Gumroad, pay what you want</a> (from $0).</p>
+  <p>Hosting Thanksgiving? The <a href="https://lumenledger.gumroad.com/l/thanksgiving-dinner-planner">Thanksgiving Dinner Planner</a> works the cooking schedule backward from dinner time (<a href="../download/thanksgiving-dinner-planner.xlsx" download>free .xlsx</a>).</p>
+</div>
+<p class="note">General information, not financial advice. The spreadsheet only does arithmetic on the numbers you enter.</p>
+</main>
+<footer class="wrap">© 2026 Lumen &amp; Ledger · Texts CC BY 4.0 · <a href="../">Tools</a> · <a href="../about/">About</a> · <a href="../privacy/">Privacy</a> · Contact: lumenledger.tools@proton.me</footer>
+<script>
+(function(){
+  function $(i){return document.getElementById(i)}
+  function usd(x){return '$'+x.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}
+  function calc(){
+    var t=parseFloat($('tot').value),o=parseFloat($('oth').value),p=parseInt($('ppl').value,10),b=parseFloat($('buf').value);
+    if(!(t>=0)||!(o>=0)||!(p>=1)||!(b>=0&&b<=50)){$('out').textContent='Enter a budget, other spending, at least 1 person and a reserve between 0 and 50%.';return}
+    var g=t-o;
+    if(g<=0){$('out').innerHTML='Other spending ('+usd(o)+') already uses the whole budget ('+usd(t)+'): lower a category or raise the total.';return}
+    var r=g*b/100,pp=Math.floor((g-r)/p*100)/100;
+    $('out').innerHTML='Gift pot: <b>'+usd(g)+'</b>, reserve '+usd(r)+'. Budget per person: <b>'+usd(pp)+'</b> for '+p+(p===1?' person':' people')+' (total '+usd(pp*p)+').';
+  }
+  ['tot','oth','ppl','buf'].forEach(function(i){$(i).addEventListener('input',calc)});
+  calc();
+})();
+</script>
+</body>
+</html>
