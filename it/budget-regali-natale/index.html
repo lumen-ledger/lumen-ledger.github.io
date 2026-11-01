@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Budget regali di Natale: calcolatore di quanto spendere per persona</title>
+<meta name="description" content="Calcolatore gratuito del budget regali di Natale: parti dal totale che puoi spendere, togli cenone, viaggi e addobbi, dividi per gruppi (famiglia, bambini, amici, colleghi) con pesi diversi. Funziona nel browser, nessun dato inviato.">
+<link rel="canonical" href="https://lumen-ledger.github.io/it/budget-regali-natale/">
+<link rel="alternate" hreflang="it" href="https://lumen-ledger.github.io/it/budget-regali-natale/">
+<link rel="alternate" hreflang="en-US" href="https://lumen-ledger.github.io/holiday-budget-planner/">
+<style>
+:root{--navy:#0F2A3D;--sun:#F2B33D;--paper:#F7F5EF;--line:#d9d4c7;--warn:#C2452D}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--navy)}
+header{background:var(--navy);color:#fff;padding:32px 20px}
+.wrap{max-width:760px;margin:0 auto}
+header h1{margin:0;font-size:1.7rem}
+header p{margin:8px 0 0;color:#d6dde2}
+nav{font-size:.9rem;margin-bottom:10px}nav a{color:var(--sun)}
+main{padding:24px 20px}
+h2{font-size:1.15rem;margin:28px 0 6px}
+ul,ol{padding-left:20px}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:10px 0}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#ece8dc}
+td.n,th.n{text-align:right}
+td.n input{max-width:90px;text-align:right}
+.note{border-left:4px solid var(--warn);background:#fff;padding:10px 14px;font-size:.93rem}
+.box{border:1px solid var(--line);background:#fff;padding:14px 16px}
+.box label{display:block;font-size:.9rem;margin-top:8px}
+.box input{width:100%;max-width:200px;padding:6px;font:inherit}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.out{font-size:1.02rem;margin-top:12px}
+footer{padding:20px;font-size:.82rem;color:#5b6770}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="#calcolatore">Calcolatore</a> · <a href="#esempio">Esempio</a> · <a href="#metodo">Metodo</a> · <a href="#foglio">Foglio di calcolo</a></nav>
+  <h1>Budget regali di Natale: quanto spendere per ogni persona</h1>
+  <p>Parti da quanto puoi spendere davvero, togli le spese che non sono regali, tieni una riserva e dividi il resto per gruppi di persone con pesi diversi. Esempio: 800 € totali, 350 € di altre spese, riserva 10% &rarr; <b>405 €</b> per i regali, cioè <b>54 €</b> a testa per 3 familiari stretti e 18 € per ogni amico.</p>
+</div></header>
+<main class="wrap">
+
+<h2 id="calcolatore">Calcolatore</h2>
+<div class="box">
+  <div class="grid">
+    <label>Budget totale delle feste (€)<input id="tot" type="number" min="0" step="10" value="800"></label>
+    <label>Spese che non sono regali (€)<input id="oth" type="number" min="0" step="10" value="350"></label>
+    <label>Riserva per imprevisti (%)<input id="buf" type="number" min="0" max="50" step="1" value="10"></label>
+  </div>
+  <table>
+    <tr><th>Gruppo</th><th class="n">Persone</th><th class="n">Peso</th></tr>
+    <tr><td>Famiglia stretta</td><td class="n"><input id="n0" type="number" min="0" step="1" value="3" aria-label="Persone famiglia stretta"></td><td class="n"><input id="w0" type="number" min="0" step="0.5" value="3" aria-label="Peso famiglia stretta"></td></tr>
+    <tr><td>Bambini</td><td class="n"><input id="n1" type="number" min="0" step="1" value="2" aria-label="Persone bambini"></td><td class="n"><input id="w1" type="number" min="0" step="0.5" value="2" aria-label="Peso bambini"></td></tr>
+    <tr><td>Altri parenti</td><td class="n"><input id="n2" type="number" min="0" step="1" value="4" aria-label="Persone altri parenti"></td><td class="n"><input id="w2" type="number" min="0" step="0.5" value="1" aria-label="Peso altri parenti"></td></tr>
+    <tr><td>Amici</td><td class="n"><input id="n3" type="number" min="0" step="1" value="4" aria-label="Persone amici"></td><td class="n"><input id="w3" type="number" min="0" step="0.5" value="1" aria-label="Peso amici"></td></tr>
+    <tr><td>Colleghi, insegnanti, altri</td><td class="n"><input id="n4" type="number" min="0" step="1" value="3" aria-label="Persone colleghi e altri"></td><td class="n"><input id="w4" type="number" min="0" step="0.5" value="0.5" aria-label="Peso colleghi e altri"></td></tr>
+  </table>
+  <div class="out" id="out" aria-live="polite"></div>
+  <p><small>Il calcolo avviene nel tuo browser; nessun dato viene inviato.</small></p>
+</div>
+<p>Il <b>peso</b> dice quante "quote" riceve ogni persona del gruppo: con peso 3 un familiare stretto riceve il triplo di un amico con peso 1. Formula: quota = (totale − altre spese) × (1 − riserva) ÷ somma di (persone × peso); budget a persona = quota × peso, arrotondato per difetto al centesimo.</p>
+
+<h2 id="esempio">Esempio svolto (valori predefiniti)</h2>
+<table>
+<tr><th>Passaggio</th><th class="n">Valore</th></tr>
+<tr><td>Budget totale</td><td class="n">800,00 €</td></tr>
+<tr><td>Meno spese non regalo (cenone, viaggio, addobbi, spedizioni)</td><td class="n">−350,00 €</td></tr>
+<tr><td>Disponibile per i regali</td><td class="n">450,00 €</td></tr>
+<tr><td>Meno riserva 10%</td><td class="n">−45,00 €</td></tr>
+<tr><td>Da distribuire</td><td class="n"><b>405,00 €</b></td></tr>
+<tr><td>Quote: 3×3 + 2×2 + 4×1 + 4×1 + 3×0,5</td><td class="n">22,5</td></tr>
+<tr><td>Valore di una quota: 405 ÷ 22,5</td><td class="n">18,00 €</td></tr>
+</table>
+<table>
+<tr><th>Gruppo</th><th class="n">A persona</th><th class="n">Totale gruppo</th></tr>
+<tr><td>Famiglia stretta (3, peso 3)</td><td class="n">54,00 €</td><td class="n">162,00 €</td></tr>
+<tr><td>Bambini (2, peso 2)</td><td class="n">36,00 €</td><td class="n">72,00 €</td></tr>
+<tr><td>Altri parenti (4, peso 1)</td><td class="n">18,00 €</td><td class="n">72,00 €</td></tr>
+<tr><td>Amici (4, peso 1)</td><td class="n">18,00 €</td><td class="n">72,00 €</td></tr>
+<tr><td>Colleghi e altri (3, peso 0,5)</td><td class="n">9,00 €</td><td class="n">27,00 €</td></tr>
+<tr><td><b>Totale</b> (16 persone)</td><td></td><td class="n"><b>405,00 €</b></td></tr>
+</table>
+<p>I numeri dell'esempio sono illustrativi, non medie nazionali: usa i tuoi.</p>
+
+<h2 id="metodo">Metodo in 5 passi</h2>
+<ol>
+<li><b>Il totale prima della lista.</b> Parti da ciò che puoi pagare senza rate e senza toccare i risparmi per le emergenze, non da quanto "servirebbe" per la lista.</li>
+<li><b>Togli prima le spese rigide.</b> Cenone o pranzo, viaggi per raggiungere i parenti, addobbi, carta e spedizioni sono più difficili da tagliare di un regalo.</li>
+<li><b>Tieni una riserva.</b> Il 5-10% copre il regalo dimenticato e la persona che si aggiunge all'ultimo.</li>
+<li><b>Pesi, non cifre a caso.</b> Decidi i rapporti tra i gruppi (es. famiglia 3, amici 1) e lascia che sia il calcolo a dare le cifre: se il totale cambia, le proporzioni restano.</li>
+<li><b>Segna ogni acquisto il giorno stesso,</b> spedizione e confezione comprese, e quanto è finito sulla carta di credito.</li>
+</ol>
+<p>Se la cifra a persona esce troppo bassa: riduci il numero di persone (regalo di gruppo tra amici o colleghi), abbassa il peso di un gruppo, oppure rivedi le spese non regalo. Il calcolatore lo mostra subito.</p>
+
+<h2 id="foglio">Foglio di calcolo gratuito (in inglese)</h2>
+<div class="box">
+  <p>Per seguire spese e regali per tutta la stagione: <a href="../../download/holiday-budget-planner.xlsx" download><b>holiday-budget-planner.xlsx</b></a> (gratuito, CC BY 4.0, nessuna registrazione). Contiene budget per persona (150 righe), previsto vs speso per 9 categorie, totale su carta di credito, scadenze dei resi evidenziate 14 giorni prima e confronto con l'anno precedente. Le etichette sono in inglese; il simbolo di valuta segue il formato che imposti in Excel, LibreOffice o Google Sheets.</p>
+  <p>Descrizione completa (in inglese): <a href="../../holiday-budget-planner/">Holiday budget planner</a>.</p>
+  <p>Per tenere d'occhio anche le bollette d'inverno: <a href="../quanto-consuma-stufetta-elettrica/">quanto consuma una stufetta elettrica</a>.</p>
+</div>
+<p class="note">Informazione generale, non consulenza finanziaria. Il calcolatore fa solo aritmetica sui numeri che inserisci.</p>
+</main>
+<footer class="wrap">© 2026 Lumen &amp; Ledger · Testi CC BY 4.0 · <a href="../">Strumenti</a> · <a href="../chi-siamo/">Chi siamo</a> · <a href="../privacy/">Privacy</a> · Contatti: lumenledger.tools@proton.me</footer>
+<script>
+(function(){
+  function $(i){return document.getElementById(i)}
+  function eur(x){return x.toLocaleString('it-IT',{minimumFractionDigits:2,maximumFractionDigits:2})+' €'}
+  var G=['Famiglia stretta','Bambini','Altri parenti','Amici','Colleghi e altri'];
+  function calc(){
+    var t=parseFloat($('tot').value),o=parseFloat($('oth').value),b=parseFloat($('buf').value);
+    if(!(t>=0)||!(o>=0)||!(b>=0&&b<=50)){$('out').textContent='Inserisci budget, altre spese e una riserva tra 0 e 50%.';return}
+    var n=[],w=[],q=0,i;
+    for(i=0;i<5;i++){n[i]=parseInt($('n'+i).value,10)||0;w[i]=parseFloat($('w'+i).value)||0;if(n[i]<0||w[i]<0){$('out').textContent='Persone e pesi non possono essere negativi.';return}q+=n[i]*w[i]}
+    var g=t-o;
+    if(g<=0){$('out').innerHTML='Le altre spese ('+eur(o)+') usano già tutto il budget ('+eur(t)+'): riduci una voce o alza il totale.';return}
+    if(q<=0){$('out').textContent='Inserisci almeno una persona con peso maggiore di zero.';return}
+    var r=g*b/100,d=g-r,u=d/q,tt=0;
+    var s='Per i regali: <b>'+eur(g)+'</b>, riserva '+eur(r)+', da distribuire <b>'+eur(d)+'</b>. Una quota vale '+eur(Math.floor(u*100)/100)+'.<br>';
+    for(i=0;i<5;i++){if(n[i]>0&&w[i]>0){var pp=Math.floor(u*w[i]*100+1e-9)/100;tt+=pp*n[i];s+=G[i]+': <b>'+eur(pp)+'</b> a persona, '+eur(pp*n[i])+' in totale ('+n[i]+(n[i]===1?' persona':' persone')+')<br>'}}
+    s+='Totale assegnato: '+eur(Math.round(tt*100)/100)+'.';
+    $('out').innerHTML=s;
+  }
+  ['tot','oth','buf','n0','w0','n1','w1','n2','w2','n3','w3','n4','w4'].forEach(function(i){$(i).addEventListener('input',calc)});
+  calc();
+})();
+</script>
+</body>
+</html>
