@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quanto consuma una stufetta elettrica? Calcolatore costo all'ora e al mese (prezzi ARERA 2026)</title>
+<meta name="description" content="Costo di una stufetta elettrica o di qualsiasi elettrodomestico: watt x ore x prezzo per kWh. Con il prezzo di riferimento ARERA dal 1 ottobre 2026 (43,43 cent/kWh) una stufetta da 2.000 W costa 0,87 euro l'ora. Tabella da 800 a 2.500 W e limite del contatore da 3 kW.">
+<link rel="canonical" href="https://lumen-ledger.github.io/it/quanto-consuma-stufetta-elettrica/">
+<style>
+:root{--navy:#0F2A3D;--sun:#F2B33D;--paper:#F7F5EF;--line:#d9d4c7;--warn:#C2452D}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--navy)}
+header{background:var(--navy);color:#fff;padding:32px 20px}
+.wrap{max-width:760px;margin:0 auto}
+header h1{margin:0;font-size:1.7rem}
+header p{margin:8px 0 0;color:#d6dde2}
+nav{font-size:.9rem;margin-bottom:10px}nav a{color:var(--sun)}
+main{padding:24px 20px}
+h2{font-size:1.15rem;margin:28px 0 6px}
+ul,ol{padding-left:20px}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:10px 0}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#ece8dc}
+.note{border-left:4px solid var(--warn);background:#fff;padding:10px 14px;font-size:.93rem}
+.box{border:1px solid var(--line);background:#fff;padding:14px 16px}
+.box label{display:block;font-size:.9rem;margin-top:8px}
+.box input{width:100%;max-width:260px;padding:6px;font:inherit}
+.presets button{margin:4px 4px 0 0;padding:4px 8px;font:inherit;font-size:.85rem;border:1px solid var(--line);background:#f3f0e6;border-radius:4px;cursor:pointer}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.out{font-size:1.05rem;margin-top:12px}
+footer{padding:20px;font-size:.82rem;color:#5b6770}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="#calcolatore">Calcolatore</a> · <a href="#tabella">Tabella</a> · <a href="#contatore">Contatore da 3 kW</a></nav>
+  <h1>Quanto consuma una stufetta elettrica (e quanto costa)?</h1>
+  <p>Costo = watt ÷ 1.000 × ore × prezzo per kWh. Al prezzo di riferimento ARERA dal 1° ottobre 2026 (43,43 centesimi/kWh) una stufetta da 2.000 W al massimo costa <b>0,87 &euro; l'ora</b>.</p>
+</div></header>
+<main class="wrap">
+<p class="note">Informazione generale, non consulenza. Prezzo predefinito: ARERA, prezzo di riferimento per il cliente tipo vulnerabile in Maggior Tutela, IV trimestre 2026 (1° ottobre - 31 dicembre), 43,43 c&euro;/kWh tasse incluse (comunicato del 29 settembre 2026, letto il 2026-11-01). E' una media che comprende anche quote fisse, oneri e imposte: sul mercato libero il tuo prezzo puo' essere diverso. Se hai la bolletta, usa il tuo costo per kWh (spesa totale ÷ kWh fatturati).</p>
+
+<h2 id="calcolatore">Calcolatore</h2>
+<div class="box">
+  <div class="presets">Esempi di potenza di targa (usa quella scritta sul tuo apparecchio):
+    <button type="button" data-w="2000">Stufetta 2.000 W</button><button type="button" data-w="1000">Stufetta al minimo 1.000 W</button><button type="button" data-w="1500">1.500 W</button><button type="button" data-w="800">800 W</button><button type="button" data-w="2500">2.500 W</button>
+  </div>
+  <div class="grid">
+    <label>Potenza (watt)<input id="w" type="number" min="0" step="1" value="2000"></label>
+    <label>Prezzo per kWh (&euro;)<input id="r" type="number" min="0" step="0.001" value="0.4343"></label>
+    <label>Ore di uso al giorno<input id="h" type="number" min="0" max="24" step="0.5" value="4"></label>
+    <label>Giorni al mese<input id="d" type="number" min="0" max="31" step="1" value="30"></label>
+    <label>Quota del tempo a piena potenza (%)<input id="u" type="number" min="0" max="100" step="5" value="100"></label>
+  </div>
+  <div class="out" id="out" aria-live="polite"></div>
+</div>
+<p>Quota del tempo a piena potenza: 100% e' il caso peggiore. Una stufetta con termostato spegne e riaccende la resistenza quando la stanza e' calda, quindi consuma meno di potenza × ore; quanto meno dipende da stanza, isolamento e impostazione. Una presa con misuratore di consumo lo dice con precisione.</p>
+
+<h2>Come si fa il conto</h2>
+<ul>
+<li>La potenza e' sulla targhetta dell'apparecchio (sotto o sul retro), in watt (W). Se le posizioni sono due (per esempio 1.000 / 2.000 W), al massimo conta il valore piu' alto.</li>
+<li>kWh al giorno = watt × ore di uso ÷ 1.000. Costo = kWh × prezzo per kWh.</li>
+<li>Esempio: 2.000 W per 4 ore = 8 kWh al giorno; × 0,4343 &euro; = 3,47 &euro; al giorno; per 30 giorni 240 kWh = <b>104,23 &euro;</b>.</li>
+<li>Su una stagione: 2.000 W, 3 ore al giorno per 120 giorni = 720 kWh = <b>312,70 &euro;</b> allo stesso prezzo.</li>
+<li>Tutte le stufette a resistenza (termoventilatori, radiatori a olio, stufette alogene o al quarzo) trasformano 1 kWh in circa 860 kcal di calore: a parita' di watt e di ore, il consumo e' lo stesso qualunque sia il modello. Cambia come il calore arriva nella stanza, non quanta energia costa.</li>
+</ul>
+
+<h2 id="tabella">Tabella: costo all'ora e al mese</h2>
+<p>Prezzo 43,43 c&euro;/kWh (ARERA, IV trimestre 2026), resistenza sempre accesa (quota 100%), mese da 30 giorni. Valori calcolati con la stessa formula del calcolatore.</p>
+<table>
+<tr><th>Potenza</th><th>All'ora</th><th>4 ore al giorno, 30 giorni</th><th>8 ore al giorno, 30 giorni</th></tr>
+<tr><td>800 W</td><td>0,35 &euro;</td><td>41,69 &euro; (96 kWh)</td><td>83,39 &euro; (192 kWh)</td></tr>
+<tr><td>1.000 W</td><td>0,43 &euro;</td><td>52,12 &euro; (120 kWh)</td><td>104,23 &euro; (240 kWh)</td></tr>
+<tr><td>1.200 W</td><td>0,52 &euro;</td><td>62,54 &euro; (144 kWh)</td><td>125,08 &euro; (288 kWh)</td></tr>
+<tr><td>1.500 W</td><td>0,65 &euro;</td><td>78,17 &euro; (180 kWh)</td><td>156,35 &euro; (360 kWh)</td></tr>
+<tr><td>2.000 W</td><td>0,87 &euro;</td><td>104,23 &euro; (240 kWh)</td><td>208,46 &euro; (480 kWh)</td></tr>
+<tr><td>2.200 W</td><td>0,96 &euro;</td><td>114,66 &euro; (264 kWh)</td><td>229,31 &euro; (528 kWh)</td></tr>
+<tr><td>2.500 W</td><td>1,09 &euro;</td><td>130,29 &euro; (300 kWh)</td><td>260,58 &euro; (600 kWh)</td></tr>
+</table>
+<p>Con il termostato che tiene la resistenza accesa meta' del tempo (quota 50%), i valori mensili si dimezzano: 2.000 W per 8 ore diventano 104,23 &euro;.</p>
+
+<h2 id="contatore">Il contatore da 3 kW: quando "salta"</h2>
+<p>Secondo ARERA, per la maggior parte delle abitazioni la potenza impegnata e' di 3 kW e, per le forniture fino a 30 kW, la potenza disponibile e' la potenza impegnata aumentata almeno del 10%: con 3 kW, almeno 3,3 kW. Oltre la potenza disponibile il contatore interrompe la fornitura.</p>
+<ul>
+<li>Una stufetta da 2.000 W usa da sola circa due terzi di 3 kW. Se insieme partono un forno o una lavatrice in fase di riscaldamento, la somma delle potenze puo' superare 3,3 kW.</li>
+<li>Prima di usare la stufetta, somma le potenze di targa degli apparecchi che possono funzionare insieme. La potenza impegnata del tuo contratto e' indicata in bolletta.</li>
+</ul>
+
+<h2>Prima di usare una stufetta</h2>
+<p>Segui le istruzioni del fabbricante su distanza da tende e mobili, prese e prolunghe, e spegnila quando esci dalla stanza o vai a dormire. Questa pagina calcola solo il costo.</p>
+
+<h2>Fonti</h2>
+<ul>
+<li>ARERA, comunicato stampa "Elettricita': Maggior Tutela +37,3% nel IV trimestre 2026 per i clienti vulnerabili", 29 settembre 2026 (43,43 c&euro;/kWh tasse incluse; delibera 338/2026/R/eel): <a href="https://www.arera.it/comunicati-stampa/dettaglio/elettricita-maggior-tutela-373-nel-iv-trimestre-2026-per-i-clienti-vulnerabili">arera.it</a>, letto il 2026-11-01.</li>
+<li>ARERA, Atlante per il consumatore, "Cosa e' la potenza impegnata?" (3 kW tipici, potenza disponibile +10%): <a href="https://www.arera.it/atlante-per-il-consumatore/elettricita/il-contratto/potenza-impegnata/cosa-e-la-potenza-impegnata">arera.it</a>, letto il 2026-11-01.</li>
+<li>Conversione: 1 kWh = 3,6 MJ; 1 kcal = 4,1868 kJ, quindi 1 kWh ≈ 860 kcal.</li>
+</ul>
+<p>Per vedere quanto pesano gli elettrodomestici bolletta dopo bolletta: <a href="../../download/tracker-bollette-luce-gas.xlsx" download>tracker bollette luce e gas</a> (Excel gratuito, calcola il tuo costo reale per kWh). Logica del calcolatore: <a href="../../scripts/appliance_cost.js">appliance_cost.js</a> (MIT). Versione per gli Stati Uniti: <a href="../../appliance-running-cost/">appliance running cost</a>.</p>
+</main>
+<footer class="wrap">© 2026 Lumen &amp; Ledger · Testi CC BY 4.0 · <a href="../">Strumenti</a> · <a href="../chi-siamo/">Chi siamo</a> · <a href="../privacy/">Privacy</a> · Contatti: lumenledger.tools@proton.me</footer>
+<script src="../../scripts/appliance_cost.js"></script>
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)};
+  function eur(x,dec){return x.toLocaleString('it-IT',{minimumFractionDigits:dec,maximumFractionDigits:dec})}
+  function num(i){return parseFloat(String($(i).value).replace(',','.'))||0}
+  function calc(){
+    var r=ApplianceCost.run({watts:num('w'),hours:num('h'),days:num('d'),duty:num('u'),rate:num('r')});
+    $('out').innerHTML='All\'ora: <b>'+eur(r.hour.usd,2)+' &euro;</b> ('+eur(r.hour.kwh,2)+' kWh) · Al giorno: <b>'+eur(r.day.usd,2)+' &euro;</b> ('+eur(r.day.kwh,1)+' kWh) · Al mese: <b>'+eur(r.month.usd,2)+' &euro;</b> ('+eur(r.month.kwh,0)+' kWh)';
+  }
+  ['w','h','d','u','r'].forEach(function(i){$(i).addEventListener('input',calc)});
+  document.querySelectorAll('.presets button').forEach(function(b){b.addEventListener('click',function(){$('w').value=b.dataset.w;calc()})});
+  var q=new URLSearchParams(location.search),qr=parseFloat(q.get('prezzo')),qw=parseFloat(q.get('w'));
+  if(qr>=0.01&&qr<=2)$('r').value=qr;
+  if(qw>0&&qw<=20000)$('w').value=qw;
+  calc();
+})();
+</script>
+</body>
+</html>
