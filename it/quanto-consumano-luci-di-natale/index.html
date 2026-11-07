@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quanto consumano le luci di Natale? Calcolatore costo per la stagione (prezzo ARERA 2026)</title>
+<meta name="description" content="Costo delle luci di Natale dai watt scritti sulla confezione, dalle ore accese e dal prezzo per kWh. Al prezzo di riferimento ARERA dal 1 ottobre 2026 (43,43 cent/kWh), 500 W accesi 6 ore al giorno dall'8 dicembre al 6 gennaio (30 giorni) costano 39,09 euro. Tabella per potenza e ore.">
+<link rel="canonical" href="https://lumen-ledger.github.io/it/quanto-consumano-luci-di-natale/">
+<link rel="alternate" hreflang="it" href="https://lumen-ledger.github.io/it/quanto-consumano-luci-di-natale/">
+<link rel="alternate" hreflang="en-US" href="https://lumen-ledger.github.io/christmas-lights-cost/">
+<style>
+:root{--navy:#0F2A3D;--sun:#F2B33D;--paper:#F7F5EF;--line:#d9d4c7;--warn:#C2452D}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--navy)}
+header{background:var(--navy);color:#fff;padding:32px 20px}
+.wrap{max-width:760px;margin:0 auto}
+header h1{margin:0;font-size:1.7rem}
+header p{margin:8px 0 0;color:#d6dde2}
+nav{font-size:.9rem;margin-bottom:10px}nav a{color:var(--sun)}
+main{padding:24px 20px}
+h2{font-size:1.15rem;margin:28px 0 6px}
+ul,ol{padding-left:20px}
+table{border-collapse:collapse;width:100%;font-size:.9rem;margin:10px 0}
+th,td{border:1px solid var(--line);padding:5px 7px;text-align:left;vertical-align:top}
+th{background:#ece8dc}
+.note{border-left:4px solid var(--warn);background:#fff;padding:10px 14px;font-size:.93rem}
+.box{border:1px solid var(--line);background:#fff;padding:14px 16px}
+.box label{display:block;font-size:.9rem;margin-top:8px}
+.box input{width:100%;max-width:260px;padding:6px;font:inherit}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.out{font-size:1.02rem;margin-top:12px}
+footer{padding:20px;font-size:.82rem;color:#5b6770}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="#calcolatore">Calcolatore</a> · <a href="#tabella">Tabella</a> · <a href="../budget-regali-natale/">Budget di Natale</a></nav>
+  <h1>Quanto consumano le luci di Natale (e quanto costano)?</h1>
+  <p>Costo = watt × ore ÷ 1.000 × prezzo per kWh. Al prezzo di riferimento ARERA dal 1° ottobre 2026 (43,43 centesimi/kWh), luci accese 6 ore al giorno dall'8 dicembre al 6 gennaio (30 giorni) costano <b>7,82 &euro;</b> ogni 100 W, <b>39,09 &euro;</b> per 500 W e <b>117,26 &euro;</b> per 1.500 W.</p>
+</div></header>
+<main class="wrap">
+<p class="note">Informazione generale, non consulenza. Il risultato vale quanto i watt che inserisci: usa la potenza scritta sulla confezione, sull'etichetta vicino alla spina o sull'alimentatore. Prezzo predefinito: ARERA, prezzo di riferimento per il cliente tipo vulnerabile in Maggior Tutela, IV trimestre 2026, 43,43 c&euro;/kWh tasse incluse (comunicato del 29 settembre 2026, letto il 2026-11-01). E' una media che comprende quote fisse, oneri e imposte: se hai la bolletta, usa il tuo costo per kWh (spesa totale ÷ kWh fatturati).</p>
+
+<h2 id="calcolatore">Calcolatore</h2>
+<div class="box">
+  <div class="grid">
+    <label>Prezzo per kWh (&euro;)<input id="r" type="number" min="0" step="0.001" value="0.4343"></label>
+    <label>Ore accese al giorno<input id="h" type="number" min="0" max="24" step="0.5" value="6"></label>
+    <label>Giorni della stagione<input id="d" type="number" min="0" max="366" step="1" value="30"></label>
+  </div>
+  <table>
+  <tr><th>Decorazione (nome facoltativo)</th><th>Watt ciascuna</th><th>Quante</th></tr>
+  <tr><td><input id="n1" value="Luci dell'albero" aria-label="Nome 1"></td><td><input id="w1" type="number" min="0" step="0.1" value="20" aria-label="Watt 1"></td><td><input id="c1" type="number" min="0" step="1" value="3" aria-label="Quantità 1"></td></tr>
+  <tr><td><input id="n2" value="Catene da esterno" aria-label="Nome 2"></td><td><input id="w2" type="number" min="0" step="0.1" value="40" aria-label="Watt 2"></td><td><input id="c2" type="number" min="0" step="1" value="5" aria-label="Quantità 2"></td></tr>
+  <tr><td><input id="n3" value="Presepe / proiettore" aria-label="Nome 3"></td><td><input id="w3" type="number" min="0" step="0.1" value="0" aria-label="Watt 3"></td><td><input id="c3" type="number" min="0" step="1" value="0" aria-label="Quantità 3"></td></tr>
+  </table>
+  <p style="font-size:.88rem;margin:4px 0">I valori iniziali sono un esempio da sovrascrivere, non potenze tipiche. Sull'etichetta ci sono solo gli ampere? <input id="amp" type="number" min="0" step="0.01" style="width:90px" aria-label="Ampere"> A × 230 V = <span id="ampw">–</span> W (limite superiore: la corrente indicata è un massimo).</p>
+  <div class="out" id="out" aria-live="polite"></div>
+</div>
+
+<h2>Come leggere i numeri</h2>
+<ul>
+<li><b>Watt:</b> la potenza assorbita mentre le luci sono accese. 1.000 W per 1 ora = 1 kWh, l'unità che trovi in bolletta.</li>
+<li><b>Alimentatore:</b> molte catene LED hanno un alimentatore esterno; per il calcolo usa la potenza in ingresso (lato presa, 230 V) se indicata; quella in uscita la sottostima un po'.</li>
+<li><b>Timer:</b> paghi le ore accese. Passare da 12 a 6 ore al giorno dimezza il costo; il calcolatore mostra quanto aggiunge ogni ora in più al giorno su tutta la stagione.</li>
+<li><b>Vecchie e nuove:</b> inserisci ogni catena con i suoi watt di targa in una riga e confronta mettendo "quante" a 0 per una delle due. Usa le potenze reali, non regole a occhio.</li>
+<li><b>Giorni:</b> 30 è il periodo dall'8 dicembre al 6 gennaio compresi; cambialo se accendi prima o spegni dopo.</li>
+</ul>
+<p>La sicurezza dipende dalle istruzioni del prodotto: rispetta l'indicazione uso interno/esterno e, se l'etichetta indica un numero massimo di catene collegabili tra loro, non superarlo.</p>
+
+<h2 id="tabella">Costo della stagione per potenza e ore</h2>
+<p>30 giorni, prezzo 43,43 c&euro;/kWh (ARERA, IV trimestre 2026).</p>
+<table>
+<tr><th>Ore al giorno</th><th>50 W</th><th>100 W</th><th>500 W</th><th>1.500 W</th></tr>
+<tr><td>4</td><td>2,61 &euro;</td><td>5,21 &euro;</td><td>26,06 &euro;</td><td>78,17 &euro;</td></tr>
+<tr><td>6</td><td>3,91 &euro;</td><td>7,82 &euro;</td><td>39,09 &euro;</td><td>117,26 &euro;</td></tr>
+<tr><td>8</td><td>5,21 &euro;</td><td>10,42 &euro;</td><td>52,12 &euro;</td><td>156,35 &euro;</td></tr>
+<tr><td>12</td><td>7,82 &euro;</td><td>15,63 &euro;</td><td>78,17 &euro;</td><td>234,52 &euro;</td></tr>
+</table>
+<p>Il costo è proporzionale: 24 ore al giorno costano il doppio della riga da 12 ore; 60 giorni il doppio di 30.</p>
+
+<h2>Fonti</h2>
+<ul>
+<li>ARERA, comunicato del 29 settembre 2026: prezzo di riferimento dell'energia elettrica per il cliente tipo vulnerabile, IV trimestre 2026, 43,43 c&euro;/kWh tasse incluse (letto il 2026-11-01; aggiornamento atteso a fine dicembre per il I trimestre 2027). Stesso valore usato in <a href="../quanto-consuma-stufetta-elettrica/">quanto consuma una stufetta elettrica</a>.</li>
+<li>kWh = W × h ÷ 1.000. W = V × A vale per un carico resistivo; per catene LED con alimentatore (fattore di potenza inferiore a 1) e per una corrente massima di targa dà un limite superiore. Tensione nominale domestica in Italia: 230 V.</li>
+</ul>
+<p>Metti le luci nel conto delle feste con il <a href="../budget-regali-natale/">budget di Natale</a> e il <a href="../../download/pianificatore-spese-natale.xlsx" download>pianificatore spese di Natale</a> (.xlsx gratis); verifica quanto pesano in bolletta con il <a href="../../download/tracker-bollette-luce-gas.xlsx" download>tracker bollette luce e gas</a>. Versione per gli Stati Uniti: <a href="../../christmas-lights-cost/" hreflang="en-US">Christmas lights cost</a>. Logica del calcolatore: <a href="../../scripts/christmas_lights.js">christmas_lights.js</a> (MIT).</p>
+</main>
+<footer class="wrap">© 2026 Lumen &amp; Ledger · Testi CC BY 4.0 · <a href="../">Strumenti</a> · <a href="../chi-siamo/">Chi siamo</a> · <a href="../privacy/">Privacy</a> · Contatti: lumenledger.tools@proton.me</footer>
+<script src="../../scripts/christmas_lights.js"></script>
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)};
+  function num(i){return parseFloat($(i).value)||0}
+  function eur(x){return x.toLocaleString('it-IT',{minimumFractionDigits:2,maximumFractionDigits:2})+' €'}
+  function calc(){
+    var sets=[1,2,3].map(function(i){return {watts:num('w'+i),count:num('c'+i)}});
+    var x=XmasLights.run({sets:sets,hours:num('h'),days:num('d'),rate:num('r')});
+    $('out').innerHTML='Totale <b>'+x.watts.toLocaleString('it-IT')+' W</b> · '+x.kwh.toLocaleString('it-IT',{maximumFractionDigits:1})+' kWh nella stagione<br>Costo della stagione <b>'+eur(x.season)+'</b> · al giorno '+eur(x.perDay)+' · ogni ora in più al giorno aggiunge '+eur(x.perHour*num('d'))+' sulla stagione';
+    var a=num('amp');$('ampw').textContent=a>0?String(Math.round(XmasLights.wattsFromAmps(a,230))):'–';
+  }
+  ['r','h','d','w1','c1','w2','c2','w3','c3','amp'].forEach(function(i){$(i).addEventListener('input',calc)});
+  var q=new URLSearchParams(location.search),qr=parseFloat(q.get('prezzo'));
+  if(qr>=0.01&&qr<=2){$('r').value=qr}
+  calc();
+})();
+</script>
+</body>
+</html>
