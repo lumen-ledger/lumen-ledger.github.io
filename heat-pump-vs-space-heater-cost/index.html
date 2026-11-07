@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Heat pump vs space heater vs gas furnace: cost per therm of heat by state (2026)</title>
+<meta name="description" content="Cost of the same 100,000 Btu of heat from a heat pump (rated HSPF2), an electric space heater and a gas furnace, for every state with EIA 2026 electricity and 2025 gas prices. Calculator with your own rates and last winter's gas use.">
+<link rel="canonical" href="https://lumen-ledger.github.io/heat-pump-vs-space-heater-cost/">
+<link rel="alternate" hreflang="en-US" href="https://lumen-ledger.github.io/heat-pump-vs-space-heater-cost/">
+<link rel="alternate" hreflang="it" href="https://lumen-ledger.github.io/it/condizionatore-pompa-di-calore-costo-riscaldamento/">
+<style>
+:root{--navy:#0F2A3D;--sun:#F2B33D;--paper:#F7F5EF;--line:#d9d4c7;--warn:#C2452D}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--navy)}
+header{background:var(--navy);color:#fff;padding:32px 20px}
+.wrap{max-width:760px;margin:0 auto}
+header h1{margin:0;font-size:1.7rem}
+header p{margin:8px 0 0;color:#d6dde2}
+nav{font-size:.9rem;margin-bottom:10px}nav a{color:var(--sun)}
+main{padding:24px 20px}
+h2{font-size:1.15rem;margin:28px 0 6px}
+ul,ol{padding-left:20px}
+table{border-collapse:collapse;width:100%;font-size:.9rem;margin:10px 0}
+th,td{border:1px solid var(--line);padding:5px 7px;text-align:left;vertical-align:top}
+th{background:#ece8dc}
+.note{border-left:4px solid var(--warn);background:#fff;padding:10px 14px;font-size:.93rem}
+.box{border:1px solid var(--line);background:#fff;padding:14px 16px}
+.box label{display:block;font-size:.9rem;margin-top:8px}
+.box input,.box select{width:100%;max-width:260px;padding:6px;font:inherit}
+.presets button{margin:4px 4px 0 0;padding:4px 8px;font:inherit;font-size:.85rem;border:1px solid var(--line);background:#f3f0e6;border-radius:4px;cursor:pointer}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.out{font-size:1.02rem;margin-top:12px}
+footer{padding:20px;font-size:.82rem;color:#5b6770}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="../appliance-running-cost/">Space heater cost</a> · <a href="../electricity-price-per-kwh/">Price per kWh by state</a> · <a href="#by-state">Table by state</a></nav>
+  <h1>Heat pump vs space heater vs gas furnace: what 1 therm of heat costs</h1>
+  <p>At U.S. average prices (electricity 18.19¢/kWh, gas $15.34/Mcf), 100,000 Btu of heat costs <b>$5.33</b> from a space heater, <b>$2.43</b> from a heat pump at the federal minimum HSPF2 of 7.5, and <b>$1.85</b> from an 80% gas furnace.</p>
+</div></header>
+<main class="wrap">
+<p class="note">General information, not financial advice. A heat pump's real efficiency depends on your climate, the unit and the installation; the rating used here is a standardized seasonal average, not a measurement of your home. Prices: EIA averages (sources below); use the prices on your own bills when you can.</p>
+
+<h2>Calculator</h2>
+<div class="box">
+  <div class="grid">
+    <label>State averages (EIA)<select id="st"><option value="0.1819|15.34" selected>U.S. average</option><option value="">Custom (your bills)</option><option value="0.1651|17.56">Alabama</option><option value="0.2732|12.96">Alaska</option><option value="0.1536|18.58">Arizona</option><option value="0.1374|19.25">Arkansas</option><option value="0.3258|22.01">California</option><option value="0.1680|11.17">Colorado</option><option value="0.2747|16.83">Connecticut</option><option value="0.1798|15.97">Delaware</option><option value="0.2486|16.68">District of Columbia</option><option value="0.1532|25.48">Florida</option><option value="0.1548|20.42">Georgia</option><option value="0.4641|52.38">Hawaii</option><option value="0.1302|7.69">Idaho</option><option value="0.1923|11.25">Illinois</option><option value="0.1704|11.49">Indiana</option><option value="0.1455|10.61">Iowa</option><option value="0.1526|14.81">Kansas</option><option value="0.1420|14.23">Kentucky</option><option value="0.1327|17.39">Louisiana</option><option value="0.3023|18.95">Maine</option><option value="0.2131|16.14">Maryland</option><option value="0.3019|25.06">Massachusetts</option><option value="0.2173|10.92">Michigan</option><option value="0.1644|10.98">Minnesota</option><option value="0.1506|16.65">Mississippi</option><option value="0.1428|14.94">Missouri</option><option value="0.1413|8.99">Montana</option><option value="0.1292|11.40">Nebraska</option><option value="0.1336|13.14">Nevada</option><option value="0.2691|18.61">New Hampshire</option><option value="0.2409|14.21">New Jersey</option><option value="0.1534|9.83">New Mexico</option><option value="0.2926|17.58">New York</option><option value="0.1494|16.42">North Carolina</option><option value="0.1246|9.50">North Dakota</option><option value="0.1881|13.85">Ohio</option><option value="0.1381|14.38">Oklahoma</option><option value="0.1546|16.71">Oregon</option><option value="0.2113|15.04">Pennsylvania</option><option value="0.2905|21.66">Rhode Island</option><option value="0.1590|16.91">South Carolina</option><option value="0.1458|9.86">South Dakota</option><option value="0.1380|11.84">Tennessee</option><option value="0.1603|19.42">Texas</option><option value="0.1319|10.19">Utah</option><option value="0.2393|18.00">Vermont</option><option value="0.1695|16.79">Virginia</option><option value="0.1442|17.62">Washington</option><option value="0.1558|13.80">West Virginia</option><option value="0.1905|10.74">Wisconsin</option><option value="0.1401|11.74">Wyoming</option></select></label>
+    <label>Electricity price per kWh ($)<input id="r" type="number" min="0" step="0.001" value="0.1819"></label>
+    <label>Gas price from your bill<input id="gp" type="number" min="0" step="0.01" value="15.34"></label>
+    <label>Gas unit<select id="gu"><option value="1" selected>$ per Mcf</option><option value="10.36">$ per therm</option><option value="10">$ per Ccf</option></select></label>
+    <label>Heat pump HSPF2 (from the label or spec sheet)<input id="hs" type="number" min="1" max="20" step="0.1" value="7.5"></label>
+    <label>Gas furnace AFUE (%)<input id="af" type="number" min="1" max="100" step="1" value="80"></label>
+    <label>Optional: gas you bought for heating last winter (therms)<input id="th" type="number" min="0" step="1" value=""></label>
+  </div>
+  <div class="presets">HSPF2:
+    <button type="button" data-h="7.5">7.5 split-system minimum</button><button type="button" data-h="6.7">6.7 single-package minimum</button><button type="button" data-h="8.1">8.1</button><button type="button" data-h="9">9.0</button><button type="button" data-h="10">10.0</button>
+  </div>
+  <div class="out" id="out" aria-live="polite"></div>
+</div>
+<p>The optional field turns last winter's gas into delivered heat (therms × AFUE) and prices the same heat with the other two options. Use only the heating part of your gas use: if the gas also runs a water heater or a range, subtract their share (for example the average of your summer months).</p>
+
+<h2>How the comparison works</h2>
+<ul>
+<li><b>Space heater (electric resistance):</b> 1 kWh becomes 3,412 Btu of heat, so 1 therm (100,000 Btu) needs 29.3 kWh.</li>
+<li><b>Heat pump:</b> HSPF is the heat delivered over the heating season in Btu divided by the electricity used in watt-hours (10 CFR part 430, subpart B, appendix M, section 1.2). HSPF2 is the same ratio under the test procedure in force since 2023 (appendix M1). Dividing by 3.412 gives the seasonal coefficient of performance: HSPF2 7.5 ≈ COP 2.2, so 1 therm of heat needs about 13.3 kWh.</li>
+<li><b>Federal minimums</b> for central heat pumps made from 2023-01-01 (10 CFR 430.32(c)(5)): HSPF2 7.5 for split systems, 6.7 for single-package units, 6.3 for space-constrained products, 6.1 for small-duct high-velocity systems. Many units on sale are rated higher; use the number for your model.</li>
+<li><b>Gas furnace:</b> 1 cubic foot of gas ≈ 1,036 Btu (EIA), so 1 Mcf ≈ 10.36 therms; the furnace delivers AFUE % of it. Federal minimum 80% for non-weatherized gas furnaces made from 2015-11-19 (10 CFR 430.32(e)(1)).</li>
+</ul>
+<p><b>Where the rating misleads.</b> The required HSPF2 rating uses the heating hours of one climate region (Region IV, appendix M1 section 5.1); the regulation treats ratings for other regions as optional. In colder places a heat pump spends more hours in cold weather, where its efficiency drops and electric backup heat (which costs the same as a space heater per Btu) may switch on. Treat the heat pump column as a best case for cold climates and ask for the cold-climate rating of a specific model.</p>
+
+<h2 id="by-state">Cost of 1 therm of heat by state</h2>
+<p>Electricity: EIA average residential price January–August 2026. Gas: EIA average residential price, 2025 (2024 where 2025 is not available). Heat pump at HSPF2 7.5, furnace at AFUE 80%. Last column: the HSPF2 a heat pump needs to match an 80% furnace at these prices.</p>
+<table>
+<tr><th>State</th><th>¢/kWh</th><th>Gas $/Mcf (year)</th><th>Space heater</th><th>Heat pump 7.5</th><th>Furnace 80%</th><th>HSPF2 to match furnace</th></tr>
+<tr><td>Alabama</td><td>16.51</td><td>17.56 (2025)</td><td>$4.84</td><td>$2.20</td><td><b>$2.12</b></td><td>7.8</td></tr>
+<tr><td>Alaska</td><td>27.32</td><td>12.96 (2025)</td><td>$8.01</td><td>$3.64</td><td><b>$1.56</b></td><td>17.5</td></tr>
+<tr><td>Arizona</td><td>15.36</td><td>18.58 (2025)</td><td>$4.50</td><td><b>$2.05</b></td><td>$2.24</td><td>6.9</td></tr>
+<tr><td>Arkansas</td><td>13.74</td><td>19.25 (2025)</td><td>$4.03</td><td><b>$1.83</b></td><td>$2.32</td><td>5.9</td></tr>
+<tr><td>California</td><td>32.58</td><td>22.01 (2025)</td><td>$9.55</td><td>$4.34</td><td><b>$2.66</b></td><td>12.3</td></tr>
+<tr><td>Colorado</td><td>16.80</td><td>11.17 (2025)</td><td>$4.92</td><td>$2.24</td><td><b>$1.35</b></td><td>12.5</td></tr>
+<tr><td>Connecticut</td><td>27.47</td><td>16.83 (2024)</td><td>$8.05</td><td>$3.66</td><td><b>$2.03</b></td><td>13.5</td></tr>
+<tr><td>Delaware</td><td>17.98</td><td>15.97 (2025)</td><td>$5.27</td><td>$2.40</td><td><b>$1.93</b></td><td>9.3</td></tr>
+<tr><td>District of Columbia</td><td>24.86</td><td>16.68 (2025)</td><td>$7.29</td><td>$3.31</td><td><b>$2.01</b></td><td>12.4</td></tr>
+<tr><td>Florida</td><td>15.32</td><td>25.48 (2025)</td><td>$4.49</td><td><b>$2.04</b></td><td>$3.07</td><td>5.0</td></tr>
+<tr><td>Georgia</td><td>15.48</td><td>20.42 (2025)</td><td>$4.54</td><td><b>$2.06</b></td><td>$2.46</td><td>6.3</td></tr>
+<tr><td>Hawaii</td><td>46.41</td><td>52.38 (2025)</td><td>$13.60</td><td><b>$6.19</b></td><td>$6.32</td><td>7.3</td></tr>
+<tr><td>Idaho</td><td>13.02</td><td>7.69 (2025)</td><td>$3.82</td><td>$1.74</td><td><b>$0.93</b></td><td>14.0</td></tr>
+<tr><td>Illinois</td><td>19.23</td><td>11.25 (2025)</td><td>$5.64</td><td>$2.56</td><td><b>$1.36</b></td><td>14.2</td></tr>
+<tr><td>Indiana</td><td>17.04</td><td>11.49 (2025)</td><td>$4.99</td><td>$2.27</td><td><b>$1.39</b></td><td>12.3</td></tr>
+<tr><td>Iowa</td><td>14.55</td><td>10.61 (2025)</td><td>$4.26</td><td>$1.94</td><td><b>$1.28</b></td><td>11.4</td></tr>
+<tr><td>Kansas</td><td>15.26</td><td>14.81 (2025)</td><td>$4.47</td><td>$2.03</td><td><b>$1.79</b></td><td>8.5</td></tr>
+<tr><td>Kentucky</td><td>14.20</td><td>14.23 (2025)</td><td>$4.16</td><td>$1.89</td><td><b>$1.72</b></td><td>8.3</td></tr>
+<tr><td>Louisiana</td><td>13.27</td><td>17.39 (2025)</td><td>$3.89</td><td><b>$1.77</b></td><td>$2.10</td><td>6.3</td></tr>
+<tr><td>Maine</td><td>30.23</td><td>18.95 (2024)</td><td>$8.86</td><td>$4.03</td><td><b>$2.29</b></td><td>13.2</td></tr>
+<tr><td>Maryland</td><td>21.31</td><td>16.14 (2024)</td><td>$6.25</td><td>$2.84</td><td><b>$1.95</b></td><td>10.9</td></tr>
+<tr><td>Massachusetts</td><td>30.19</td><td>25.06 (2025)</td><td>$8.85</td><td>$4.03</td><td><b>$3.02</b></td><td>10.0</td></tr>
+<tr><td>Michigan</td><td>21.73</td><td>10.92 (2025)</td><td>$6.37</td><td>$2.90</td><td><b>$1.32</b></td><td>16.5</td></tr>
+<tr><td>Minnesota</td><td>16.44</td><td>10.98 (2025)</td><td>$4.82</td><td>$2.19</td><td><b>$1.32</b></td><td>12.4</td></tr>
+<tr><td>Mississippi</td><td>15.06</td><td>16.65 (2025)</td><td>$4.41</td><td><b>$2.01</b></td><td>$2.01</td><td>7.5</td></tr>
+<tr><td>Missouri</td><td>14.28</td><td>14.94 (2025)</td><td>$4.19</td><td>$1.90</td><td><b>$1.80</b></td><td>7.9</td></tr>
+<tr><td>Montana</td><td>14.13</td><td>8.99 (2025)</td><td>$4.14</td><td>$1.88</td><td><b>$1.08</b></td><td>13.0</td></tr>
+<tr><td>Nebraska</td><td>12.92</td><td>11.40 (2025)</td><td>$3.79</td><td>$1.72</td><td><b>$1.38</b></td><td>9.4</td></tr>
+<tr><td>Nevada</td><td>13.36</td><td>13.14 (2025)</td><td>$3.92</td><td>$1.78</td><td><b>$1.59</b></td><td>8.4</td></tr>
+<tr><td>New Hampshire</td><td>26.91</td><td>18.61 (2025)</td><td>$7.89</td><td>$3.59</td><td><b>$2.25</b></td><td>12.0</td></tr>
+<tr><td>New Jersey</td><td>24.09</td><td>14.21 (2025)</td><td>$7.06</td><td>$3.21</td><td><b>$1.71</b></td><td>14.1</td></tr>
+<tr><td>New Mexico</td><td>15.34</td><td>9.83 (2025)</td><td>$4.50</td><td>$2.05</td><td><b>$1.19</b></td><td>12.9</td></tr>
+<tr><td>New York</td><td>29.26</td><td>17.58 (2025)</td><td>$8.58</td><td>$3.90</td><td><b>$2.12</b></td><td>13.8</td></tr>
+<tr><td>North Carolina</td><td>14.94</td><td>16.42 (2024)</td><td>$4.38</td><td>$1.99</td><td><b>$1.98</b></td><td>7.5</td></tr>
+<tr><td>North Dakota</td><td>12.46</td><td>9.50 (2025)</td><td>$3.65</td><td>$1.66</td><td><b>$1.15</b></td><td>10.9</td></tr>
+<tr><td>Ohio</td><td>18.81</td><td>13.85 (2025)</td><td>$5.51</td><td>$2.51</td><td><b>$1.67</b></td><td>11.3</td></tr>
+<tr><td>Oklahoma</td><td>13.81</td><td>14.38 (2025)</td><td>$4.05</td><td>$1.84</td><td><b>$1.74</b></td><td>8.0</td></tr>
+<tr><td>Oregon</td><td>15.46</td><td>16.71 (2025)</td><td>$4.53</td><td>$2.06</td><td><b>$2.02</b></td><td>7.7</td></tr>
+<tr><td>Pennsylvania</td><td>21.13</td><td>15.04 (2025)</td><td>$6.19</td><td>$2.82</td><td><b>$1.81</b></td><td>11.6</td></tr>
+<tr><td>Rhode Island</td><td>29.05</td><td>21.66 (2024)</td><td>$8.51</td><td>$3.87</td><td><b>$2.61</b></td><td>11.1</td></tr>
+<tr><td>South Carolina</td><td>15.90</td><td>16.91 (2024)</td><td>$4.66</td><td>$2.12</td><td><b>$2.04</b></td><td>7.8</td></tr>
+<tr><td>South Dakota</td><td>14.58</td><td>9.86 (2025)</td><td>$4.27</td><td>$1.94</td><td><b>$1.19</b></td><td>12.3</td></tr>
+<tr><td>Tennessee</td><td>13.80</td><td>11.84 (2025)</td><td>$4.04</td><td>$1.84</td><td><b>$1.43</b></td><td>9.7</td></tr>
+<tr><td>Texas</td><td>16.03</td><td>19.42 (2025)</td><td>$4.70</td><td><b>$2.14</b></td><td>$2.34</td><td>6.8</td></tr>
+<tr><td>Utah</td><td>13.19</td><td>10.19 (2025)</td><td>$3.87</td><td>$1.76</td><td><b>$1.23</b></td><td>10.7</td></tr>
+<tr><td>Vermont</td><td>23.93</td><td>18.00 (2025)</td><td>$7.01</td><td>$3.19</td><td><b>$2.17</b></td><td>11.0</td></tr>
+<tr><td>Virginia</td><td>16.95</td><td>16.79 (2025)</td><td>$4.97</td><td>$2.26</td><td><b>$2.03</b></td><td>8.4</td></tr>
+<tr><td>Washington</td><td>14.42</td><td>17.62 (2025)</td><td>$4.23</td><td><b>$1.92</b></td><td>$2.13</td><td>6.8</td></tr>
+<tr><td>West Virginia</td><td>15.58</td><td>13.80 (2025)</td><td>$4.57</td><td>$2.08</td><td><b>$1.67</b></td><td>9.4</td></tr>
+<tr><td>Wisconsin</td><td>19.05</td><td>10.74 (2025)</td><td>$5.58</td><td>$2.54</td><td><b>$1.30</b></td><td>14.7</td></tr>
+<tr><td>Wyoming</td><td>14.01</td><td>11.74 (2025)</td><td>$4.11</td><td>$1.87</td><td><b>$1.42</b></td><td>9.9</td></tr>
+<tr><td><b>U.S. total</b></td><td>18.19</td><td>15.34 (2025)</td><td>$5.33</td><td>$2.43</td><td><b>$1.85</b></td><td>9.8</td></tr>
+</table>
+<p>At these averages a heat pump at HSPF2 7.5 costs less per therm than an 80% furnace in 9 of 51 jurisdictions (Arizona, Arkansas, Florida, Georgia, Hawaii, Louisiana, Mississippi, Texas, Washington). In every state it costs less than a space heater, by the factor COP = 2.2. Equipment, installation and maintenance costs are not included.</p>
+
+<h2>What this page does not include</h2>
+<ul>
+<li>Purchase and installation costs, tax credits or rebates (they change; check the program's official page).</li>
+<li>Furnace blower and heat pump fan electricity beyond what the ratings include, duct losses and fixed monthly charges.</li>
+<li>Cooling: a heat pump also replaces an air conditioner, which can change the decision.</li>
+</ul>
+
+<h2>Sources</h2>
+<ul>
+<li>10 CFR 430.32(c)(5) (HSPF2 minimums) and 430.32(e)(1) (furnace AFUE): <a href="https://www.ecfr.gov/current/title-10/chapter-II/subchapter-D/part-430/subpart-C/section-430.32">eCFR</a>, read via Cornell LII 2026-11-07.</li>
+<li>10 CFR part 430, subpart B, appendix M section 1.2 (HSPF definition, Btu per watt-hour) and appendix M1 section 5.1 (HSPF2 rated on Region IV hours): <a href="https://www.law.cornell.edu/cfr/text/10/appendix-M1_to_subpart_B_of_part_430">Cornell LII</a>, read 2026-11-07.</li>
+<li>EIA, Electric Power Monthly, Table 5.6.B (residential, year-to-date August 2026), release 2026-10-23, read 2026-10-31. Full table: <a href="../electricity-price-per-kwh/">price per kWh by state</a>.</li>
+<li>EIA, Natural Gas Prices, average residential price by state, annual 2025, release 2026-10-30: <a href="https://www.eia.gov/dnav/ng/ng_pri_sum_a_EPG0_PRS_DMcf_a.htm">eia.gov</a>, read 2026-10-31.</li>
+<li>EIA Energy Explained, British thermal units (1 kWh = 3,412 Btu; 1 cf of natural gas ≈ 1,036 Btu; 1 therm = 100,000 Btu): <a href="https://www.eia.gov/energyexplained/units-and-calculators/british-thermal-units.php">eia.gov</a>, read 2026-10-31.</li>
+</ul>
+<p>Track what heating adds to your bills with the free <a href="../">utility bill tracker</a> (home page). Space heater cost per hour: <a href="../appliance-running-cost/">appliance running cost</a>. Calculator logic: <a href="../scripts/heat_pump.js">heat_pump.js</a> (MIT). Italian version (SCOP from the EU label): <a href="../it/condizionatore-pompa-di-calore-costo-riscaldamento/" hreflang="it">condizionatore in pompa di calore</a>.</p>
+</main>
+<footer class="wrap">© 2026 Lumen &amp; Ledger · Texts CC BY 4.0 · <a href="../">Tools</a> · <a href="../about/">About</a> · <a href="../privacy/">Privacy</a> · Contact: lumenledger.tools@proton.me</footer>
+<script src="../scripts/heat_pump.js"></script>
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)};
+  function num(i){return parseFloat($(i).value)||0}
+  function usd(x){return '$'+(x<1000?x.toFixed(2):Math.round(x).toLocaleString('en-US'))}
+  function calc(){
+    var perTherm=num('gp')*parseFloat($('gu').value)/10.36;
+    var x=HeatPump.run({rate:num('r'),hspf2:num('hs')||7.5,afue:num('af')||80,gasPerTherm:perTherm,thermsUsed:num('th')});
+    var s='1 therm of heat: space heater <b>'+usd(x.resist)+'</b> · heat pump (COP '+x.cop.toFixed(2)+') <b>'+usd(x.hp)+'</b> · gas furnace <b>'+usd(x.gas)+'</b>';
+    if(x.gas>0)s+='<br>The heat pump matches the furnace at HSPF2 <b>'+x.breakevenHspf.toFixed(1)+'</b>, or at a gas price of <b>'+usd(x.breakevenGas)+'</b> per therm bought ('+usd(x.breakevenGas*10.36)+'/Mcf).';
+    if(x.heat)s+='<br>Last winter\'s heat ('+Math.round(x.heat)+' therms delivered): furnace <b>'+usd(x.yearGas)+'</b> · heat pump <b>'+usd(x.yearHp)+'</b> ('+Math.round(x.kwhHp).toLocaleString('en-US')+' kWh) · space heaters <b>'+usd(x.yearResist)+'</b>';
+    $('out').innerHTML=s;
+  }
+  $('st').addEventListener('change',function(){if(this.value){var v=this.value.split('|');$('r').value=v[0];$('gp').value=v[1];$('gu').value='1'}calc()});
+  ['r','gp'].forEach(function(i){$(i).addEventListener('input',function(){$('st').value='';calc()})});
+  ['hs','af','th'].forEach(function(i){$(i).addEventListener('input',calc)});
+  $('gu').addEventListener('change',function(){$('st').value='';calc()});
+  document.querySelectorAll('.presets button').forEach(function(b){b.addEventListener('click',function(){$('hs').value=b.dataset.h;calc()})});
+  var q=new URLSearchParams(location.search),qr=parseFloat(q.get('rate'));
+  if(qr>=0.01&&qr<=2){$('r').value=qr;$('st').value=''}
+  calc();
+})();
+</script>
+</body>
+</html>
