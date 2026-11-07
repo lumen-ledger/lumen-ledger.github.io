@@ -43,7 +43,7 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
 </head>
 <body>
 <header><div class="wrap">
-  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="#calcolatore">Calcolatore</a> · <a href="#tabella">Tabella</a> · <a href="#contatore">Contatore da 3 kW</a> · <a href="#vs-caldaia">Stufetta o caldaia</a></nav>
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="#calcolatore">Calcolatore</a> · <a href="#tabella">Tabella</a> · <a href="#altri-apparecchi">Termocoperta e altri</a> · <a href="#contatore">Contatore da 3 kW</a> · <a href="#vs-caldaia">Stufetta o caldaia</a></nav>
   <h1>Quanto consuma una stufetta elettrica (e quanto costa)?</h1>
   <p>Costo = watt ÷ 1.000 × ore × prezzo per kWh. Al prezzo di riferimento ARERA dal 1° ottobre 2026 (43,43 centesimi/kWh) una stufetta da 2.000 W al massimo costa <b>0,87 &euro; l'ora</b>.</p>
 </div></header>
@@ -53,7 +53,7 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
 <h2 id="calcolatore">Calcolatore</h2>
 <div class="box">
   <div class="presets">Esempi di potenza di targa (usa quella scritta sul tuo apparecchio):
-    <button type="button" data-w="2000">Stufetta 2.000 W</button><button type="button" data-w="1000">Stufetta al minimo 1.000 W</button><button type="button" data-w="1500">1.500 W</button><button type="button" data-w="800">800 W</button><button type="button" data-w="2500">2.500 W</button>
+    <button type="button" data-w="2000">Stufetta 2.000 W</button><button type="button" data-w="1000">Stufetta al minimo 1.000 W</button><button type="button" data-w="1500">1.500 W</button><button type="button" data-w="800">800 W</button><button type="button" data-w="2500">2.500 W</button><button type="button" data-w="100">Termocoperta 100 W</button><button type="button" data-w="250">Deumidificatore 250 W</button>
   </div>
   <div class="grid">
     <label>Potenza (watt)<input id="w" type="number" min="0" step="1" value="2000"></label>
@@ -88,6 +88,20 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
 <tr><td>2.500 W</td><td>1,09 &euro;</td><td>130,29 &euro; (300 kWh)</td><td>260,58 &euro; (600 kWh)</td></tr>
 </table>
 <p>Con il termostato che tiene la resistenza accesa meta' del tempo (quota 50%), i valori mensili si dimezzano: 2.000 W per 8 ore diventano 104,23 &euro;.</p>
+
+<h2 id="altri-apparecchi">Termocoperta, deumidificatore e altri apparecchi invernali</h2>
+<p>La formula e' la stessa per qualunque apparecchio elettrico: watt &times; ore &divide; 1.000 &times; prezzo per kWh. Le potenze qui sotto sono solo esempi: leggi quella sulla targhetta o nel libretto del tuo apparecchio e mettila nel <a href="#calcolatore">calcolatore</a>. Anche le ore di uso sono ipotesi, da cambiare con le tue.</p>
+<table>
+<tr><th>Esempio</th><th>Potenza di targa</th><th>Ore al giorno (ipotesi)</th><th>All'ora</th><th>30 giorni</th></tr>
+<tr><td>Scaldasonno, solo per scaldare il letto</td><td>60 W</td><td>1</td><td>0,03 &euro;</td><td>0,78 &euro; (1,8 kWh)</td></tr>
+<tr><td>Termocoperta tutta la notte</td><td>100 W</td><td>8</td><td>0,04 &euro;</td><td>10,42 &euro; (24 kWh)</td></tr>
+<tr><td>Deumidificatore</td><td>250 W</td><td>8</td><td>0,11 &euro;</td><td>26,06 &euro; (60 kWh)</td></tr>
+<tr><td>Deumidificatore</td><td>500 W</td><td>8</td><td>0,22 &euro;</td><td>52,12 &euro; (120 kWh)</td></tr>
+<tr><td>Scaldasalviette elettrico</td><td>500 W</td><td>2</td><td>0,22 &euro;</td><td>13,03 &euro; (30 kWh)</td></tr>
+<tr><td>Asciugacapelli</td><td>2.000 W</td><td>10 minuti</td><td>0,87 &euro;</td><td>4,34 &euro; (10 kWh)</td></tr>
+</table>
+<p>Prezzo 43,43 c&euro;/kWh (ARERA, IV trimestre 2026), apparecchio sempre alla potenza di targa. Termocoperte con regolatore e deumidificatori con igrostato restano spesso a potenza piu' bassa o si spengono da soli: il valore in tabella e' il caso peggiore per quelle ore. Una presa con misuratore di consumo da' il dato reale.</p>
+<p>Per lavatrice, lavastoviglie e asciugatrice il consumo per ciclo si legge sull'etichetta energetica UE: vedi <a href="../costo-lavaggio-etichetta-energetica/">costo di un lavaggio</a>.</p>
 
 <h2 id="contatore">Il contatore da 3 kW: quando "salta"</h2>
 <p>Secondo ARERA, per la maggior parte delle abitazioni la potenza impegnata e' di 3 kW e, per le forniture fino a 30 kW, la potenza disponibile e' la potenza impegnata aumentata almeno del 10%: con 3 kW, almeno 3,3 kW. Oltre la potenza disponibile il contatore interrompe la fornitura.</p>
