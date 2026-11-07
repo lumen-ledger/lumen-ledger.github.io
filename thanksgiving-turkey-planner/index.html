@@ -41,12 +41,24 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
 </head>
 <body>
 <header><div class="wrap">
-  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="#planner">Planner</a> · <a href="#tables">Tables</a> · <a href="#sources">Sources</a></nav>
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="#size">How big?</a> · <a href="#planner">Planner</a> · <a href="#tables">Tables</a> · <a href="#sources">Sources</a></nav>
   <h1>Turkey planner: when to start thawing, when it goes in the oven</h1>
   <p>Weight + dinner time → thaw start, oven time at 325 °F, first thermometer check. Example: a 16 lb turkey for a 3:00 pm dinner on Thursday, November 26, 2026 goes in the fridge to thaw by <b>Saturday, November 21</b> and in the oven by <b>10:25 AM</b>.</p>
 </div></header>
 <main class="wrap">
 <p class="note">General information, not food-safety advice for your situation. Times are approximate: the turkey is done only when a food thermometer reads <b>165 °F</b> in the thickest part of the breast, the innermost part of the thigh and the wing. Tables from University of Georgia Extension Circular 1226 (reviewed 2026-09-15), which is based on USDA FSIS guidance, read 2026-10-31. The USDA and FoodSafety.gov pages refused automated reading that day, so check them before cooking: <a href="https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/poultry/lets-talk-turkey-roasting">USDA FSIS “Let's Talk Turkey”</a>.</p>
+
+<h2 id="size">How big a turkey for your guests?</h2>
+<div class="box">
+  <div class="grid">
+    <label>Guests<input id="g" type="number" min="1" max="60" step="1" value="10"></label>
+    <label>Appetite<select id="ap"><option value="1">Average, few leftovers (1 lb each)</option><option value="1.5">Hearty eaters or leftovers wanted (1½ lb each)</option></select></label>
+    <label>Buying<select id="sc"><option value="whole">Whole turkey</option><option value="breast">Bone-in turkey breast (½ lb each)</option></select></label>
+  </div>
+  <div class="out" id="sz" aria-live="polite"></div>
+  <p><button type="button" id="usz">Use this weight in the planner</button></p>
+</div>
+<p>Rule of thumb from University of Illinois Extension: about 1 lb of whole turkey (raw weight, bone in) per person, 1½ lb for hearty eaters or plenty of leftovers, ½ lb per person for a bone-in breast. If you serve another meat as well, the lower amount is usually enough. Above 24 lb the tables below stop, so the tool suggests two smaller turkeys, which also roast faster.</p>
 
 <h2 id="planner">Planner</h2>
 <div class="box">
@@ -90,6 +102,7 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
 <ul>
 <li>University of Georgia Extension, Circular 1226 “Food Safety Tips for Preparing a Holiday Turkey” (published with full review 2026-09-15). It cites USDA FSIS, “Your Safe Thanksgiving Guide” (2025). Source of the roasting, thawing, temperature, resting and leftover figures: <a href="https://fieldreport.caes.uga.edu/publications/C1226/food-safety-tips-for-preparing-a-holiday-turkey/">fieldreport.caes.uga.edu</a>, read 2026-10-31.</li>
 <li>University of Nebraska–Lincoln Extension, “How to Thaw a Turkey” (reviewed 2026). It has the same thawing table and the “at least 50 percent longer” rule for cooking from frozen: <a href="https://food.unl.edu/how-thaw-turkey">food.unl.edu</a>, read 2026-10-31.</li>
+<li>University of Illinois Extension, “Choosing Your Turkey”: per-person amounts (1 lb whole, 1½ lb for hearty eaters or leftovers, ½ lb bone-in breast): <a href="https://extension.illinois.edu/turkey/choosing-your-turkey">extension.illinois.edu</a>, read 2026-11-07 (page undated).</li>
 <li>USDA FSIS, “Let's Talk Turkey—A Consumer Guide to Safely Roasting a Turkey”: <a href="https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/poultry/lets-talk-turkey-roasting">fsis.usda.gov</a> (could not be read automatically on 2026-10-31). For questions, the USDA runs the Meat and Poultry Hotline.</li>
 </ul>
 <p>Planner logic: <a href="../scripts/turkey_plan.js">turkey_plan.js</a> (MIT). More free tools on the <a href="../">home page</a>.</p>
@@ -128,6 +141,20 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
   }
   ['lb','cut','dd','dt','th'].forEach(function(i){$(i).addEventListener('input',calc);$(i).addEventListener('change',calc)});
   $('ics').addEventListener('click',ics);
+  var szw=0,szc='whole';
+  function size(){
+    var g=Math.max(1,Math.round(parseFloat($('g').value)||1)),c=$('sc').value,per=c==='breast'?0.5:parseFloat($('ap').value);
+    $('ap').disabled=c==='breast';
+    var w=Math.ceil(g*per*2)/2,max=c==='breast'?8:24,min=c==='breast'?4:8,n=Math.ceil(w/max),each=Math.ceil(w/n*2)/2,h;
+    szc=c;
+    if(n>1){szw=each;h='About <b>'+w+' lb</b> in total for '+g+' guests. That is more than the largest row in the tables ('+max+' lb): buy <b>'+n+' '+(c==='breast'?'breasts':'turkeys')+' of about '+each+' lb</b>.'}
+    else if(w<min){szw=min;h='About <b>'+w+' lb</b> for '+g+' guest'+(g>1?'s':'')+'. The smallest '+(c==='breast'?'breast':'whole turkey')+' row in the tables is '+min+' lb'+(c==='whole'?': a bone-in breast may fit better.':'.')}
+    else{szw=w;h='Buy about <b>'+w+' lb</b> of '+(c==='breast'?'bone-in breast':'whole turkey')+' for '+g+' guest'+(g>1?'s':'')+'.'}
+    $('sz').innerHTML=h;
+  }
+  ['g','ap','sc'].forEach(function(i){$(i).addEventListener('input',size);$(i).addEventListener('change',size)});
+  $('usz').addEventListener('click',function(){$('lb').value=szw;$('cut').value=szc;calc();$('planner').scrollIntoView()});
+  size();
   var q=new URLSearchParams(location.search),ql=parseFloat(q.get('lb'));if(ql>=4&&ql<=24)$('lb').value=ql;
   calc();
 })();
