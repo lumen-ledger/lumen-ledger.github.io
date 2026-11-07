@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quanto costa un lavaggio? Lavatrice, lavastoviglie e asciugatrice: costo per ciclo dall'etichetta energetica</title>
+<meta name="description" content="Il costo per ciclo si legge dall'etichetta energetica UE: kWh per 100 cicli ÷ 100 × prezzo per kWh. Con 52 kWh/100 cicli e il prezzo ARERA di 43,43 cent/kWh un lavaggio eco costa 0,23 euro di elettricita'. Calcolatore per lavatrice, lavastoviglie e asciugatrice, acqua inclusa, e confronto tra due modelli.">
+<link rel="canonical" href="https://lumen-ledger.github.io/it/costo-lavaggio-etichetta-energetica/">
+<style>
+:root{--navy:#0F2A3D;--sun:#F2B33D;--paper:#F7F5EF;--line:#d9d4c7;--warn:#C2452D}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--navy)}
+header{background:var(--navy);color:#fff;padding:32px 20px}
+.wrap{max-width:760px;margin:0 auto}
+header h1{margin:0;font-size:1.7rem}
+header p{margin:8px 0 0;color:#d6dde2}
+nav{font-size:.9rem;margin-bottom:10px}nav a{color:var(--sun)}
+main{padding:24px 20px}
+h2{font-size:1.15rem;margin:28px 0 6px}
+ul,ol{padding-left:20px}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:10px 0}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#ece8dc}
+.note{border-left:4px solid var(--warn);background:#fff;padding:10px 14px;font-size:.93rem}
+.box{border:1px solid var(--line);background:#fff;padding:14px 16px}
+.box label{display:block;font-size:.9rem;margin-top:8px}
+.box input,.box select{width:100%;max-width:260px;padding:6px;font:inherit}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.out{font-size:1.05rem;margin-top:12px}
+footer{padding:20px;font-size:.82rem;color:#5b6770}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="#calcolatore">Calcolatore</a> · <a href="#etichetta">Dove leggere i numeri</a> · <a href="#tabella">Tabella</a> · <a href="#confronto">Confronta due modelli</a></nav>
+  <h1>Quanto costa un lavaggio? Il costo per ciclo dall'etichetta energetica</h1>
+  <p>Costo per ciclo = kWh per 100 cicli ÷ 100 × prezzo per kWh. Con <b>52 kWh/100 cicli</b> (valore d'esempio) e il prezzo di riferimento ARERA di 43,43 c&euro;/kWh, un ciclo eco costa <b>0,23 &euro;</b> di elettricita'.</p>
+</div></header>
+<main class="wrap">
+<p class="note">Informazione generale, non consulenza. Prezzo predefinito: ARERA, prezzo di riferimento per il cliente tipo vulnerabile in Maggior Tutela, IV trimestre 2026, 43,43 c&euro;/kWh tasse incluse (comunicato del 29 settembre 2026, letto il 2026-11-01): sul mercato libero il tuo prezzo puo' essere diverso; con la bolletta in mano usa spesa totale ÷ kWh fatturati. Il valore in etichetta riguarda solo il <b>programma eco</b> nelle condizioni di prova del regolamento: altri programmi (piu' caldi, piu' lunghi, a carico pieno o parziale diverso) consumano in modo diverso e questa pagina non lo stima.</p>
+
+<h2 id="calcolatore">Calcolatore</h2>
+<div class="box">
+  <div class="grid">
+    <label>Elettrodomestico<select id="t">
+      <option value="lav">Lavatrice (programma eco 40-60)</option>
+      <option value="lvs">Lavastoviglie (programma eco)</option>
+      <option value="asc">Asciugatrice (programma eco cotone)</option>
+    </select></label>
+    <label>kWh per 100 cicli (dall'etichetta)<input id="k" type="number" min="0" step="1" value="52"></label>
+    <label>Prezzo per kWh (&euro;)<input id="r" type="number" min="0" step="0.001" value="0.4343"></label>
+    <label>Cicli a settimana<input id="c" type="number" min="0" max="50" step="0.5" value="4"></label>
+    <label id="lw">Litri per ciclo (dall'etichetta, facoltativo)<input id="l" type="number" min="0" step="0.1" placeholder="es. 48"></label>
+    <label id="pw">Prezzo acqua (&euro;/m³, facoltativo)<input id="a" type="number" min="0" step="0.01" placeholder="spesa bolletta acqua &divide; m&sup3;"></label>
+  </div>
+  <div class="out" id="out" aria-live="polite"></div>
+</div>
+
+<h2>Come si fa il conto</h2>
+<ol>
+<li>Sull'etichetta trovi il consumo di energia per <b>100 cicli</b> in kWh, arrotondato all'intero. Dividilo per 100: 52 kWh/100 cicli = 0,52 kWh per ciclo.</li>
+<li>Moltiplica per il prezzo per kWh: 0,52 × 0,4343 = <b>0,226 &euro;</b> per ciclo.</li>
+<li>Per l'anno moltiplica per i cicli: 4 a settimana × 52 settimane = 208 cicli, 108,16 kWh, <b>46,97 &euro;</b> (3,91 &euro; al mese).</li>
+<li>Acqua (lavatrice e lavastoviglie): litri per ciclo ÷ 1.000 × prezzo per m³. Il prezzo dell'acqua varia molto da comune a comune: ricavalo dalla tua bolletta (spesa totale ÷ m³ fatturati, quote fisse comprese).</li>
+</ol>
+<p>Siccome l'etichetta arrotonda all'intero, il costo per ciclo ha un'incertezza di ±0,005 kWh, cioe' circa ±0,2 centesimi al prezzo predefinito.</p>
+
+<h2 id="etichetta">Dove leggere i numeri sull'etichetta</h2>
+<table>
+<tr><th>Elettrodomestico</th><th>Energia</th><th>Altri dati in etichetta</th><th>Regolamento</th></tr>
+<tr><td>Lavatrice</td><td>consumo ponderato di energia per 100 cicli, kWh (programma eco 40-60)</td><td>capacita' nominale in kg; consumo ponderato di acqua per ciclo in litri; durata del programma eco 40-60 (h:min)</td><td>(UE) 2019/2014, si applica dal 1° marzo 2021</td></tr>
+<tr><td>Lavastoviglie</td><td>consumo di energia del programma eco per 100 cicli, kWh</td><td>coperti standard; acqua per ciclo in litri (un decimale); durata del programma eco (hh:mm)</td><td>(UE) 2019/2017, si applica dal 1° marzo 2021</td></tr>
+<tr><td>Asciugatrice</td><td>consumo medio ponderato di energia per 100 cicli di asciugatura, kWh</td><td>capacita' nominale del programma eco a pieno carico in kg; durata del programma eco a pieno carico (h:min); classe di rumore; per i modelli a condensazione, classe di efficienza di condensazione</td><td>(UE) 2023/2534, si applica dal 1° luglio 2025</td></tr>
+</table>
+<p>Ogni etichetta ha un codice QR che porta alla scheda del modello nella banca dati europea dei prodotti (EPREL): se l'etichetta non c'e' piu', i dati si ritrovano li' cercando la sigla del modello. Le etichette vecchie (prima del 2021 per lavatrici e lavastoviglie, prima di luglio 2025 per le asciugatrici) indicavano un consumo <i>annuo</i> calcolato su un numero di cicli convenzionale e non sono confrontabili direttamente con le nuove.</p>
+
+<h2 id="tabella">Tabella: costo per ciclo e all'anno</h2>
+<p>Al prezzo di 43,43 c&euro;/kWh, con 4 cicli a settimana (208 l'anno). Solo elettricita'.</p>
+<table>
+<tr><th>kWh/100 cicli in etichetta</th><th>Costo per ciclo</th><th>Costo all'anno</th></tr>
+<tr><td>25</td><td>0,11 &euro;</td><td>22,58 &euro;</td></tr>
+<tr><td>50</td><td>0,22 &euro;</td><td>45,17 &euro;</td></tr>
+<tr><td>75</td><td>0,33 &euro;</td><td>67,75 &euro;</td></tr>
+<tr><td>100</td><td>0,43 &euro;</td><td>90,33 &euro;</td></tr>
+<tr><td>150</td><td>0,65 &euro;</td><td>135,50 &euro;</td></tr>
+<tr><td>200</td><td>0,87 &euro;</td><td>180,67 &euro;</td></tr>
+<tr><td>250</td><td>1,09 &euro;</td><td>225,84 &euro;</td></tr>
+</table>
+<p>Con un altro numero di cicli: costo all'anno × (tuoi cicli a settimana ÷ 4).</p>
+
+<h2 id="confronto">Confronta due modelli</h2>
+<p>Utile quando scegli tra due modelli o valuti se sostituire quello vecchio: la differenza dipende solo dai kWh/100 cicli, dal prezzo e da quanto lo usi.</p>
+<div class="box">
+  <div class="grid">
+    <label>Modello A, kWh/100 cicli<input id="ka" type="number" min="0" step="1" value="90"></label>
+    <label>Modello B, kWh/100 cicli<input id="kb" type="number" min="0" step="1" value="52"></label>
+    <label>Differenza di prezzo d'acquisto (&euro;, facoltativo)<input id="dp" type="number" min="0" step="1" placeholder="es. 150"></label>
+  </div>
+  <div class="out" id="cout" aria-live="polite"></div>
+</div>
+<p>Esempio: 90 contro 52 kWh/100 cicli, 4 cicli a settimana, 43,43 c&euro;/kWh: 79,04 kWh e <b>34,33 &euro;</b> all'anno di differenza. Il conto usa prezzo e abitudini di oggi: se cambiano, cambia il risultato.</p>
+
+<h2>Fonti</h2>
+<ul>
+<li>Regolamento delegato (UE) 2019/2014 (etichettatura energetica delle lavatrici per uso domestico), allegato III punto 1.2 voci VI-IX e art. 11: <a href="https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32019R2014">EUR-Lex</a>, letto il 2026-11-07.</li>
+<li>Regolamento delegato (UE) 2019/2017 (etichettatura energetica delle lavastoviglie per uso domestico), allegato III voci VI-IX e art. 11: <a href="https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32019R2017">EUR-Lex</a>, letto il 2026-11-07.</li>
+<li>Regolamento delegato (UE) 2023/2534 (etichettatura energetica delle asciugatrici per uso domestico), allegato III punto 1.1 voci VI, IX, X, allegato II e art. 10: <a href="https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32023R2534">EUR-Lex</a>, letto il 2026-11-07.</li>
+<li>ARERA, comunicato stampa del 29 settembre 2026 sul prezzo di riferimento per i clienti vulnerabili, IV trimestre 2026 (43,43 c&euro;/kWh tasse incluse): <a href="https://www.arera.it/comunicati-stampa/dettaglio/elettricita-maggior-tutela-373-nel-iv-trimestre-2026-per-i-clienti-vulnerabili">arera.it</a>, letto il 2026-11-01.</li>
+</ul>
+<p>Per gli elettrodomestici senza etichetta per ciclo (stufette, phon, forno): <a href="../quanto-consuma-stufetta-elettrica/">calcolatore watt × ore</a>. Per seguire il costo reale per kWh bolletta dopo bolletta: <a href="../../download/tracker-bollette-luce-gas.xlsx" download>tracker bollette luce e gas</a> (Excel gratuito). Logica del calcolatore: <a href="../../scripts/costo_ciclo.js">costo_ciclo.js</a> (MIT).</p>
+</main>
+<footer class="wrap">© 2026 Lumen &amp; Ledger · Testi CC BY 4.0 · <a href="../">Strumenti</a> · <a href="../chi-siamo/">Chi siamo</a> · <a href="../privacy/">Privacy</a> · Contatti: lumenledger.tools@proton.me</footer>
+<script src="../../scripts/costo_ciclo.js"></script>
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)};
+  function eur(x,dec){return x.toLocaleString('it-IT',{minimumFractionDigits:dec,maximumFractionDigits:dec})}
+  function num(i){return parseFloat(String($(i).value).replace(',','.'))||0}
+  function calc(){
+    var dry=$('t').value==='asc';
+    $('lw').style.display=$('pw').style.display=dry?'none':'';
+    var r=CostoCiclo.run({kwh100:num('k'),rate:num('r'),perWeek:num('c'),litres:dry?0:num('l'),water:dry?0:num('a')});
+    var t='Per ciclo: <b>'+eur(r.cycle,3)+' &euro;</b> ('+eur(r.kwhCycle,2)+' kWh'+(r.waterCycle>0?'; acqua '+eur(r.waterCycle,3)+' &euro;':'')+')<br>All\'anno ('+eur(r.cyclesYear,0)+' cicli): <b>'+eur(r.year,2)+' &euro;</b> ('+eur(r.kwhYear,1)+' kWh) · Al mese: '+eur(r.month,2)+' &euro;';
+    $('out').innerHTML=t;cmp();
+  }
+  function cmp(){
+    var c=CostoCiclo.compare(num('ka'),num('kb'),num('r'),num('c')),d=c.diffYear,dp=num('dp');
+    var t='Modello A: '+eur(c.a.energyYear,2)+' &euro;/anno · Modello B: '+eur(c.b.energyYear,2)+' &euro;/anno<br>Differenza: <b>'+eur(Math.abs(d),2)+' &euro; all\'anno</b> ('+eur(Math.abs(c.diffKwhYear),1)+' kWh) a favore del modello '+(d>=0?'B':'A');
+    if(dp>0&&Math.abs(d)>0)t+='<br>La differenza di prezzo di '+eur(dp,0)+' &euro; si recupera in <b>'+eur(dp/Math.abs(d),1)+' anni</b> di solo risparmio di elettricita\' (stesse abitudini e stesso prezzo).';
+    $('cout').innerHTML=t;
+  }
+  ['k','r','c','l','a','t'].forEach(function(i){$(i).addEventListener('input',calc)});
+  ['ka','kb','dp'].forEach(function(i){$(i).addEventListener('input',cmp)});
+  var q=new URLSearchParams(location.search),qr=parseFloat(q.get('prezzo'));
+  if(qr>=0.01&&qr<=2)$('r').value=qr;
+  calc();
+})();
+</script>
+</body>
+</html>
