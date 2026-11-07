@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Do gift cards expire? US 5-year rule and inactivity fee date calculator</title>
+<meta name="description" content="Enter when a US gift card was bought or last reloaded and get the earliest date its money may expire under federal law (5 years) and the first date an inactivity fee is allowed (after 12 months with no use). Source: 12 CFR 1005.20 (Regulation E), read 2026-11-07.">
+<link rel="canonical" href="https://lumen-ledger.github.io/gift-card-expiration-rules/">
+<style>
+:root{--navy:#0F2A3D;--sun:#F2B33D;--paper:#F7F5EF;--line:#d9d4c7;--warn:#C2452D}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--navy)}
+header{background:var(--navy);color:#fff;padding:32px 20px}
+.wrap{max-width:760px;margin:0 auto}
+header h1{margin:0;font-size:1.7rem}
+header p{margin:8px 0 0;color:#d6dde2}
+nav{font-size:.9rem;margin-bottom:10px}nav a{color:var(--sun)}
+main{padding:24px 20px}
+h2{font-size:1.15rem;margin:28px 0 6px}
+ul,ol{padding-left:20px}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:10px 0}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#ece8dc}
+.note{border-left:4px solid var(--warn);background:#fff;padding:10px 14px;font-size:.93rem}
+.box{border:1px solid var(--line);background:#fff;padding:14px 16px}
+.box label{display:block;font-size:.9rem;margin-top:8px}
+.box input,.box select{width:100%;max-width:300px;padding:6px;font:inherit}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.out{font-size:1.02rem;margin-top:12px}
+.late{color:#C2452D}
+footer{padding:20px;font-size:.82rem;color:#5b6770}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="#calculator">Calculator</a> · <a href="#rules">The rules</a> · <a href="#not-covered">Cards not covered</a> · <a href="#examples">Examples</a> · <a href="#sources">Sources</a></nav>
+  <h1>Do gift cards expire? The US federal 5-year rule</h1>
+  <p>Under federal law, the money on a covered US gift card cannot expire sooner than <b>5 years</b> after the card was sold or last reloaded. An inactivity or service fee is allowed only after <b>12 months with no use</b>, only if the card discloses it, and at most once per calendar month. A card bought on 20 December 2026: its funds are protected at least until <b>20 December 2031</b>.</p>
+</div></header>
+<main class="wrap">
+<p class="note">General information, not legal advice. Federal minimum rules for consumer gift cards sold in the United States (Regulation E, 12 CFR 1005.20), read on 2026-11-07 (see <a href="#sources">Sources</a>). Many states give more protection (for example no expiration at all): federal law does not override a state law that protects consumers more. This page does not list state rules.</p>
+
+<h2 id="calculator">Gift card date calculator</h2>
+<div class="box">
+  <div class="grid">
+    <label>Type of card
+      <select id="type">
+        <option value="store">Store or restaurant gift card (one merchant or chain)</option>
+        <option value="gpr">Visa, Mastercard, Amex or mall gift card (many stores)</option>
+        <option value="cert">Gift certificate, fixed amount, cannot be reloaded</option>
+        <option value="excluded">Promotional, loyalty, reward or "bonus" card</option>
+      </select></label>
+    <label>Date it was bought or issued<input id="issued" type="date" value="2026-12-20"></label>
+    <label id="loadedL">Date money was last added (optional)<input id="loaded" type="date"></label>
+    <label>Date it was last used to pay (optional)<input id="activity" type="date"></label>
+    <label>Expiration date printed on the card (optional)<input id="printed" type="date"></label>
+  </div>
+  <div class="out" id="out" aria-live="polite"></div>
+</div>
+<p style="font-size:.9rem">Dates are calculated in your browser: nothing is sent anywhere. A card bought on 29 February is counted to 28 February (the cautious date).</p>
+
+<h2 id="rules">The federal rules in plain English</h2>
+<table>
+<tr><th>Question</th><th>Federal rule</th><th>Source</th></tr>
+<tr><td>Which cards</td><td>Gift certificates, store gift cards and general-use prepaid gift cards (network-branded cards usable at many unaffiliated merchants), sold or issued to consumers primarily for personal, family or household purposes.</td><td>12 CFR 1005.20(a)(1)-(3)</td></tr>
+<tr><td>When can the money expire?</td><td>Not before the <b>later</b> of: 5 years after the date the certificate was issued or the card was last loaded with funds; or the expiration date of the card, if any.</td><td>1005.20(e)(2)</td></tr>
+<tr><td>The plastic expires before the money</td><td>Allowed, but no fee may be charged to replace the card or to give you the remaining balance in another way before the funds expire, unless the card was lost or stolen.</td><td>1005.20(e)(4)</td></tr>
+<tr><td>What the card must say</td><td>The expiration date of the funds (or that they do not expire), a toll-free number (and website, if any) for a replacement card, and, next to the card expiration date, a statement that the card expires but the funds do not or expire later, and that you can contact the issuer for a replacement (not required on a non-reloadable card whose expiration date is at least 7 years from manufacture).</td><td>1005.20(e)(3)</td></tr>
+<tr><td>Inactivity, dormancy or service fees</td><td>Only if there was <b>no activity</b> in the one-year period ending on the day the fee is charged; the amount, how often and the fact it is charged for inactivity are stated clearly on the card; and <b>no more than one</b> such fee per calendar month.</td><td>1005.20(d)(1)-(3)</td></tr>
+<tr><td>What counts as activity</td><td>Any action that increases or decreases the money on the card (a purchase, a reload). The fee itself, error corrections and reversals do not count.</td><td>1005.20(a)(7)</td></tr>
+<tr><td>Other fees</td><td>Every fee must be disclosed: type, amount (or how it is calculated) and when it applies, plus a toll-free number for fee information.</td><td>1005.20(f)</td></tr>
+<tr><td>State laws</td><td>A state law is not inconsistent with the federal law if it gives the consumer greater protection.</td><td>15 U.S.C. 1693q</td></tr>
+</table>
+<p><b>Practical habit:</b> using even part of the balance is activity, so it restarts the 12-month fee clock. It does not restart the 5-year expiration clock, which for reloadable cards runs from the last time money was <b>added</b>.</p>
+
+<h2 id="not-covered">Cards the federal rules do not cover</h2>
+<p>Regulation 1005.20(b) excludes cards or certificates that are:</p>
+<ul>
+<li>usable only for telephone services;</li>
+<li>reloadable and not marketed or labeled as a gift card or gift certificate;</li>
+<li>loyalty, award or promotional gift cards (for example "free $10 card with a $50 purchase" or rewards points): they must say on the front that they are promotional and when the funds expire, and disclose any fees, but the 5-year minimum does not apply;</li>
+<li>not marketed to the general public;</li>
+<li>issued in paper form only;</li>
+<li>redeemable only for admission to events or venues at a particular location or group of affiliated locations (and related goods or services).</li>
+</ul>
+<p>For these, read the card's terms and your state's rules.</p>
+
+<h2 id="examples">Examples</h2>
+<table>
+<tr><th>Card</th><th>Money cannot expire before</th><th>First possible inactivity fee</th></tr>
+<tr><td>Store gift card bought 20 Dec 2026, last used 15 Jan 2027, never reloaded</td><td>20 Dec 2031</td><td>16 Jan 2028, only if disclosed on the card</td></tr>
+<tr><td>Visa gift card bought 20 Dec 2026, card printed "valid thru 12/2029"</td><td>20 Dec 2031 (the plastic expires first: free replacement)</td><td>21 Dec 2027 if never used</td></tr>
+<tr><td>Reloadable coffee-chain card first issued 29 Feb 2024, last reloaded 27 Nov 2026</td><td>27 Nov 2031</td><td>28 Nov 2027 if not used after the reload</td></tr>
+<tr><td>Same card bought 20 Dec 2026 with printed expiration 30 Jun 2033</td><td>30 Jun 2033 (later than 5 years)</td><td>21 Dec 2027 if never used</td></tr>
+</table>
+<p>The fee date shown is the cautious one: the day after the first anniversary of the last activity.</p>
+
+<h2>What to do with an old card</h2>
+<ol>
+<li>Look at the back of the card or the card holder: funds expiration date, fees and the toll-free number must be there.</li>
+<li>Check the balance on the issuer's website or toll-free number before you shop.</li>
+<li>If the plastic has expired but the funds have not, ask for a replacement: it must be free unless the card was lost or stolen.</li>
+<li>Your state may protect you more: check your state attorney general or consumer protection office.</li>
+</ol>
+<p>Planning gifts this season? The <a href="../holiday-budget-planner/">gift budget per person calculator</a> and its free spreadsheet track who gets what, card payments and return dates. Bought online in the UK? See <a href="../uk-gift-return-deadlines/">UK gift return deadlines</a>. Calculator logic: <a href="../scripts/gift_card.js">gift_card.js</a> (MIT).</p>
+
+<h2 id="sources">Sources (read 2026-11-07)</h2>
+<ul>
+<li>12 CFR 1005.20, Requirements for gift cards and gift certificates (Regulation E), paragraphs (a), (b), (d), (e), (f): <a href="https://www.law.cornell.edu/cfr/text/12/1005.20">Cornell LII, Electronic Code of Federal Regulations</a>.</li>
+<li>15 U.S.C. 1693q, Relation to State laws (Electronic Fund Transfer Act): <a href="https://www.law.cornell.edu/uscode/text/15/1693q">Cornell LII</a>.</li>
+<li>12 CFR 1005.12(b), preemption of inconsistent state laws, which includes expiration dates and dormancy, inactivity or service fees on gift cards: <a href="https://www.law.cornell.edu/cfr/text/12/1005.12">Cornell LII</a>.</li>
+</ul>
+<p style="font-size:.9rem">Not covered here: state laws (some ban expiration dates or fees, or require cash back for small balances); cards bought from private sellers or resale sites; whether a specific card belongs to an excluded category, which depends on how it was marketed and issued. When in doubt, the terms on the card and the issuer's customer service are the first step.</p>
+</main>
+<footer class="wrap">© 2026 Lumen &amp; Ledger · Text CC BY 4.0 · <a href="../">Tools</a> · <a href="../about/">About</a> · <a href="../privacy/">Privacy</a> · Contact: lumenledger.tools@proton.me</footer>
+<script src="../scripts/gift_card.js"></script>
+<script>
+(function(){
+  var G=window.GiftCard;
+  function $(i){return document.getElementById(i)}
+  var M=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  function f(d){return M[d.getUTCMonth()]+' '+d.getUTCDate()+', '+d.getUTCFullYear()}
+  function calc(){
+    var t=$('type').value;
+    $('loadedL').style.display=t==='cert'?'none':'';
+    var o={type:t,issued:G.parse($('issued').value),loaded:t==='cert'?null:G.parse($('loaded').value),activity:G.parse($('activity').value),printed:G.parse($('printed').value)};
+    if(t==='excluded'){$('out').innerHTML='<p><b>The federal 5-year minimum does not apply</b> to promotional, loyalty or reward cards. They must state the expiration date and any fees: read the card terms, and check your state rules.</p>';return}
+    if(!o.issued){$('out').textContent='Enter the date the card was bought or issued.';return}
+    var r=G.compute(o),h='';
+    if(o.loaded&&o.loaded<o.issued)h+='<p class="late">The reload date is before the issue date: check the dates.</p>';
+    if(o.activity&&o.activity<o.issued)h+='<p class="late">The last-use date is before the issue date: check the dates.</p>';
+    h+='<p><b>The money cannot expire before '+f(r.funds)+'.</b> ';
+    h+=(r.funds>r.fiveY?'That is the date printed on the card, later than 5 years.':'5 years after the card was '+(t!=='cert'&&o.loaded&&o.loaded>o.issued?'last reloaded':'issued')+'.')+'</p>';
+    if(r.cardBeforeFunds)h+='<p>The card itself expires on '+f(o.printed)+', before the money. After that date you can ask for a <b>free replacement</b> or the remaining balance (unless the card was lost or stolen).</p>';
+    h+='<p><b>Inactivity or service fee:</b> not before '+f(r.feeFrom)+' (12 months with no use after '+f(r.lastActivity)+'), only if the fee is stated on the card, and at most one per calendar month. Any purchase or reload before then restarts the 12 months.</p>';
+    h+='<p style="font-size:.9rem">Federal minimum. Your state may give more protection.</p>';
+    $('out').innerHTML=h;
+  }
+  ['type','issued','loaded','activity','printed'].forEach(function(i){$(i).addEventListener('input',calc);$(i).addEventListener('change',calc)});
+  calc();
+})();
+</script>
+</body>
+</html>
