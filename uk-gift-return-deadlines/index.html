@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UK Christmas gift return deadlines: 14-day cancellation and 30-day reject calculator</title>
+<meta name="description" content="Bought a gift online in the UK? Enter the delivery date and get the last day to cancel (14 days), the date to send it back, the 30-day short-term right to reject for faulty goods and the 6-month date. Sources: Consumer Contracts Regulations 2013 and Consumer Rights Act 2015 on legislation.gov.uk.">
+<link rel="canonical" href="https://lumen-ledger.github.io/uk-gift-return-deadlines/">
+<style>
+:root{--navy:#0F2A3D;--sun:#F2B33D;--paper:#F7F5EF;--line:#d9d4c7;--warn:#C2452D}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--navy)}
+header{background:var(--navy);color:#fff;padding:32px 20px}
+.wrap{max-width:760px;margin:0 auto}
+header h1{margin:0;font-size:1.7rem}
+header p{margin:8px 0 0;color:#d6dde2}
+nav{font-size:.9rem;margin-bottom:10px}nav a{color:var(--sun)}
+main{padding:24px 20px}
+h2{font-size:1.15rem;margin:28px 0 6px}
+ul,ol{padding-left:20px}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:10px 0}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#ece8dc}
+.note{border-left:4px solid var(--warn);background:#fff;padding:10px 14px;font-size:.93rem}
+.box{border:1px solid var(--line);background:#fff;padding:14px 16px}
+.box label{display:block;font-size:.9rem;margin-top:8px}
+.box input,.box select{width:100%;max-width:300px;padding:6px;font:inherit}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.out{font-size:1.02rem;margin-top:12px}
+.late{color:#C2452D}
+footer{padding:20px;font-size:.82rem;color:#5b6770}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="#calculator">Calculator</a> · <a href="#cancel">Online: 14 days</a> · <a href="#exceptions">Exceptions</a> · <a href="#faulty">Faulty gifts</a> · <a href="#sources">Sources</a></nav>
+  <h1>UK gift returns: how long you have</h1>
+  <p>For a gift bought online, the 14-day cancellation period runs from <b>delivery</b>, not from Christmas Day. Delivered on <b>10 December</b>: cancel by <b>24 December</b>. Delivered on 23 December: cancel by 6 January. In a shop, there is no legal right to return something just because you changed your mind: that is store policy.</p>
+</div></header>
+<main class="wrap">
+
+<p class="note">General information, not legal advice. Covers consumer purchases from a business in the UK. Legislation read on legislation.gov.uk on 2026-11-07 (see <a href="#sources">Sources</a>). For a specific dispute, ask the retailer first, then a consumer advice service.</p>
+
+<h2 id="calculator">Deadline calculator</h2>
+<div class="box">
+  <div class="grid">
+    <label>Where it was bought
+      <select id="where">
+        <option value="online">Online, by phone or mail order</option>
+        <option value="off">Off-premises (at your home, doorstep)</option>
+        <option value="shop">In a shop</option>
+      </select></label>
+    <label>Delivery date (when you, or the person you named, received it)<input id="del" type="date" value="2026-12-10"></label>
+    <label>Did the retailer tell you about the right to cancel?
+      <select id="info">
+        <option value="yes">Yes (terms, order confirmation)</option>
+        <option value="no">No, never</option>
+      </select></label>
+    <label>Date you send the cancellation notice (optional)<input id="sent" type="date"></label>
+  </div>
+  <div class="out" id="out" aria-live="polite"></div>
+</div>
+<p style="font-size:.9rem">Calendar days. The delivery day itself is not counted ("14 days after the day on which the goods come into physical possession", reg. 30(3)). Dates are calculated in your browser: nothing is sent anywhere.</p>
+
+<h2 id="cancel">Online and phone orders: the 14-day right to cancel</h2>
+<table>
+<tr><th>What</th><th>Rule</th><th>Source</th></tr>
+<tr><td>Which purchases</td><td>Distance contracts (online, phone, mail order) and off-premises contracts. Not purchases made in a shop.</td><td>CCR 2013 reg. 29(1)</td></tr>
+<tr><td>How long</td><td>Until the end of 14 days after the day the goods come into the physical possession of you or a person you named (not the courier). One order delivered on different days: from the last item.</td><td>reg. 30(3)-(4)</td></tr>
+<tr><td>If you were not told about the right</td><td>Extended by up to 12 months. If the information arrives within that time, the period ends 14 days after you receive it.</td><td>reg. 31</td></tr>
+<tr><td>How to cancel</td><td>The model cancellation form or any clear statement. It counts if you <b>send</b> it before the period ends. In a dispute you must show you cancelled in time: keep the email or confirmation.</td><td>reg. 32(3), (5), (6)</td></tr>
+<tr><td>Sending it back</td><td>Without undue delay and no later than 14 days after telling the retailer. You pay the direct cost of return unless the retailer agreed to pay or did not tell you that you would have to.</td><td>reg. 35(4)-(6)</td></tr>
+<tr><td>Refund</td><td>Within 14 days after the retailer gets the goods back or you supply evidence you sent them, whichever is first (if the retailer does not collect). Same payment method, no fee. Outbound delivery is refunded up to the cheapest standard option.</td><td>reg. 34(1)-(8)</td></tr>
+<tr><td>Deductions</td><td>The retailer may deduct for loss in value caused by handling beyond what you could reasonably do in a shop to check the item.</td><td>reg. 34(9)-(12)</td></tr>
+</table>
+<p><b>Gifts:</b> these are rights under the contract between the retailer and the buyer. If you received the gift, the return is usually started by whoever bought it (account, order number, refund to their card). Gift receipts and the longer Christmas return windows many retailers advertise are voluntary store policies: read the policy on the receipt or website, it can be more generous than the law.</p>
+
+<h2 id="exceptions">What cannot be cancelled for a change of mind</h2>
+<p>Regulation 28 excludes or ends the right for, among others:</p>
+<ul>
+<li>goods made to your specifications or clearly personalised (engraved, printed with a photo);</li>
+<li>goods liable to deteriorate or expire rapidly (fresh food, flowers);</li>
+<li>sealed goods not suitable for return for health or hygiene reasons, once unsealed after delivery;</li>
+<li>sealed audio or video recordings and sealed software, once unsealed after delivery;</li>
+<li>goods that, after delivery, are inseparably mixed with other items;</li>
+<li>newspapers and magazines (except subscriptions);</li>
+<li>leisure, accommodation or catering services for a specific date (a ticket for a show on a set day).</li>
+</ul>
+
+<h2 id="faulty">If the gift is faulty: Consumer Rights Act 2015</h2>
+<p>These rights apply to shop purchases too, and have nothing to do with changing your mind:</p>
+<ul>
+<li><b>Short-term right to reject: 30 days</b> for a full refund, counted from the first day after ownership or possession has passed, the goods have been delivered and, if needed, installed (s.22(3)). Shorter for goods expected to perish sooner (s.22(4)). The clock pauses while a repair or replacement you asked for or agreed to is under way (s.22(6)).</li>
+<li>After that: repair or replacement, then a price reduction or final right to reject (s.19(3)-(4), ss.23-24).</li>
+<li>A fault that appears <b>within 6 months</b> of delivery is taken to have been there at delivery, unless the retailer shows otherwise or this is incompatible with the goods or the fault (s.19(14)-(15)). This presumption applies to repair, replacement, price reduction and final rejection, not to the 30-day right.</li>
+<li>Time limit for a claim in England and Wales: generally <b>6 years</b> from when the cause of action accrued (Limitation Act 1980 s.5). Scotland and Northern Ireland have their own limitation rules: check them before relying on this figure.</li>
+</ul>
+<p>A manufacturer's guarantee (for example "3 years") is extra; it does not replace these rights against the retailer.</p>
+
+<h2>Examples</h2>
+<table>
+<tr><th>Delivered</th><th>Last day to cancel (online)</th><th>30-day reject ends (faulty)</th><th>6-month presumption until</th></tr>
+<tr><td>28 November 2026</td><td>12 December 2026</td><td>28 December 2026</td><td>28 May 2027</td></tr>
+<tr><td>10 December 2026</td><td>24 December 2026</td><td>9 January 2027</td><td>10 June 2027</td></tr>
+<tr><td>23 December 2026</td><td>6 January 2027</td><td>22 January 2027</td><td>23 June 2027</td></tr>
+</table>
+<p>Planning the gifts? The <a href="../holiday-budget-planner/">gift budget per person calculator</a> and its free spreadsheet have a "return by" column that flags deadlines in the next 14 days.</p>
+
+<h2 id="sources">Sources (checked 2026-11-07)</h2>
+<ul>
+<li>The Consumer Contracts (Information, Cancellation and Additional Charges) Regulations 2013 (SI 2013/3134), regulations <a href="https://www.legislation.gov.uk/uksi/2013/3134/regulation/28">28</a>, <a href="https://www.legislation.gov.uk/uksi/2013/3134/regulation/29">29</a>, <a href="https://www.legislation.gov.uk/uksi/2013/3134/regulation/30">30</a>, <a href="https://www.legislation.gov.uk/uksi/2013/3134/regulation/31">31</a>, <a href="https://www.legislation.gov.uk/uksi/2013/3134/regulation/32">32</a>, <a href="https://www.legislation.gov.uk/uksi/2013/3134/regulation/34">34</a>, <a href="https://www.legislation.gov.uk/uksi/2013/3134/regulation/35">35</a>, latest revised text on legislation.gov.uk.</li>
+<li>Consumer Rights Act 2015, sections <a href="https://www.legislation.gov.uk/ukpga/2015/15/section/19">19</a> and <a href="https://www.legislation.gov.uk/ukpga/2015/15/section/22">22</a>, latest revised text on legislation.gov.uk.</li>
+<li>Limitation Act 1980, <a href="https://www.legislation.gov.uk/ukpga/1980/58/section/5">section 5</a> (extent: England and Wales).</li>
+</ul>
+<p style="font-size:.9rem">Check case by case: the individual store's return policy; purchases from sellers outside the UK or from private individuals (these rules cover consumers buying from a trader); digital content and services, which follow different rules; whether a deadline falling on a weekend or bank holiday changes anything (not applied here: the dates shown are the cautious ones). Buying from an Italian shop? See the <a href="../it/resi-regali-natale/">Italian version</a> (EU rules, in Italian).</p>
+</main>
+<footer class="wrap">© 2026 Lumen &amp; Ledger · Text CC BY 4.0 · <a href="../">Tools</a> · <a href="../about/">About</a> · <a href="../privacy/">Privacy</a> · Contact: lumenledger.tools@proton.me</footer>
+<script>
+(function(){
+  function $(i){return document.getElementById(i)}
+  var M=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var W=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  function parse(s){var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(s||'');if(!m)return null;var d=new Date(Date.UTC(+m[1],+m[2]-1,+m[3]));return isNaN(d)?null:d}
+  function addD(d,n){return new Date(d.getTime()+n*864e5)}
+  function addM(d,n){var y=d.getUTCFullYear(),m=d.getUTCMonth()+n,day=d.getUTCDate();var last=new Date(Date.UTC(y,m+1,0)).getUTCDate();return new Date(Date.UTC(y,m,Math.min(day,last)))}
+  function f(d){return W[d.getUTCDay()]+' '+d.getUTCDate()+' '+M[d.getUTCMonth()]+' '+d.getUTCFullYear()}
+  function calc(){
+    var w=$('where').value,d=parse($('del').value),inf=$('info').value,s=parse($('sent').value);
+    if(!d){$('out').textContent='Enter the delivery date.';return}
+    var h='';
+    if(w==='shop'){
+      h+='<p><b>Change of mind:</b> for shop purchases the law gives no right to return. The store policy applies (exchange, gift receipt): check the receipt or ask in store.</p>';
+    }else{
+      var dl=addD(d,14),lim=inf==='no'?addM(dl,12):dl;
+      h+='<p><b>Last day to send the cancellation notice: '+f(dl)+'</b> (14 days after delivery, delivery day not counted).</p>';
+      if(inf==='no'){h+='<p>If the retailer never told you about the right to cancel, the period runs until <b>'+f(lim)+'</b> (12 months more, reg. 31). If you get the information earlier, you have 14 days from then.</p>'}
+      if(s){
+        if(s<d){h+='<p class="late">The notice date is before delivery: check the dates.</p>'}
+        else if(s>lim){h+='<p class="late"><b>A notice sent on '+f(s)+' is after the deadline.</b> Your rights for faulty goods and any store return policy still apply.</p>'}
+        else{h+='<p>Notice sent '+f(s)+': send the item back <b>by '+f(addD(s,14))+'</b>; refund due within 14 days after the retailer gets it back or you show proof of sending.</p>'}
+      }
+    }
+    h+='<p><b>If faulty:</b> 30-day short-term right to reject until <b>'+f(addD(d,30))+'</b> (if delivery was the last of the s.22(3) events); faults appearing by '+f(addM(d,6))+' are presumed to have existed at delivery.</p>';
+    $('out').innerHTML=h;
+  }
+  ['where','del','info','sent'].forEach(function(i){$(i).addEventListener('input',calc);$(i).addEventListener('change',calc)});
+  calc();
+})();
+</script>
+</body>
+</html>
