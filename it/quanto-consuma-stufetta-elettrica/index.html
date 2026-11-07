@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Quanto consuma una stufetta elettrica? Calcolatore costo all'ora e al mese (prezzi ARERA 2026)</title>
-<meta name="description" content="Costo di una stufetta elettrica o di qualsiasi elettrodomestico: watt x ore x prezzo per kWh. Con il prezzo di riferimento ARERA dal 1 ottobre 2026 (43,43 cent/kWh) una stufetta da 2.000 W costa 0,87 euro l'ora. Tabella da 800 a 2.500 W e limite del contatore da 3 kW.">
+<meta name="description" content="Costo di una stufetta elettrica o di qualsiasi elettrodomestico: watt x ore x prezzo per kWh. Con il prezzo di riferimento ARERA dal 1 ottobre 2026 (43,43 cent/kWh) una stufetta da 2.000 W costa 0,87 euro l'ora. Tabella da 800 a 2.500 W, limite del contatore da 3 kW e confronto con la caldaia a gas.">
 <link rel="canonical" href="https://lumen-ledger.github.io/it/quanto-consuma-stufetta-elettrica/">
 <link rel="alternate" hreflang="it" href="https://lumen-ledger.github.io/it/quanto-consuma-stufetta-elettrica/">
 <link rel="alternate" hreflang="en-US" href="https://lumen-ledger.github.io/appliance-running-cost/">
@@ -36,7 +36,7 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
 </head>
 <body>
 <header><div class="wrap">
-  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="#calcolatore">Calcolatore</a> · <a href="#tabella">Tabella</a> · <a href="#contatore">Contatore da 3 kW</a></nav>
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="#calcolatore">Calcolatore</a> · <a href="#tabella">Tabella</a> · <a href="#contatore">Contatore da 3 kW</a> · <a href="#vs-caldaia">Stufetta o caldaia</a></nav>
   <h1>Quanto consuma una stufetta elettrica (e quanto costa)?</h1>
   <p>Costo = watt ÷ 1.000 × ore × prezzo per kWh. Al prezzo di riferimento ARERA dal 1° ottobre 2026 (43,43 centesimi/kWh) una stufetta da 2.000 W al massimo costa <b>0,87 &euro; l'ora</b>.</p>
 </div></header>
@@ -89,6 +89,24 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
 <li>Prima di usare la stufetta, somma le potenze di targa degli apparecchi che possono funzionare insieme. La potenza impegnata del tuo contratto e' indicata in bolletta.</li>
 </ul>
 
+<h2 id="vs-caldaia">Stufetta o caldaia a gas: quanto costa lo stesso calore</h2>
+<p>Una stufetta a resistenza trasforma 1 kWh di elettricita' in 1 kWh di calore. Un metro cubo standard (Smc) di gas contiene 10,7 kWh di energia al potere calorifico superiore usato da ARERA (0,038520 GJ/Smc), e la caldaia ne rende in calore una parte pari alla sua efficienza. Per le caldaie fino a 70 kW immesse sul mercato dal 26 settembre 2015 il Regolamento UE 813/2013 impone un'efficienza stagionale minima dell'86% (75% per alcune caldaie di tipo B1 di piccola potenza).</p>
+<ul>
+<li>Calore dalla stufetta: costa quanto il prezzo dell'elettricita', 0,4343 &euro; per kWh al prezzo ARERA del IV trimestre 2026.</li>
+<li>Calore dalla caldaia: prezzo del gas per Smc ÷ (10,7 × efficienza). Con efficienza 86% servono 0,1087 Smc per ogni kWh di calore.</li>
+<li><b>Punto di pareggio</b>: a 0,4343 &euro;/kWh la stufetta costa meno della caldaia, per lo stesso calore, solo se il gas ti costa piu' di <b>4,00 &euro;/Smc</b> tutto compreso (efficienza 86%) o di <b>3,49 &euro;/Smc</b> (efficienza 75%). Per confronto, la sola materia prima gas fissata da ARERA per i clienti vulnerabili a ottobre 2026 e' 0,945 &euro;/Smc; il prezzo finale aggiunge trasporto, oneri e imposte: controlla il tuo in bolletta.</li>
+</ul>
+<div class="box">
+  <div class="grid">
+    <label>Prezzo elettricita' (&euro;/kWh)<input id="ve" type="number" min="0" step="0.001" value="0.4343"></label>
+    <label>Prezzo gas dalla tua bolletta (&euro;/Smc)<input id="vg" type="number" min="0" step="0.01" placeholder="es. spesa gas &divide; Smc fatturati"></label>
+    <label>Efficienza della caldaia (%)<input id="vn" type="number" min="1" max="110" step="1" value="86"></label>
+  </div>
+  <div class="out" id="vout" aria-live="polite"></div>
+</div>
+<p>Come trovare il prezzo del gas: spesa totale della bolletta gas ÷ Smc fatturati. Include le quote fisse, quindi in un mese con pochi consumi il risultato e' piu' alto del costo di un Smc in piu'. Non sono inclusi: l'elettricita' usata dalla caldaia (pompa e ventilatore) e il calore perso nelle tubazioni.</p>
+<p>Il confronto vale <i>per kWh di calore</i>. La stufetta puo' comunque ridurre la spesa totale se ti permette di scaldare una sola stanza tenendo spento o piu' basso il riscaldamento del resto della casa: quanto si risparmia dipende dalla casa e questa pagina non lo stima. Le pompe di calore (anche i condizionatori in modalita' riscaldamento) rendono piu' di 1 kWh di calore per kWh elettrico e non sono trattate qui.</p>
+
 <h2>Prima di usare una stufetta</h2>
 <p>Segui le istruzioni del fabbricante su distanza da tende e mobili, prese e prolunghe, e spegnila quando esci dalla stanza o vai a dormire. Questa pagina calcola solo il costo.</p>
 
@@ -96,7 +114,9 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
 <ul>
 <li>ARERA, comunicato stampa "Elettricita': Maggior Tutela +37,3% nel IV trimestre 2026 per i clienti vulnerabili", 29 settembre 2026 (43,43 c&euro;/kWh tasse incluse; delibera 338/2026/R/eel): <a href="https://www.arera.it/comunicati-stampa/dettaglio/elettricita-maggior-tutela-373-nel-iv-trimestre-2026-per-i-clienti-vulnerabili">arera.it</a>, letto il 2026-11-01.</li>
 <li>ARERA, Atlante per il consumatore, "Cosa e' la potenza impegnata?" (3 kW tipici, potenza disponibile +10%): <a href="https://www.arera.it/atlante-per-il-consumatore/elettricita/il-contratto/potenza-impegnata/cosa-e-la-potenza-impegnata">arera.it</a>, letto il 2026-11-01.</li>
-<li>Conversione: 1 kWh = 3,6 MJ; 1 kcal = 4,1868 kJ, quindi 1 kWh ≈ 860 kcal.</li>
+<li>ARERA, comunicato "Gas: valore della materia prima per il servizio di tutela della vulnerabilita', ottobre 2026", 3 novembre 2026 (CMEM 0,945436 &euro;/Smc; potere calorifico superiore di riferimento 0,038520 GJ/Smc): <a href="https://www.arera.it/comunicati-stampa/dettaglio/gas-valore-materia-prima-vulnerabilita-ottobre-2026">arera.it</a>, letto il 2026-11-07.</li>
+<li>Regolamento (UE) n. 813/2013, allegato II punto 1 (efficienza energetica stagionale del riscaldamento d'ambiente: minimo 86% per caldaie fino a 70 kW, 75% per alcune caldaie di tipo B1, dal 26 settembre 2015): <a href="https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32013R0813">EUR-Lex</a>, letto il 2026-11-07.</li>
+<li>Conversione: 1 kWh = 3,6 MJ; 0,038520 GJ = 38,52 MJ = 10,7 kWh; 1 kcal = 4,1868 kJ, quindi 1 kWh ≈ 860 kcal.</li>
 </ul>
 <p>Per vedere quanto pesano gli elettrodomestici bolletta dopo bolletta: <a href="../../download/tracker-bollette-luce-gas.xlsx" download>tracker bollette luce e gas</a> (Excel gratuito, calcola il tuo costo reale per kWh). Logica del calcolatore: <a href="../../scripts/appliance_cost.js">appliance_cost.js</a> (MIT). Versione per gli Stati Uniti: <a href="../../appliance-running-cost/">appliance running cost</a>.</p>
 </main>
@@ -111,12 +131,25 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
     var r=ApplianceCost.run({watts:num('w'),hours:num('h'),days:num('d'),duty:num('u'),rate:num('r')});
     $('out').innerHTML='All\'ora: <b>'+eur(r.hour.usd,2)+' &euro;</b> ('+eur(r.hour.kwh,2)+' kWh) · Al giorno: <b>'+eur(r.day.usd,2)+' &euro;</b> ('+eur(r.day.kwh,1)+' kWh) · Al mese: <b>'+eur(r.month.usd,2)+' &euro;</b> ('+eur(r.month.kwh,0)+' kWh)';
   }
+  function vs(){
+    var pe=num('ve'),pg=num('vg'),n=num('vn')/100,K=10.7,be=pe*K*n,t;
+    if(!(pe>0&&n>0)){$('vout').innerHTML='Inserisci prezzo dell&#39;elettricit&agrave; ed efficienza.';return}
+    t='Punto di pareggio: la stufetta conviene, a parit&agrave; di calore, solo se il gas costa pi&ugrave; di <b>'+eur(be,2)+' &euro;/Smc</b>.';
+    if(pg>0){
+      var cg=pg/(K*n),r=pe/cg;
+      t+='<br>1 kWh di calore: stufetta <b>'+eur(pe,3)+' &euro;</b>, caldaia <b>'+eur(cg,3)+' &euro;</b>. '+(r>=1?'La stufetta costa <b>'+eur(r,1)+' volte</b> la caldaia.':'La caldaia costa <b>'+eur(1/r,1)+' volte</b> la stufetta.')+'<br>Il calore di 1 ora di stufetta da 2.000 W: '+eur(2*pe,2)+' &euro; con la stufetta, '+eur(2*cg,2)+' &euro; con la caldaia ('+eur(2/(K*n),3)+' Smc).';
+    }
+    $('vout').innerHTML=t;
+  }
+  ['ve','vg','vn'].forEach(function(i){$(i).addEventListener('input',vs)});
+  $('r').addEventListener('input',function(){$('ve').value=$('r').value;vs()});
   ['w','h','d','u','r'].forEach(function(i){$(i).addEventListener('input',calc)});
   document.querySelectorAll('.presets button').forEach(function(b){b.addEventListener('click',function(){$('w').value=b.dataset.w;calc()})});
   var q=new URLSearchParams(location.search),qr=parseFloat(q.get('prezzo')),qw=parseFloat(q.get('w'));
   if(qr>=0.01&&qr<=2)$('r').value=qr;
   if(qw>0&&qw<=20000)$('w').value=qw;
-  calc();
+  $('ve').value=$('r').value;
+  calc();vs();
 })();
 </script>
 </body>
