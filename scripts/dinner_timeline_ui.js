@@ -65,5 +65,5 @@
   $('go').addEventListener('click', run);
   var st = T.decode(location.hash);
   if (st && st.dishes.length) { $('serve').value = st.serve; load(st.dishes); run(); }
-  else { $('serve').value = nextDec25(); load(exList()); }
+  else { $('serve').value = L.defDate ? L.defDate() + 'T' + L.defServe : nextDec25(); load(exList()); }
 })();
