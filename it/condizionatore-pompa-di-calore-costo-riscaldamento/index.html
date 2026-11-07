@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Riscaldare con il condizionatore (pompa di calore): quanto costa? Calcolatore dallo SCOP</title>
+<meta name="description" content="Costo del calore di un condizionatore in pompa di calore: prezzo dell'elettricita' diviso SCOP dell'etichetta energetica. A 43,43 cent/kWh (ARERA, IV trim. 2026) e SCOP 4,0 un kWh di calore costa 0,109 euro, un quarto della stufetta. Confronto con caldaia a gas e calcolatore.">
+<link rel="canonical" href="https://lumen-ledger.github.io/it/condizionatore-pompa-di-calore-costo-riscaldamento/">
+<style>
+:root{--navy:#0F2A3D;--sun:#F2B33D;--paper:#F7F5EF;--line:#d9d4c7;--warn:#C2452D}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--navy)}
+header{background:var(--navy);color:#fff;padding:32px 20px}
+.wrap{max-width:760px;margin:0 auto}
+header h1{margin:0;font-size:1.7rem}
+header p{margin:8px 0 0;color:#d6dde2}
+nav{font-size:.9rem;margin-bottom:10px}nav a{color:var(--sun)}
+main{padding:24px 20px}
+h2{font-size:1.15rem;margin:28px 0 6px}
+ul,ol{padding-left:20px}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:10px 0}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#ece8dc}
+.note{border-left:4px solid var(--warn);background:#fff;padding:10px 14px;font-size:.93rem}
+.box{border:1px solid var(--line);background:#fff;padding:14px 16px}
+.box label{display:block;font-size:.9rem;margin-top:8px}
+.box input{width:100%;max-width:260px;padding:6px;font:inherit}
+.presets button{margin:4px 4px 0 0;padding:4px 8px;font:inherit;font-size:.85rem;border:1px solid var(--line);background:#f3f0e6;border-radius:4px;cursor:pointer}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.out{font-size:1.05rem;margin-top:12px}
+footer{padding:20px;font-size:.82rem;color:#5b6770}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="#calcolatore">Calcolatore</a> · <a href="#tabella">Tabella per classe</a> · <a href="#etichetta">Leggere l'etichetta</a> · <a href="#limiti">Limiti</a></nav>
+  <h1>Riscaldare con il condizionatore: quanto costa?</h1>
+  <p>Un condizionatore in pompa di calore costa, per ogni kWh di calore, il prezzo dell'elettricita' diviso lo SCOP dell'etichetta. A 43,43 centesimi/kWh (prezzo di riferimento ARERA, IV trimestre 2026) con SCOP 4,0: <b>0,109 &euro; per kWh di calore</b>, un quarto di una stufetta elettrica.</p>
+</div></header>
+<main class="wrap">
+<p class="note">Informazione generale, non consulenza tecnica. I numeri sono stime da dati di etichetta e prezzi medi: il consumo reale dipende dal clima, dalla casa, dall'installazione e da come usi l'apparecchio.</p>
+
+<h2>La formula</h2>
+<ul>
+<li><b>Costo di 1 kWh di calore</b> = prezzo dell'elettricita' (&euro;/kWh) ÷ SCOP.</li>
+<li><b>Elettricita' consumata</b> = calore che ti serve (kWh) ÷ SCOP.</li>
+<li>Lo SCOP (coefficiente di prestazione stagionale) e' il rapporto tra il calore fornito in una stagione di riscaldamento convenzionale e l'elettricita' consumata. Una stufetta a resistenza ha, in questi termini, rapporto 1: 1 kWh elettrico, 1 kWh di calore.</li>
+</ul>
+<p>Esempio: per avere in media 1 kW di calore per 8 ore al giorno per 150 giorni servono 1.200 kWh di calore. Con SCOP 4,0 il condizionatore consuma 300 kWh, cioe' <b>130,29 &euro;</b> a 0,4343 &euro;/kWh; una stufetta ne consuma 1.200, cioe' <b>521,16 &euro;</b>.</p>
+
+<h2 id="calcolatore">Calcolatore</h2>
+<div class="box">
+  <div class="grid">
+    <label>Prezzo elettricita' (&euro;/kWh, tutto compreso)<input id="p" type="number" min="0" step="0.001" value="0.4343"></label>
+    <label>SCOP dall'etichetta (stagione media)<input id="s" type="number" min="1" max="10" step="0.1" value="4.0"></label>
+    <label>Calore medio richiesto (kW)<input id="k" type="number" min="0" step="0.1" value="1"></label>
+    <label>Ore al giorno<input id="h" type="number" min="0" max="24" step="0.5" value="8"></label>
+    <label>Giorni<input id="d" type="number" min="0" max="366" step="1" value="150"></label>
+    <label>Prezzo gas dalla tua bolletta (&euro;/Smc, facoltativo)<input id="g" type="number" min="0" step="0.01" placeholder="spesa gas &divide; Smc fatturati"></label>
+    <label>Efficienza della caldaia (%)<input id="n" type="number" min="1" max="110" step="1" value="86"></label>
+  </div>
+  <div class="out" id="out" aria-live="polite"></div>
+</div>
+<p>"Calore medio richiesto" non e' la potenza scritta sull'apparecchio: e' quanta potenza termica serve in media alla stanza nelle ore di uso, che di solito e' meno della potenza massima. Se non la conosci, usa il calcolatore per confrontare le alternative a parita' di calore: il rapporto tra i costi non dipende da questo valore.</p>
+
+<h2 id="tabella">Costo del calore per classe energetica</h2>
+<p>Soglie SCOP delle classi di riscaldamento (stagione media) del Regolamento UE 626/2011; prezzo elettricita' 0,4343 &euro;/kWh. Il pareggio con la caldaia e' il prezzo del gas tutto compreso sopra il quale, a parita' di calore, il condizionatore costa meno di una caldaia con efficienza 86%.</p>
+<table>
+<tr><th>SCOP</th><th>Riferimento</th><th>&euro; per kWh di calore</th><th>&euro; per 1.000 kWh di calore</th><th>Rispetto alla stufetta</th><th>Pareggio con caldaia 86%</th></tr>
+<tr><td>3,4</td><td>soglia classe A</td><td>0,128</td><td>127,74</td><td>29%</td><td>1,18 &euro;/Smc</td></tr>
+<tr><td>3,8</td><td>minimo di legge dal 2014 (refrigerante con GWP &gt; 150)</td><td>0,114</td><td>114,29</td><td>26%</td><td>1,05 &euro;/Smc</td></tr>
+<tr><td>4,0</td><td>soglia classe A+</td><td>0,109</td><td>108,58</td><td>25%</td><td>1,00 &euro;/Smc</td></tr>
+<tr><td>4,6</td><td>soglia classe A++</td><td>0,094</td><td>94,41</td><td>22%</td><td>0,87 &euro;/Smc</td></tr>
+<tr><td>5,1</td><td>soglia classe A+++</td><td>0,085</td><td>85,16</td><td>20%</td><td>0,78 &euro;/Smc</td></tr>
+</table>
+<p>Stufetta elettrica: 0,4343 &euro; per kWh di calore (434,30 &euro; per 1.000 kWh). Per la caldaia: prezzo del gas ÷ (10,7 kWh/Smc × efficienza), come spiegato nel <a href="../quanto-consuma-stufetta-elettrica/#vs-caldaia">confronto stufetta-caldaia</a>. Il minimo di legge per refrigeranti con GWP fino a 150 e' SCOP 3,42 (Regolamento UE 206/2012). Il prezzo finale del gas dipende dall'offerta: per sapere quale caso e' il tuo, confronta il pareggio con il prezzo della tua bolletta gas.</p>
+
+<h2 id="etichetta">Dove trovare lo SCOP sull'etichetta</h2>
+<ul>
+<li>Sull'etichetta energetica dei condizionatori reversibili (Regolamento UE 626/2011, allegato III), la parte riscaldamento ha il simbolo con la ventola rossa e riporta, per ciascuna delle tre stagioni di riscaldamento della cartina (media, piu' calda, piu' fredda): carico teorico in kW, SCOP, consumo annuo in kWh/anno. La stagione media e' obbligatoria; per le altre l'etichetta puo' mostrare una "X".</li>
+<li>Il consumo annuo dell'etichetta e' convenzionale: corrisponde al carico teorico per <b>1.400 ore</b> l'anno (stagioni media e piu' calda) o 2.100 (stagione piu' fredda), diviso SCOP, piu' i consumi in standby (Regolamento UE 206/2012, allegato II, tabella 4). Non e' il tuo consumo: se usi l'apparecchio meno ore o a potenza ridotta consumi meno.</li>
+<li>Costo annuo convenzionale = kWh/anno dell'etichetta × prezzo. Esempio: 875 kWh/anno × 0,4343 = 380,01 &euro;.</li>
+<li>Scheda prodotto e dati di etichetta si trovano anche nella banca dati europea EPREL (eprel.ec.europa.eu) cercando il modello.</li>
+</ul>
+<div class="box">
+  <div class="grid">
+    <label>kWh/anno riscaldamento dall'etichetta<input id="q" type="number" min="0" step="1" placeholder="es. 875"></label>
+  </div>
+  <div class="out" id="qout" aria-live="polite"></div>
+</div>
+
+<h2 id="limiti">Limiti della stima</h2>
+<ul>
+<li>Lo SCOP e' una media stagionale misurata in condizioni di prova. Con temperature esterne basse la resa scende e servono cicli di sbrinamento; nelle giornate miti sale.</li>
+<li>La stagione "media" dell'etichetta ha temperatura di progetto -10 &deg;C, la "piu' calda" +2 &deg;C (Regolamento UE 206/2012, allegato II, tabella 3). Se l'etichetta mostra uno SCOP per la stagione piu' calda, e' quello che il fabbricante ha dichiarato per climi miti.</li>
+<li>Il calcolatore non include costi di acquisto, installazione, manutenzione, eventuali incentivi, ne' le differenze di comfort tra i sistemi.</li>
+<li>Un nuovo formato di etichetta per i condizionatori (scala A-G) e' in preparazione a livello UE: fino alla sua entrata in vigore vale quello del Regolamento 626/2011. Verifica la data della tua etichetta.</li>
+</ul>
+
+<h2>Fonti</h2>
+<ul>
+<li>Regolamento delegato (UE) n. 626/2011, allegato II tabella 1 (classi di efficienza in riscaldamento: A+++ SCOP &ge; 5,10; A++ &ge; 4,60; A+ &ge; 4,00; A &ge; 3,40; B &ge; 3,10; C &ge; 2,80; D &ge; 2,50), allegato I (definizioni SCOP, consumo annuo) e allegato III (contenuto dell'etichetta): <a href="https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32011R0626">EUR-Lex</a>, letto il 2026-11-07.</li>
+<li>Regolamento (UE) n. 206/2012, allegato I (SCOP minimo dal 1° gennaio 2014: 3,80 se GWP &gt; 150, 3,42 se GWP &le; 150) e allegato II tabelle 3 e 4 (temperature di progetto; 1.400 ore equivalenti per stagioni media e piu' calda, 2.100 per la piu' fredda): <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32012R0206">EUR-Lex</a>, letto il 2026-11-07.</li>
+<li>ARERA, comunicato del 29 settembre 2026 (43,43 c&euro;/kWh tasse incluse, clienti vulnerabili, IV trimestre 2026): <a href="https://www.arera.it/comunicati-stampa/dettaglio/elettricita-maggior-tutela-373-nel-iv-trimestre-2026-per-i-clienti-vulnerabili">arera.it</a>, letto il 2026-11-01.</li>
+<li>ARERA, potere calorifico superiore di riferimento 0,038520 GJ/Smc (10,7 kWh/Smc) e Regolamento UE 813/2013 (caldaie, efficienza minima 86%): fonti e date nella pagina <a href="../quanto-consuma-stufetta-elettrica/#vs-caldaia">stufetta o caldaia</a>.</li>
+</ul>
+<p>Logica del calcolatore: <a href="../../scripts/pompa_calore.js">pompa_calore.js</a> (MIT). Pagine collegate: <a href="../quanto-consuma-stufetta-elettrica/">quanto consuma una stufetta elettrica</a>, <a href="../costo-lavaggio-etichetta-energetica/">costo per lavaggio dall'etichetta energetica</a>. Per seguire la spesa reale bolletta dopo bolletta: <a href="../../download/tracker-bollette-luce-gas.xlsx" download>tracker bollette luce e gas</a> (Excel gratuito).</p>
+</main>
+<footer class="wrap">© 2026 Lumen &amp; Ledger · Testi CC BY 4.0 · <a href="../">Strumenti</a> · <a href="../chi-siamo/">Chi siamo</a> · <a href="../privacy/">Privacy</a> · Contatti: lumenledger.tools@proton.me</footer>
+<script src="../../scripts/pompa_calore.js"></script>
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)};
+  function eur(x,dec){return x.toLocaleString('it-IT',{minimumFractionDigits:dec,maximumFractionDigits:dec})}
+  function num(i){return parseFloat(String($(i).value).replace(',','.'))||0}
+  function calc(){
+    var p=num('p'),s=num('s');
+    if(!(p>0&&s>=1)){$('out').innerHTML='Inserisci prezzo e SCOP (almeno 1).';return}
+    var r=PompaCalore.run({price:p,scop:s,heatKw:num('k'),hours:num('h'),days:num('d'),gas:num('g'),eff:num('n')||86});
+    var t='1 kWh di calore: condizionatore <b>'+eur(r.heatCostPompa,3)+' &euro;</b>, stufetta <b>'+eur(r.heatCostStufetta,3)+' &euro;</b>. Pareggio con la caldaia: <b>'+eur(r.gasBreakeven,2)+' &euro;/Smc</b>.';
+    if(r.heat){
+      t+='<br>Calore richiesto: '+eur(r.heat,0)+' kWh. Condizionatore: <b>'+eur(r.costPompa,2)+' &euro;</b> ('+eur(r.kwhPompa,0)+' kWh elettrici). Stufetta: <b>'+eur(r.costStufetta,2)+' &euro;</b>.';
+      if(r.costCaldaia!==undefined)t+=' Caldaia: <b>'+eur(r.costCaldaia,2)+' &euro;</b> ('+eur(r.smc,0)+' Smc).';
+    }
+    $('out').innerHTML=t;
+    var q=num('q');
+    $('qout').innerHTML=q>0?'Costo annuo convenzionale: <b>'+eur(q*p,2)+' &euro;</b> ('+eur(q,0)+' kWh × '+eur(p,4)+' &euro;/kWh).':'Inserisci i kWh/anno della parte riscaldamento.';
+  }
+  ['p','s','k','h','d','g','n','q'].forEach(function(i){$(i).addEventListener('input',calc)});
+  var qs=new URLSearchParams(location.search),qp=parseFloat(qs.get('prezzo')),qsc=parseFloat(qs.get('scop'));
+  if(qp>=0.01&&qp<=2)$('p').value=qp;
+  if(qsc>=1&&qsc<=10)$('s').value=qsc;
+  calc();
+})();
+</script>
+</body>
+</html>
