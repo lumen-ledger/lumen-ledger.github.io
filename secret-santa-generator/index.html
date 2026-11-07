@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="index,follow">
+<title>Secret Santa generator with exclusions, no email or sign-up</title>
+<meta name="description" content="Free Secret Santa name draw that runs in your browser: add names, keep couples apart, avoid two people drawing each other, set a budget and get one private link per person to send yourself. No email, no account, nothing stored.">
+<link rel="canonical" href="https://lumen-ledger.github.io/secret-santa-generator/">
+<style>
+:root{--navy:#0F2A3D;--sun:#F2B33D;--paper:#F7F5EF;--line:#d9d4c7;--warn:#C2452D}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--navy)}
+header{background:var(--navy);color:#fff;padding:32px 20px}
+.wrap{max-width:760px;margin:0 auto}
+header h1{margin:0;font-size:1.7rem}
+header p{margin:8px 0 0;color:#d6dde2}
+nav{font-size:.9rem;margin-bottom:10px}nav a{color:var(--sun)}
+main{padding:24px 20px}
+h2{font-size:1.15rem;margin:28px 0 6px}
+ul,ol{padding-left:20px}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:10px 0}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#ece8dc}
+td input{width:100%;font:inherit;font-size:.8rem;padding:4px}
+.note{border-left:4px solid var(--warn);background:#fff;padding:10px 14px;font-size:.93rem}
+.box{border:1px solid var(--line);background:#fff;padding:14px 16px}
+.box label{display:block;font-size:.9rem;margin-top:8px}
+.box textarea{width:100%;font:inherit;padding:6px;min-height:150px}
+.box input[type=text],.box input[type=date],.box input[type=number]{width:100%;max-width:300px;padding:6px;font:inherit}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+button{font:inherit;padding:8px 14px;margin:10px 8px 0 0;border:1px solid var(--navy);background:var(--navy);color:#fff;cursor:pointer;border-radius:3px}
+button.light{background:#fff;color:var(--navy)}
+.err{color:var(--warn)}
+.big{font-size:1.5rem;font-weight:700}
+footer{padding:20px;font-size:.82rem;color:#5b6770}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="#draw">Draw names</a> · <a href="#how">How the links work</a> · <a href="#tips">Tips</a> · <a href="#faq">FAQ</a></nav>
+  <h1 id="title">Secret Santa generator: exclusions, private links, no email</h1>
+  <p id="sub">Type the names, keep couples or housemates apart, set the budget. You get one private link per person and send each link yourself, by any chat app. The draw happens in your browser: no account, no email addresses, nothing saved on a server.</p>
+</div></header>
+<main class="wrap">
+
+<div id="reveal" style="display:none">
+  <div class="box" style="text-align:center;padding:28px 16px">
+    <p id="rv-hi" class="big"></p>
+    <p>Make sure nobody is looking at your screen.</p>
+    <button id="rv-btn">Show who I am buying for</button>
+    <div id="rv-out" style="display:none"></div>
+  </div>
+  <p style="font-size:.9rem">This page read your assignment from the link itself; nothing was downloaded from a server. Keep the link: you can open it again whenever you like. <a href="./">Organize your own draw</a>.</p>
+</div>
+
+<div id="organizer">
+<h2 id="draw">Draw names</h2>
+<div class="box">
+  <label for="names">Participants, one name per line (at least 3; names must be different)</label>
+  <textarea id="names" placeholder="Anna&#10;Ben&#10;Carla&#10;David&#10;Emma&#10;Femi"></textarea>
+  <label for="pairs">Who must not draw each other (optional): one couple or group per line, names separated by a comma or "&amp;"</label>
+  <textarea id="pairs" style="min-height:70px" placeholder="Anna &amp; Ben&#10;Carla, David"></textarea>
+  <label><input type="checkbox" id="noswap" checked> Avoid two people drawing each other (A buys for B and B buys for A)</label>
+  <div class="grid">
+    <label>Spending limit (optional)<input id="budget" type="text" placeholder="$25" maxlength="20"></label>
+    <label>Exchange date (optional)<input id="date" type="date"></label>
+  </div>
+  <label>Message for everyone (optional, max 200 characters)<input id="msg" type="text" maxlength="200" style="max-width:100%" placeholder="Party at Carla's, bring the gift wrapped"></label>
+  <button id="go">Draw names</button>
+  <div id="out" aria-live="polite"></div>
+</div>
+<p style="font-size:.9rem">Random numbers come from your browser's cryptographic generator (<code>crypto.getRandomValues</code>). The names are not sent anywhere and disappear when you close the tab, so <b>copy the links before closing</b>.</p>
+
+<h2 id="how">How the private links work</h2>
+<ol>
+<li>Each link contains that person's own assignment (their name, who they buy for, the limit, the date and your message), stored after the <code>#</code> sign. The part after <code>#</code> is never sent to the web server by browsers, so this site never receives it.</li>
+<li>The assignment is <b>encoded, not encrypted</b>: it is not readable at a glance, but someone determined to decode a link could. It stops accidental spoilers, not a determined snoop. Send each person only their own link.</li>
+<li>If you take part too, do not open other people's links. Use "Copy all links" to keep a list for re-sending: it shows who each link belongs to, not who they drew.</li>
+<li>If someone loses their link, send them the same link again from your list. A new draw gives everyone new assignments, so all the old links would have to be replaced.</li>
+</ol>
+
+<h2 id="tips">Tips for a smooth exchange</h2>
+<ul>
+<li><b>Exclusions:</b> couples and people who live together usually swap gifts anyway, so keep them apart. If there are too many exclusions the draw can be impossible: the tool tells you, and you can remove one.</li>
+<li><b>Limit:</b> a clear spending limit avoids awkward gaps. To check what the whole season costs you, see the <a href="../holiday-budget-planner/">gift budget per person calculator</a>.</li>
+<li><b>Gift cards:</b> in the US, money on most store gift cards cannot expire for at least 5 years: <a href="../gift-card-expiration-rules/">gift card rules and date calculator</a>.</li>
+<li><b>Returns:</b> buying online in the UK? <a href="../uk-gift-return-deadlines/">Gift return deadlines</a> (14-day cancellation, 30 days for faulty goods).</li>
+</ul>
+
+<h2 id="faq">FAQ</h2>
+<p><b>Do I need everyone's email address?</b> No. You choose how to deliver each link: text message, chat app, email, or written on a card.</p>
+<p><b>Can the organizer see who drew whom?</b> Only if they choose to. After the draw you see the list of links; the assignments stay hidden unless you click "Show full list", meant for an organizer who is not taking part.</p>
+<p><b>Is the draw random?</b> Yes, within your rules: nobody draws themselves or someone excluded, and, if the box is ticked, nobody ends up in a two-person swap. With exclusions some combinations are impossible, which also makes some outcomes more or less likely than in a draw without rules.</p>
+<p><b>Is anything saved?</b> No. The page has no tracking, no cookies and no account. See <a href="../privacy/">Privacy</a>.</p>
+</div>
+</main>
+<footer class="wrap">© 2026 Lumen &amp; Ledger · Text CC BY 4.0, code MIT · <a href="../">Tools</a> · <a href="../about/">About</a> · <a href="../privacy/">Privacy</a> · Contact: lumenledger.tools@proton.me</footer>
+<script src="../scripts/secret_santa.js"></script>
+<script>
+(function(){
+  var S=window.SecretSanta;
+  function $(i){return document.getElementById(i)}
+  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  var MN=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  function fd(s){var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(s||'');return m?MN[+m[2]-1]+' '+(+m[3])+', '+m[1]:''}
+  var h=location.hash.match(/^#s=([A-Za-z0-9_-]+)$/);
+  if(h){
+    var a=S.decode(h[1]);
+    $('organizer').style.display='none';$('reveal').style.display='';
+    document.title='Your Secret Santa assignment';
+    $('title').textContent='Your Secret Santa assignment';
+    $('sub').textContent='Someone organized a Secret Santa and sent you this private link.';
+    if(!a||!a.g||!a.r){$('rv-hi').textContent='This link looks incomplete.';$('rv-btn').style.display='none';
+      $('rv-out').style.display='';$('rv-out').innerHTML='<p>Copy the whole link (it is long) or ask the organizer to send it again.</p>';return}
+    $('rv-hi').textContent='Hi '+a.g+'!';
+    $('rv-btn').addEventListener('click',function(){
+      var o='<p>You are Secret Santa for</p><p class="big">'+esc(a.r)+'</p>';
+      if(a.b)o+='<p>Spending limit: <b>'+esc(a.b)+'</b></p>';
+      if(a.d)o+='<p>Exchange date: <b>'+esc(fd(a.d))+'</b></p>';
+      if(a.m)o+='<p>Message from the organizer: '+esc(a.m)+'</p>';
+      $('rv-out').innerHTML=o;$('rv-out').style.display='';this.style.display='none';
+    });
+    return;
+  }
+  var last=null;
+  function base(){return location.origin+location.pathname}
+  function copy(t,btn){
+    function done(){var o=btn.textContent;btn.textContent='Copied';setTimeout(function(){btn.textContent=o},1500)}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,function(){prompt('Copy this:',t)})}else{prompt('Copy this:',t)}
+  }
+  $('go').addEventListener('click',function(){
+    var pn=S.parseNames($('names').value),names=pn.names,out=$('out'),msg='';
+    if(pn.dup.length)msg+='<p class="err">Repeated name ignored: '+esc(pn.dup.join(', '))+'. Add a surname or initial to tell people apart.</p>';
+    if(names.length<3){out.innerHTML=msg+'<p class="err">Enter at least 3 different names.</p>';return}
+    var pp=S.parsePairs($('pairs').value,names);
+    if(pp.unknown.length){out.innerHTML=msg+'<p class="err">Exclusion not understood or name not in the list: '+esc(pp.unknown.join(', '))+'. Use the same spelling as the participant list and separate names with a comma.</p>';return}
+    var r=S.draw(names.length,pp.pairs,{noSwap:$('noswap').checked});
+    if(!r){out.innerHTML=msg+'<p class="err">No valid draw exists with these rules. Remove an exclusion, add a participant, or untick the "avoid two people drawing each other" box.</p>';return}
+    var b=$('budget').value.trim(),d=$('date').value,m=$('msg').value.trim().slice(0,200);
+    last=names.map(function(g,i){var o={g:g,r:names[r[i]]};if(b)o.b=b;if(d)o.d=d;if(m)o.m=m;return{g:g,r:names[r[i]],link:base()+'#s='+S.encode(o)}});
+    var t='<p><b>Done: '+names.length+' people, '+pp.pairs.length+' excluded pair'+(pp.pairs.length===1?'':'s')+'.</b> Send each person only their own link.</p><table><tr><th>Send to</th><th>Private link</th><th></th></tr>';
+    last.forEach(function(x,i){t+='<tr><td>'+esc(x.g)+'</td><td><input readonly value="'+esc(x.link)+'" aria-label="Link for '+esc(x.g)+'"></td><td><button class="light cp" data-i="'+i+'" style="margin:0">Copy</button></td></tr>'});
+    t+='</table><button id="all" class="light">Copy all links (names + links)</button><button id="full" class="light">Show full list</button><div id="fl"></div>';
+    out.innerHTML=msg+t;
+    Array.prototype.forEach.call(out.querySelectorAll('.cp'),function(bt){bt.addEventListener('click',function(){copy(last[+bt.getAttribute('data-i')].link,bt)})});
+    $('all').addEventListener('click',function(){copy(last.map(function(x){return x.g+': '+x.link}).join('\n'),this)});
+    $('full').addEventListener('click',function(){
+      if(!confirm('This shows every assignment. Continue only if you are not taking part.'))return;
+      var f='<table><tr><th>Giver</th><th>Buys for</th></tr>';last.forEach(function(x){f+='<tr><td>'+esc(x.g)+'</td><td>'+esc(x.r)+'</td></tr>'});
+      $('fl').innerHTML=f+'</table>';this.style.display='none';
+    });
+  });
+  window.addEventListener('hashchange',function(){if(/^#s=/.test(location.hash))location.reload()});
+})();
+</script>
+</body>
+</html>
