@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Resi dei regali di Natale: calcolatore delle scadenze (recesso 14 giorni e garanzia)</title>
+<meta name="description" content="Entro quando si può restituire un regalo comprato online? Calcolatore gratuito: inserisci la data di consegna e ottieni l'ultimo giorno per il recesso (14 giorni), per la rispedizione e le date della garanzia legale (2 anni). Fonti: Codice del consumo su Normattiva e MIMIT.">
+<link rel="canonical" href="https://lumen-ledger.github.io/it/resi-regali-natale/">
+<style>
+:root{--navy:#0F2A3D;--sun:#F2B33D;--paper:#F7F5EF;--line:#d9d4c7;--warn:#C2452D}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--navy)}
+header{background:var(--navy);color:#fff;padding:32px 20px}
+.wrap{max-width:760px;margin:0 auto}
+header h1{margin:0;font-size:1.7rem}
+header p{margin:8px 0 0;color:#d6dde2}
+nav{font-size:.9rem;margin-bottom:10px}nav a{color:var(--sun)}
+main{padding:24px 20px}
+h2{font-size:1.15rem;margin:28px 0 6px}
+ul,ol{padding-left:20px}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:10px 0}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#ece8dc}
+.note{border-left:4px solid var(--warn);background:#fff;padding:10px 14px;font-size:.93rem}
+.box{border:1px solid var(--line);background:#fff;padding:14px 16px}
+.box label{display:block;font-size:.9rem;margin-top:8px}
+.box input,.box select{width:100%;max-width:300px;padding:6px;font:inherit}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.out{font-size:1.02rem;margin-top:12px}
+.late{color:#C2452D}
+footer{padding:20px;font-size:.82rem;color:#5b6770}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="#calcolatore">Calcolatore</a> · <a href="#regole">Regole</a> · <a href="#esclusi">Esclusi</a> · <a href="#garanzia">Garanzia</a> · <a href="#fonti">Fonti</a></nav>
+  <h1>Resi dei regali di Natale: entro quando si può restituire</h1>
+  <p>Per un acquisto online i 14 giorni di recesso partono dalla <b>consegna</b>, non da Natale. Un regalo consegnato il <b>10 dicembre</b> si può rendere per ripensamento solo fino al <b>24 dicembre</b>; uno consegnato il 23 dicembre fino al 6 gennaio. Nei negozi fisici il reso per ripensamento non è un diritto: dipende dalla politica del negozio.</p>
+</div></header>
+<main class="wrap">
+
+<p class="note">Informazione generale, non consulenza legale. Testi di legge letti su Normattiva e pagine MIMIT il 2026-11-07 (vedi <a href="#fonti">Fonti</a>). Per casi particolari rivolgiti al venditore o a un'associazione dei consumatori.</p>
+
+<h2 id="calcolatore">Calcolatore delle scadenze</h2>
+<div class="box">
+  <div class="grid">
+    <label>Dove è stato comprato
+      <select id="where">
+        <option value="online">Online, telefono o catalogo (a distanza)</option>
+        <option value="fuori">Fuori dal negozio (a domicilio, porta a porta)</option>
+        <option value="negozio">In negozio</option>
+      </select></label>
+    <label>Data di consegna (quando tu o chi hai indicato l'ha ricevuto)<input id="del" type="date" value="2026-12-10"></label>
+    <label>Il venditore ti ha informato del diritto di recesso?
+      <select id="info">
+        <option value="si">Sì (condizioni di vendita, conferma d'ordine)</option>
+        <option value="no">No, nessuna informazione</option>
+      </select></label>
+    <label>Data in cui comunichi il recesso (facoltativa)<input id="sent" type="date"></label>
+    <label>Bene
+      <select id="cond">
+        <option value="nuovo">Nuovo</option>
+        <option value="usato">Usato</option>
+      </select></label>
+  </div>
+  <div class="out" id="out" aria-live="polite"></div>
+</div>
+<p style="font-size:.9rem">Il calcolo usa giorni di calendario e non conta il giorno della consegna (considerando 41 della direttiva 2011/83/UE). Le date restano sul tuo dispositivo: nessun dato viene inviato.</p>
+
+<h2 id="regole">Le regole del recesso, in breve</h2>
+<table>
+<tr><th>Cosa</th><th>Regola</th><th>Fonte</th></tr>
+<tr><td>A quali acquisti si applica</td><td>Contratti a distanza (online, telefono) e conclusi fuori dai locali commerciali. Non agli acquisti in negozio.</td><td>Art. 52 Codice del consumo; MIMIT</td></tr>
+<tr><td>Durata</td><td>14 giorni, senza indicare il motivo.</td><td>Art. 52 c.1</td></tr>
+<tr><td>Da quando</td><td>Da quando tu o un terzo da te designato (diverso dal corriere) prendete possesso fisico del bene. Più beni di un unico ordine consegnati separatamente: dall'ultimo bene.</td><td>Art. 52 c.2</td></tr>
+<tr><td>Se il venditore non ti ha informato</td><td>Il termine si allunga di 12 mesi oltre i 14 giorni iniziali; se l'informazione arriva prima, finisce 14 giorni dopo averla ricevuta.</td><td>Art. 53; MIMIT</td></tr>
+<tr><td>Come si comunica</td><td>Modulo tipo di recesso o qualsiasi dichiarazione esplicita, inviata prima della scadenza. La prova spetta a te: usa un mezzo tracciabile (modulo del sito con conferma, email, PEC, raccomandata).</td><td>Art. 54</td></tr>
+<tr><td>Rispedizione</td><td>Entro 14 giorni dalla comunicazione del recesso (basta spedire prima della scadenza). Paghi solo il costo diretto della restituzione, salvo che il venditore se ne faccia carico o non ti abbia informato che è a tuo carico.</td><td>Art. 57 c.1</td></tr>
+<tr><td>Rimborso</td><td>Entro 14 giorni da quando il venditore è informato del recesso.</td><td>MIMIT (art. 56)</td></tr>
+</table>
+<p><b>Regali:</b> il recesso spetta a chi ha concluso il contratto. Se il regalo l'hai ricevuto, di solito il reso lo avvia chi l'ha comprato (account, numero d'ordine, rimborso sul suo metodo di pagamento). Molti negozi offrono a dicembre resi più lunghi o lo scontrino di cortesia: sono condizioni commerciali volontarie, leggile sul sito o sullo scontrino.</p>
+
+<h2 id="esclusi">Cosa non si può rendere per ripensamento</h2>
+<p>L'art. 59 esclude dal recesso, tra gli altri:</p>
+<ul>
+<li>beni su misura o chiaramente personalizzati (es. tazza con foto, incisione);</li>
+<li>beni che rischiano di deteriorarsi o scadere rapidamente (es. dolci, fiori);</li>
+<li>beni sigillati non restituibili per motivi igienici o di salute, se aperti dopo la consegna;</li>
+<li>registrazioni audio o video e software sigillati, se aperti dopo la consegna;</li>
+<li>giornali e riviste (tranne gli abbonamenti);</li>
+<li>servizi per il tempo libero, alloggio o ristorazione con una data precisa (es. biglietto per uno spettacolo in un certo giorno);</li>
+<li>contenuti digitali non su supporto materiale, già iniziati con il tuo consenso espresso e la rinuncia al recesso.</li>
+</ul>
+
+<h2 id="garanzia">Se il regalo è difettoso: garanzia legale</h2>
+<p>La garanzia legale di conformità vale anche per gli acquisti in negozio e non c'entra con il ripensamento:</p>
+<ul>
+<li>il venditore risponde dei difetti presenti alla consegna che si manifestano <b>entro 2 anni</b> (art. 133 c.1);</li>
+<li>per i difetti che emergono entro 1 anno dalla consegna si presume che esistessero già (MIMIT, art. 135);</li>
+<li>l'azione si prescrive in <b>26 mesi</b> dalla consegna (art. 133 c.3);</li>
+<li>beni usati: le parti possono ridurre questi periodi, ma non sotto 1 anno (art. 133 c.4): controlla il contratto;</li>
+<li>rimedi: prima riparazione o sostituzione gratuita, poi riduzione del prezzo o risoluzione (art. 135-bis);</li>
+<li>ci si rivolge al venditore, non al produttore (MIMIT).</li>
+</ul>
+<p>Se il bene viene riparato, l'art. 133 c.1-bis prevede una proroga una tantum di 12 mesi: verifica su Normattiva a quali contratti si applica. La garanzia commerciale del produttore (es. "3 anni") si aggiunge a quella legale, non la sostituisce.</p>
+
+<h2>Esempi</h2>
+<table>
+<tr><th>Consegna</th><th>Ultimo giorno per comunicare il recesso</th><th>Difetti coperti fino al (bene nuovo)</th></tr>
+<tr><td>28 novembre 2026</td><td>12 dicembre 2026</td><td>28 novembre 2028</td></tr>
+<tr><td>10 dicembre 2026</td><td>24 dicembre 2026</td><td>10 dicembre 2028</td></tr>
+<tr><td>23 dicembre 2026</td><td>6 gennaio 2027</td><td>23 dicembre 2028</td></tr>
+</table>
+<p>Compri i regali online? Il <a href="../budget-regali-natale/">calcolatore del budget regali</a> e il <a href="../budget-regali-natale/#foglio">pianificatore spese di Natale</a> (foglio gratuito) hanno una colonna "Reso entro" che evidenzia le scadenze dei prossimi 14 giorni.</p>
+
+<h2 id="fonti">Fonti (verificate il 2026-11-07)</h2>
+<ul>
+<li>D.Lgs. 6 settembre 2005, n. 206 (Codice del consumo), artt. 52, 54, 57, 59 e 133, testo vigente su <a href="https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-09-06;206">Normattiva</a>.</li>
+<li>MIMIT, <a href="https://www.mimit.gov.it/it/mercato-e-consumatori/tutela-del-consumatore/diritti-del-consumatore/diritto-di-recesso">Diritto di recesso</a> (ultima modifica 10 ottobre 2023) e <a href="https://www.mimit.gov.it/it/mercato-e-consumatori/tutela-del-consumatore/diritti-del-consumatore/garanzia-legale">Garanzia legale</a> (ultima modifica 26 ottobre 2023), per artt. 53, 56 e 135.</li>
+<li>Direttiva 2011/83/UE, considerando 41 (computo dei termini), su <a href="https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:32011L0083">EUR-Lex</a>.</li>
+</ul>
+<p style="font-size:.9rem">Da verificare caso per caso: le condizioni di reso del singolo negozio (spesso più favorevoli a dicembre); l'eventuale slittamento se la scadenza cade in un giorno festivo (qui non applicato: le date indicate sono le più prudenti); acquisti da venditori fuori dall'UE o da privati (il Codice del consumo regola i rapporti tra consumatore e professionista).</p>
+</main>
+<footer class="wrap">© 2026 Lumen &amp; Ledger · Testi CC BY 4.0 · <a href="../">Strumenti</a> · <a href="../chi-siamo/">Chi siamo</a> · <a href="../privacy/">Privacy</a> · Contatti: lumenledger.tools@proton.me</footer>
+<script>
+(function(){
+  function $(i){return document.getElementById(i)}
+  var M=['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
+  var W=['domenica','lunedì','martedì','mercoledì','giovedì','venerdì','sabato'];
+  function parse(s){var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(s||'');if(!m)return null;var d=new Date(Date.UTC(+m[1],+m[2]-1,+m[3]));return isNaN(d)?null:d}
+  function addD(d,n){return new Date(d.getTime()+n*864e5)}
+  function addM(d,n){var y=d.getUTCFullYear(),m=d.getUTCMonth()+n,day=d.getUTCDate();var last=new Date(Date.UTC(y,m+1,0)).getUTCDate();return new Date(Date.UTC(y,m,Math.min(day,last)))}
+  function f(d){return W[d.getUTCDay()]+' '+d.getUTCDate()+' '+M[d.getUTCMonth()]+' '+d.getUTCFullYear()}
+  function calc(){
+    var w=$('where').value,d=parse($('del').value),inf=$('info').value,s=parse($('sent').value),used=$('cond').value==='usato';
+    if(!d){$('out').textContent='Inserisci la data di consegna.';return}
+    var h='';
+    if(w==='negozio'){
+      h+='<p><b>Recesso:</b> per gli acquisti in negozio la legge non prevede il reso per ripensamento. Vale la politica del negozio (cambio merce, scontrino di cortesia): leggila sullo scontrino o chiedi al punto vendita.</p>';
+    }else{
+      var dl=addD(d,14),lim=inf==='no'?addM(dl,12):dl;
+      h+='<p><b>Ultimo giorno per comunicare il recesso: '+f(dl)+'</b> (14 giorni dalla consegna, giorno di consegna escluso).</p>';
+      if(inf==='no'){h+='<p>Se il venditore non ti ha mai informato del diritto di recesso, il termine si allunga fino a <b>'+f(lim)+'</b> (12 mesi in più, art. 53). Se ricevi l&#39;informazione prima, hai 14 giorni da quel momento.</p>'}
+      if(s){
+        if(s<d){h+='<p class="late">La data di comunicazione è precedente alla consegna: controlla le date.</p>'}
+        else if(s>lim){h+='<p class="late"><b>La comunicazione di '+f(s)+' è oltre la scadenza.</b> Restano la garanzia legale per i difetti e l&#39;eventuale politica di reso del venditore.</p>'}
+        else{h+='<p>Recesso comunicato '+f(s)+': rispedisci il bene <b>entro '+f(addD(s,14))+'</b>; il venditore deve rimborsarti entro 14 giorni da quando ha ricevuto la comunicazione.</p>'}
+      }
+    }
+    h+='<p><b>Garanzia legale:</b> difetti che si manifestano entro <b>'+f(addM(d,24))+'</b>; si presume che esistessero alla consegna se emergono entro '+f(addM(d,12))+'; azione prescritta dopo '+f(addM(d,26))+'.';
+    if(used){h+=' Per un bene usato il contratto può ridurre garanzia e prescrizione fino a 1 anno (non prima di '+f(addM(d,12))+'): controlla le condizioni.'}
+    h+='</p>';
+    $('out').innerHTML=h;
+  }
+  ['where','del','info','sent','cond'].forEach(function(i){$(i).addEventListener('input',calc);$(i).addEventListener('change',calc)});
+  calc();
+})();
+</script>
+</body>
+</html>
