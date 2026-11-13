@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="index,follow">
+<title>UK bank holidays 2027 and annual leave planner</title>
+<meta name="description" content="2027 bank holidays for England and Wales, Scotland and Northern Ireland, with an exact planner that finds the most days off for your annual leave.">
+<link rel="canonical" href="https://lumen-ledger.github.io/uk-bank-holidays-2027-leave-planner/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Lumen &amp; Ledger">
+<meta property="og:locale" content="en_GB">
+<meta property="og:title" content="UK bank holidays 2027 and annual leave planner">
+<meta property="og:description" content="2027 bank holidays for England and Wales, Scotland and Northern Ireland, with an exact planner that finds the most days off for your annual leave.">
+<meta property="og:url" content="https://lumen-ledger.github.io/uk-bank-holidays-2027-leave-planner/">
+<meta name="twitter:card" content="summary">
+<style>
+:root{--navy:#0F2A3D;--sun:#F2B33D;--paper:#F7F5EF;--line:#d9d4c7;--warn:#C2452D}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--navy)}
+header{background:var(--navy);color:#fff;padding:32px 20px}
+.wrap{max-width:760px;margin:0 auto}
+header h1{margin:0;font-size:1.7rem}
+header p{margin:8px 0 0;color:#d6dde2}
+nav{font-size:.9rem;margin-bottom:10px}nav a{color:var(--sun)}
+main{padding:24px 20px}
+h2{font-size:1.15rem;margin:28px 0 6px}
+ul,ol{padding-left:20px}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:10px 0}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#ece8dc}
+.note{border-left:4px solid var(--warn);background:#fff;padding:10px 14px;font-size:.93rem}
+.box{border:1px solid var(--line);background:#fff;padding:14px 16px}
+.box label{display:block;font-size:.9rem;margin-top:8px}
+.box input,.box select{width:100%;max-width:260px;padding:6px;font:inherit}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.out{font-size:1.05rem;margin-top:12px}
+button.act{margin-top:10px;padding:6px 12px;font:inherit;border:1px solid var(--navy);background:var(--sun);border-radius:4px;cursor:pointer}
+.months{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;margin-top:12px}
+.mon{background:#fff;border:1px solid var(--line);padding:6px;font-size:.78rem}
+.mon b{display:block;margin-bottom:2px}
+.mon table{margin:0;font-size:.75rem}
+.mon td,.mon th{border:0;padding:1px 2px;text-align:center}
+.mon th{background:none;color:#5b6770}
+.w{color:#8a949b}.h{background:#F2B33D;font-weight:bold}.f{background:#0F2A3D;color:#fff}.b{background:#e6e0cf}
+.legend span{display:inline-block;padding:0 6px;margin-right:6px;font-size:.85rem}
+footer{padding:20px;font-size:.82rem;color:#5b6770}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="#planner">Planner</a> · <a href="#dates">2027 dates</a> · <a href="#breaks">Best breaks</a> · <a href="#method">Method</a> · <a href="#sources">Sources</a></nav>
+  <h1>UK bank holidays 2027: annual leave planner</h1>
+  <p>In 2027 England and Wales have 8 bank holidays, Scotland 9 and Northern Ireland 10. Christmas Day and Boxing Day fall on a weekend, so the substitute days are Monday 27 and Tuesday 28 December. With 3 days of leave (29–31 December) you get 10 days off in a row, from Saturday 25 December to Monday 3 January 2028. The planner below finds the best plan for your own number of days.</p>
+</div></header>
+<main class="wrap">
+<p class="note">General information, not advice. When you can take leave depends on your contract and your employer: some employers count bank holidays as part of your annual leave, some ask you to work them, and your leave year may not run from January to December. The planner only knows the bank holidays and the extra days off you enter.</p>
+
+<h2 id="planner">Planner</h2>
+<div class="box">
+  <div class="grid">
+    <label>Where you work<select id="nat"><option value="england-and-wales">England and Wales</option><option value="scotland">Scotland</option><option value="northern-ireland">Northern Ireland</option></select></label>
+    <label>Days of annual leave to use<input id="n" type="number" min="0" max="60" step="1" value="8"></label>
+    <label>Working week<select id="six"><option value="0">Monday–Friday</option><option value="1">Monday–Saturday</option></select></label>
+    <label>Shortest break (days off in a row)<input id="minl" type="number" min="2" max="30" step="1" value="4"></label>
+    <label>Longest break (days off in a row)<input id="maxl" type="number" min="3" max="40" step="1" value="16"></label>
+  </div>
+  <label>Other days you already have off, e.g. an office closure or a local holiday (dd/mm, comma separated, optional)<input id="cl" type="text" placeholder="e.g. 24/12, 31/12" style="max-width:100%"></label>
+  <div class="out" id="out" aria-live="polite"></div>
+  <ol id="list"></ol>
+  <button class="act" id="ics" type="button">Download the plan as a calendar file (.ics)</button>
+  <p class="legend"><span class="h">bank holiday</span><span class="f">annual leave</span><span class="b">weekend inside a break</span><span class="w">weekend</span></p>
+  <div class="months" id="cal"></div>
+</div>
+<p>Example (England and Wales, Monday–Friday, 8 days of leave, breaks of 4 to 16 days): the best plan gives <b>31 days off</b> in 7 breaks: 1–4 January, 26–30 March, 1–4 May, 29 May–1 June, 28–31 August, 25–29 December and 31 December–4 January 2028. If you would rather have fewer, longer breaks, raise the shortest break.</p>
+
+<h2 id="dates">Bank holidays 2027</h2>
+<table>
+<tr><th>Date</th><th>England and Wales</th><th>Scotland</th><th>Northern Ireland</th></tr>
+<tr><td>Fri 1 January</td><td>New Year's Day</td><td>New Year's Day</td><td>New Year's Day</td></tr>
+<tr><td>Mon 4 January</td><td>—</td><td>2nd January (substitute day)</td><td>—</td></tr>
+<tr><td>Wed 17 March</td><td>—</td><td>—</td><td>St Patrick's Day</td></tr>
+<tr><td>Fri 26 March</td><td>Good Friday</td><td>Good Friday</td><td>Good Friday</td></tr>
+<tr><td>Mon 29 March</td><td>Easter Monday</td><td>—</td><td>Easter Monday</td></tr>
+<tr><td>Mon 3 May</td><td>Early May bank holiday</td><td>Early May bank holiday</td><td>Early May bank holiday</td></tr>
+<tr><td>Mon 31 May</td><td>Spring bank holiday</td><td>Spring bank holiday</td><td>Spring bank holiday</td></tr>
+<tr><td>Mon 12 July</td><td>—</td><td>—</td><td>Battle of the Boyne (Orangemen's Day)</td></tr>
+<tr><td>Mon 2 August</td><td>—</td><td>Summer bank holiday</td><td>—</td></tr>
+<tr><td>Mon 30 August</td><td>Summer bank holiday</td><td>—</td><td>Summer bank holiday</td></tr>
+<tr><td>Tue 30 November</td><td>—</td><td>St Andrew's Day</td><td>—</td></tr>
+<tr><td>Mon 27 December</td><td>Christmas Day (substitute day)</td><td>Christmas Day (substitute day)</td><td>Christmas Day (substitute day)</td></tr>
+<tr><td>Tue 28 December</td><td>Boxing Day (substitute day)</td><td>Boxing Day (substitute day)</td><td>Boxing Day (substitute day)</td></tr>
+</table>
+<p>After that: Monday 3 January 2028 is the substitute day for New Year's Day in all three, and in Scotland Tuesday 4 January 2028 is the substitute day for 2nd January. Easter Sunday 2027 is 28 March.</p>
+
+<h2 id="breaks">Best single breaks in 2027 (Monday–Friday)</h2>
+<table>
+<tr><th>Break</th><th>Leave days</th><th>Days off in a row</th><th>Where</th></tr>
+<tr><td>Christmas: Sat 25 Dec – Mon 3 Jan 2028</td><td>29, 30, 31 Dec (3)</td><td>10</td><td>All three (Scotland: to Tue 4 Jan, 11 days)</td></tr>
+<tr><td>Christmas: Fri 24 Dec – Mon 3 Jan 2028</td><td>24, 29, 30, 31 Dec (4)</td><td>11</td><td>All three (Scotland: to Tue 4 Jan, 12 days)</td></tr>
+<tr><td>Easter: Fri 26 Mar – Sun 4 Apr</td><td>30, 31 Mar, 1, 2 Apr (4)</td><td>10</td><td>England and Wales, Northern Ireland</td></tr>
+<tr><td>Easter: Sat 20 Mar – Mon 29 Mar</td><td>22–25 Mar (4)</td><td>10</td><td>England and Wales, Northern Ireland</td></tr>
+<tr><td>New Year: Fri 1 Jan – Tue 5 Jan</td><td>5 Jan (1)</td><td>5</td><td>Scotland</td></tr>
+<tr><td>St Patrick's Day: Wed 17 – Sun 21 Mar</td><td>18, 19 Mar (2)</td><td>5</td><td>Northern Ireland</td></tr>
+<tr><td>St Andrew's Day: Sat 27 – Tue 30 Nov</td><td>29 Nov (1)</td><td>4</td><td>Scotland</td></tr>
+<tr><td>Any Monday bank holiday</td><td>the Friday before or the Tuesday after (1)</td><td>4</td><td>All three</td></tr>
+</table>
+<p>In Scotland Easter Monday is not a bank holiday, so 4 days of leave around Easter give 9 days off rather than 10 (Sat 20 – Sun 28 March, taking 22–25 March). The planner shows the exact result for your settings.</p>
+
+<h2 id="method">How the planner works</h2>
+<ul>
+<li>Days off: Sundays, Saturdays (unless you work Monday–Saturday), the bank holidays of the nation you pick, and any extra days you enter.</li>
+<li>A break is a run of consecutive days off that contains at least one day of annual leave; its length must be between the shortest and longest break you choose. The shortest break stops the planner from recommending nothing but long weekends.</li>
+<li>The planner checks every combination of breaks (dynamic programming over the days of the year) and returns the one with the most days off in total; on a tie, the one that uses fewer leave days. It is not a rule of thumb: the result is the optimum for your settings (tested against exhaustive search on 300 random calendars).</li>
+<li>Breaks must start in 2027; the calendar runs to 6 January 2028, so a Christmas break can end in the new year. Leave taken in January 2028 usually comes out of the next year's allowance.</li>
+<li>Statutory leave for most workers is 5.6 weeks a year, capped at 28 days (Working Time Regulations 1998, regulations 13 and 13A). For a 5-day week that is 28 days, and an employer may count bank holidays within it: in that case enter only the days left after the bank holidays.</li>
+<li>Code: <a href="../scripts/ponti_ferie.js">ponti_ferie.js</a> (MIT; the same engine as our <a href="../it/ponti-ferie-2027/">Italian version</a>). Everything runs in your browser; nothing is sent anywhere.</li>
+</ul>
+
+<h2 id="sources">Sources (checked 13 November 2026)</h2>
+<ul>
+<li>Bank holiday dates for 2027 and January 2028, for each nation: <a href="https://www.gov.uk/bank-holidays" rel="noopener">GOV.UK, UK bank holidays</a> (official data feed <a href="https://www.gov.uk/bank-holidays.json" rel="noopener">bank-holidays.json</a>). An extra bank holiday can be added by royal proclamation: if that happens, GOV.UK will list it.</li>
+<li>Bank holidays and annual leave: <a href="https://www.gov.uk/holiday-entitlement-rights/bank-holidays" rel="noopener">GOV.UK, Holiday entitlement: bank holidays</a> ("Bank or public holidays do not have to be given as paid leave"; an employer can include them in statutory leave).</li>
+<li>Statutory entitlement: <a href="https://www.legislation.gov.uk/uksi/1998/1833/regulation/13A" rel="noopener">Working Time Regulations 1998, regulation 13A</a> (additional 1.6 weeks; total with regulation 13 capped at 28 days). Northern Ireland has its own Working Time Regulations; check nidirect for the rules there.</li>
+</ul>
+<p>See also: <a href="../uk-gift-return-deadlines/">UK gift return deadlines</a> · <a href="../christmas-dinner-timeline/">Christmas dinner timeline</a> · <a href="../holiday-budget-planner/">holiday budget planner</a> · <a href="../secret-santa-generator/">Secret Santa generator</a>.</p>
+</main>
+<footer class="wrap">© 2026 Lumen &amp; Ledger · Text CC BY 4.0 · <a href="../">Tools</a> · <a href="../about/">About</a> · <a href="../privacy/">Privacy</a> · Contact: lumenledger.tools@proton.me</footer>
+<script src="../scripts/ponti_ferie.js"></script>
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)};
+  var P=window.PontiFerie, Y=2027, MON=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  // GOV.UK bank-holidays.json, read 2026-11-13 (2027 + January 2028)
+  var BH={
+    'england-and-wales':[['2027-01-01',"New Year's Day"],['2027-03-26','Good Friday'],['2027-03-29','Easter Monday'],['2027-05-03','Early May bank holiday'],['2027-05-31','Spring bank holiday'],['2027-08-30','Summer bank holiday'],['2027-12-27','Christmas Day (substitute day)'],['2027-12-28','Boxing Day (substitute day)'],['2028-01-03',"New Year's Day (substitute day)"]],
+    'scotland':[['2027-01-01',"New Year's Day"],['2027-01-04','2nd January (substitute day)'],['2027-03-26','Good Friday'],['2027-05-03','Early May bank holiday'],['2027-05-31','Spring bank holiday'],['2027-08-02','Summer bank holiday'],['2027-11-30',"St Andrew's Day"],['2027-12-27','Christmas Day (substitute day)'],['2027-12-28','Boxing Day (substitute day)'],['2028-01-03',"New Year's Day (substitute day)"],['2028-01-04','2nd January (substitute day)']],
+    'northern-ireland':[['2027-01-01',"New Year's Day"],['2027-03-17',"St Patrick's Day"],['2027-03-26','Good Friday'],['2027-03-29','Easter Monday'],['2027-05-03','Early May bank holiday'],['2027-05-31','Spring bank holiday'],['2027-07-12',"Battle of the Boyne (Orangemen's Day)"],['2027-08-30','Summer bank holiday'],['2027-12-27','Christmas Day (substitute day)'],['2027-12-28','Boxing Day (substitute day)'],['2028-01-03',"New Year's Day (substitute day)"]]
+  };
+  var last=null;
+  function ddmm(s){var m=String(s).trim().match(/^(\d{1,2})[\/\-.](\d{1,2})$/);if(!m)return null;var d=+m[1],mo=+m[2];if(mo<1||mo>12||d<1||d>31)return null;return [mo,d]}
+  function fmt(t){var d=new Date(t);return DOW[d.getUTCDay()]+' '+d.getUTCDate()+' '+MON[d.getUTCMonth()].slice(0,3)+(d.getUTCFullYear()!==Y?' '+d.getUTCFullYear():'')}
+  function calc(){
+    var N=Math.max(0,Math.min(60,parseInt($('n').value,10)||0));
+    var minl=Math.max(2,parseInt($('minl').value,10)||4), maxl=Math.max(minl,parseInt($('maxl').value,10)||16);
+    var closed=[];String($('cl').value).split(',').forEach(function(x){var k=ddmm(x);if(k)closed.push(P.utc(Y,k[0],k[1]))});
+    var hols=(BH[$('nat').value]||[]).map(function(h){var p=h[0].split('-');return [P.utc(+p[0],+p[1],+p[2]),h[1]]});
+    var D=P.days(Y,{sixDay:$('six').value==='1',hols:hols,closed:closed,closedLabel:'your extra day off'});
+    var r=P.optimize(D,N,maxl,minl);last={D:D,r:r};
+    var lv={},inb={};
+    r.blocks.forEach(function(b){for(var i=b.s;i<=b.e;i++){inb[i]=1;if(!D[i].off)lv[i]=1}});
+    $('out').innerHTML=r.blocks.length?'<b>'+r.daysOff+' days off</b> in '+r.blocks.length+' break'+(r.blocks.length>1?'s':'')+' using <b>'+r.used+'</b> day'+(r.used!==1?'s':'')+' of annual leave ('+(r.daysOff/Math.max(1,r.used)).toFixed(1)+' days off per leave day).':'No break fits these settings: add leave days or lower the shortest break.';
+    $('list').innerHTML=r.blocks.map(function(b){var f=[];for(var i=b.s;i<=b.e;i++)if(!D[i].off)f.push(fmt(D[i].t));var h=[];for(i=b.s;i<=b.e;i++)if(D[i].hol)h.push(D[i].hol);
+      return '<li><b>'+fmt(D[b.s].t)+' – '+fmt(D[b.e].t)+'</b>: '+b.len+' days off, leave: '+f.join(', ')+(h.length?' ('+h.join(', ')+')':'')+'</li>'}).join('');
+    var html='',idx={};D.forEach(function(d,i){idx[d.t]=i});
+    for(var m=0;m<12;m++){
+      var first=P.utc(Y,m+1,1),lead=(new Date(first).getUTCDay()+6)%7,s='<div class="mon"><b>'+MON[m]+' '+Y+'</b><table><tr><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th><th>S</th></tr><tr>';
+      for(var k=0;k<lead;k++)s+='<td></td>';
+      for(var t=first,c=lead;new Date(t).getUTCMonth()===m;t+=864e5,c++){
+        if(c&&c%7===0)s+='</tr><tr>';var i2=idx[t],d=D[i2],cls=lv[i2]?'f':d.hol?'h':(inb[i2]&&d.off)?'b':d.off?'w':'';
+        s+='<td'+(cls?' class="'+cls+'"':'')+(d.hol?' title="'+d.hol.replace(/"/g,'')+'"':'')+'>'+new Date(t).getUTCDate()+'</td>'}
+      html+=s+'</tr></table></div>'}
+    $('cal').innerHTML=html;
+  }
+  function ics(){
+    if(!last||!last.r.blocks.length)return;
+    var D=last.D,p=function(t){return new Date(t).toISOString().slice(0,10).replace(/-/g,'')};
+    var L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Lumen & Ledger//Leave planner//EN','CALSCALE:GREGORIAN'];
+    last.r.blocks.forEach(function(b,i){L.push('BEGIN:VEVENT','UID:leave-'+p(D[b.s].t)+'-'+i+'@lumen-ledger.github.io','DTSTAMP:'+p(Date.now())+'T000000Z','DTSTART;VALUE=DATE:'+p(D[b.s].t),'DTEND;VALUE=DATE:'+p(D[b.e].t+864e5),'SUMMARY:Break ('+b.len+' days off\\, '+b.cost+' leave days)','END:VEVENT')});
+    L.push('END:VCALENDAR');
+    var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([L.join('\r\n')],{type:'text/calendar'}));a.download='leave-plan-'+Y+'.ics';document.body.appendChild(a);a.click();a.remove();
+  }
+  ['nat','n','six','minl','maxl','cl'].forEach(function(i){$(i).addEventListener('input',calc);$(i).addEventListener('change',calc)});
+  $('ics').addEventListener('click',ics);
+  calc();
+})();
+</script>
+</body>
+</html>

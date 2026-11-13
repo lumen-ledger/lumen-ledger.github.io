@@ -1,6 +1,7 @@
 /* Ponti e ferie - Lumen & Ledger - MIT License
  * Festivita' nazionali italiane (L. 260/1949 art. 2 come modificata da L. 54/1977,
  * DPR 792/1985, L. 336/2000, L. 151/2025) + ottimizzazione esatta dei giorni di ferie.
+ * Con opt.hols accetta qualsiasi elenco di festivita' (usato per i bank holidays UK).
  * Tutto nel browser, nessun dato inviato. Funziona anche in Node (module.exports). */
 (function (root) {
   'use strict';
@@ -36,8 +37,9 @@
   function days(y, opt) {
     opt = opt || {};
     var sixDay = !!opt.sixDay, hol = {}, extra = opt.closed || [];
-    holidays(y, opt.patron).concat(holidays(y + 1, opt.patron)).forEach(function (h) { hol[h[0]] = (hol[h[0]] ? hol[h[0]] + ' + ' : '') + h[1]; });
-    extra.forEach(function (t) { if (!hol[t]) hol[t] = 'Chiusura aziendale'; });
+    // opt.hols: elenco [t, nome] alternativo (es. bank holidays UK) al posto delle festivita' italiane
+    (opt.hols || holidays(y, opt.patron).concat(holidays(y + 1, opt.patron))).forEach(function (h) { hol[h[0]] = (hol[h[0]] ? hol[h[0]] + ' + ' : '') + h[1]; });
+    extra.forEach(function (t) { if (!hol[t]) hol[t] = opt.closedLabel || 'Chiusura aziendale'; });
     var out = [], t = utc(y, 1, 1), end = utc(y + 1, 1, 7); // fino al 6 gennaio dell'anno dopo
     for (; t < end; t += DAY) {
       var dow = new Date(t).getUTCDay(); // 0 = domenica
