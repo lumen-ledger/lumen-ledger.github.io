@@ -24,6 +24,7 @@ header p{margin:8px 0 0;color:#d6dde2}
 nav{font-size:.9rem;margin-bottom:10px}nav a{color:var(--sun)}
 main{padding:24px 20px}
 h2{font-size:1.15rem;margin:28px 0 6px}
+h3{font-size:1rem;margin:18px 0 4px}
 ul,ol{padding-left:20px}
 table{border-collapse:collapse;width:100%;font-size:.93rem;margin:10px 0}
 th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
@@ -43,7 +44,7 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
 </head>
 <body>
 <header><div class="wrap">
-  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="../electricity-price-per-kwh/">Price per kWh by state</a> · <a href="../plugin-solar-calculator/">Solar calculator</a></nav>
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="../electricity-price-per-kwh/">Price per kWh by state</a> · <a href="../plugin-solar-calculator/">Solar calculator</a> · <a href="#faq">FAQ</a></nav>
   <h1>Texas Electricity Facts Label (EFL), explained</h1>
   <p>The EFL shows a plan's price at exactly three usage levels. Your bill depends on your usage every month. Here is how to read the label, and a calculator that prices a plan on your own year.</p>
 </div></header>
@@ -80,7 +81,7 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
 </table>
 <p>Plan B looks a third cheaper at 1,000 kWh, yet costs $23.10 more over this year, because the credit applies in only 6 of the 12 months. At 999 kWh Plan B costs $209.18; at 1,000 kWh it costs $109.39. Monthly usage used: 1,150, 950, 800, 720, 900, 1,350, 1,700, 1,750, 1,400, 950, 780, 1,050 kWh. With a different usage pattern the winner can flip, which is why your own numbers matter.</p>
 
-<h2>Price two plans on your own usage</h2>
+<h2 id="calculator">Price two plans on your own usage</h2>
 <div class="box">
 <p style="margin-top:0">Copy the numbers from each plan's EFL. Delivery (TDU) charges are listed on the EFL too; enter 0 if the EFL already folds them into the energy charge.</p>
 <div class="grid">
@@ -126,6 +127,25 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
 
 <h2>Track it after you switch</h2>
 <p>The free <a href="../download/utility-bill-tracker.xlsx" download>Utility Bill Tracker (.xlsx)</a> logs each bill and its all-in price per kWh, so next year you have your 12 months ready. Also on Gumroad as <a href="https://lumenledger.gumroad.com/l/utility-bill-tracker">pay what you want</a>. How Texas compares: <a href="../electricity-price-per-kwh/">average residential price by state</a> (Texas, Jan-Aug 2026: 16.03¢, EIA).</p>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is a Texas Electricity Facts Label (EFL)?", "acceptedAnswer": {"@type": "Answer", "text": "A standard disclosure that every retail electric provider in the competitive Texas market must give for each plan, under 16 Texas Administrative Code 25.475. It shows the average price at 500, 1,000 and 2,000 kWh a month, every fee the provider may charge, the contract term and any early termination fee."}}, {"@type": "Question", "name": "What does the average price at 1,000 kWh include?", "acceptedAnswer": {"@type": "Answer", "text": "For fixed rate plans, all recurring charges, meaning charges expected on every bill, at exactly that usage. State and local sales taxes and the gross receipts tax reimbursement are excluded (25.475(g)(2) and (b)(9)). Your bill adds taxes, and your usage is rarely exactly 500, 1,000 or 2,000 kWh."}}, {"@type": "Question", "name": "Why is the 1,000 kWh price so low on some plans?", "acceptedAnswer": {"@type": "Answer", "text": "Usually a bill credit that applies only inside a usage range. In our hypothetical example, a plan with a $100 credit at 1,000-2,000 kWh shows 10.9 cents at 1,000 kWh against 16.4 cents for a simple plan, yet over a 13,500 kWh year it costs $2,220.18 versus $2,197.08, $23.10 more, because the credit applies in only 6 of the 12 months."}}, {"@type": "Question", "name": "What happens if I use 999 kWh on a bill credit plan?", "acceptedAnswer": {"@type": "Answer", "text": "You miss the credit for that month. In the example plan, 999 kWh costs $209.18 and 1,000 kWh costs $109.39. The upper limit works the same way: at 2,001 kWh the bill is $414.59 against $314.39 at 2,000 kWh. Check both ends of the range against your past bills."}}, {"@type": "Question", "name": "Is a bill credit plan ever the cheaper choice?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, if your usage stays inside the credit range in most months. With the same two example plans and 100 kWh more in every month (credit earned in 9 of 12 months), the bill credit plan costs $2,166.18 for the year and the simple plan $2,377.08, $210.90 less. Run your own 12 months in the calculator above."}}, {"@type": "Question", "name": "Can the price change on a fixed rate plan?", "acceptedAnswer": {"@type": "Answer", "text": "Only for the reasons the rule lists, such as actual changes in delivery (TDU) charges, ERCOT or Texas Regional Entity fees, and certain legal or regulatory changes (25.475(b)(5)). A fixed rate plan has a term of at least three months."}}, {"@type": "Question", "name": "What does the EFL price mean on a variable price plan?", "acceptedAnswer": {"@type": "Answer", "text": "Only the average price for the first billing cycle (25.475(g)(2)). After that the provider can change the price by its own method, and for residential customers a variable price plan can only be month-to-month (25.475(b)(11))."}}, {"@type": "Question", "name": "Can I cancel a Texas electricity plan without a fee?", "acceptedAnswer": {"@type": "Answer", "text": "In three cases set by 25.475: within three federal business days after receiving the terms of service ((f)(4)(A)(i)); when you move and give a forwarding address and any evidence the provider requires ((c)(2)(C)); and in the 14 days before a fixed rate contract expires ((e)(2)(C)(ii)). Otherwise the early termination fee on the EFL applies."}}]}</script>
+<h2 id="faq">Questions</h2>
+<h3>What is a Texas Electricity Facts Label (EFL)?</h3>
+<p>A standard disclosure that every retail electric provider in the competitive Texas market must give for each plan, under 16 Texas Administrative Code §25.475. It shows the average price at 500, 1,000 and 2,000 kWh a month, every fee the provider may charge, the contract term and any early termination fee.</p>
+<h3>What does the average price at 1,000 kWh include?</h3>
+<p>For fixed rate plans, all recurring charges, meaning charges expected on every bill, at exactly that usage. State and local sales taxes and the gross receipts tax reimbursement are excluded (25.475(g)(2) and (b)(9)). Your bill adds taxes, and your usage is rarely exactly 500, 1,000 or 2,000 kWh.</p>
+<h3>Why is the 1,000 kWh price so low on some plans?</h3>
+<p>Usually a bill credit that applies only inside a usage range. In our hypothetical example, a plan with a $100 credit at 1,000-2,000 kWh shows 10.9 cents at 1,000 kWh against 16.4 cents for a simple plan, yet over a 13,500 kWh year it costs $2,220.18 versus $2,197.08, $23.10 more, because the credit applies in only 6 of the 12 months.</p>
+<h3>What happens if I use 999 kWh on a bill credit plan?</h3>
+<p>You miss the credit for that month. In the example plan, 999 kWh costs $209.18 and 1,000 kWh costs $109.39. The upper limit works the same way: at 2,001 kWh the bill is $414.59 against $314.39 at 2,000 kWh. Check both ends of the range against your past bills.</p>
+<h3>Is a bill credit plan ever the cheaper choice?</h3>
+<p>Yes, if your usage stays inside the credit range in most months. With the same two example plans and 100 kWh more in every month (credit earned in 9 of 12 months), the bill credit plan costs $2,166.18 for the year and the simple plan $2,377.08, $210.90 less. Run your own 12 months in the calculator above.</p>
+<h3>Can the price change on a fixed rate plan?</h3>
+<p>Only for the reasons the rule lists, such as actual changes in delivery (TDU) charges, ERCOT or Texas Regional Entity fees, and certain legal or regulatory changes (25.475(b)(5)). A fixed rate plan has a term of at least three months.</p>
+<h3>What does the EFL price mean on a variable price plan?</h3>
+<p>Only the average price for the first billing cycle (25.475(g)(2)). After that the provider can change the price by its own method, and for residential customers a variable price plan can only be month-to-month (25.475(b)(11)).</p>
+<h3>Can I cancel a Texas electricity plan without a fee?</h3>
+<p>In three cases set by §25.475: within three federal business days after receiving the terms of service ((f)(4)(A)(i)); when you move and give a forwarding address and any evidence the provider requires ((c)(2)(C)); and in the 14 days before a fixed rate contract expires ((e)(2)(C)(ii)). Otherwise the early termination fee on the EFL applies.</p>
 
 <h2>Sources (checked 2026-10-31)</h2>
 <ul>
