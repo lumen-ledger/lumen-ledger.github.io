@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="index,follow">
+<title>Ponti 2027: calcolatore ferie con festività e santo patrono</title>
+<meta name="description" content="Festività 2027 con il giorno della settimana (4 ottobre incluso) e il piano ferie migliore per i tuoi giorni: calcolo esatto, santo patrono, settimana di 6 giorni, file calendario.">
+<link rel="canonical" href="https://lumen-ledger.github.io/it/ponti-ferie-2027/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Lumen &amp; Ledger">
+<meta property="og:locale" content="it_IT">
+<meta property="og:title" content="Ponti 2027: calcolatore ferie con festività e santo patrono">
+<meta property="og:description" content="Festività 2027 con il giorno della settimana (4 ottobre incluso) e il piano ferie migliore per i tuoi giorni: calcolo esatto, santo patrono, settimana di 6 giorni, file calendario.">
+<meta property="og:url" content="https://lumen-ledger.github.io/it/ponti-ferie-2027/">
+<meta name="twitter:card" content="summary">
+<style>
+:root{--navy:#0F2A3D;--sun:#F2B33D;--paper:#F7F5EF;--line:#d9d4c7;--warn:#C2452D}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--navy)}
+header{background:var(--navy);color:#fff;padding:32px 20px}
+.wrap{max-width:760px;margin:0 auto}
+header h1{margin:0;font-size:1.7rem}
+header p{margin:8px 0 0;color:#d6dde2}
+nav{font-size:.9rem;margin-bottom:10px}nav a{color:var(--sun)}
+main{padding:24px 20px}
+h2{font-size:1.15rem;margin:28px 0 6px}
+ul,ol{padding-left:20px}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:10px 0}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#ece8dc}
+.note{border-left:4px solid var(--warn);background:#fff;padding:10px 14px;font-size:.93rem}
+.box{border:1px solid var(--line);background:#fff;padding:14px 16px}
+.box label{display:block;font-size:.9rem;margin-top:8px}
+.box input,.box select{width:100%;max-width:260px;padding:6px;font:inherit}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.out{font-size:1.05rem;margin-top:12px}
+button.act{margin-top:10px;padding:6px 12px;font:inherit;border:1px solid var(--navy);background:var(--sun);border-radius:4px;cursor:pointer}
+.months{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;margin-top:12px}
+.mon{background:#fff;border:1px solid var(--line);padding:6px;font-size:.78rem}
+.mon b{display:block;margin-bottom:2px}
+.mon table{margin:0;font-size:.75rem}
+.mon td,.mon th{border:0;padding:1px 2px;text-align:center}
+.mon th{background:none;color:#5b6770}
+.w{color:#8a949b}.h{background:#F2B33D;font-weight:bold}.f{background:#0F2A3D;color:#fff}.b{background:#e6e0cf}
+.legend span{display:inline-block;padding:0 6px;margin-right:6px;font-size:.85rem}
+footer{padding:20px;font-size:.82rem;color:#5b6770}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="#calcolo">Calcolatore</a> · <a href="#festivita">Festività 2027</a> · <a href="#ponti">Ponti 2027</a> · <a href="#metodo">Metodo</a> · <a href="#fonti">Fonti</a></nav>
+  <h1>Ponti 2027: come usare i giorni di ferie</h1>
+  <p>Nel 2027 cadono in giorni feriali (lunedì–venerdì) 7 festività nazionali su 12, compresa la nuova festa di San Francesco del 4 ottobre (lunedì). Con 1 giorno di ferie si ottengono 4 giorni liberi a Capodanno, Pasqua, San Francesco e Ognissanti; con 3 giorni in tutto, 12 giorni liberi. Il calcolatore trova il piano migliore per i tuoi giorni.</p>
+</div></header>
+<main class="wrap">
+<p class="note">Informazione generale, non consulenza. Le date delle ferie si decidono con il datore di lavoro e secondo il tuo contratto (CCNL): il calcolatore non conosce chiusure aziendali, turni o periodi esclusi, a meno che tu non li inserisca. Il santo patrono vale nel comune in cui lavori, se il tuo contratto lo prevede: controlla la data sul sito del comune.</p>
+
+<h2 id="calcolo">Calcolatore</h2>
+<div class="box">
+  <div class="grid">
+    <label>Anno<select id="y"><option>2027</option><option>2028</option></select></label>
+    <label>Giorni di ferie da usare<input id="n" type="number" min="0" max="60" step="1" value="5"></label>
+    <label>Settimana lavorativa<select id="six"><option value="0">lunedì–venerdì</option><option value="1">lunedì–sabato</option></select></label>
+    <label>Santo patrono (giorno/mese, facoltativo)<input id="pat" type="text" placeholder="es. 29/06" inputmode="numeric"></label>
+    <label>Pausa minima (giorni consecutivi liberi)<input id="minl" type="number" min="2" max="30" step="1" value="4"></label>
+    <label>Pausa massima (giorni consecutivi liberi)<input id="maxl" type="number" min="3" max="40" step="1" value="16"></label>
+  </div>
+  <label>Chiusure aziendali o altri giorni già liberi (gg/mm separati da virgola, facoltativo)<input id="cl" type="text" placeholder="es. 16/08, 17/08, 24/12" style="max-width:100%"></label>
+  <div class="out" id="out" aria-live="polite"></div>
+  <ol id="list"></ol>
+  <button class="act" id="ics" type="button">Scarica il piano come file calendario (.ics)</button>
+  <p class="legend"><span class="h">festività</span><span class="f">ferie</span><span class="b">weekend nella pausa</span><span class="w">weekend</span></p>
+  <div class="months" id="cal"></div>
+</div>
+<p>Esempio: con 5 giorni di ferie (lunedì–venerdì, pause da 4 a 16 giorni) il piano migliore dà <b>18 giorni liberi</b>: 1–6 gennaio (ferie 4 e 5 gennaio), 27–30 marzo (30 marzo), 2–5 ottobre (5 ottobre), 30 ottobre–2 novembre (2 novembre). A parità di giorni liberi esistono spesso varianti equivalenti (per esempio venerdì 1 ottobre invece di martedì 5).</p>
+
+<h2 id="festivita">Festività nazionali 2027</h2>
+<table>
+<tr><th>Data</th><th>Festività</th></tr>
+<tr><td>venerdì 1/1</td><td>Capodanno</td></tr>
+<tr><td>mercoledì 6/1</td><td>Epifania</td></tr>
+<tr><td>lunedì 29/3</td><td>Lunedì dell'Angelo (Pasquetta; Pasqua è domenica 28 marzo)</td></tr>
+<tr><td>domenica 25/4</td><td>Festa della Liberazione</td></tr>
+<tr><td>sabato 1/5</td><td>Festa del Lavoro</td></tr>
+<tr><td>mercoledì 2/6</td><td>Festa della Repubblica</td></tr>
+<tr><td>domenica 15/8</td><td>Ferragosto (Assunzione)</td></tr>
+<tr><td>lunedì 4/10</td><td>San Francesco d'Assisi, patrono d'Italia (festa nazionale dal 2026)</td></tr>
+<tr><td>lunedì 1/11</td><td>Ognissanti</td></tr>
+<tr><td>mercoledì 8/12</td><td>Immacolata Concezione</td></tr>
+<tr><td>sabato 25/12</td><td>Natale</td></tr>
+<tr><td>domenica 26/12</td><td>Santo Stefano</td></tr>
+</table>
+<p>Cadono di sabato o domenica 25 aprile, 1 maggio, 15 agosto, 25 e 26 dicembre: nessun giorno feriale in più. Se lavori anche il sabato, 1 maggio e 25 dicembre sono invece giorni non lavorati in più. Il trattamento economico delle festività che cadono di domenica dipende dal contratto.</p>
+
+<h2 id="ponti">Ponti 2027 (settimana lunedì–venerdì)</h2>
+<table>
+<tr><th>Festività</th><th>1 giorno di ferie</th><th>2 giorni di ferie</th></tr>
+<tr><td>Capodanno + Epifania</td><td>4/1 → 4 giorni (1–4 gennaio)</td><td>4–5/1 → 6 giorni (1–6 gennaio); oppure 7–8/1 → 5 giorni (6–10 gennaio)</td></tr>
+<tr><td>Pasquetta</td><td>26/3 o 30/3 → 4 giorni</td><td>25–26/3, 26+30/3 o 30–31/3 → 5 giorni</td></tr>
+<tr><td>2 giugno (mercoledì)</td><td>—</td><td>31/5–1/6 → 5 giorni (29 maggio–2 giugno); oppure 3–4/6 → 5 giorni (2–6 giugno)</td></tr>
+<tr><td>San Francesco (lunedì)</td><td>1/10 o 5/10 → 4 giorni</td><td>30/9–1/10, 1+5/10 o 5–6/10 → 5 giorni</td></tr>
+<tr><td>Ognissanti (lunedì)</td><td>29/10 o 2/11 → 4 giorni</td><td>28–29/10, 29/10+2/11 o 2–3/11 → 5 giorni</td></tr>
+<tr><td>Immacolata (mercoledì)</td><td>—</td><td>6–7/12 → 5 giorni (4–8 dicembre); oppure 9–10/12 → 5 giorni (8–12 dicembre)</td></tr>
+</table>
+<p>Con 4 giorni di ferie, 31/5–1/6 e 3–4/6 danno 9 giorni consecutivi (29 maggio–6 giugno). Natale e Santo Stefano cadono nel weekend: per una pausa natalizia servono più giorni (dal 27 al 31 dicembre sono 5 giorni lavorativi; il 1° gennaio 2028 è sabato).</p>
+
+<h2 id="metodo">Come funziona il calcolo</h2>
+<ul>
+<li>Giorni non lavorativi: domeniche, sabati (se la settimana è lunedì–venerdì), festività nazionali, santo patrono e chiusure che inserisci.</li>
+<li>Una pausa è un blocco di giorni liberi consecutivi che contiene almeno un giorno di ferie; deve durare tra la pausa minima e la massima che scegli. La pausa minima evita che il calcolo ti consigli solo weekend lunghi di 3 giorni.</li>
+<li>Il calcolatore prova tutte le combinazioni di pause (programmazione dinamica sui giorni dell'anno) e restituisce quella con il maggior numero totale di giorni liberi; a parità, quella che usa meno ferie. Non è un'euristica: il risultato è l'ottimo per i vincoli scelti (collaudato su 300 calendari casuali contro la ricerca esaustiva).</li>
+<li>Le pause devono iniziare nell'anno scelto; il calendario si estende fino al 6 gennaio dell'anno dopo, per cui una pausa di fine dicembre può usare ferie di gennaio, che di solito fanno parte del monte ore dell'anno nuovo.</li>
+<li>Formule: <a href="../../scripts/ponti_ferie.js">ponti_ferie.js</a> (MIT). Tutto gira nel browser; nessun dato viene inviato.</li>
+</ul>
+
+<h2 id="fonti">Fonti (verificate il 13/11/2026)</h2>
+<ul>
+<li>Legge 27 maggio 1949, n. 260, art. 2 (elenco dei giorni festivi), testo vigente dal 1/1/2026 con il 4 ottobre: <a href="https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:1949-05-27;260~art2" rel="noopener">Normattiva</a>.</li>
+<li>Legge 5 marzo 1977, n. 54, art. 1 (soppressione degli effetti civili di S. Giuseppe, Ascensione, Corpus Domini, SS. Pietro e Paolo, 2 giugno e 4 novembre): <a href="https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:1977-03-05;54~art1" rel="noopener">Normattiva</a>.</li>
+<li>D.P.R. 28 dicembre 1985, n. 792 (Epifania di nuovo festiva dal 1986): <a href="https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.presidente.repubblica:1985-12-28;792" rel="noopener">Normattiva</a>.</li>
+<li>Legge 20 novembre 2000, n. 336 (2 giugno di nuovo festivo dal 2001): <a href="https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2000-11-20;336" rel="noopener">Normattiva</a>.</li>
+<li>Legge 8 ottobre 2025, n. 151 (festa nazionale di San Francesco d'Assisi il 4 ottobre, in vigore dal 1/1/2026), che modifica l'art. 2 della legge 260/1949.</li>
+<li>Data di Pasqua: algoritmo del calendario gregoriano (Meeus/Jones/Butcher), nel file di calcolo.</li>
+</ul>
+<p>Vedi anche: <a href="../orari-forno-pranzo-natale/">orari del forno per il pranzo di Natale</a> · <a href="../budget-regali-natale/">budget regali di Natale</a> · <a href="../costo-ricarica-auto-elettrica/">costo ricarica auto elettrica</a> (per i viaggi dei ponti).</p>
+</main>
+<footer class="wrap">© 2026 Lumen &amp; Ledger · Testi CC BY 4.0 · <a href="../">Strumenti</a> · <a href="../chi-siamo/">Chi siamo</a> · <a href="../privacy/">Privacy</a> · Contatti: lumenledger.tools@proton.me</footer>
+<script src="../../scripts/ponti_ferie.js"></script>
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)};
+  var P=window.PontiFerie, MESI=['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
+  var GG=['dom','lun','mar','mer','gio','ven','sab'];
+  var last=null;
+  function ddmm(s){var m=String(s).trim().match(/^(\d{1,2})[\/\-.](\d{1,2})$/);if(!m)return null;var d=+m[1],mo=+m[2];if(mo<1||mo>12||d<1||d>31)return null;return (mo<10?'0':'')+mo+'-'+(d<10?'0':'')+d}
+  function fmt(t){var d=new Date(t);return GG[d.getUTCDay()]+' '+d.getUTCDate()+' '+MESI[d.getUTCMonth()]+(d.getUTCFullYear()!==+$('y').value?' '+d.getUTCFullYear():'')}
+  function calc(){
+    var y=+$('y').value, N=Math.max(0,Math.min(60,parseInt($('n').value,10)||0));
+    var minl=Math.max(2,parseInt($('minl').value,10)||4), maxl=Math.max(minl,parseInt($('maxl').value,10)||16);
+    var closed=[];String($('cl').value).split(',').forEach(function(x){var k=ddmm(x);if(k){var p=k.split('-');closed.push(P.utc(y,+p[0],+p[1]))}});
+    var D=P.days(y,{sixDay:$('six').value==='1',patron:ddmm($('pat').value),closed:closed});
+    var r=P.optimize(D,N,maxl,minl);last={D:D,r:r};
+    var fer={},inb={};
+    r.blocks.forEach(function(b){for(var i=b.s;i<=b.e;i++){inb[i]=1;if(!D[i].off)fer[i]=1}});
+    $('out').innerHTML=r.blocks.length?'<b>'+r.daysOff+' giorni liberi</b> in '+r.blocks.length+' pause usando <b>'+r.used+'</b> giorni di ferie (in media '+(r.daysOff/Math.max(1,r.used)).toFixed(1).replace('.',',')+' giorni liberi per giorno di ferie).':'Nessuna pausa possibile con questi vincoli: aumenta i giorni di ferie o riduci la pausa minima.';
+    $('list').innerHTML=r.blocks.map(function(b){var f=[];for(var i=b.s;i<=b.e;i++)if(!D[i].off)f.push(fmt(D[i].t));var h=[];for(i=b.s;i<=b.e;i++)if(D[i].hol)h.push(D[i].hol);
+      return '<li><b>'+fmt(D[b.s].t)+' – '+fmt(D[b.e].t)+'</b>: '+b.len+' giorni liberi, ferie: '+f.join(', ')+(h.length?' ('+h.join(', ')+')':'')+'</li>'}).join('');
+    var html='',idx={};D.forEach(function(d,i){idx[d.t]=i});
+    for(var m=0;m<12;m++){
+      var first=P.utc(y,m+1,1),lead=(new Date(first).getUTCDay()+6)%7,s='<div class="mon"><b>'+MESI[m]+' '+y+'</b><table><tr><th>L</th><th>M</th><th>M</th><th>G</th><th>V</th><th>S</th><th>D</th></tr><tr>';
+      for(var k=0;k<lead;k++)s+='<td></td>';
+      for(var t=first,c=lead;new Date(t).getUTCMonth()===m;t+=864e5,c++){
+        if(c&&c%7===0)s+='</tr><tr>';var i2=idx[t],d=D[i2],cls=fer[i2]?'f':d.hol?'h':(inb[i2]&&d.off)?'b':d.off?'w':'';
+        s+='<td'+(cls?' class="'+cls+'"':'')+(d.hol?' title="'+d.hol.replace(/"/g,'')+'"':'')+'>'+new Date(t).getUTCDate()+'</td>'}
+      html+=s+'</tr></table></div>'}
+    $('cal').innerHTML=html;
+  }
+  function ics(){
+    if(!last||!last.r.blocks.length)return;
+    var D=last.D,p=function(t){return new Date(t).toISOString().slice(0,10).replace(/-/g,'')};
+    var L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Lumen & Ledger//Ponti ferie//IT','CALSCALE:GREGORIAN'];
+    last.r.blocks.forEach(function(b,i){L.push('BEGIN:VEVENT','UID:ponti-'+p(D[b.s].t)+'-'+i+'@lumen-ledger.github.io','DTSTAMP:'+p(Date.now())+'T000000Z','DTSTART;VALUE=DATE:'+p(D[b.s].t),'DTEND;VALUE=DATE:'+p(D[b.e].t+864e5),'SUMMARY:Pausa ('+b.len+' giorni\\, '+b.cost+' di ferie)','END:VEVENT')});
+    L.push('END:VCALENDAR');
+    var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([L.join('\r\n')],{type:'text/calendar'}));a.download='ponti-ferie-'+$('y').value+'.ics';document.body.appendChild(a);a.click();a.remove();
+  }
+  ['y','n','six','pat','minl','maxl','cl'].forEach(function(i){$(i).addEventListener('input',calc);$(i).addEventListener('change',calc)});
+  $('ics').addEventListener('click',ics);
+  calc();
+})();
+</script>
+</body>
+</html>
