@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="index,follow">
+<title>Christmas dinner timeline calculator: work back from serving time</title>
+<meta name="description" content="Enter each dish's cook and rest minutes and your serving time; get a printable start-time schedule with oven clashes flagged. Free, runs in your browser.">
+<link rel="canonical" href="https://lumen-ledger.github.io/christmas-dinner-timeline/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Lumen &amp; Ledger">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Christmas dinner timeline calculator: work back from serving time">
+<meta property="og:description" content="Enter each dish's cook and rest minutes and your serving time; get a printable start-time schedule with oven clashes flagged. Free, runs in your browser.">
+<meta property="og:url" content="https://lumen-ledger.github.io/christmas-dinner-timeline/">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" hreflang="en" href="https://lumen-ledger.github.io/christmas-dinner-timeline/">
+<link rel="alternate" hreflang="it" href="https://lumen-ledger.github.io/it/orari-forno-pranzo-natale/">
+<style>
+:root{--navy:#0F2A3D;--sun:#F2B33D;--paper:#F7F5EF;--line:#d9d4c7;--warn:#C2452D}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--navy)}
+header{background:var(--navy);color:#fff;padding:32px 20px}
+.wrap{max-width:760px;margin:0 auto}
+header h1{margin:0;font-size:1.7rem}
+header p{margin:8px 0 0;color:#d6dde2}
+nav{font-size:.9rem;margin-bottom:10px}nav a{color:var(--sun)}
+main{padding:24px 20px}
+h2{font-size:1.15rem;margin:28px 0 6px}
+ul,ol{padding-left:20px}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:10px 0}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#ece8dc}
+td input{width:100%;font:inherit;font-size:.8rem;padding:4px}
+.note{border-left:4px solid var(--warn);background:#fff;padding:10px 14px;font-size:.93rem}
+.box{border:1px solid var(--line);background:#fff;padding:14px 16px}
+.box label{display:block;font-size:.9rem;margin-top:8px}
+.box textarea{width:100%;font:inherit;padding:6px;min-height:150px}
+.box input[type=text],.box input[type=date],.box input[type=number]{width:100%;max-width:300px;padding:6px;font:inherit}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+button{font:inherit;padding:8px 14px;margin:10px 8px 0 0;border:1px solid var(--navy);background:var(--navy);color:#fff;cursor:pointer;border-radius:3px}
+button.light{background:#fff;color:var(--navy)}
+.err{color:var(--warn)}
+.big{font-size:1.5rem;font-weight:700}
+td select,td input{font:inherit;font-size:.85rem;padding:4px;width:100%}
+.clash{color:var(--warn);font-weight:600}
+.tl td:first-child{white-space:nowrap;font-weight:600}
+@media print{header nav,#editor,button,#how,#safety,#faq,footer{display:none}header{background:#fff;color:#000;padding:0}}
+footer{padding:20px;font-size:.82rem;color:#5b6770}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="#plan">Plan</a> · <a href="#how">How it works</a> · <a href="#safety">Safe temperatures</a> · <a href="#faq">FAQ</a></nav>
+  <h1>Christmas dinner timeline: work back from the time you eat</h1>
+  <p>List the dishes with the minutes from your own recipes. You get the time each one has to start, a minute-by-minute schedule to print, and a warning when two oven dishes need different temperatures at the same time.</p>
+</div></header>
+<main class="wrap">
+<h2 id="plan">Plan</h2>
+<div class="box" id="editor">
+  <label for="serve">When do you sit down to eat?</label>
+  <input id="serve" type="datetime-local" style="padding:6px;font:inherit">
+  <table><thead><tr><th style="width:34%">Dish</th><th>Where</th><th>Oven &deg;F</th><th>Cook min</th><th>Rest / hold min</th><th></th></tr></thead><tbody id="dishes-body"></tbody></table>
+  <button id="add" class="light">Add a dish</button><button id="ex" class="light">Load example</button><button id="clear" class="light">Clear</button>
+  <br><button id="go">Make the timeline</button>
+</div>
+<div id="out" aria-live="polite"></div>
+<p style="font-size:.9rem">The example menu uses placeholder minutes: replace them with the times in your recipes.</p>
+
+<h2 id="how">How it works</h2>
+<ol>
+<li><b>Start</b> = serving time minus cooking minutes minus resting (or holding) minutes. <b>Out / done</b> = serving time minus resting minutes. These are the same formulas as the "Menu" sheet of the <a href="https://lumenledger.gumroad.com/l/christmas-dinner-planner">Christmas Dinner Planner</a> spreadsheet.</li>
+<li><b>Oven clash</b>: two oven dishes clash when they need different temperatures and their cooking windows overlap. One home oven cannot do both, so the usual fixes are: cook one earlier and reheat it, move one to the stovetop or slow cooker, or bake it while the roast rests.</li>
+<li>Make-ahead dishes have no time and are listed separately, so they are not forgotten.</li>
+<li>The minutes are yours: cooking times depend on weight, shape, oven and recipe, so this page does not invent them. For a turkey, the <a href="../thanksgiving-turkey-planner/">turkey thaw and roast planner</a> uses published roasting tables by weight.</li>
+<li>Nothing is sent anywhere. "Copy link to this plan" puts the menu after the <code>#</code> of the address, which browsers do not send to the server: open the link on another device to see the same plan.</li>
+</ol>
+
+<h2 id="safety">Safe minimum internal temperatures</h2>
+<p>The timeline tells you when to start; a food thermometer tells you when it is done. From the U.S. CDC page "Preventing Food Poisoning" (dated November 24, 2025, read 2026-11-07):</p>
+<table>
+<tr><th>Food</th><th>Minimum internal temperature</th></tr>
+<tr><td>Whole cuts of beef, veal, lamb and pork, including fresh ham</td><td>145 &deg;F (63 &deg;C), then let it rest 3 minutes</td></tr>
+<tr><td>Ground meats such as beef and pork</td><td>160 &deg;F (71 &deg;C)</td></tr>
+<tr><td>All poultry, including ground chicken and turkey</td><td>165 &deg;F (74 &deg;C)</td></tr>
+<tr><td>Fish with fins</td><td>145 &deg;F (63 &deg;C)</td></tr>
+<tr><td>Leftovers and casseroles</td><td>165 &deg;F (74 &deg;C)</td></tr>
+</table>
+<p>Pre-cooked ham: follow the package label. Celsius values are rounded conversions. Source: <a href="https://www.cdc.gov/food-safety/prevention/">cdc.gov/food-safety/prevention</a>. General information, not professional food-safety advice.</p>
+
+<h2 id="faq">FAQ</h2>
+<p><b>Why does my roast start so early?</b> Because resting counts: a roast that cooks 150 minutes and rests 20 goes in 170 minutes before you eat.</p>
+<p><b>Does it include preheating?</b> No. Add your oven's preheat time before the first oven start, or include it in the cooking minutes of the first oven dish.</p>
+<p><b>Can I also plan guests, shopping and budget?</b> Yes, in the <a href="https://lumenledger.gumroad.com/l/christmas-dinner-planner">Christmas Dinner Planner</a> (free spreadsheet, pay what you want; direct download <a href="../download/christmas-dinner-planner.xlsx">christmas-dinner-planner.xlsx</a>): the same timeline plus guest list, dietary needs and a shopping budget. For November, the same page exists for <a href="../thanksgiving-dinner-timeline/">Thanksgiving dinner</a>. For gifts, see the <a href="../holiday-budget-planner/">holiday budget calculator</a> and the <a href="../secret-santa-generator/">Secret Santa generator</a>.</p>
+<p><b>Is anything saved?</b> No tracking, no cookies, no account. See <a href="../privacy/">Privacy</a>.</p>
+</main>
+<footer class="wrap">© 2026 Lumen &amp; Ledger · Text CC BY 4.0, code MIT · <a href="../">Tools</a> · <a href="../about/">About</a> · <a href="../privacy/">Privacy</a> · Contact: lumenledger.tools@proton.me</footer>
+<script>
+window.DT_L={unit:'F',locale:'en-US',defServe:'14:00',restWord:'rest',
+  where:{oven:'Oven',stove:'Stovetop',slow:'Slow cooker',ahead:'Make-ahead',other:'Other'},
+  aria:['Dish','Where','Oven temperature','Cook minutes','Rest minutes','Remove dish'],
+  th:['Time','What to do'],start:'Start',out:'Take out / done, then rest',serve:'Serve',ahead:'Make ahead',
+  clash:'Oven clash with',clashSum:'%n oven dishes overlap with a different temperature: see the red notes.',noClash:'No oven temperature clashes.',
+  noTimed:'Add at least one dish with cooking minutes.',noServe:'Pick the date and time you eat.',range:'Minutes must be between 0 and 2880:',
+  print:'Print',share:'Copy link to this plan',copied:'Copied',
+  ex:[['Beef roast','oven',350,150,20],['Roast potatoes','oven',425,50,0],['Vegetable gratin','oven',350,30,0],['Glazed carrots','stove','',25,0],['Gravy','stove','',15,0],['Rolls','oven',425,15,5],['Christmas cookies','ahead','','',0],['Trifle','ahead','','',0]]};
+</script>
+<script src="../scripts/dinner_timeline.js"></script>
+<script src="../scripts/dinner_timeline_ui.js"></script>
+</body>
+</html>

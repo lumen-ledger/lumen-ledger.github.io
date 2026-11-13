@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="index,follow">
+<title>Orari forno pranzo di Natale: calcolo a ritroso dall'ora del pasto</title>
+<meta name="description" content="Inserisci piatti, minuti di cottura e riposo e l'ora del pranzo o del cenone: scaletta da stampare e avviso se il forno serve a due temperature insieme. Gratis, nel browser.">
+<link rel="canonical" href="https://lumen-ledger.github.io/it/orari-forno-pranzo-natale/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Lumen &amp; Ledger">
+<meta property="og:locale" content="it_IT">
+<meta property="og:title" content="Orari forno pranzo di Natale: calcolo a ritroso dall'ora del pasto">
+<meta property="og:description" content="Inserisci piatti, minuti di cottura e riposo e l'ora del pranzo o del cenone: scaletta da stampare e avviso se il forno serve a due temperature insieme. Gratis, nel browser.">
+<meta property="og:url" content="https://lumen-ledger.github.io/it/orari-forno-pranzo-natale/">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" hreflang="it" href="https://lumen-ledger.github.io/it/orari-forno-pranzo-natale/">
+<link rel="alternate" hreflang="en" href="https://lumen-ledger.github.io/christmas-dinner-timeline/">
+<style>
+:root{--navy:#0F2A3D;--sun:#F2B33D;--paper:#F7F5EF;--line:#d9d4c7;--warn:#C2452D}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--navy)}
+header{background:var(--navy);color:#fff;padding:32px 20px}
+.wrap{max-width:760px;margin:0 auto}
+header h1{margin:0;font-size:1.7rem}
+header p{margin:8px 0 0;color:#d6dde2}
+nav{font-size:.9rem;margin-bottom:10px}nav a{color:var(--sun)}
+main{padding:24px 20px}
+h2{font-size:1.15rem;margin:28px 0 6px}
+ul,ol{padding-left:20px}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:10px 0}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#ece8dc}
+td input{width:100%;font:inherit;font-size:.8rem;padding:4px}
+.note{border-left:4px solid var(--warn);background:#fff;padding:10px 14px;font-size:.93rem}
+.box{border:1px solid var(--line);background:#fff;padding:14px 16px}
+.box label{display:block;font-size:.9rem;margin-top:8px}
+.box textarea{width:100%;font:inherit;padding:6px;min-height:150px}
+.box input[type=text],.box input[type=date],.box input[type=number]{width:100%;max-width:300px;padding:6px;font:inherit}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+button{font:inherit;padding:8px 14px;margin:10px 8px 0 0;border:1px solid var(--navy);background:var(--navy);color:#fff;cursor:pointer;border-radius:3px}
+button.light{background:#fff;color:var(--navy)}
+.err{color:var(--warn)}
+.big{font-size:1.5rem;font-weight:700}
+td select,td input{font:inherit;font-size:.85rem;padding:4px;width:100%}
+.clash{color:var(--warn);font-weight:600}
+.tl td:first-child{white-space:nowrap;font-weight:600}
+@media print{header nav,#editor,button,#how,#safety,#faq,footer{display:none}header{background:#fff;color:#000;padding:0}}
+footer{padding:20px;font-size:.82rem;color:#5b6770}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="#piano">Calcola</a> · <a href="#come">Come funziona</a> · <a href="#temperature">Temperature sicure</a> · <a href="#domande">Domande</a></nav>
+  <h1>Orari del forno per il pranzo di Natale, calcolati a ritroso</h1>
+  <p>Elenca i piatti con i minuti delle tue ricette e l'ora in cui vi sedete a tavola. Ottieni l'ora d'inizio di ogni piatto, una scaletta da stampare e un avviso quando due piatti al forno chiedono temperature diverse nello stesso momento.</p>
+</div></header>
+<main class="wrap">
+<h2 id="piano">Calcola la scaletta</h2>
+<div class="box" id="editor">
+  <label for="serve">Quando vi sedete a tavola?</label>
+  <input id="serve" type="datetime-local" style="padding:6px;font:inherit">
+  <table><thead><tr><th style="width:34%">Piatto</th><th>Dove</th><th>Forno &deg;C</th><th>Minuti cottura</th><th>Minuti riposo / attesa</th><th></th></tr></thead><tbody id="dishes-body"></tbody></table>
+  <button id="add" class="light">Aggiungi un piatto</button><button id="ex" class="light">Carica l'esempio</button><button id="clear" class="light">Svuota</button>
+  <br><button id="go">Calcola gli orari</button>
+</div>
+<div id="out" aria-live="polite"></div>
+<p style="font-size:.9rem">I minuti del menu di esempio sono indicativi: sostituiscili con quelli delle tue ricette.</p>
+
+<h2 id="come">Come funziona</h2>
+<ol>
+<li><b>Inizio</b> = ora del pasto meno minuti di cottura meno minuti di riposo (o di attesa). <b>Fuori dal forno / pronto</b> = ora del pasto meno minuti di riposo. Sono le stesse formule del foglio "Menu" del <a href="https://lumenledger.gumroad.com/l/pianificatore-pranzo-natale">Pianificatore pranzo e cenone di Natale</a>.</li>
+<li><b>Conflitto forno</b>: due piatti al forno sono in conflitto quando chiedono temperature diverse e le loro finestre di cottura si sovrappongono. Un forno di casa non può fare entrambe le cose: di solito si cuoce un piatto prima e lo si scalda, lo si sposta sui fornelli, oppure lo si inforna mentre l'arrosto riposa.</li>
+<li>I piatti preparati in anticipo o senza cottura non hanno orario e sono elencati a parte, per non dimenticarli.</li>
+<li>I minuti sono tuoi: i tempi di cottura dipendono da peso, forma, forno e ricetta, quindi la pagina non li inventa.</li>
+<li>Non viene inviato nulla. "Copia il link a questo piano" mette il menu dopo il <code>#</code> dell'indirizzo, parte che i browser non mandano al server: aprendo il link su un altro dispositivo vedi lo stesso piano.</li>
+</ol>
+
+<h2 id="temperature">Temperature minime al cuore</h2>
+<p>La scaletta dice quando iniziare; un termometro da cucina dice quando è pronto. Valori dei CDC statunitensi, pagina "Preventing Food Poisoning" (datata 24 novembre 2025, letta il 2026-11-07), con conversione arrotondata in gradi Celsius:</p>
+<table>
+<tr><th>Alimento</th><th>Temperatura minima al cuore</th></tr>
+<tr><td>Tagli interi di manzo, vitello, agnello e maiale</td><td>63 &deg;C (145 &deg;F), poi 3 minuti di riposo</td></tr>
+<tr><td>Carni macinate di manzo e maiale</td><td>71 &deg;C (160 &deg;F)</td></tr>
+<tr><td>Pollame, anche macinato (pollo, tacchino)</td><td>74 &deg;C (165 &deg;F)</td></tr>
+<tr><td>Pesce con pinne</td><td>63 &deg;C (145 &deg;F)</td></tr>
+<tr><td>Avanzi e sformati</td><td>74 &deg;C (165 &deg;F)</td></tr>
+</table>
+<p>Fonte: <a href="https://www.cdc.gov/food-safety/prevention/">cdc.gov/food-safety/prevention</a> (in inglese). Informazione generale, non consulenza professionale sulla sicurezza alimentare.</p>
+
+<h2 id="domande">Domande</h2>
+<p><b>Perché l'arrosto inizia così presto?</b> Perché conta anche il riposo: un arrosto che cuoce 90 minuti e riposa 15 va in forno 105 minuti prima del pasto.</p>
+<p><b>È compreso il preriscaldamento?</b> No. Aggiungi il tempo di preriscaldamento del tuo forno prima del primo piatto al forno, oppure includilo nei minuti di cottura del primo piatto.</p>
+<p><b>Posso organizzare anche ospiti, spesa e budget?</b> Sì, con il <a href="https://lumenledger.gumroad.com/l/pianificatore-pranzo-natale">Pianificatore pranzo e cenone di Natale</a> (foglio di calcolo gratuito, offerta libera; download diretto <a href="../../download/pianificatore-pranzo-natale.xlsx">pianificatore-pranzo-natale.xlsx</a>): la stessa scaletta più ospiti, intolleranze, lista della spesa e costo a persona. Per i regali: <a href="../budget-regali-natale/">budget regali di Natale</a> e <a href="../estrazione-babbo-natale-segreto/">estrazione Babbo Natale segreto</a>.</p>
+<p><b>Viene salvato qualcosa?</b> No: niente tracciamento, cookie o account. Vedi <a href="../privacy/">Privacy</a>.</p>
+</main>
+<footer class="wrap">© 2026 Lumen &amp; Ledger · Testi CC BY 4.0, codice MIT · <a href="../">Strumenti</a> · <a href="../chi-siamo/">Chi siamo</a> · <a href="../privacy/">Privacy</a> · Contatto: lumenledger.tools@proton.me</footer>
+<script>
+window.DT_L={unit:'C',locale:'it-IT',defServe:'13:00',restWord:'di riposo',
+  where:{oven:'Forno',stove:'Fornelli',slow:'Pentola lenta',ahead:'In anticipo / senza cottura',other:'Altro'},
+  aria:['Piatto','Dove','Temperatura forno','Minuti di cottura','Minuti di riposo','Rimuovi piatto'],
+  th:['Ora','Cosa fare'],start:'Inizia',out:'Togli dal forno / pronto, poi riposo',serve:'In tavola',ahead:'Da preparare prima o senza cottura',
+  clash:'Conflitto forno con',clashSum:'%n piatti al forno si sovrappongono con temperature diverse: vedi le note in rosso.',noClash:'Nessun conflitto di temperatura nel forno.',
+  noTimed:'Aggiungi almeno un piatto con i minuti di cottura.',noServe:'Scegli data e ora del pasto.',range:'I minuti devono essere tra 0 e 2880:',
+  print:'Stampa',share:'Copia il link a questo piano',copied:'Copiato',
+  ex:[['Arrosto di vitello','oven',180,90,15],['Patate al forno','oven',200,50,0],['Lasagne','oven',180,40,10],['Verdure gratinate','oven',200,20,0],['Tortellini in brodo','stove','',15,0],['Antipasti','ahead','','',0],['Tiramisù','ahead','','',0],['Panettone e pandoro','ahead','','',0]]};
+</script>
+<script src="../../scripts/dinner_timeline.js"></script>
+<script src="../../scripts/dinner_timeline_ui.js"></script>
+</body>
+</html>

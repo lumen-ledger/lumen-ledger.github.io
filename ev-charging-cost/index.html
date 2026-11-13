@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EV charging cost at home by state (2026 calculator)</title>
+<meta name="description" content="What it costs to charge an electric car at home: cost per mile, per month and vs gasoline, at your state's 2026 residential rate (EIA). All 50 states + DC.">
+<link rel="canonical" href="https://lumen-ledger.github.io/ev-charging-cost/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Lumen &amp; Ledger">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="EV charging cost at home by state (2026 calculator)">
+<meta property="og:description" content="What it costs to charge an electric car at home: cost per mile, per month and vs gasoline, at your state's 2026 residential rate (EIA). All 50 states + DC.">
+<meta property="og:url" content="https://lumen-ledger.github.io/ev-charging-cost/">
+<meta name="twitter:card" content="summary">
+<style>
+:root{--navy:#0F2A3D;--sun:#F2B33D;--paper:#F7F5EF;--line:#d9d4c7;--warn:#C2452D}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--navy)}
+header{background:var(--navy);color:#fff;padding:32px 20px}
+.wrap{max-width:760px;margin:0 auto}
+header h1{margin:0;font-size:1.7rem}
+header p{margin:8px 0 0;color:#d6dde2}
+nav{font-size:.9rem;margin-bottom:10px}nav a{color:var(--sun)}
+main{padding:24px 20px}
+h2{font-size:1.15rem;margin:28px 0 6px}
+ul,ol{padding-left:20px}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:10px 0}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#ece8dc}
+.note{border-left:4px solid var(--warn);background:#fff;padding:10px 14px;font-size:.93rem}
+.box{border:1px solid var(--line);background:#fff;padding:14px 16px}
+.box label{display:block;font-size:.9rem;margin-top:8px}
+.box input,.box select{width:100%;max-width:260px;padding:6px;font:inherit}
+.presets button{margin:4px 4px 0 0;padding:4px 8px;font:inherit;font-size:.85rem;border:1px solid var(--line);background:#f3f0e6;border-radius:4px;cursor:pointer}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.out{font-size:1.05rem;margin-top:12px}
+footer{padding:20px;font-size:.82rem;color:#5b6770}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="../electricity-price-per-kwh/">Price per kWh by state</a> · <a href="../appliance-running-cost/">Appliance running cost</a> · <a href="#table">State table</a></nav>
+  <h1>How much does it cost to charge an EV at home?</h1>
+  <p>Cost = miles ÷ 100 × kWh per 100 miles × your price per kWh. At the U.S. average residential rate of 18.19 cents, a car using 30 kWh/100 mi costs <b>$5.46</b> per 100 miles, or <b>$68.21</b> a month for 1,250 miles.</p>
+</div></header>
+<main class="wrap">
+<p class="note">General information, not financial advice. Rates: U.S. Energy Information Administration (EIA), Electric Power Monthly, Table 5.6.B, average residential price January–August 2026 (release 2026-10-23, read 2026-10-31). The average includes fixed charges and taxes; your rate may differ by month, usage tier or time of day. Use the price per kWh from your bill if you have it (<a href="../electricity-price-per-kwh/">how to find it</a>). Public fast charging is priced differently and is not covered here.</p>
+
+<h2>Calculator</h2>
+<div class="box">
+  <div class="grid">
+    <label>Efficiency (kWh per 100 miles, from the window label)<input id="e" type="number" min="1" step="0.1" value="30"></label>
+    <label>…or enter MPGe to convert<input id="mpge" type="number" min="1" step="1" placeholder="e.g. 112"></label>
+    <label>Miles per month<input id="mi" type="number" min="0" step="10" value="1250"></label>
+    <label>Extra charging loss (%)<input id="l" type="number" min="0" max="50" step="1" value="0"></label>
+    <label>State average rate (EIA, Jan–Aug 2026)<select id="st"><option value="0.1819" selected>U.S. average (18.19¢)</option><option value="">Custom rate</option><option value="0.1651">Alabama (16.51¢)</option><option value="0.2732">Alaska (27.32¢)</option><option value="0.1536">Arizona (15.36¢)</option><option value="0.1374">Arkansas (13.74¢)</option><option value="0.3258">California (32.58¢)</option><option value="0.1680">Colorado (16.80¢)</option><option value="0.2747">Connecticut (27.47¢)</option><option value="0.1798">Delaware (17.98¢)</option><option value="0.2486">District of Columbia (24.86¢)</option><option value="0.1532">Florida (15.32¢)</option><option value="0.1548">Georgia (15.48¢)</option><option value="0.4641">Hawaii (46.41¢)</option><option value="0.1302">Idaho (13.02¢)</option><option value="0.1923">Illinois (19.23¢)</option><option value="0.1704">Indiana (17.04¢)</option><option value="0.1455">Iowa (14.55¢)</option><option value="0.1526">Kansas (15.26¢)</option><option value="0.1420">Kentucky (14.20¢)</option><option value="0.1327">Louisiana (13.27¢)</option><option value="0.3023">Maine (30.23¢)</option><option value="0.2131">Maryland (21.31¢)</option><option value="0.3019">Massachusetts (30.19¢)</option><option value="0.2173">Michigan (21.73¢)</option><option value="0.1644">Minnesota (16.44¢)</option><option value="0.1506">Mississippi (15.06¢)</option><option value="0.1428">Missouri (14.28¢)</option><option value="0.1413">Montana (14.13¢)</option><option value="0.1292">Nebraska (12.92¢)</option><option value="0.1336">Nevada (13.36¢)</option><option value="0.2691">New Hampshire (26.91¢)</option><option value="0.2409">New Jersey (24.09¢)</option><option value="0.1534">New Mexico (15.34¢)</option><option value="0.2926">New York (29.26¢)</option><option value="0.1494">North Carolina (14.94¢)</option><option value="0.1246">North Dakota (12.46¢)</option><option value="0.1881">Ohio (18.81¢)</option><option value="0.1381">Oklahoma (13.81¢)</option><option value="0.1546">Oregon (15.46¢)</option><option value="0.2113">Pennsylvania (21.13¢)</option><option value="0.2905">Rhode Island (29.05¢)</option><option value="0.1590">South Carolina (15.90¢)</option><option value="0.1458">South Dakota (14.58¢)</option><option value="0.1380">Tennessee (13.80¢)</option><option value="0.1603">Texas (16.03¢)</option><option value="0.1319">Utah (13.19¢)</option><option value="0.2393">Vermont (23.93¢)</option><option value="0.1695">Virginia (16.95¢)</option><option value="0.1442">Washington (14.42¢)</option><option value="0.1558">West Virginia (15.58¢)</option><option value="0.1905">Wisconsin (19.05¢)</option><option value="0.1401">Wyoming (14.01¢)</option></select></label>
+    <label>Your price ($ per kWh)<input id="r" type="number" min="0" step="0.001" value="0.1819"></label>
+  </div>
+  <p class="out" id="out"></p>
+  <h3 style="font-size:1rem;margin:16px 0 0">Compare with a gasoline car</h3>
+  <div class="grid">
+    <label>Gasoline car (mpg)<input id="mpg" type="number" min="1" step="1" value="30"></label>
+    <label>Gasoline price ($ per gallon)<input id="g" type="number" min="0" step="0.01" value="4.153"></label>
+  </div>
+  <p class="out" id="gout"></p>
+  <p style="font-size:.85rem;margin:6px 0 0">Defaults are examples, not your car: 30 kWh/100 mi (about 112 MPGe), 1,250 miles a month (the 15,000 miles a year fueleconomy.gov uses for label cost estimates), 30 mpg, and the EIA U.S. regular gasoline retail price of $4.153 for the week of November 2, 2026. Share a rate with <code>?rate=0.16</code>.</p>
+</div>
+
+<h2>Where to find your car's kWh per 100 miles</h2>
+<ul>
+<li>The EPA window sticker and <a href="https://www.fueleconomy.gov/">fueleconomy.gov</a> show <b>kWh/100 mi</b> next to MPGe. Lower is better.</li>
+<li>If you only have MPGe: kWh/100 mi = 3,370.5 ÷ MPGe, because EPA counts 33.705 kWh as one gallon of gasoline (40 CFR 600.002). Example: 139 MPGe (2026 Tesla Model 3 Standard RWD, fueleconomy.gov top-ten list, read 2026-11-07) ≈ 24.2 kWh/100 mi.</li>
+<li><b>Charging loss.</b> EPA's test procedure records the AC watt-hours drawn during recharging (40 CFR 600.116-12(c)(8)), so the label figure is measured on the wall side: leave the extra loss at 0 %. If you read consumption from the car's trip computer instead, it usually reports battery-side energy, so add a loss. The U.S. Department of Energy puts the loss from wall to battery at about 16 % (Fact of the Week #1045, 2018); fueleconomy.gov gives battery charging efficiency as often 84–93 %.</li>
+<li>Cold weather, highway speed and cabin heating raise consumption; a month of your own data beats any label.</li>
+</ul>
+
+<h2 id="table">Cost per 100 miles by state</h2>
+<p>At 30 kWh per 100 miles (example), label energy, no extra loss. Highest: Hawaii $13.92, California $9.77, Maine $9.07. Lowest: North Dakota $3.74, Nebraska $3.88, Idaho $3.91.</p>
+<table>
+<thead><tr><th>State</th><th>Avg. residential ¢/kWh (Jan–Aug 2026)</th><th>Per 100 mi</th><th>Per month (1,250 mi)</th><th>Per year (15,000 mi)</th></tr></thead>
+<tbody>
+<tr><td><a href="?rate=0.1651#out">Alabama</a></td><td>16.51</td><td>$4.95</td><td>$61.91</td><td>$743</td></tr>
+<tr><td><a href="?rate=0.2732#out">Alaska</a></td><td>27.32</td><td>$8.20</td><td>$102</td><td>$1,229</td></tr>
+<tr><td><a href="?rate=0.1536#out">Arizona</a></td><td>15.36</td><td>$4.61</td><td>$57.60</td><td>$691</td></tr>
+<tr><td><a href="?rate=0.1374#out">Arkansas</a></td><td>13.74</td><td>$4.12</td><td>$51.52</td><td>$618</td></tr>
+<tr><td><a href="?rate=0.3258#out">California</a></td><td>32.58</td><td>$9.77</td><td>$122</td><td>$1,466</td></tr>
+<tr><td><a href="?rate=0.1680#out">Colorado</a></td><td>16.80</td><td>$5.04</td><td>$63.00</td><td>$756</td></tr>
+<tr><td><a href="?rate=0.2747#out">Connecticut</a></td><td>27.47</td><td>$8.24</td><td>$103</td><td>$1,236</td></tr>
+<tr><td><a href="?rate=0.1798#out">Delaware</a></td><td>17.98</td><td>$5.39</td><td>$67.42</td><td>$809</td></tr>
+<tr><td><a href="?rate=0.2486#out">District of Columbia</a></td><td>24.86</td><td>$7.46</td><td>$93.22</td><td>$1,119</td></tr>
+<tr><td><a href="?rate=0.1532#out">Florida</a></td><td>15.32</td><td>$4.60</td><td>$57.45</td><td>$689</td></tr>
+<tr><td><a href="?rate=0.1548#out">Georgia</a></td><td>15.48</td><td>$4.64</td><td>$58.05</td><td>$697</td></tr>
+<tr><td><a href="?rate=0.4641#out">Hawaii</a></td><td>46.41</td><td>$13.92</td><td>$174</td><td>$2,088</td></tr>
+<tr><td><a href="?rate=0.1302#out">Idaho</a></td><td>13.02</td><td>$3.91</td><td>$48.83</td><td>$586</td></tr>
+<tr><td><a href="?rate=0.1923#out">Illinois</a></td><td>19.23</td><td>$5.77</td><td>$72.11</td><td>$865</td></tr>
+<tr><td><a href="?rate=0.1704#out">Indiana</a></td><td>17.04</td><td>$5.11</td><td>$63.90</td><td>$767</td></tr>
+<tr><td><a href="?rate=0.1455#out">Iowa</a></td><td>14.55</td><td>$4.37</td><td>$54.56</td><td>$655</td></tr>
+<tr><td><a href="?rate=0.1526#out">Kansas</a></td><td>15.26</td><td>$4.58</td><td>$57.23</td><td>$687</td></tr>
+<tr><td><a href="?rate=0.1420#out">Kentucky</a></td><td>14.20</td><td>$4.26</td><td>$53.25</td><td>$639</td></tr>
+<tr><td><a href="?rate=0.1327#out">Louisiana</a></td><td>13.27</td><td>$3.98</td><td>$49.76</td><td>$597</td></tr>
+<tr><td><a href="?rate=0.3023#out">Maine</a></td><td>30.23</td><td>$9.07</td><td>$113</td><td>$1,360</td></tr>
+<tr><td><a href="?rate=0.2131#out">Maryland</a></td><td>21.31</td><td>$6.39</td><td>$79.91</td><td>$959</td></tr>
+<tr><td><a href="?rate=0.3019#out">Massachusetts</a></td><td>30.19</td><td>$9.06</td><td>$113</td><td>$1,359</td></tr>
+<tr><td><a href="?rate=0.2173#out">Michigan</a></td><td>21.73</td><td>$6.52</td><td>$81.49</td><td>$978</td></tr>
+<tr><td><a href="?rate=0.1644#out">Minnesota</a></td><td>16.44</td><td>$4.93</td><td>$61.65</td><td>$740</td></tr>
+<tr><td><a href="?rate=0.1506#out">Mississippi</a></td><td>15.06</td><td>$4.52</td><td>$56.48</td><td>$678</td></tr>
+<tr><td><a href="?rate=0.1428#out">Missouri</a></td><td>14.28</td><td>$4.28</td><td>$53.55</td><td>$643</td></tr>
+<tr><td><a href="?rate=0.1413#out">Montana</a></td><td>14.13</td><td>$4.24</td><td>$52.99</td><td>$636</td></tr>
+<tr><td><a href="?rate=0.1292#out">Nebraska</a></td><td>12.92</td><td>$3.88</td><td>$48.45</td><td>$581</td></tr>
+<tr><td><a href="?rate=0.1336#out">Nevada</a></td><td>13.36</td><td>$4.01</td><td>$50.10</td><td>$601</td></tr>
+<tr><td><a href="?rate=0.2691#out">New Hampshire</a></td><td>26.91</td><td>$8.07</td><td>$101</td><td>$1,211</td></tr>
+<tr><td><a href="?rate=0.2409#out">New Jersey</a></td><td>24.09</td><td>$7.23</td><td>$90.34</td><td>$1,084</td></tr>
+<tr><td><a href="?rate=0.1534#out">New Mexico</a></td><td>15.34</td><td>$4.60</td><td>$57.52</td><td>$690</td></tr>
+<tr><td><a href="?rate=0.2926#out">New York</a></td><td>29.26</td><td>$8.78</td><td>$110</td><td>$1,317</td></tr>
+<tr><td><a href="?rate=0.1494#out">North Carolina</a></td><td>14.94</td><td>$4.48</td><td>$56.02</td><td>$672</td></tr>
+<tr><td><a href="?rate=0.1246#out">North Dakota</a></td><td>12.46</td><td>$3.74</td><td>$46.73</td><td>$561</td></tr>
+<tr><td><a href="?rate=0.1881#out">Ohio</a></td><td>18.81</td><td>$5.64</td><td>$70.54</td><td>$846</td></tr>
+<tr><td><a href="?rate=0.1381#out">Oklahoma</a></td><td>13.81</td><td>$4.14</td><td>$51.79</td><td>$621</td></tr>
+<tr><td><a href="?rate=0.1546#out">Oregon</a></td><td>15.46</td><td>$4.64</td><td>$57.98</td><td>$696</td></tr>
+<tr><td><a href="?rate=0.2113#out">Pennsylvania</a></td><td>21.13</td><td>$6.34</td><td>$79.24</td><td>$951</td></tr>
+<tr><td><a href="?rate=0.2905#out">Rhode Island</a></td><td>29.05</td><td>$8.71</td><td>$109</td><td>$1,307</td></tr>
+<tr><td><a href="?rate=0.1590#out">South Carolina</a></td><td>15.90</td><td>$4.77</td><td>$59.62</td><td>$715</td></tr>
+<tr><td><a href="?rate=0.1458#out">South Dakota</a></td><td>14.58</td><td>$4.37</td><td>$54.67</td><td>$656</td></tr>
+<tr><td><a href="?rate=0.1380#out">Tennessee</a></td><td>13.80</td><td>$4.14</td><td>$51.75</td><td>$621</td></tr>
+<tr><td><a href="?rate=0.1603#out">Texas</a></td><td>16.03</td><td>$4.81</td><td>$60.11</td><td>$721</td></tr>
+<tr><td><a href="?rate=0.1319#out">Utah</a></td><td>13.19</td><td>$3.96</td><td>$49.46</td><td>$594</td></tr>
+<tr><td><a href="?rate=0.2393#out">Vermont</a></td><td>23.93</td><td>$7.18</td><td>$89.74</td><td>$1,077</td></tr>
+<tr><td><a href="?rate=0.1695#out">Virginia</a></td><td>16.95</td><td>$5.08</td><td>$63.56</td><td>$763</td></tr>
+<tr><td><a href="?rate=0.1442#out">Washington</a></td><td>14.42</td><td>$4.33</td><td>$54.08</td><td>$649</td></tr>
+<tr><td><a href="?rate=0.1558#out">West Virginia</a></td><td>15.58</td><td>$4.67</td><td>$58.42</td><td>$701</td></tr>
+<tr><td><a href="?rate=0.1905#out">Wisconsin</a></td><td>19.05</td><td>$5.71</td><td>$71.44</td><td>$857</td></tr>
+<tr><td><a href="?rate=0.1401#out">Wyoming</a></td><td>14.01</td><td>$4.20</td><td>$52.54</td><td>$630</td></tr>
+<tr><td><b>U.S. total</b></td><td>18.19</td><td>$5.46</td><td>$68.21</td><td>$819</td></tr>
+</tbody>
+</table>
+<p style="font-size:.85rem">State names open the calculator with that state's rate (<code>?rate=</code>).</p>
+
+<h2 id="break-even">When does charging at home cost as much as gasoline?</h2>
+<p>The break-even price per kWh is gasoline cost per mile ÷ kWh per mile. With the defaults (30 mpg, $4.153/gal, 30 kWh/100 mi) it is <b>$0.461 per kWh</b>; the calculator shows it for your numbers. This compares energy only: it leaves out purchase price, insurance, maintenance, registration fees, and any time-of-use or EV rate your utility may offer. Gasoline prices also differ by state; enter your local price.</p>
+
+<h2>Related</h2>
+<ul>
+<li><a href="../electricity-price-per-kwh/">Average price vs the price per kWh on your bill</a>, with the same EIA table.</li>
+<li><a href="../appliance-running-cost/">Running cost of a space heater or any appliance</a>.</li>
+<li><a href="../plugin-solar-calculator/">Plug-in (balcony) solar payback calculator</a>.</li>
+<li><a href="../texas-electricity-facts-label/">Texas: read an Electricity Facts Label and compare two plans</a>.</li>
+</ul>
+
+<h2>Sources</h2>
+<ul>
+<li>EIA, Electric Power Monthly, Table 5.6.B, average price of electricity to ultimate customers by end-use sector, by state, year-to-date (release 2026-10-23, read 2026-10-31).</li>
+<li>EIA, Gasoline and Diesel Fuel Update, U.S. regular retail price including taxes, week of November 2, 2026 (<a href="https://www.eia.gov/petroleum/gasdiesel/">eia.gov/petroleum/gasdiesel</a>, read 2026-11-07).</li>
+<li>40 CFR 600.002, definition of gasoline gallon equivalent (33.705 kWh); 40 CFR 600.116-12(c)(8), AC watt-hours measured during recharging (read 2026-11-07).</li>
+<li>fueleconomy.gov: “Learn more about the electric vehicle label” (15,000 miles a year for annual fuel cost), top-ten 2026 EVs by MPGe, “All-electric vehicles” (charging efficiency 84–93 %); DOE Vehicle Technologies Office, Fact of the Week #1045 (2018-09-03). All read 2026-11-07.</li>
+</ul>
+<p>Formulas: <a href="../scripts/ev_charging.js">ev_charging.js</a> (MIT). Everything runs in your browser; nothing is sent anywhere.</p>
+</main>
+<footer class="wrap">© 2026 Lumen &amp; Ledger · Texts CC BY 4.0 · <a href="../">Tools</a> · <a href="../about/">About</a> · <a href="../privacy/">Privacy</a> · Contact: lumenledger.tools@proton.me</footer>
+<script src="../scripts/ev_charging.js"></script>
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)};
+  function usd(x){var a=Math.abs(x);return (x<0?'-':'')+'$'+(a<100?a.toFixed(2):Math.round(a).toString().replace(/\B(?=(\d{3})+(?!\d))/g,','))}
+  function num(i){return parseFloat($(i).value)||0}
+  function calc(){
+    var r=EvCharging.run({kwh100:num('e'),miles:num('mi'),rate:num('r'),lossPct:num('l'),mpg:num('mpg'),gasPrice:num('g')});
+    $('out').innerHTML='Per mile: <b>'+(r.perMile*100).toFixed(1)+'¢</b> · Per 100 miles: <b>'+usd(r.per100)+'</b> · Per month: <b>'+usd(r.usd)+'</b> ('+r.kwh.toFixed(0)+' kWh) · Per year: <b>'+usd(r.year)+'</b>';
+    $('gout').innerHTML=r.gasPerMile>0?'Gasoline: <b>'+(r.gasPerMile*100).toFixed(1)+'¢</b> per mile, <b>'+usd(r.gasMonth)+'</b> a month. Difference: <b>'+usd(r.saveMonth)+'</b> a month, <b>'+usd(r.saveYear)+'</b> a year ('+(r.saveMonth>=0?'home charging costs less':'gasoline costs less')+'). Break-even electricity price: <b>$'+r.breakEvenRate.toFixed(3)+'</b> per kWh.':'';
+  }
+  $('mpge').addEventListener('input',function(){var m=num('mpge');if(m>0)$('e').value=EvCharging.mpgeToKwh100(m).toFixed(1);calc()});
+  $('e').addEventListener('input',function(){$('mpge').value='';calc()});
+  $('st').addEventListener('change',function(){if(this.value)$('r').value=this.value;calc()});
+  ['mi','l','mpg','g'].forEach(function(i){$(i).addEventListener('input',calc)});
+  $('r').addEventListener('input',function(){$('st').value='';calc()});
+  var q=new URLSearchParams(location.search),qr=parseFloat(q.get('rate'));
+  if(qr>=0.01&&qr<=2){$('r').value=qr;$('st').value='';for(var i=0;i<$('st').options.length;i++){if(Math.abs(parseFloat($('st').options[i].value)-qr)<1e-6){$('st').selectedIndex=i;break}}}
+  calc();
+})();
+</script>
+</body>
+</html>

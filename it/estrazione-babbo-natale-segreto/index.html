@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="index,follow">
+<title>Babbo Natale segreto: estrazione online con esclusioni</title>
+<meta name="description" content="Estrazione gratuita per Babbo Natale segreto nel browser: coppie separate, niente estrazioni reciproche, budget e un link privato per ciascuno. Niente email, nessun dato salvato.">
+<link rel="canonical" href="https://lumen-ledger.github.io/it/estrazione-babbo-natale-segreto/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Lumen &amp; Ledger">
+<meta property="og:locale" content="it_IT">
+<meta property="og:title" content="Babbo Natale segreto: estrazione online con esclusioni">
+<meta property="og:description" content="Estrazione gratuita per Babbo Natale segreto nel browser: coppie separate, niente estrazioni reciproche, budget e un link privato per ciascuno. Niente email, nessun dato salvato.">
+<meta property="og:url" content="https://lumen-ledger.github.io/it/estrazione-babbo-natale-segreto/">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" hreflang="it" href="https://lumen-ledger.github.io/it/estrazione-babbo-natale-segreto/">
+<link rel="alternate" hreflang="en" href="https://lumen-ledger.github.io/secret-santa-generator/">
+<style>
+:root{--navy:#0F2A3D;--sun:#F2B33D;--paper:#F7F5EF;--line:#d9d4c7;--warn:#C2452D}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--navy)}
+header{background:var(--navy);color:#fff;padding:32px 20px}
+.wrap{max-width:760px;margin:0 auto}
+header h1{margin:0;font-size:1.7rem}
+header p{margin:8px 0 0;color:#d6dde2}
+nav{font-size:.9rem;margin-bottom:10px}nav a{color:var(--sun)}
+main{padding:24px 20px}
+h2{font-size:1.15rem;margin:28px 0 6px}
+ul,ol{padding-left:20px}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:10px 0}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#ece8dc}
+td input{width:100%;font:inherit;font-size:.8rem;padding:4px}
+.note{border-left:4px solid var(--warn);background:#fff;padding:10px 14px;font-size:.93rem}
+.box{border:1px solid var(--line);background:#fff;padding:14px 16px}
+.box label{display:block;font-size:.9rem;margin-top:8px}
+.box textarea{width:100%;font:inherit;padding:6px;min-height:150px}
+.box input[type=text],.box input[type=date],.box input[type=number]{width:100%;max-width:300px;padding:6px;font:inherit}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+button{font:inherit;padding:8px 14px;margin:10px 8px 0 0;border:1px solid var(--navy);background:var(--navy);color:#fff;cursor:pointer;border-radius:3px}
+button.light{background:#fff;color:var(--navy)}
+.err{color:var(--warn)}
+.big{font-size:1.5rem;font-weight:700}
+footer{padding:20px;font-size:.82rem;color:#5b6770}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="#estrai">Estrai i nomi</a> · <a href="#link">Come funzionano i link</a> · <a href="#consigli">Consigli</a> · <a href="#domande">Domande</a> · <a href="../../secret-santa-generator/" hreflang="en">English</a></nav>
+  <h1 id="title">Babbo Natale segreto: estrazione online con esclusioni e link privati</h1>
+  <p id="sub">Scrivi i nomi, tieni separate coppie e conviventi, fissa il budget. Ottieni un link privato per ogni persona e lo mandi tu, con WhatsApp o qualsiasi altra app. L’estrazione avviene nel tuo browser: niente account, niente indirizzi email, nulla salvato su un server.</p>
+</div></header>
+<main class="wrap">
+
+<div id="reveal" style="display:none">
+  <div class="box" style="text-align:center;padding:28px 16px">
+    <p id="rv-hi" class="big"></p>
+    <p>Controlla che nessuno stia guardando lo schermo.</p>
+    <button id="rv-btn">Mostra a chi devo fare il regalo</button>
+    <div id="rv-out" style="display:none"></div>
+  </div>
+  <p style="font-size:.9rem">Questa pagina ha letto l’abbinamento dal link stesso: nulla è stato scaricato da un server. Conserva il link: puoi riaprirlo quando vuoi. <a href="./">Organizza la tua estrazione</a>.</p>
+</div>
+
+<div id="organizer">
+<h2 id="estrai">Estrai i nomi</h2>
+<div class="box">
+  <label for="names">Partecipanti, un nome per riga (almeno 3, tutti diversi)</label>
+  <textarea id="names" placeholder="Anna&#10;Bruno&#10;Carla&#10;Davide&#10;Elena&#10;Franco"></textarea>
+  <label for="pairs">Chi non deve estrarsi a vicenda (facoltativo): una coppia o un gruppo per riga, nomi separati da virgola o "&amp;"</label>
+  <textarea id="pairs" style="min-height:70px" placeholder="Anna &amp; Bruno&#10;Carla, Davide"></textarea>
+  <label><input type="checkbox" id="noswap" checked> Evita che due persone si estraggano a vicenda (A regala a B e B regala ad A)</label>
+  <div class="grid">
+    <label>Budget massimo (facoltativo)<input id="budget" type="text" placeholder="20 €" maxlength="20"></label>
+    <label>Data dello scambio (facoltativa)<input id="date" type="date"></label>
+  </div>
+  <label>Messaggio per tutti (facoltativo, max 200 caratteri)<input id="msg" type="text" maxlength="200" style="max-width:100%" placeholder="Scambio a casa di Carla, regalo già incartato"></label>
+  <button id="go">Estrai i nomi</button>
+  <div id="out" aria-live="polite"></div>
+</div>
+<p style="font-size:.9rem">I numeri casuali vengono dal generatore crittografico del browser (<code>crypto.getRandomValues</code>). I nomi non vengono inviati da nessuna parte e spariscono quando chiudi la scheda: <b>copia i link prima di chiudere</b>.</p>
+
+<h2 id="link">Come funzionano i link privati</h2>
+<ol>
+<li>Ogni link contiene l’abbinamento di quella persona (il suo nome, a chi fa il regalo, budget, data e messaggio), scritto dopo il simbolo <code>#</code>. I browser non inviano mai al server la parte dopo <code>#</code>, quindi questo sito non la riceve.</li>
+<li>L’abbinamento è <b>codificato, non cifrato</b>: non si legge a colpo d’occhio, ma chi volesse davvero decodificare un link potrebbe riuscirci. Evita gli spoiler per sbaglio, non un curioso determinato. Manda a ciascuno solo il suo link.</li>
+<li>Se partecipi anche tu, non aprire i link degli altri. Con "Copia tutti i link" tieni un elenco per rimandarli: mostra a chi appartiene ogni link, non chi ha estratto chi.</li>
+<li>Se qualcuno perde il link, rimandagli lo stesso link dal tuo elenco. Una nuova estrazione cambia tutti gli abbinamenti, quindi andrebbero sostituiti tutti i link.</li>
+</ol>
+
+<h2 id="consigli">Consigli per uno scambio senza intoppi</h2>
+<ul>
+<li><b>Esclusioni:</b> coppie e conviventi di solito si fanno già un regalo, quindi conviene tenerli separati. Se le esclusioni sono troppe l’estrazione può diventare impossibile: lo strumento te lo dice e puoi toglierne una.</li>
+<li><b>Budget:</b> un tetto chiaro evita differenze imbarazzanti. Per vedere quanto spendi in tutto per i regali, usa il <a href="../budget-regali-natale/">calcolatore budget regali di Natale</a>.</li>
+<li><b>Organizzi anche il pranzo?</b> Il <a href="https://lumenledger.gumroad.com/l/pianificatore-pranzo-natale">Pianificatore pranzo e cenone di Natale</a> (foglio di calcolo gratuito, paghi quanto vuoi) calcola gli orari del forno a ritroso dall’ora in cui si mangia. Download diretto: <a href="../../download/pianificatore-pranzo-natale.xlsx">pianificatore-pranzo-natale.xlsx</a>.</li>
+<li><b>Resi:</b> regalo comprato online da cambiare? <a href="../resi-regali-natale/">Scadenze per resi e recesso</a> (14 giorni, garanzia 2 anni).</li>
+<li><b>Luci in casa:</b> <a href="../quanto-consumano-luci-di-natale/">quanto costano le luci di Natale</a> in bolletta.</li>
+</ul>
+
+<h2 id="domande">Domande frequenti</h2>
+<p><b>Servono gli indirizzi email dei partecipanti?</b> No. Decidi tu come consegnare ogni link: SMS, WhatsApp, email o scritto su un biglietto.</p>
+<p><b>Chi organizza vede chi ha estratto chi?</b> Solo se lo sceglie. Dopo l’estrazione vedi l’elenco dei link; gli abbinamenti restano nascosti finché non premi "Mostra elenco completo", pensato per chi organizza senza partecipare.</p>
+<p><b>L’estrazione è casuale?</b> Sì, nei limiti delle tue regole: nessuno estrae se stesso o una persona esclusa e, se la casella è spuntata, nessuno finisce in uno scambio a due. Con le esclusioni alcune combinazioni sono impossibili, quindi alcuni esiti diventano più o meno probabili rispetto a un’estrazione senza regole.</p>
+<p><b>Viene salvato qualcosa?</b> No. La pagina non ha tracciamento, cookie o account. Vedi <a href="../privacy/">Privacy</a>.</p>
+</div>
+</main>
+<footer class="wrap">© 2026 Lumen &amp; Ledger · Testi CC BY 4.0, codice MIT · <a href="../">Strumenti</a> · <a href="../chi-siamo/">Chi siamo</a> · <a href="../privacy/">Privacy</a> · Contatto: lumenledger.tools@proton.me</footer>
+<script src="../../scripts/secret_santa.js"></script>
+<script>
+(function(){
+  var S=window.SecretSanta;
+  function $(i){return document.getElementById(i)}
+  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  var MN=['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
+  function fd(s){var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(s||'');return m?(+m[3])+' '+MN[+m[2]-1]+' '+m[1]:''}
+  var h=location.hash.match(/^#s=([A-Za-z0-9_-]+)$/);
+  if(h){
+    var a=S.decode(h[1]);
+    $('organizer').style.display='none';$('reveal').style.display='';
+    document.title='Il tuo Babbo Natale segreto';
+    $('title').textContent='Il tuo Babbo Natale segreto';
+    $('sub').textContent='Qualcuno ha organizzato un Babbo Natale segreto e ti ha mandato questo link privato.';
+    if(!a||!a.g||!a.r){$('rv-hi').textContent='Questo link sembra incompleto.';$('rv-btn').style.display='none';
+      $('rv-out').style.display='';$('rv-out').innerHTML='<p>Copia il link per intero (è lungo) o chiedi a chi organizza di rimandarlo.</p>';return}
+    $('rv-hi').textContent='Ciao '+a.g+'!';
+    $('rv-btn').addEventListener('click',function(){
+      var o='<p>Sei il Babbo Natale segreto di</p><p class="big">'+esc(a.r)+'</p>';
+      if(a.b)o+='<p>Budget massimo: <b>'+esc(a.b)+'</b></p>';
+      if(a.d)o+='<p>Data dello scambio: <b>'+esc(fd(a.d))+'</b></p>';
+      if(a.m)o+='<p>Messaggio di chi organizza: '+esc(a.m)+'</p>';
+      $('rv-out').innerHTML=o;$('rv-out').style.display='';this.style.display='none';
+    });
+    return;
+  }
+  var last=null;
+  function base(){return location.origin+location.pathname}
+  function copy(t,btn){
+    function done(){var o=btn.textContent;btn.textContent='Copiato';setTimeout(function(){btn.textContent=o},1500)}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,function(){prompt('Copia:',t)})}else{prompt('Copia:',t)}
+  }
+  $('go').addEventListener('click',function(){
+    var pn=S.parseNames($('names').value),names=pn.names,out=$('out'),msg='';
+    if(pn.dup.length)msg+='<p class="err">Nome ripetuto ignorato: '+esc(pn.dup.join(', '))+'. Aggiungi un cognome o un’iniziale per distinguerli.</p>';
+    if(names.length<3){out.innerHTML=msg+'<p class="err">Inserisci almeno 3 nomi diversi.</p>';return}
+    var pp=S.parsePairs($('pairs').value,names);
+    if(pp.unknown.length){out.innerHTML=msg+'<p class="err">Esclusione non riconosciuta o nome non presente nell’elenco: '+esc(pp.unknown.join(', '))+'. Scrivi i nomi come nell’elenco dei partecipanti e separali con una virgola.</p>';return}
+    var r=S.draw(names.length,pp.pairs,{noSwap:$('noswap').checked});
+    if(!r){out.innerHTML=msg+'<p class="err">Con queste regole non esiste un’estrazione valida. Togli un’esclusione, aggiungi un partecipante o togli la spunta da "evita che due persone si estraggano a vicenda".</p>';return}
+    var b=$('budget').value.trim(),d=$('date').value,m=$('msg').value.trim().slice(0,200);
+    last=names.map(function(g,i){var o={g:g,r:names[r[i]]};if(b)o.b=b;if(d)o.d=d;if(m)o.m=m;return{g:g,r:names[r[i]],link:base()+'#s='+S.encode(o)}});
+    var t='<p><b>Fatto: '+names.length+' persone, '+pp.pairs.length+(pp.pairs.length===1?' coppia esclusa':' coppie escluse')+'.</b> Manda a ciascuno solo il suo link.</p><table><tr><th>Manda a</th><th>Link privato</th><th></th></tr>';
+    last.forEach(function(x,i){t+='<tr><td>'+esc(x.g)+'</td><td><input readonly value="'+esc(x.link)+'" aria-label="Link per '+esc(x.g)+'"></td><td><button class="light cp" data-i="'+i+'" style="margin:0">Copia</button></td></tr>'});
+    t+='</table><button id="all" class="light">Copia tutti i link (nomi + link)</button><button id="full" class="light">Mostra elenco completo</button><div id="fl"></div>';
+    out.innerHTML=msg+t;
+    Array.prototype.forEach.call(out.querySelectorAll('.cp'),function(bt){bt.addEventListener('click',function(){copy(last[+bt.getAttribute('data-i')].link,bt)})});
+    $('all').addEventListener('click',function(){copy(last.map(function(x){return x.g+': '+x.link}).join('\n'),this)});
+    $('full').addEventListener('click',function(){
+      if(!confirm('Verranno mostrati tutti gli abbinamenti. Continua solo se non partecipi.'))return;
+      var f='<table><tr><th>Chi regala</th><th>A chi</th></tr>';last.forEach(function(x){f+='<tr><td>'+esc(x.g)+'</td><td>'+esc(x.r)+'</td></tr>'});
+      $('fl').innerHTML=f+'</table>';this.style.display='none';
+    });
+  });
+  window.addEventListener('hashchange',function(){if(/^#s=/.test(location.hash))location.reload()});
+})();
+</script>
+</body>
+</html>
