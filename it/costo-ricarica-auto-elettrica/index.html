@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="index,follow">
+<title>Costo ricarica auto elettrica a casa: calcolo e confronto benzina</title>
+<meta name="description" content="Quanto costa ricaricare l'auto elettrica a casa: euro per 100 km, al mese e confronto con benzina e diesel. Prezzo ARERA (43,43 c€/kWh) e carburanti MASE datati.">
+<link rel="canonical" href="https://lumen-ledger.github.io/it/costo-ricarica-auto-elettrica/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Lumen &amp; Ledger">
+<meta property="og:locale" content="it_IT">
+<meta property="og:title" content="Costo ricarica auto elettrica a casa: calcolo e confronto benzina">
+<meta property="og:description" content="Quanto costa ricaricare l'auto elettrica a casa: euro per 100 km, al mese e confronto con benzina e diesel. Prezzo ARERA (43,43 c€/kWh) e carburanti MASE datati.">
+<meta property="og:url" content="https://lumen-ledger.github.io/it/costo-ricarica-auto-elettrica/">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" hreflang="it" href="https://lumen-ledger.github.io/it/costo-ricarica-auto-elettrica/">
+<link rel="alternate" hreflang="en" href="https://lumen-ledger.github.io/ev-charging-cost/">
+<style>
+:root{--navy:#0F2A3D;--sun:#F2B33D;--paper:#F7F5EF;--line:#d9d4c7;--warn:#C2452D}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--navy)}
+header{background:var(--navy);color:#fff;padding:32px 20px}
+.wrap{max-width:760px;margin:0 auto}
+header h1{margin:0;font-size:1.7rem}
+header p{margin:8px 0 0;color:#d6dde2}
+nav{font-size:.9rem;margin-bottom:10px}nav a{color:var(--sun)}
+main{padding:24px 20px}
+h2{font-size:1.15rem;margin:28px 0 6px}
+ul,ol{padding-left:20px}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:10px 0}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#ece8dc}
+.note{border-left:4px solid var(--warn);background:#fff;padding:10px 14px;font-size:.93rem}
+.box{border:1px solid var(--line);background:#fff;padding:14px 16px}
+.box label{display:block;font-size:.9rem;margin-top:8px}
+.box input{width:100%;max-width:260px;padding:6px;font:inherit}
+.presets button{margin:4px 4px 0 0;padding:4px 8px;font:inherit;font-size:.85rem;border:1px solid var(--line);background:#f3f0e6;border-radius:4px;cursor:pointer}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.out{font-size:1.05rem;margin-top:12px}
+footer{padding:20px;font-size:.82rem;color:#5b6770}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="#calcolo">Calcolatore</a> · <a href="#tabella">Tabella</a> · <a href="#pareggio">Pareggio con benzina</a> · <a href="#fonti">Fonti</a></nav>
+  <h1>Quanto costa ricaricare l'auto elettrica a casa?</h1>
+  <p>Costo = km ÷ 100 × consumo in kWh/100 km × prezzo dell'energia. Al prezzo ARERA del IV trimestre 2026 (43,43 centesimi/kWh, tasse incluse) un'auto che consuma 16 kWh/100 km costa <b>6,95 &euro;</b> ogni 100 km, <b>69,49 &euro;</b> al mese per 1.000 km. Una benzina da 6,5 l/100 km, al prezzo medio MASE della settimana del 9 novembre 2026 (1,995 €/l), costa 12,97 &euro; ogni 100 km.</p>
+</div></header>
+<main class="wrap">
+<p class="note">Informazione generale, non consulenza. I valori predefiniti sono esempi, non la tua auto ne' il tuo contratto: inserisci il consumo della tua auto e il prezzo per kWh della tua bolletta (spesa totale ÷ kWh consumati, <a href="../quanto-consuma-stufetta-elettrica/">esempio di calcolo</a>). La ricarica alle colonnine pubbliche ha prezzi diversi e non e' coperta qui.</p>
+
+<h2 id="calcolo">Calcolatore</h2>
+<div class="box">
+  <div class="grid">
+    <label>Consumo dell'auto (kWh per 100 km)<input id="e" type="number" min="1" step="0.1" value="16"></label>
+    <label>…oppure in Wh/km (si converte)<input id="whkm" type="number" min="10" step="1" placeholder="es. 160"></label>
+    <label>Km al mese<input id="mi" type="number" min="0" step="50" value="1000"></label>
+    <label>Perdite di ricarica extra (%)<input id="l" type="number" min="0" max="50" step="1" value="0"></label>
+    <label>Prezzo dell'energia (€/kWh)<input id="r" type="number" min="0" step="0.001" value="0.4343"></label>
+  </div>
+  <p class="out" id="out"></p>
+  <h3 style="font-size:1rem;margin:16px 0 0">Confronto con un'auto a benzina o diesel</h3>
+  <div class="grid">
+    <label>Carburante<select id="fuel"><option value="1.995" selected>Benzina (1,995 €/l)</option><option value="2.218">Gasolio (2,218 €/l)</option><option value="">Prezzo mio</option></select></label>
+    <label>Consumo (litri per 100 km)<input id="lc" type="number" min="1" step="0.1" value="6.5"></label>
+    <label>Prezzo carburante (€/litro)<input id="g" type="number" min="0" step="0.001" value="1.995"></label>
+  </div>
+  <p class="out" id="gout"></p>
+  <p style="font-size:.85rem;margin:6px 0 0">Prezzi carburante: media nazionale MASE della settimana del 9 novembre 2026, self e servito insieme, tasse incluse. Puoi condividere un prezzo con <code>?prezzo=0.30</code> nell'indirizzo.</p>
+</div>
+
+<h2>Dove trovare il consumo della tua auto</h2>
+<ul>
+<li>Il libretto, la scheda tecnica del costruttore e il certificato di conformita' riportano il consumo di energia elettrica <b>WLTP</b>, di solito in Wh/km (160 Wh/km = 16 kWh/100 km). Il valore WLTP e' misurato su un ciclo di prova standard: in autostrada, col freddo e col riscaldamento acceso il consumo reale e' piu' alto.</li>
+<li><b>Perdite di ricarica.</b> Il consumo WLTP delle auto elettriche e' riferito all'energia elettrica ricaricata dalla rete (Reg. UE 2017/1151, allegato XXI, sub-allegato 8): se usi il dato omologato puoi lasciare le perdite extra a 0%. Non siamo riusciti a rileggere oggi il testo integrale del sub-allegato su EUR-Lex: se vuoi un margine prudente, metti 5-10%. Se invece leggi il consumo dal computer di bordo, di solito e' l'energia uscita dalla batteria: aggiungi le perdite tra presa e batteria (il Dipartimento dell'Energia USA le stima intorno al 16%, Fact of the Week #1045).</li>
+<li>La misura piu' affidabile e' la tua: kWh segnati da wallbox o contatore in un mese, divisi per i km percorsi.</li>
+</ul>
+
+<h2 id="tabella">Costo ogni 100 km: consumo × prezzo</h2>
+<p>Energia dalla rete, senza perdite extra. La colonna 0,4343 €/kWh e' il prezzo ARERA del IV trimestre 2026; le altre sono valori di confronto per offerte del mercato libero (guarda il prezzo totale per kWh in bolletta, non solo la componente energia).</p>
+<table>
+<thead><tr><th>Consumo</th><th>0,25 &euro;/kWh</th><th>0,30 &euro;/kWh</th><th>0,35 &euro;/kWh</th><th>0,4343 &euro;/kWh</th><th>0,50 &euro;/kWh</th></tr></thead>
+<tbody>
+<tr><td>13 kWh/100 km</td><td>3,25 &euro;</td><td>3,90 &euro;</td><td>4,55 &euro;</td><td>5,65 &euro;</td><td>6,50 &euro;</td></tr>
+<tr><td>15 kWh/100 km</td><td>3,75 &euro;</td><td>4,50 &euro;</td><td>5,25 &euro;</td><td>6,51 &euro;</td><td>7,50 &euro;</td></tr>
+<tr><td>17 kWh/100 km</td><td>4,25 &euro;</td><td>5,10 &euro;</td><td>5,95 &euro;</td><td>7,38 &euro;</td><td>8,50 &euro;</td></tr>
+<tr><td>20 kWh/100 km</td><td>5,00 &euro;</td><td>6,00 &euro;</td><td>7,00 &euro;</td><td>8,69 &euro;</td><td>10,00 &euro;</td></tr>
+<tr><td>23 kWh/100 km</td><td>5,75 &euro;</td><td>6,90 &euro;</td><td>8,05 &euro;</td><td>9,99 &euro;</td><td>11,50 &euro;</td></tr>
+</tbody>
+</table>
+
+<h2 id="pareggio">Quando la ricarica a casa costa come la benzina?</h2>
+<p>Il prezzo di pareggio per kWh e' il costo del carburante per km diviso i kWh per km. Con 6,5 l/100 km a 1,995 €/l e un'elettrica da 16 kWh/100 km e' <b>0,810 €/kWh</b>: sotto questo prezzo l'elettricita' costa meno. Ai valori d'esempio la differenza e' circa 722 &euro; l'anno su 12.000 km. Il confronto riguarda solo l'energia: esclude prezzo d'acquisto, assicurazione, bollo, manutenzione, eventuale wallbox e aumento della potenza del contatore.</p>
+<p>Con 3 kW impegnati e altri apparecchi accesi, ricaricare a piena potenza puo' far scattare il contatore: vedi la <a href="../quanto-consuma-stufetta-elettrica/#contatore">nota sulla potenza disponibile</a>. Le tariffe biorarie (F1/F23) cambiano il prezzo a seconda dell'ora: inserisci il prezzo della fascia in cui ricarichi.</p>
+
+<h2>Correlati</h2>
+<ul>
+<li><a href="../quanto-consuma-stufetta-elettrica/">Quanto consuma una stufetta elettrica</a>, con lo stesso prezzo ARERA e il costo di altri apparecchi.</li>
+<li><a href="../condizionatore-pompa-di-calore-costo-riscaldamento/">Condizionatore in pompa di calore: costo del riscaldamento</a>.</li>
+<li><a href="../fotovoltaico-balcone-conviene/">Fotovoltaico da balcone: conviene?</a> (l'auto si ricarica soprattutto di sera: l'autoconsumo dal balcone e' basso).</li>
+<li><a href="../../ev-charging-cost/">English: EV charging cost at home by U.S. state</a>.</li>
+</ul>
+
+<h2 id="fonti">Fonti</h2>
+<ul>
+<li>ARERA, prezzo di riferimento dell'energia elettrica per il cliente domestico tipo vulnerabile, IV trimestre 2026 (1° ottobre - 31 dicembre), 43,43 c€/kWh tasse incluse (comunicato del 29 settembre 2026, letto il 2026-11-01). Comprende quote fisse e oneri spalmati sul consumo tipo: il tuo prezzo medio puo' essere diverso.</li>
+<li>Ministero dell'Ambiente e della Sicurezza Energetica (MASE), prezzi medi settimanali dei carburanti al consumo, rilevazione del 9 novembre 2026: benzina 1,995 €/l, gasolio auto 2,218 €/l (export CSV su sisen.mase.gov.it, letto il 2026-11-13).</li>
+<li>Regolamento (UE) 2017/1151, allegato XXI (procedura WLTP), sub-allegato 8 per i veicoli elettrici: testo integrale da verificare su <a href="https://eur-lex.europa.eu/eli/reg/2017/1151/oj/ita">EUR-Lex</a> (non leggibile dal nostro strumento il 2026-11-13).</li>
+<li>U.S. Department of Energy, Vehicle Technologies Office, Fact of the Week #1045 (2018-09-03), perdite di ricarica, letto il 2026-11-07.</li>
+</ul>
+<p>Formule: <a href="../../scripts/ev_charging.js">ev_charging.js</a> (MIT), la stessa libreria della versione inglese. Tutto gira nel browser; nessun dato viene inviato.</p>
+</main>
+<footer class="wrap">© 2026 Lumen &amp; Ledger · Testi CC BY 4.0 · <a href="../">Strumenti</a> · <a href="../chi-siamo/">Chi siamo</a> · <a href="../privacy/">Privacy</a> · Contatti: lumenledger.tools@proton.me</footer>
+<script src="../../scripts/ev_charging.js"></script>
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)};
+  function eur(x){var a=Math.abs(x),s=a<100?a.toFixed(2):Math.round(a).toString();var p=s.split('.');p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,'.');return (x<0?'-':'')+p.join(',')+' €'}
+  function c(x,d){return x.toFixed(d).replace('.',',')}
+  function num(i){return parseFloat(String($(i).value).replace(',','.'))||0}
+  function calc(){
+    var lc=num('lc');
+    var r=EvCharging.run({kwh100:num('e'),miles:num('mi'),rate:num('r'),lossPct:num('l'),mpg:lc>0?100/lc:0,gasPrice:num('g')});
+    $('out').innerHTML='Al km: <b>'+c(r.perMile*100,1)+' cent</b> · Ogni 100 km: <b>'+eur(r.per100)+'</b> · Al mese: <b>'+eur(r.usd)+'</b> ('+r.kwh.toFixed(0)+' kWh) · All\'anno: <b>'+eur(r.year)+'</b>';
+    $('gout').innerHTML=r.gasPerMile>0?'Carburante: <b>'+c(r.gasPerMile*100,1)+' cent</b> al km, <b>'+eur(r.gasMonth)+'</b> al mese. Differenza: <b>'+eur(r.saveMonth)+'</b> al mese, <b>'+eur(r.saveYear)+'</b> all\'anno ('+(r.saveMonth>=0?'la ricarica a casa costa meno':'il carburante costa meno')+'). Prezzo di pareggio dell\'elettricita\': <b>'+c(r.breakEvenRate,3)+' €/kWh</b>.':'';
+  }
+  $('whkm').addEventListener('input',function(){var w=num('whkm');if(w>0)$('e').value=(w/10).toFixed(1);calc()});
+  $('e').addEventListener('input',function(){$('whkm').value='';calc()});
+  $('fuel').addEventListener('change',function(){if(this.value)$('g').value=this.value;calc()});
+  $('g').addEventListener('input',function(){$('fuel').value='';calc()});
+  ['mi','l','r','lc'].forEach(function(i){$(i).addEventListener('input',calc)});
+  var q=new URLSearchParams(location.search),qr=parseFloat(q.get('prezzo'));
+  if(qr>=0.01&&qr<=2)$('r').value=qr;
+  calc();
+})();
+</script>
+</body>
+</html>
