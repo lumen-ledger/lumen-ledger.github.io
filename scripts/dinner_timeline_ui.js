@@ -24,7 +24,10 @@
     }).filter(function (d) { return d.name; });
   }
   function load(list) { tb.innerHTML = ''; list.forEach(row); if (!list.length) for (var i = 0; i < 4; i++) row(); }
-  function exList() { return L.ex.map(function (e) { return { name: e[0], where: e[1], temp: e[2] === '' ? null : e[2], cook: e[3] === '' ? null : e[3], rest: e[4] }; }); }
+  var U = $('unit');
+  function setUnit(u) { if (!U || (u !== 'F' && u !== 'C')) return; L.unit = u; U.value = u; var th = $('unit-th'); if (th) th.textContent = u; }
+  if (U) U.addEventListener('change', function () { var old = L.unit; setUnit(U.value); if (old !== L.unit && L.exC) { var ex = old === 'F' ? L.ex : L.exC, nw = old === 'F' ? L.exC : L.ex; Array.prototype.forEach.call(tb.querySelectorAll('tr'), function (tr) { var n = tr.querySelector('input').value; ex.forEach(function (e, i) { var t = tr.querySelector('.t'); if (t && e[0] === n && String(e[2]) === t.value) t.value = nw[i][2]; }); }); } if ($('out').innerHTML) run(); });
+  function exList() { return (L.unit === 'C' && L.exC ? L.exC : L.ex).map(function (e) { return { name: e[0], where: e[1], temp: e[2] === '' ? null : e[2], cook: e[3] === '' ? null : e[3], rest: e[4] }; }); }
   function nextDec25() { var n = new Date(), y = n.getMonth() === 11 && n.getDate() > 25 ? n.getFullYear() + 1 : n.getFullYear(); return y + '-12-25T' + L.defServe; }
   function hm(d) { return d.toLocaleTimeString(L.locale, { hour: 'numeric', minute: '2-digit' }); }
   function run() {
@@ -51,7 +54,7 @@
     if (p.ahead.length) h += '<p><b>' + L.ahead + ':</b> ' + esc(p.ahead.map(function (r) { return r.name; }).join(', ')) + '</p>';
     h += '<button id="print">' + L.print + '</button><button id="share" class="light">' + L.share + '</button>';
     out.innerHTML = h;
-    var link = location.origin + location.pathname + '#' + T.encode(ds, v);
+    var link = location.origin + location.pathname + '#' + T.encode(ds, v) + (U ? '&u=' + L.unit : '');
     if (window.history && history.replaceState) history.replaceState(null, '', link);
     $('print').addEventListener('click', function () { window.print(); });
     $('share').addEventListener('click', function () {
@@ -63,6 +66,7 @@
   $('ex').addEventListener('click', function () { load(exList()); });
   $('clear').addEventListener('click', function () { load([]); $('out').innerHTML = ''; });
   $('go').addEventListener('click', run);
+  var um = /[#&]u=([FC])(?![A-Za-z0-9])/.exec(location.hash); if (um) setUnit(um[1]);
   var st = T.decode(location.hash);
   if (st && st.dishes.length) { $('serve').value = st.serve; load(st.dishes); run(); }
   else { $('serve').value = L.defDate ? L.defDate() + 'T' + L.defServe : nextDec25(); load(exList()); }
