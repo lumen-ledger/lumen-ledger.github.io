@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Free holiday budget planner (Excel/Sheets) + gift calculator</title>
-<meta name="description" content="Free holiday budget spreadsheet: budget per recipient, planned vs actual, money left, card totals, return deadlines. Plus a gift budget per person calculator.">
+<meta name="description" content="Free holiday budget spreadsheet: budget per recipient, planned vs actual, money left, card totals, return deadlines. Plus gift budget per person and credit card interest calculators.">
 <link rel="canonical" href="https://lumen-ledger.github.io/holiday-budget-planner/">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Lumen &amp; Ledger">
 <meta property="og:locale" content="en_US">
 <meta property="og:title" content="Free holiday budget planner (Excel/Sheets) + gift calculator">
-<meta property="og:description" content="Free holiday budget spreadsheet: budget per recipient, planned vs actual, money left, card totals, return deadlines. Plus a gift budget per person calculator.">
+<meta property="og:description" content="Free holiday budget spreadsheet: budget per recipient, planned vs actual, money left, card totals, return deadlines. Plus gift budget per person and credit card interest calculators.">
 <meta property="og:url" content="https://lumen-ledger.github.io/holiday-budget-planner/">
 <meta name="twitter:card" content="summary">
 <link rel="alternate" hreflang="en-US" href="https://lumen-ledger.github.io/holiday-budget-planner/">
@@ -61,6 +61,25 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
   <p><small>Runs in your browser; nothing is sent anywhere.</small></p>
 </div>
 <p>"Everything except gifts" is food and hosting, travel, decorations, cards and postage, wrapping and shipping, events, donations. In the example, $895 is the sum of those rows on the Setup sheet. The calculator is plain arithmetic on your numbers: (total − other spending) × (1 − reserve) ÷ people.</p>
+
+<h2 id="card-interest">If the holidays go on a credit card: what the interest costs</h2>
+<div class="box">
+  <div class="grid">
+    <label>Holiday balance on the card ($)<input id="cb" type="number" min="0" step="10" value="1000"></label>
+    <label>Card APR (%)<input id="ca" type="number" min="0" max="40" step="0.01" value="22.36"></label>
+    <label>Fixed monthly payment ($)<input id="cp" type="number" min="1" step="5" value="100"></label>
+  </div>
+  <div class="out" id="cout" aria-live="polite"></div>
+  <p><small>Runs in your browser; nothing is sent anywhere.</small></p>
+</div>
+<p>The default APR, 22.36%, is the Federal Reserve's average rate on credit card accounts assessed interest at commercial banks, Q3 2026 (preliminary; 21.19% across all accounts), from the G.19 Consumer Credit release of November 6, 2026. Your own rate is on your statement.</p>
+<table>
+<tr><th>$1,000 at 22.36% APR, paying</th><th>Months to pay off</th><th>Interest paid</th></tr>
+<tr><td>$200 a month</td><td>6</td><td>$59.81</td></tr>
+<tr><td>$100 a month</td><td>12</td><td>$117.05</td></tr>
+<tr><td>$50 a month</td><td>26</td><td>$262.88</td></tr>
+</table>
+<p style="font-size:.9rem">Method: each month interest = balance × APR ÷ 12 (rounded to the cent), then the payment is subtracted; no new purchases, fees or promotional rates. Card issuers usually compute interest on the average daily balance, so your statement can differ by a few dollars. If the payment does not cover the first month's interest, the balance never goes down and the calculator says so.</p>
 
 <h2 id="sheets">What is inside the file</h2>
 <table>
@@ -125,9 +144,12 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
 <p>Yes. It has no macros or add-ins and opens in Excel, LibreOffice Calc and Google Sheets (File → Import).</p>
 <h3>How do the return-by dates work?</h3>
 <p>On the Gifts sheet you type the store's return deadline for each purchase; the date turns orange 14 days ahead. The window is set by the store's policy; for UK online orders the <a href="../uk-gift-return-deadlines/">gift return deadline calculator</a> gives the legal 14-day cancellation date.</p>
+<h3>How much interest will I pay if I put the holidays on a credit card?</h3>
+<p>At 22.36% APR (Federal Reserve G.19 average for accounts assessed interest, Q3 2026), $1,000 paid off at $100 a month takes 12 months and costs $117.05 in interest; at $50 a month it takes 26 months and costs $262.88. Use the <a href="#card-interest">card interest calculator</a> with your own APR and payment.</p>
 <h3>Does the calculator save or send my numbers?</h3>
 <p>No. The calculation runs in your browser; the page has no tracking, cookies or accounts, and the spreadsheet stays on your device.</p>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much should I spend on each gift?", "acceptedAnswer": {"@type": "Answer", "text": "There is no right amount for everyone: it depends on the total you can pay off. With the calculator defaults ($1,500 total, $895 for everything except gifts, 12 people, 10% reserve) the gift pot is $605 and the budget is $45.37 per person. These are illustrative numbers, not national averages."}}, {"@type": "Question", "name": "What goes into \"everything except gifts\"?", "acceptedAnswer": {"@type": "Answer", "text": "Food and hosting, travel, decorations, cards and postage, wrapping and shipping, events and outings, donations. Subtract them from the total before dividing: they are harder to cut later than a gift."}}, {"@type": "Question", "name": "How much should I keep aside for surprises?", "acceptedAnswer": {"@type": "Answer", "text": "5-10% of the gift pot. In the example, 10% of $605 is $60.50: it covers a forgotten gift or a guest who joins at the last minute."}}, {"@type": "Question", "name": "The amount per person is too low. What can I change?", "acceptedAnswer": {"@type": "Answer", "text": "Shorten the list (for example one group gift for friends or coworkers), lower a non-gift category or raise the total. Example: with the same defaults and 8 people instead of 12, the budget goes from $45.37 to $68.06 per person."}}, {"@type": "Question", "name": "Why is the total a few cents below the gift pot?", "acceptedAnswer": {"@type": "Answer", "text": "Each budget per person is rounded down to the cent, so the total never goes over. With the defaults, 12 × $45.37 = $544.44 against $544.50 available after the reserve."}}, {"@type": "Question", "name": "Does the spreadsheet work in Google Sheets?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It has no macros or add-ins and opens in Excel, LibreOffice Calc and Google Sheets (File → Import)."}}, {"@type": "Question", "name": "How do the return-by dates work?", "acceptedAnswer": {"@type": "Answer", "text": "On the Gifts sheet you type the store's return deadline for each purchase; the date turns orange 14 days ahead. The window is set by the store's policy; for UK online orders the gift return deadline calculator gives the legal 14-day cancellation date."}}, {"@type": "Question", "name": "Does the calculator save or send my numbers?", "acceptedAnswer": {"@type": "Answer", "text": "No. The calculation runs in your browser; the page has no tracking, cookies or accounts, and the spreadsheet stays on your device."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much should I spend on each gift?", "acceptedAnswer": {"@type": "Answer", "text": "There is no right amount for everyone: it depends on the total you can pay off. With the calculator defaults ($1,500 total, $895 for everything except gifts, 12 people, 10% reserve) the gift pot is $605 and the budget is $45.37 per person. These are illustrative numbers, not national averages."}}, {"@type": "Question", "name": "What goes into \"everything except gifts\"?", "acceptedAnswer": {"@type": "Answer", "text": "Food and hosting, travel, decorations, cards and postage, wrapping and shipping, events and outings, donations. Subtract them from the total before dividing: they are harder to cut later than a gift."}}, {"@type": "Question", "name": "How much should I keep aside for surprises?", "acceptedAnswer": {"@type": "Answer", "text": "5-10% of the gift pot. In the example, 10% of $605 is $60.50: it covers a forgotten gift or a guest who joins at the last minute."}}, {"@type": "Question", "name": "The amount per person is too low. What can I change?", "acceptedAnswer": {"@type": "Answer", "text": "Shorten the list (for example one group gift for friends or coworkers), lower a non-gift category or raise the total. Example: with the same defaults and 8 people instead of 12, the budget goes from $45.37 to $68.06 per person."}}, {"@type": "Question", "name": "Why is the total a few cents below the gift pot?", "acceptedAnswer": {"@type": "Answer", "text": "Each budget per person is rounded down to the cent, so the total never goes over. With the defaults, 12 × $45.37 = $544.44 against $544.50 available after the reserve."}}, {"@type": "Question", "name": "Does the spreadsheet work in Google Sheets?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It has no macros or add-ins and opens in Excel, LibreOffice Calc and Google Sheets (File → Import)."}}, {"@type": "Question", "name": "How do the return-by dates work?", "acceptedAnswer": {"@type": "Answer", "text": "On the Gifts sheet you type the store's return deadline for each purchase; the date turns orange 14 days ahead. The window is set by the store's policy; for UK online orders the gift return deadline calculator gives the legal 14-day cancellation date."}}, {"@type": "Question", "name": "How much interest will I pay if I put the holidays on a credit card?", "acceptedAnswer": {"@type": "Answer", "text": "At 22.36% APR (Federal Reserve G.19 average for accounts assessed interest, Q3 2026), $1,000 paid off at $100 a month takes 12 months and costs $117.05 in interest; at $50 a month it takes 26 months and costs $262.88. Use the card interest calculator with your own APR and payment."}}, {"@type": "Question", "name": "Does the calculator save or send my numbers?", "acceptedAnswer": {"@type": "Answer", "text": "No. The calculation runs in your browser; the page has no tracking, cookies or accounts, and the spreadsheet stays on your device."}}]}</script>
+<p style="font-size:.9rem">Source for the default APR: <a href="https://www.federalreserve.gov/releases/g19/current/default.htm">Federal Reserve, G.19 Consumer Credit</a>, release of November 6, 2026 (checked 2026-11-14).</p>
 <p class="note">General information, not financial advice. The spreadsheet only does arithmetic on the numbers you enter.</p>
 </main>
 <footer class="wrap">© 2026 Lumen &amp; Ledger · Texts CC BY 4.0 · <a href="../">Tools</a> · <a href="../about/">About</a> · <a href="../privacy/">Privacy</a> · Contact: lumenledger.tools@proton.me</footer>
@@ -145,6 +167,16 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
   }
   ['tot','oth','ppl','buf'].forEach(function(i){$(i).addEventListener('input',calc)});
   calc();
+  function card(){
+    var B=parseFloat($('cb').value),a=parseFloat($('ca').value),P=parseFloat($('cp').value);
+    if(!(B>0)||!(a>=0&&a<=40)||!(P>0)){$('cout').textContent='Enter a balance, an APR between 0 and 40% and a monthly payment.';return}
+    var r=a/100/12,b=B,m=0,i=0;
+    while(b>0.005&&m<600){var it=Math.round(b*r*100)/100;if(P<=it){$('cout').innerHTML='A payment of '+usd(P)+' does not cover the monthly interest ('+usd(it)+'): the balance would never go down. Pay more than '+usd(it)+' a month.';return}i+=it;b+=it;b=Math.round((b-Math.min(P,b))*100)/100;m++}
+    if(m>=600){$('cout').textContent='More than 50 years: raise the payment.';return}
+    $('cout').innerHTML='Paid off in <b>'+m+(m===1?' month':' months')+'</b>. Interest: <b>'+usd(i)+'</b>, total paid '+usd(B+i)+' ('+(i/B*100).toFixed(1)+'% more than the balance).';
+  }
+  ['cb','ca','cp'].forEach(function(i){$(i).addEventListener('input',card)});
+  card();
 })();
 </script>
 </body>
