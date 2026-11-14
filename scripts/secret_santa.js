@@ -58,14 +58,31 @@
     });
     return { hints: hints, unknown: unknown, dup: dup };
   }
+  // Last year's draw: one line per giver, "Anna > Ben" (also "->", "=>" or the arrow sign) = Anna does not draw Ben again.
+  // One-way: Ben may still draw Anna.
+  function parseOneWay(text, names) {
+    var idx = {}, pairs = [], unknown = [];
+    names.forEach(function (n, i) { idx[key(n)] = i; });
+    String(text || '').split(/\r?\n/).forEach(function (l) {
+      if (!l.trim()) return;
+      var p = l.split(/\s*(?:->|=>|\u2192|>)\s*/).map(function (s) { return s.trim().replace(/\s+/g, ' '); });
+      if (p.length !== 2 || !p[0] || !p[1]) { unknown.push(l.trim()); return; }
+      for (var k = 0; k < 2; k++) if (!(key(p[k]) in idx)) { unknown.push(p[k]); return; }
+      var g = idx[key(p[0])], r = idx[key(p[1])];
+      if (g !== r) pairs.push([g, r]);
+    });
+    return { pairs: pairs, unknown: unknown };
+  }
   // returns array giver index -> receiver index, or null if impossible
   // opts.noSwap: avoid A->B together with B->A (ignored when n < 3)
+  // opts.oneWay: [[giver, receiver], ...] banned in that direction only
   function draw(n, pairs, opts, rng) {
     opts = opts || {};
     if (n < 2) return null;
     var ban = [];
     for (var i = 0; i < n; i++) { ban.push({}); ban[i][i] = 1; }
     (pairs || []).forEach(function (p) { ban[p[0]][p[1]] = 1; ban[p[1]][p[0]] = 1; });
+    (opts.oneWay || []).forEach(function (p) { ban[p[0]][p[1]] = 1; });
     var noSwap = !!opts.noSwap && n >= 3;
     var res = new Array(n), used = {}, steps = 0, LIMIT = 200000;
     var order = shuffle(range(n), rng);
@@ -115,6 +132,6 @@
       return JSON.parse(deutf8(o));
     } catch (e) { return null; }
   }
-  var api = { parseNames: parseNames, parsePairs: parsePairs, parseHints: parseHints, draw: draw, encode: encode, decode: decode, shuffle: shuffle };
+  var api = { parseNames: parseNames, parsePairs: parsePairs, parseHints: parseHints, parseOneWay: parseOneWay, draw: draw, encode: encode, decode: decode, shuffle: shuffle };
   if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.SecretSanta = api;
 })(this);
