@@ -42,6 +42,22 @@
     });
     return { pairs: pairs, unknown: unknown };
   }
+  // Optional gift hints: one line per person, "Name: hint" (also "Name - hint"). Max 150 characters each.
+  function parseHints(text, names) {
+    var idx = {}, hints = {}, unknown = [], dup = [];
+    names.forEach(function (n, i) { idx[key(n)] = i; });
+    String(text || '').split(/\r?\n/).forEach(function (l) {
+      if (!l.trim()) return;
+      var m = /^\s*([^:]+?)\s*(?::|\s-\s)\s*(.*)$/.exec(l);
+      if (!m || !m[2].trim()) { unknown.push(l.trim()); return; }
+      var n = m[1].replace(/\s+/g, ' ');
+      if (!(key(n) in idx)) { unknown.push(n); return; }
+      var i = idx[key(n)];
+      if (i in hints) dup.push(n);
+      hints[i] = m[2].trim().replace(/\s+/g, ' ').slice(0, 150);
+    });
+    return { hints: hints, unknown: unknown, dup: dup };
+  }
   // returns array giver index -> receiver index, or null if impossible
   // opts.noSwap: avoid A->B together with B->A (ignored when n < 3)
   function draw(n, pairs, opts, rng) {
@@ -99,6 +115,6 @@
       return JSON.parse(deutf8(o));
     } catch (e) { return null; }
   }
-  var api = { parseNames: parseNames, parsePairs: parsePairs, draw: draw, encode: encode, decode: decode, shuffle: shuffle };
+  var api = { parseNames: parseNames, parsePairs: parsePairs, parseHints: parseHints, draw: draw, encode: encode, decode: decode, shuffle: shuffle };
   if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.SecretSanta = api;
 })(this);
