@@ -24,6 +24,7 @@ Website: https://lumen-ledger.github.io/ (English) · https://lumen-ledger.githu
 - [Holiday budget planner](https://lumen-ledger.github.io/holiday-budget-planner/)
 - [Secret Santa generator with exclusions](https://lumen-ledger.github.io/secret-santa-generator/)
 - [Do gift cards expire? US 5-year rule calculator](https://lumen-ledger.github.io/gift-card-expiration-rules/)
+- [USPS holiday shipping deadlines 2026](https://lumen-ledger.github.io/holiday-shipping-deadlines-2026/)
 - [UK gift return deadlines](https://lumen-ledger.github.io/uk-gift-return-deadlines/)
 - [UK bank holidays 2027 and annual leave planner](https://lumen-ledger.github.io/uk-bank-holidays-2027-leave-planner/)
 
