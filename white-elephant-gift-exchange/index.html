@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="index,follow">
+<title>White Elephant gift exchange: rules, number draw and steal tracker</title>
+<meta name="description" content="Draw a random turn order for a White Elephant or Yankee Swap, then track steals per gift with a lock limit. Clear rules and variants. No sign-up, nothing saved.">
+<link rel="canonical" href="https://lumen-ledger.github.io/white-elephant-gift-exchange/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Lumen &amp; Ledger">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="White Elephant gift exchange: rules, number draw and steal tracker">
+<meta property="og:description" content="Draw a random turn order for a White Elephant or Yankee Swap, then track steals per gift with a lock limit. Clear rules and variants. No sign-up, nothing saved.">
+<meta property="og:url" content="https://lumen-ledger.github.io/white-elephant-gift-exchange/">
+<meta name="twitter:card" content="summary">
+<style>
+:root{--navy:#0F2A3D;--sun:#F2B33D;--paper:#F7F5EF;--line:#d9d4c7;--warn:#C2452D}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--navy)}
+header{background:var(--navy);color:#fff;padding:32px 20px}
+.wrap{max-width:760px;margin:0 auto}
+header h1{margin:0;font-size:1.7rem}
+header p{margin:8px 0 0;color:#d6dde2}
+nav{font-size:.9rem;margin-bottom:10px}nav a{color:var(--sun)}
+main{padding:24px 20px}
+h2{font-size:1.15rem;margin:28px 0 6px}
+h3{font-size:1rem;margin:16px 0 2px}
+ul,ol{padding-left:20px}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:10px 0}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:middle}
+th{background:#ece8dc}
+td input{width:100%;font:inherit;font-size:.9rem;padding:4px}
+.note{border-left:4px solid var(--warn);background:#fff;padding:10px 14px;font-size:.93rem}
+.box{border:1px solid var(--line);background:#fff;padding:14px 16px}
+.box label{display:block;font-size:.9rem;margin-top:8px}
+.box textarea{width:100%;font:inherit;padding:6px;min-height:140px}
+.box input[type=number]{width:100%;max-width:160px;padding:6px;font:inherit}
+button{font:inherit;padding:8px 14px;margin:10px 8px 0 0;border:1px solid var(--navy);background:var(--navy);color:#fff;cursor:pointer;border-radius:3px}
+button.light{background:#fff;color:var(--navy)}
+button.s{padding:2px 9px;margin:0 2px}
+.err{color:var(--warn)}
+.lock{color:var(--warn);font-weight:700}
+footer{padding:20px;font-size:.82rem;color:#5b6770}
+@media print{header nav,button,.noprint,footer{display:none}body{background:#fff}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="#draw">Draw the order</a> · <a href="#tracker">Steal tracker</a> · <a href="#rules">Rules</a> · <a href="#variants">Variants</a> · <a href="#faq">FAQ</a></nav>
+  <h1>White Elephant gift exchange: turn order and steal tracker</h1>
+  <p>Paste the players, draw a random turn order, then use the tracker during the game: it counts how many times each gift has been stolen and shows when a gift is locked. Works for White Elephant, Yankee Swap and Dirty Santa. Everything runs in your browser; nothing is saved or sent.</p>
+</div></header>
+<main class="wrap">
+
+<h2 id="draw">1. Draw the turn order</h2>
+<div class="box">
+  <label for="names">Players, one per line (or separated by commas)</label>
+  <textarea id="names" placeholder="Anna&#10;Ben&#10;Carla&#10;Dev&#10;Eli&#10;Fay"></textarea>
+  <label for="limit">A gift is locked after this many steals (0 = no limit)</label>
+  <input id="limit" type="number" min="0" max="20" value="3">
+  <label><input id="final" type="checkbox" checked> Player 1 gets a final turn to swap with anyone (classic "first player" rule)</label>
+  <button id="go">Draw order</button>
+  <button id="again" class="light">Redraw</button>
+  <p id="err" class="err"></p>
+</div>
+<div id="out"></div>
+
+<h2 id="tracker">2. Steal tracker</h2>
+<p>After the draw, the table follows the turn order. When a player unwraps a gift, type a short name for it ("blue mug"). Each time that gift is stolen, press <b>+1</b> next to it. When it reaches the limit, it is marked locked: nobody can steal it again. The table lives only in this browser tab; printing it (Ctrl/Cmd+P) gives a paper copy.</p>
+<div id="trk"><p class="note">Draw the order first.</p></div>
+
+<h2 id="rules">Standard rules in 6 steps</h2>
+<ol>
+<li><b>Everyone brings one wrapped gift</b> within an agreed budget and puts it in a central pile. Gifts are anonymous.</li>
+<li><b>Draw the turn order</b> (numbers from a hat, or the tool above).</li>
+<li><b>Player 1 opens a gift</b> from the pile. The turn ends.</li>
+<li><b>Every next player chooses</b>: open a new gift from the pile, or steal any gift already opened.</li>
+<li><b>A player who is stolen from</b> either opens a new gift or steals a different one. They cannot steal straight back the gift just taken from them. The chain continues until someone opens a new gift; then the next number plays.</li>
+<li><b>The game ends</b> when the last gift is opened. With the first-player rule, player 1 (who had no choice at the start) may then swap once with anyone whose gift is not locked.</li>
+</ol>
+<p class="note">There is no official rulebook: these are the common house rules. Agree on the budget, the steal limit and the first-player rule before you start, and say them out loud, because most disputes come from rules nobody announced.</p>
+
+<h2 id="variants">Common variants</h2>
+<table>
+<tr><th>Variant</th><th>What changes</th><th>Good for</th></tr>
+<tr><td>Steal limit (usually 2 or 3)</td><td>A gift is locked after it has been stolen that many times; the last person to take it keeps it.</td><td>Keeping the game moving in groups above ~10 people</td></tr>
+<tr><td>One steal per turn</td><td>A player who is stolen from must open a new gift: no chain of steals.</td><td>Large office parties, short time slots</td></tr>
+<tr><td>Yankee Swap</td><td>Usually the same game; some groups use it for the version where the gift must stay visible and unwrapped after opening.</td><td>Any group</td></tr>
+<tr><td>Dirty Santa</td><td>Same rules; the name is common in the US South. Often played with stronger stealing.</td><td>Families who enjoy the stealing</td></tr>
+<tr><td>Dice version</td><td>Players roll dice: e.g. 1 = steal, 6 = swap with neighbour. Faster, more random.</td><td>Groups that want less strategy</td></tr>
+<tr><td>Theme exchange</td><td>All gifts follow one theme (mugs, books, "under $20 useful").</td><td>Avoiding joke gifts nobody wants</td></tr>
+</table>
+
+<h2 id="budget">Budget and timing</h2>
+<ul>
+<li><b>Budget:</b> pick one round number and say it in the invite (for example $20 or $25). A cap with no minimum leads to uneven gifts; "about $25" works better than "up to $25". To plan all your holiday gifts, see the <a href="../holiday-budget-planner/">holiday budget planner</a>.</li>
+<li><b>Timing:</b> as a rough planning figure, allow 1 to 2 minutes per player plus extra for steal chains; a steal limit keeps the total predictable. This is a planning assumption, not a measured average.</li>
+<li><b>Odd numbers, late arrivals:</b> a latecomer can take the next free number at the end of the order; there is no need to redraw.</li>
+</ul>
+
+<h2 id="faq">FAQ</h2>
+<h3>Is White Elephant the same as Secret Santa?</h3>
+<p>No. In Secret Santa each person buys for one specific person drawn in advance. In White Elephant gifts are anonymous and players open or steal them in turn. For a classic draw with private links, use the <a href="../secret-santa-generator/">Secret Santa generator</a>.</p>
+<h3>How many times can a gift be stolen?</h3>
+<p>It depends on your house rules. Many groups lock a gift after 2 or 3 steals; set your number in the tool above. With 0 there is no limit.</p>
+<h3>Can I steal back a gift that was just taken from me?</h3>
+<p>Under the usual rules, not immediately: you must open a new gift or steal a different one. You may steal it back on a later turn if it is not locked.</p>
+<h3>What does player 1 get at the end?</h3>
+<p>Player 1 opened a gift with nothing to compare. To balance that, many groups let player 1 swap once with any unlocked gift after the last gift is opened. Untick the box if your group does not play that way.</p>
+<h3>Is the turn order really random?</h3>
+<p>Yes. The tool shuffles the names with the browser's cryptographic random number generator (Fisher-Yates shuffle). Redraw gives a new order; nothing is stored.</p>
+<h3>How many players do I need?</h3>
+<p>At least 3; the game gets more interesting from about 6. In large groups (20 or more) use a steal limit or the one-steal-per-turn variant to keep it under an hour.</p>
+<h3>Does it work for a virtual party?</h3>
+<p>Yes: share your screen with the order and the tracker. With remote players, gifts are usually shown on camera or as photos and shipped afterwards by whoever ends up with them.</p>
+<p style="font-size:.9rem">Also useful for the season: <a href="../holiday-shipping-deadlines-2026/">USPS holiday shipping deadlines 2026</a> · <a href="../gift-card-expiration-rules/">gift card expiration rules</a>.</p>
+<!--related-holiday--><p class="related"><strong>More holiday tools:</strong> <a href="../thanksgiving-dinner-timeline/">Thanksgiving dinner timeline</a> · <a href="../thanksgiving-turkey-planner/">Turkey thaw &amp; roast planner</a> · <a href="../christmas-dinner-timeline/">Christmas dinner timeline</a> · <a href="../holiday-budget-planner/">Holiday budget planner</a> · <a href="../secret-santa-generator/">Secret Santa generator</a> · <a href="../holiday-shipping-deadlines-2026/">Holiday shipping deadlines 2026</a> · <a href="../gift-card-expiration-rules/">Gift card expiration rules</a> · <a href="../christmas-lights-cost/">Christmas lights cost</a> · <a href="../uk-gift-return-deadlines/">UK gift return deadlines</a></p>
+</main>
+<footer class="wrap">© 2026 Lumen &amp; Ledger · Text CC BY 4.0, code MIT · <a href="../">Tools</a> · <a href="../about/">About</a> · <a href="../privacy/">Privacy</a> · Contact: lumenledger.tools@proton.me</footer>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is White Elephant the same as Secret Santa?","acceptedAnswer":{"@type":"Answer","text":"No. In Secret Santa each person buys for one specific person drawn in advance. In White Elephant gifts are anonymous and players open or steal them in turn."}},{"@type":"Question","name":"How many times can a gift be stolen?","acceptedAnswer":{"@type":"Answer","text":"It depends on your house rules. Many groups lock a gift after 2 or 3 steals; set your number in the tool. With 0 there is no limit."}},{"@type":"Question","name":"Can I steal back a gift that was just taken from me?","acceptedAnswer":{"@type":"Answer","text":"Under the usual rules, not immediately: you must open a new gift or steal a different one. You may steal it back on a later turn if it is not locked."}},{"@type":"Question","name":"What does player 1 get at the end?","acceptedAnswer":{"@type":"Answer","text":"Player 1 opened a gift with nothing to compare. To balance that, many groups let player 1 swap once with any unlocked gift after the last gift is opened."}},{"@type":"Question","name":"Is the turn order really random?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool shuffles the names with the browser's cryptographic random number generator (Fisher-Yates shuffle). Redraw gives a new order; nothing is stored."}},{"@type":"Question","name":"How many players do I need?","acceptedAnswer":{"@type":"Answer","text":"At least 3; the game gets more interesting from about 6. In large groups (20 or more) use a steal limit or the one-steal-per-turn variant to keep it under an hour."}},{"@type":"Question","name":"Does it work for a virtual party?","acceptedAnswer":{"@type":"Answer","text":"Yes: share your screen with the order and the tracker. With remote players, gifts are usually shown on camera or as photos and shipped afterwards by whoever ends up with them."}}]}</script>
+<script>
+(function(){
+  function $(i){return document.getElementById(i)}
+  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  function rnd(n){ // uniform integer in [0,n)
+    var c=window.crypto||window.msCrypto;
+    if(!c||!c.getRandomValues)return Math.floor(Math.random()*n);
+    var a=new Uint32Array(1),lim=Math.floor(4294967296/n)*n;
+    do{c.getRandomValues(a)}while(a[0]>=lim);
+    return a[0]%n;
+  }
+  function parse(t){
+    var seen={},out=[];
+    t.split(/[\n,;]+/).forEach(function(x){x=x.trim().slice(0,40);var k=x.toLowerCase();if(x&&!seen[k]){seen[k]=1;out.push(x)}});
+    return out;
+  }
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=rnd(i+1),t=a[i];a[i]=a[j];a[j]=t}return a}
+  var order=[],steals=[],gifts=[];
+  function limit(){var v=parseInt($('limit').value,10);return isNaN(v)||v<0?0:Math.min(v,20)}
+  function renderTracker(){
+    if(!order.length)return;
+    var L=limit(),h='<table><tr><th>#</th><th>Player</th><th>Gift they opened</th><th>Times this gift was stolen</th></tr>';
+    order.forEach(function(p,i){
+      var s=steals[i],locked=L>0&&s>=L;
+      h+='<tr><td>'+(i+1)+'</td><td>'+esc(p)+'</td><td><input data-g="'+i+'" value="'+esc(gifts[i]||'')+'" maxlength="40" aria-label="Gift opened by '+esc(p)+'"></td><td style="white-space:nowrap">'+
+        '<button class="s light" data-m="'+i+'" aria-label="minus one">-</button> '+s+' <button class="s" data-p="'+i+'"'+(locked?' disabled':'')+' aria-label="plus one">+1</button>'+
+        (locked?' <span class="lock">locked</span>':(L>0?' <span>('+(L-s)+' left)</span>':''))+'</td></tr>';
+    });
+    h+='</table>';
+    if($('final').checked)h+='<p>After the last gift is opened: <b>'+esc(order[0])+'</b> (player 1) may swap once with any unlocked gift.</p>';
+    $('trk').innerHTML=h;
+  }
+  function draw(){
+    var n=parse($('names').value);$('err').textContent='';
+    if(n.length<3){$('err').textContent='Enter at least 3 different names.';return}
+    order=shuffle(n);steals=order.map(function(){return 0});gifts=[];
+    var h='<div class="box"><p><b>Turn order</b> ('+order.length+' players, '+(limit()?'gifts lock after '+limit()+' steals':'no steal limit')+')</p><ol>';
+    order.forEach(function(p){h+='<li>'+esc(p)+'</li>'});
+    h+='</ol><button id="cp" class="light">Copy order</button> <span id="cpm"></span></div>';
+    $('out').innerHTML=h;
+    $('cp').onclick=function(){
+      var t=order.map(function(p,i){return (i+1)+'. '+p}).join('\n');
+      if(navigator.clipboard)navigator.clipboard.writeText(t).then(function(){$('cpm').textContent='Copied.'},function(){$('cpm').textContent='Select and copy the list above.'});
+      else $('cpm').textContent='Select and copy the list above.';
+    };
+    renderTracker();
+  }
+  $('go').onclick=draw;$('again').onclick=draw;
+  $('limit').onchange=renderTracker;$('final').onchange=renderTracker;
+  $('trk').addEventListener('click',function(e){
+    var t=e.target,i;
+    if(t.dataset.p!==undefined){i=+t.dataset.p;var L=limit();if(!(L>0&&steals[i]>=L))steals[i]++;renderTracker()}
+    else if(t.dataset.m!==undefined){i=+t.dataset.m;if(steals[i]>0)steals[i]--;renderTracker()}
+  });
+  $('trk').addEventListener('input',function(e){if(e.target.dataset.g!==undefined)gifts[+e.target.dataset.g]=e.target.value});
+})();
+</script>
+</body>
+</html>
