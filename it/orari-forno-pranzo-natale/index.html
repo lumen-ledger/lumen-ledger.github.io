@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="index,follow">
 <title>Orari forno pranzo di Natale: calcolo a ritroso dall'ora del pasto</title>
-<meta name="description" content="Piatti, minuti di cottura e riposo, ora del pranzo o del cenone: scaletta da stampare e avviso se il forno serve a due temperature insieme. Gratis, nel browser.">
+<meta name="description" content="Scaletta dall'ora del pranzo o del cenone, avviso se il forno serve a due temperature e tempi al chilo per arista, costata e prosciutto. Gratis.">
 <link rel="canonical" href="https://lumen-ledger.github.io/it/orari-forno-pranzo-natale/">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Lumen &amp; Ledger">
 <meta property="og:locale" content="it_IT">
 <meta property="og:title" content="Orari forno pranzo di Natale: calcolo a ritroso dall'ora del pasto">
-<meta property="og:description" content="Piatti, minuti di cottura e riposo, ora del pranzo o del cenone: scaletta da stampare e avviso se il forno serve a due temperature insieme. Gratis, nel browser.">
+<meta property="og:description" content="Scaletta dall'ora del pranzo o del cenone, avviso se il forno serve a due temperature e tempi al chilo per arista, costata e prosciutto. Gratis.">
 <meta property="og:url" content="https://lumen-ledger.github.io/it/orari-forno-pranzo-natale/">
 <meta name="twitter:card" content="summary">
 <link rel="alternate" hreflang="it" href="https://lumen-ledger.github.io/it/orari-forno-pranzo-natale/">
@@ -46,13 +46,13 @@ button.light{background:#fff;color:var(--navy)}
 td select,td input{font:inherit;font-size:.85rem;padding:4px;width:100%}
 .clash{color:var(--warn);font-weight:600}
 .tl td:first-child{white-space:nowrap;font-weight:600}
-@media print{header nav,#editor,button,#how,#safety,#faq,#domande,#domande~h3,#domande~h3+p,footer{display:none}header{background:#fff;color:#000;padding:0}}
+@media print{header nav,#editor,#arrosti-calc,button,#how,#safety,#faq,#domande,#domande~h3,#domande~h3+p,footer{display:none}header{background:#fff;color:#000;padding:0}}
 footer{padding:20px;font-size:.82rem;color:#5b6770}
 </style>
 </head>
 <body>
 <header><div class="wrap">
-  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="#piano">Calcola</a> · <a href="#come">Come funziona</a> · <a href="#temperature">Temperature sicure</a> · <a href="#domande">Domande</a></nav>
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="#piano">Calcola</a> · <a href="#arrosti">Tempi arrosti</a> · <a href="#come">Come funziona</a> · <a href="#temperature">Temperature sicure</a> · <a href="#domande">Domande</a></nav>
   <h1>Orari del forno per il pranzo di Natale, calcolati a ritroso</h1>
   <p>Elenca i piatti con i minuti delle tue ricette e l'ora in cui vi sedete a tavola. Ottieni l'ora d'inizio di ogni piatto, una scaletta da stampare e un avviso quando due piatti al forno chiedono temperature diverse nello stesso momento.</p>
 </div></header>
@@ -68,12 +68,41 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
 <div id="out" aria-live="polite"></div>
 <p style="font-size:.9rem">I minuti del menu di esempio sono indicativi: sostituiscili con quelli delle tue ricette.</p>
 
+<h2 id="arrosti">Tempi degli arrosti al chilo: manzo, arista, prosciutto</h2>
+<p>Non hai i minuti della ricetta? Scegli il taglio e il peso: ottieni il tempo di forno indicativo da una tabella pubblicata e lo aggiungi alla scaletta con un clic.</p>
+<div class="box" id="arrosti-calc">
+  <label for="rt-cut">Taglio</label> <select id="rt-cut" style="padding:6px;font:inherit;max-width:100%"></select>
+  <label for="rt-w">Peso (kg)</label><input id="rt-w" type="number" min="0.1" max="15" step="0.1" value="1.5" style="width:6em;padding:6px;font:inherit">
+  <input id="rt-u" type="hidden" value="kg">
+  <button id="rt-go">Calcola il tempo di cottura</button>
+  <div id="rt-out" aria-live="polite"></div>
+</div>
+<table>
+<tr><th>Taglio</th><th>Peso</th><th>Forno</th><th>Tempo indicativo</th><th>Pronto a (al cuore)</th></tr>
+<tr><td>Costata di manzo con osso (carré, prime rib)</td><td>1,8&ndash;3,6 kg</td><td>165 &deg;C (325 &deg;F)</td><td>51&ndash;66 min per kg</td><td>63 &deg;C, poi 3 min di riposo</td></tr>
+<tr><td>Costata di manzo disossata</td><td>1,8 kg</td><td>165 &deg;C (325 &deg;F)</td><td>86&ndash;95 min per kg</td><td>63 &deg;C, poi 3 min di riposo</td></tr>
+<tr><td>Girello di manzo</td><td>0,9&ndash;1,4 kg</td><td>165 &deg;C (325 &deg;F)</td><td>44&ndash;49 min per kg</td><td>63 &deg;C, poi 3 min di riposo</td></tr>
+<tr><td>Filetto di manzo intero</td><td>1,8&ndash;2,7 kg</td><td>220 &deg;C (425 &deg;F)</td><td>45&ndash;60 min in tutto</td><td>63 &deg;C, poi 3 min di riposo</td></tr>
+<tr><td>Mezzo filetto di manzo</td><td>0,9&ndash;1,4 kg</td><td>220 &deg;C (425 &deg;F)</td><td>35&ndash;45 min in tutto</td><td>63 &deg;C, poi 3 min di riposo</td></tr>
+<tr><td>Prosciutto da cuocere (non precotto), con osso, intero</td><td>6,4&ndash;7,3 kg</td><td>165 &deg;C (325 &deg;F)</td><td>40&ndash;44 min per kg</td><td>63 &deg;C, poi 3 min di riposo</td></tr>
+<tr><td>Prosciutto da cuocere (non precotto), con osso, metà</td><td>3,2&ndash;3,6 kg</td><td>165 &deg;C (325 &deg;F)</td><td>49&ndash;55 min per kg</td><td>63 &deg;C, poi 3 min di riposo</td></tr>
+<tr><td>Prosciutto già cotto, con osso, intero</td><td>6,4&ndash;7,3 kg</td><td>165 &deg;C (325 &deg;F)</td><td>33&ndash;40 min per kg</td><td>60 &deg;C</td></tr>
+<tr><td>Prosciutto già cotto, con osso, metà</td><td>3,2&ndash;3,6 kg</td><td>165 &deg;C (325 &deg;F)</td><td>40&ndash;55 min per kg</td><td>60 &deg;C</td></tr>
+<tr><td>Prosciutto cotto disossato (da scaldare)</td><td>1,4&ndash;1,8 kg</td><td>165 &deg;C (325 &deg;F)</td><td>60&ndash;73 min per kg</td><td>60 &deg;C</td></tr>
+<tr><td>Arista o lonza di maiale con osso (carré)</td><td>1,4&ndash;2,3 kg</td><td>165 &deg;C (325 &deg;F)</td><td>44&ndash;55 min per kg</td><td>63 &deg;C, poi 3 min di riposo</td></tr>
+<tr><td>Arista o lonza di maiale disossata</td><td>0,9&ndash;1,8 kg</td><td>165 &deg;C (325 &deg;F)</td><td>51&ndash;73 min per kg</td><td>63 &deg;C, poi 3 min di riposo</td></tr>
+<tr><td>Corona di maiale (carré a corona)</td><td>2,7&ndash;4,5 kg</td><td>165 &deg;C (325 &deg;F)</td><td>44&ndash;55 min per kg</td><td>63 &deg;C, poi 3 min di riposo</td></tr>
+<tr><td>Filetto di maiale</td><td>0,2&ndash;0,7 kg</td><td>220 &deg;C (425 &deg;F)</td><td>20&ndash;30 min in tutto</td><td>63 &deg;C, poi 3 min di riposo</td></tr>
+</table>
+<p>Esempio: un'arista di maiale disossata da 1,5 kg richiede circa 76&ndash;109 minuti a 165 &deg;C (51&ndash;73 min per kg). Pianificata con il tempo lungo per un pranzo alle 13:00, va in forno alle 11:08 (109 min + 3 min di riposo) e il termometro si controlla dopo 1 h 16 min. Tempi per carne presa dal frigorifero e forno preriscaldato; sono indicativi: forma, osso e forno li cambiano, quindi decide il termometro. Per un prosciutto già cotto segui anche l'etichetta. La tabella originale è in libbre e gradi Fahrenheit: minuti per kg = minuti per libbra &times; 2,2; forno 325 &deg;F &asymp; 165 &deg;C e 425 &deg;F &asymp; 220 &deg;C (arrotondati). Per pesi fuori dalla tabella il calcolo è una proiezione lineare, non un tempo pubblicato.</p>
+<p style="font-size:.9rem">Fonte: Clemson Cooperative Extension, Home &amp; Garden Information Center, scheda HGIC 3565 &quot;<a href="https://hgic.clemson.edu/factsheet/holiday-meats-not-just-turkey/">Holiday Meats &ndash; Not Just Turkey!</a>&quot; (rivista il 16 dicembre 2019; letta il 2026-11-21, in inglese), che cita USDA FSIS &quot;Roasting Those &lsquo;Other&rsquo; Holiday Meats&quot; (maggio 2011). Temperature al cuore e riposo di 3 minuti sono quelli della tabella. Informazione generale, non consulenza professionale sulla sicurezza alimentare.</p>
+
 <h2 id="come">Come funziona</h2>
 <ol>
 <li><b>Inizio</b> = ora del pasto meno minuti di cottura meno minuti di riposo (o di attesa). <b>Fuori dal forno / pronto</b> = ora del pasto meno minuti di riposo. Sono le stesse formule del foglio "Menu" del <a href="https://lumenledger.gumroad.com/l/pianificatore-pranzo-natale">Pianificatore pranzo e cenone di Natale</a>.</li>
 <li><b>Conflitto forno</b>: due piatti al forno sono in conflitto quando chiedono temperature diverse e le loro finestre di cottura si sovrappongono. Un forno di casa non può fare entrambe le cose: di solito si cuoce un piatto prima e lo si scalda, lo si sposta sui fornelli, oppure lo si inforna mentre l'arrosto riposa.</li>
 <li>I piatti preparati in anticipo o senza cottura non hanno orario e sono elencati a parte, per non dimenticarli.</li>
-<li>I minuti sono tuoi: i tempi di cottura dipendono da peso, forma, forno e ricetta, quindi la pagina non li inventa.</li>
+<li>I minuti sono tuoi: i tempi di cottura dipendono da peso, forma, forno e ricetta, quindi la pagina non li inventa; per arrosti di manzo, maiale e prosciutto puoi partire dalla <a href="#arrosti">tabella pubblicata</a>.</li>
 <li>Non viene inviato nulla. "Copia il link a questo piano" mette il menu dopo il <code>#</code> dell'indirizzo, parte che i browser non mandano al server: aprendo il link su un altro dispositivo vedi lo stesso piano.</li>
 </ol>
 
@@ -92,6 +121,10 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
 <h2 id="domande">Domande frequenti</h2>
 <h3>A che ora metto l'arrosto in forno per il pranzo di Natale?</h3>
 <p>Conta a ritroso dall'ora in cui vi sedete: inizio = ora del pasto meno minuti di cottura meno minuti di riposo. Un arrosto che cuoce 90 minuti e riposa 15 va in forno 105 minuti prima: alle 11:15 per un pranzo alle 13:00.</p>
+<h3>Quanto tempo cuoce l'arista di maiale al chilo?</h3>
+<p>Circa 51-73 minuti per kg a 165 &deg;C per un'arista o lonza disossata da 0,9-1,8 kg, 44-55 minuti per kg con l'osso (1,4-2,3 kg), fino a 63 &deg;C al cuore e 3 minuti di riposo (Clemson Extension HGIC 3565, che cita USDA FSIS; tempi convertiti da libbre e &deg;F). Un'arista disossata da 1,5 kg: 76-109 minuti; per un pranzo alle 13:00, con il tempo lungo, va in forno alle 11:08. Vedi la <a href="#arrosti">tabella dei tempi</a>.</p>
+<h3>Quanto tempo ci vuole per la costata o il filetto di manzo al forno?</h3>
+<p>Una costata di manzo con osso (carré) da 1,8-3,6 kg: circa 51-66 minuti per kg a 165 &deg;C; un girello da 0,9-1,4 kg: 44-49 minuti per kg; un filetto intero da 1,8-2,7 kg: 45-60 minuti in tutto a 220 &deg;C. Per tutti: 63 &deg;C al cuore, poi 3 minuti di riposo (Clemson Extension HGIC 3565). Tempi indicativi: decide il termometro.</p>
 <h3>Il preriscaldamento è compreso?</h3>
 <p>No. Aggiungi il tempo di preriscaldamento del tuo forno prima del primo piatto al forno, oppure includilo nei minuti di cottura del primo piatto.</p>
 <h3>Cosa faccio se due piatti chiedono il forno a temperature diverse?</h3>
@@ -104,7 +137,7 @@ footer{padding:20px;font-size:.82rem;color:#5b6770}
 <p>Sì, con il <a href="https://lumenledger.gumroad.com/l/pianificatore-pranzo-natale">Pianificatore pranzo e cenone di Natale</a> (foglio di calcolo gratuito, offerta libera; download diretto <a href="../../download/pianificatore-pranzo-natale.xlsx">pianificatore-pranzo-natale.xlsx</a>): la stessa scaletta più ospiti, intolleranze, lista della spesa e costo a persona. Per i regali: <a href="../budget-regali-natale/">budget regali di Natale</a> e <a href="../estrazione-babbo-natale-segreto/">estrazione Babbo Natale segreto</a>. Per le ferie dell'anno nuovo: <a href="../ponti-ferie-2027/">ponti 2027</a>.</p>
 <h3>Viene salvato o inviato qualcosa?</h3>
 <p>No: niente tracciamento, cookie o account. Il link condiviso tiene il menu dopo il <code>#</code> dell'indirizzo, parte che i browser non mandano al server. Vedi <a href="../privacy/">Privacy</a>.</p>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "A che ora metto l'arrosto in forno per il pranzo di Natale?", "acceptedAnswer": {"@type": "Answer", "text": "Conta a ritroso dall'ora in cui vi sedete: inizio = ora del pasto meno minuti di cottura meno minuti di riposo. Un arrosto che cuoce 90 minuti e riposa 15 va in forno 105 minuti prima: alle 11:15 per un pranzo alle 13:00."}}, {"@type": "Question", "name": "Il preriscaldamento è compreso?", "acceptedAnswer": {"@type": "Answer", "text": "No. Aggiungi il tempo di preriscaldamento del tuo forno prima del primo piatto al forno, oppure includilo nei minuti di cottura del primo piatto."}}, {"@type": "Question", "name": "Cosa faccio se due piatti chiedono il forno a temperature diverse?", "acceptedAnswer": {"@type": "Answer", "text": "Un forno di casa non può fare entrambe le cose. Nel menu di esempio (pranzo alle 13:00) l'arrosto a 180 °C è in forno dalle 11:15 alle 12:45 e le patate a 200 °C dalle 12:10 alle 13:00: la scaletta lo segnala in rosso. Di solito si cuoce un piatto prima e lo si scalda, lo si sposta sui fornelli, oppure lo si inforna mentre l'arrosto riposa."}}, {"@type": "Question", "name": "A che temperatura al cuore è cotto un arrosto di vitello o di maiale?", "acceptedAnswer": {"@type": "Answer", "text": "63 °C (145 °F) per i tagli interi di manzo, vitello, agnello e maiale, poi 3 minuti di riposo (CDC, Preventing Food Poisoning, pagina datata 24 novembre 2025). Le carni macinate: 71 °C (160 °F)."}}, {"@type": "Question", "name": "E per tacchino, cappone o altro pollame?", "acceptedAnswer": {"@type": "Answer", "text": "74 °C (165 °F) per tutto il pollame, anche macinato; lo stesso valore vale per avanzi e sformati riscaldati (CDC, stessa fonte)."}}, {"@type": "Question", "name": "Posso organizzare anche ospiti, spesa e budget?", "acceptedAnswer": {"@type": "Answer", "text": "Sì, con il Pianificatore pranzo e cenone di Natale (foglio di calcolo gratuito, offerta libera): la stessa scaletta più ospiti, intolleranze, lista della spesa e costo a persona."}}, {"@type": "Question", "name": "Viene salvato o inviato qualcosa?", "acceptedAnswer": {"@type": "Answer", "text": "No: niente tracciamento, cookie o account. Il link condiviso tiene il menu dopo il # dell'indirizzo, parte che i browser non mandano al server."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "A che ora metto l'arrosto in forno per il pranzo di Natale?", "acceptedAnswer": {"@type": "Answer", "text": "Conta a ritroso dall'ora in cui vi sedete: inizio = ora del pasto meno minuti di cottura meno minuti di riposo. Un arrosto che cuoce 90 minuti e riposa 15 va in forno 105 minuti prima: alle 11:15 per un pranzo alle 13:00."}}, {"@type":"Question","name":"Quanto tempo cuoce l'arista di maiale al chilo?","acceptedAnswer":{"@type":"Answer","text":"Circa 51-73 minuti per kg a 165 °C per un'arista o lonza disossata da 0,9-1,8 kg, 44-55 minuti per kg con l'osso (1,4-2,3 kg), fino a 63 °C al cuore e 3 minuti di riposo (Clemson Extension HGIC 3565, che cita USDA FSIS; tempi convertiti da libbre e °F). Un'arista disossata da 1,5 kg: 76-109 minuti; per un pranzo alle 13:00, con il tempo lungo, va in forno alle 11:08."}}, {"@type":"Question","name":"Quanto tempo ci vuole per la costata o il filetto di manzo al forno?","acceptedAnswer":{"@type":"Answer","text":"Una costata di manzo con osso (carré) da 1,8-3,6 kg: circa 51-66 minuti per kg a 165 °C; un girello da 0,9-1,4 kg: 44-49 minuti per kg; un filetto intero da 1,8-2,7 kg: 45-60 minuti in tutto a 220 °C. Per tutti: 63 °C al cuore, poi 3 minuti di riposo (Clemson Extension HGIC 3565). Tempi indicativi: decide il termometro."}}, {"@type": "Question", "name": "Il preriscaldamento è compreso?", "acceptedAnswer": {"@type": "Answer", "text": "No. Aggiungi il tempo di preriscaldamento del tuo forno prima del primo piatto al forno, oppure includilo nei minuti di cottura del primo piatto."}}, {"@type": "Question", "name": "Cosa faccio se due piatti chiedono il forno a temperature diverse?", "acceptedAnswer": {"@type": "Answer", "text": "Un forno di casa non può fare entrambe le cose. Nel menu di esempio (pranzo alle 13:00) l'arrosto a 180 °C è in forno dalle 11:15 alle 12:45 e le patate a 200 °C dalle 12:10 alle 13:00: la scaletta lo segnala in rosso. Di solito si cuoce un piatto prima e lo si scalda, lo si sposta sui fornelli, oppure lo si inforna mentre l'arrosto riposa."}}, {"@type": "Question", "name": "A che temperatura al cuore è cotto un arrosto di vitello o di maiale?", "acceptedAnswer": {"@type": "Answer", "text": "63 °C (145 °F) per i tagli interi di manzo, vitello, agnello e maiale, poi 3 minuti di riposo (CDC, Preventing Food Poisoning, pagina datata 24 novembre 2025). Le carni macinate: 71 °C (160 °F)."}}, {"@type": "Question", "name": "E per tacchino, cappone o altro pollame?", "acceptedAnswer": {"@type": "Answer", "text": "74 °C (165 °F) per tutto il pollame, anche macinato; lo stesso valore vale per avanzi e sformati riscaldati (CDC, stessa fonte)."}}, {"@type": "Question", "name": "Posso organizzare anche ospiti, spesa e budget?", "acceptedAnswer": {"@type": "Answer", "text": "Sì, con il Pianificatore pranzo e cenone di Natale (foglio di calcolo gratuito, offerta libera): la stessa scaletta più ospiti, intolleranze, lista della spesa e costo a persona."}}, {"@type": "Question", "name": "Viene salvato o inviato qualcosa?", "acceptedAnswer": {"@type": "Answer", "text": "No: niente tracciamento, cookie o account. Il link condiviso tiene il menu dopo il # dell'indirizzo, parte che i browser non mandano al server."}}]}</script>
 <p>Altri strumenti per le feste: <a href="../resi-regali-natale/">scadenze per i resi dei regali di Natale</a>, <a href="../quanto-consumano-luci-di-natale/">quanto consumano le luci di Natale</a>.</p>
 </main>
 <footer class="wrap">© 2026 Lumen &amp; Ledger · Testi CC BY 4.0, codice MIT · <a href="../">Strumenti</a> · <a href="../chi-siamo/">Chi siamo</a> · <a href="../privacy/">Privacy</a> · Contatto: lumenledger.tools@proton.me</footer>
@@ -120,5 +153,13 @@ window.DT_L={unit:'C',locale:'it-IT',defServe:'13:00',restWord:'di riposo',
 </script>
 <script src="../../scripts/dinner_timeline.js"></script>
 <script src="../../scripts/dinner_timeline_ui.js"></script>
+<script>
+window.RT_L={kg:true,comma:true,names:{"rib-bone":"Costata di manzo con osso (carré, prime rib)","rib-boneless":"Costata di manzo disossata","eye-round":"Girello di manzo","tender-whole":"Filetto di manzo intero","tender-half":"Mezzo filetto di manzo","ham-cbe-whole":"Prosciutto da cuocere (non precotto), con osso, intero","ham-cbe-half":"Prosciutto da cuocere (non precotto), con osso, metà","ham-fc-whole":"Prosciutto già cotto, con osso, intero","ham-fc-half":"Prosciutto già cotto, con osso, metà","ham-fc-boneless":"Prosciutto cotto disossato (da scaldare)","pork-loin-bone":"Arista o lonza di maiale con osso (carré)","pork-loin-boneless":"Arista o lonza di maiale disossata","pork-crown":"Corona di maiale (carré a corona)","pork-tender":"Filetto di maiale"},
+  s:{noW:'Inserisci il peso dell\u2019arrosto.',oven:'forno',about:'circa',to:'\u2013',total:' in tutto (la tabella d\u00e0 i minuti totali, non al chilo)',done:'Pronto a',inside:'al cuore',rest:', poi almeno 3 minuti di riposo',
+  outA:'\u00e8 fuori dai pesi della tabella per questo taglio',outB:'I minuti sopra sono una proiezione lineare al chilo, non un tempo pubblicato: affidati al termometro.',
+  chk1:'Inizia a controllare con il termometro al tempo breve',chk2:'La scaletta usa il tempo lungo',chk3:'cos\u00ec l\u2019arrosto non \u00e8 mai in ritardo; se \u00e8 pronto prima, riposa di pi\u00f9.',
+  add:'Aggiungi alla mia scaletta',addedA:'Aggiunto alla scaletta sopra con',addedB:'minuti di cottura e 3 di riposo: cambia il riposo se la tua ricetta ne prevede di pi\u00f9, poi premi \u201cCalcola gli orari\u201d.'}};
+</script>
+<script src="../../scripts/roast_times.js"></script>
 </body>
 </html>
