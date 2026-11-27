@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="index,follow">
+<title>Cookie exchange calculator: how many cookies to bake, plus sign-up list</title>
+<meta name="description" content="How many cookies and batches each baker needs for a cookie swap, with a sign-up list that flags duplicate cookies and prints allergen labels. Free, nothing saved.">
+<link rel="canonical" href="https://lumen-ledger.github.io/cookie-exchange-calculator/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Lumen &amp; Ledger">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Cookie exchange calculator: how many cookies to bake, plus sign-up list">
+<meta property="og:description" content="How many cookies and batches each baker needs for a cookie swap, with a sign-up list that flags duplicate cookies and prints allergen labels. Free, nothing saved.">
+<meta property="og:url" content="https://lumen-ledger.github.io/cookie-exchange-calculator/">
+<meta name="twitter:card" content="summary">
+<style>
+:root{--navy:#0F2A3D;--sun:#F2B33D;--paper:#F7F5EF;--line:#d9d4c7;--warn:#C2452D}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--navy)}
+header{background:var(--navy);color:#fff;padding:32px 20px}
+.wrap{max-width:760px;margin:0 auto}
+header h1{margin:0;font-size:1.7rem}
+header p{margin:8px 0 0;color:#d6dde2}
+nav{font-size:.9rem;margin-bottom:10px}nav a{color:var(--sun)}
+main{padding:24px 20px}
+h2{font-size:1.15rem;margin:28px 0 6px}
+h3{font-size:1rem;margin:16px 0 2px}
+ul,ol{padding-left:20px}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:10px 0}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:middle}
+th{background:#ece8dc}
+td input{width:100%;font:inherit;font-size:.9rem;padding:4px}
+.note{border-left:4px solid var(--warn);background:#fff;padding:10px 14px;font-size:.93rem}
+.box{border:1px solid var(--line);background:#fff;padding:14px 16px}
+.box label{display:block;font-size:.9rem;margin-top:8px}
+.box textarea{width:100%;font:inherit;padding:6px;min-height:140px}
+.box input[type=number]{width:100%;max-width:160px;padding:6px;font:inherit}
+button{font:inherit;padding:8px 14px;margin:10px 8px 0 0;border:1px solid var(--navy);background:var(--navy);color:#fff;cursor:pointer;border-radius:3px}
+button.light{background:#fff;color:var(--navy)}
+button.s{padding:2px 9px;margin:0 2px}
+.err{color:var(--warn)}
+.lock{color:var(--warn);font-weight:700}
+footer{padding:20px;font-size:.82rem;color:#5b6770}
+.out{font-size:1.05rem}.big{font-size:1.5rem;font-weight:700}
+select{font:inherit;padding:6px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-top:10px}
+.card{border:2px dashed var(--line);background:#fff;padding:12px;min-height:110px;break-inside:avoid}
+.card b{font-size:1.1rem}
+tr.dup td{background:#fbe9e5}
+td label{display:inline;font-size:.85rem;margin-right:6px;white-space:nowrap}
+@media print{header,button,footer,main>*{display:none!important}body{background:#fff}main{padding:0}#cards{display:grid!important}.card{border:1px dashed #000}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="#calc">Calculator</a> · <a href="#table">Quick table</a> · <a href="#signup">Sign-up list and labels</a> · <a href="#host">Hosting checklist</a> · <a href="#faq">FAQ</a></nav>
+  <h1>Cookie exchange calculator</h1>
+  <p>How many cookies each baker needs for a holiday cookie swap, how many batches that is with your recipe, and a sign-up list that catches two people bringing the same cookie and prints a label for each plate. Everything runs in your browser; nothing is saved or sent.</p>
+</div></header>
+<main class="wrap">
+
+<h2 id="calc">How many cookies do I bake?</h2>
+<div class="box">
+  <label for="n">Bakers taking part, including you</label>
+  <input id="n" type="number" min="2" max="100" value="8">
+  <label for="c">Cookies each baker gives to each person</label>
+  <select id="c"><option value="12" selected>12 (one dozen, the usual rule)</option><option value="6">6 (half a dozen, for large groups)</option><option value="24">24 (two dozen)</option></select>
+  <label><input id="own" type="checkbox" checked> Bakers also keep one set of their own cookies</label>
+  <label for="t">Extra cookies for tasting at the party (0 if none)</label>
+  <input id="t" type="number" min="0" max="200" value="12">
+  <label for="b">Buffer for broken or burnt cookies, %</label>
+  <input id="b" type="number" min="0" max="50" value="10">
+  <label for="y">Cookies one batch of your recipe makes (check your recipe)</label>
+  <input id="y" type="number" min="1" max="500" value="36">
+  <div id="res" class="out" aria-live="polite"></div>
+</div>
+<p style="font-size:.9rem">How it is calculated: (bakers, or bakers minus 1 if you do not keep your own) × cookies per person + tasting cookies, then + buffer %, rounded up. Batches = that total ÷ your recipe's yield, rounded up. "A dozen per person" is a common house rule, not a standard: agree on it in the invite.</p>
+
+<h2 id="table">Quick table</h2>
+<p>Cookies per baker with no tasting extra and no buffer, everyone keeping one set of their own, and a recipe that makes 36 cookies.</p>
+<table id="qt"><tr><th>Bakers (incl. you)</th><th>Cookies per person</th><th>You bake</th><th>Dozens</th><th>Batches of 36</th><th>Spare</th></tr>
+<tr><td>6</td><td>12</td><td>72</td><td>6</td><td>2</td><td>0</td></tr>
+<tr><td>6</td><td>6</td><td>36</td><td>3</td><td>1</td><td>0</td></tr>
+<tr><td>8</td><td>12</td><td>96</td><td>8</td><td>3</td><td>12</td></tr>
+<tr><td>8</td><td>6</td><td>48</td><td>4</td><td>2</td><td>24</td></tr>
+<tr><td>10</td><td>12</td><td>120</td><td>10</td><td>4</td><td>24</td></tr>
+<tr><td>10</td><td>6</td><td>60</td><td>5</td><td>2</td><td>12</td></tr>
+<tr><td>12</td><td>12</td><td>144</td><td>12</td><td>4</td><td>0</td></tr>
+<tr><td>12</td><td>6</td><td>72</td><td>6</td><td>2</td><td>0</td></tr>
+<tr><td>15</td><td>12</td><td>180</td><td>15</td><td>5</td><td>0</td></tr>
+<tr><td>15</td><td>6</td><td>90</td><td>7.5</td><td>3</td><td>18</td></tr>
+<tr><td>20</td><td>12</td><td>240</td><td>20</td><td>7</td><td>12</td></tr>
+<tr><td>20</td><td>6</td><td>120</td><td>10</td><td>4</td><td>24</td></tr>
+</table>
+
+<h2 id="signup">Sign-up list and plate labels</h2>
+<p>Add each baker and the cookie they plan to bring. Entries that look like the same cookie (for example "Chocolate chip" and "chocolate-chip cookies") are highlighted so someone can switch. Then print one label per plate with the allergens ticked. Printing shows only the labels.</p>
+<div class="box">
+  <table id="sl"><tr><th>Baker</th><th>Cookie</th><th>Contains</th><th></th></tr></table>
+  <button id="add" class="light">Add a baker</button>
+  <button id="print">Print labels</button>
+  <button id="copy" class="light">Copy list</button> <span id="msg"></span>
+  <p id="dup" class="err"></p>
+</div>
+<div id="cards" class="cards"></div>
+<p style="font-size:.9rem">Want to keep the list in a file? The free <a href="https://lumenledger.gumroad.com/l/cookie-exchange-planner">Cookie Exchange Planner</a> (Excel / Google Sheets, pay what you want, $0 is fine) does the same batch calculation for up to 40 bakers, flags identical cookie names and prints the labels.</p>
+
+<h2 id="host">Hosting checklist</h2>
+<ol>
+<li><b>In the invite:</b> the number of cookies per person, the date, and a deadline to tell you which cookie each baker is bringing.</li>
+<li><b>About a week before:</b> fill in the sign-up list, sort out duplicates, and send everyone the final head count so they can bake the right amount.</li>
+<li><b>Packaging:</b> ask bakers to bring their cookies already split into bags or boxes of the agreed amount (one per person), or to bring empty containers so guests can fill their own.</li>
+<li><b>At the table:</b> one plate and one printed label per cookie, plus a few extra cookies for tasting.</li>
+<li><b>Allergies:</b> ask in the invite if anyone has a food allergy. Labels list the main allergens a baker knows are in the recipe; they do not guarantee the absence of traces.</li>
+</ol>
+
+<h2 id="faq">FAQ</h2>
+<h3>How many cookies should each person bring to a cookie exchange?</h3>
+<p>The most common house rule is one dozen for every participant, including yourself, so in a group of 8 each baker brings 8 dozen (96 cookies). Many hosts switch to half a dozen per person for groups above about 12, which halves the baking. Use the calculator to add cookies for tasting and a buffer for breakage.</p>
+<h3>Do I count myself when working out how many cookies to bake?</h3>
+<p>Usually yes: each baker also keeps one set of their own cookies, so everyone goes home with one set from every baker. If your group does not keep its own cookies, untick the box and you bake one set fewer.</p>
+<h3>How many batches do I need?</h3>
+<p>Divide the total by what your recipe makes and round up. The calculator does this with the yield you enter; check the yield printed on your recipe, because it depends on cookie size. Rounding up leaves spare cookies, which the result shows.</p>
+<h3>How do I scale my recipe?</h3>
+<p>Multiply every ingredient by the number of batches. Making separate batches is usually easier than one very large one, because a home mixer and oven trays have a limited capacity.</p>
+<h3>How do we avoid everyone bringing chocolate chip?</h3>
+<p>Collect each baker's cookie in the sign-up list before the party. The list highlights entries that look like the same cookie, so one of the bakers can switch.</p>
+<h3>What should go on the label at the swap table?</h3>
+<p>The cookie name, the baker and the main allergens the baker knows are in the recipe (for example nuts, peanuts, milk, eggs, wheat). Print one label per cookie from the sign-up list. Guests with allergies should still ask the baker, because a label cannot rule out cross-contact in a home kitchen.</p>
+<h3>Is anything saved or sent?</h3>
+<p>No. Everything runs in your browser and nothing is stored: reloading the page clears it. To keep the list, print it or copy it.</p>
+<p style="font-size:.9rem">Planning the rest of the season? See the <a href="../holiday-budget-planner/">holiday budget planner</a> and the <a href="../christmas-dinner-timeline/">Christmas dinner timeline</a>.</p>
+<!--related-holiday--><p class="related"><strong>More holiday tools:</strong> <a href="../thanksgiving-dinner-timeline/">Thanksgiving dinner timeline</a> · <a href="../thanksgiving-turkey-planner/">Turkey thaw &amp; roast planner</a> · <a href="../christmas-dinner-timeline/">Christmas dinner timeline</a> · <a href="../holiday-budget-planner/">Holiday budget planner</a> · <a href="../secret-santa-generator/">Secret Santa generator</a> · <a href="../white-elephant-gift-exchange/">White Elephant gift exchange</a> · <a href="../holiday-shipping-deadlines-2026/">Holiday shipping deadlines 2026</a> · <a href="../gift-card-expiration-rules/">Gift card expiration rules</a> · <a href="../christmas-lights-cost/">Christmas lights cost</a> · <a href="../uk-gift-return-deadlines/">UK gift return deadlines</a></p>
+</main>
+<footer class="wrap">© 2026 Lumen &amp; Ledger · Text CC BY 4.0, code MIT · <a href="../">Tools</a> · <a href="../about/">About</a> · <a href="../privacy/">Privacy</a> · Contact: lumenledger.tools@proton.me</footer>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How many cookies should each person bring to a cookie exchange?", "acceptedAnswer": {"@type": "Answer", "text": "The most common house rule is one dozen for every participant, including yourself, so in a group of 8 each baker brings 8 dozen (96 cookies). Many hosts switch to half a dozen per person for groups above about 12, which halves the baking. Use the calculator to add cookies for tasting and a buffer for breakage."}}, {"@type": "Question", "name": "Do I count myself when working out how many cookies to bake?", "acceptedAnswer": {"@type": "Answer", "text": "Usually yes: each baker also keeps one set of their own cookies, so everyone goes home with one set from every baker. If your group does not keep its own cookies, untick the box and you bake one set fewer."}}, {"@type": "Question", "name": "How many batches do I need?", "acceptedAnswer": {"@type": "Answer", "text": "Divide the total by what your recipe makes and round up. The calculator does this with the yield you enter; check the yield printed on your recipe, because it depends on cookie size. Rounding up leaves spare cookies, which the result shows."}}, {"@type": "Question", "name": "How do I scale my recipe?", "acceptedAnswer": {"@type": "Answer", "text": "Multiply every ingredient by the number of batches. Making separate batches is usually easier than one very large one, because a home mixer and oven trays have a limited capacity."}}, {"@type": "Question", "name": "How do we avoid everyone bringing chocolate chip?", "acceptedAnswer": {"@type": "Answer", "text": "Collect each baker's cookie in the sign-up list before the party. The list highlights entries that look like the same cookie, so one of the bakers can switch."}}, {"@type": "Question", "name": "What should go on the label at the swap table?", "acceptedAnswer": {"@type": "Answer", "text": "The cookie name, the baker and the main allergens the baker knows are in the recipe (for example nuts, peanuts, milk, eggs, wheat). Print one label per cookie from the sign-up list. Guests with allergies should still ask the baker, because a label cannot rule out cross-contact in a home kitchen."}}, {"@type": "Question", "name": "Is anything saved or sent?", "acceptedAnswer": {"@type": "Answer", "text": "No. Everything runs in your browser and nothing is stored: reloading the page clears it. To keep the list, print it or copy it."}}]}</script>
+<script src="../scripts/cookie_exchange.js"></script>
+<script src="../scripts/cookie_exchange_ui.js"></script>
+</body>
+</html>

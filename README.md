@@ -24,6 +24,7 @@ Website: https://lumen-ledger.github.io/ (English) · https://lumen-ledger.githu
 - [Holiday budget planner](https://lumen-ledger.github.io/holiday-budget-planner/)
 - [Secret Santa generator with exclusions](https://lumen-ledger.github.io/secret-santa-generator/)
 - [White Elephant gift exchange: turn order and steal tracker](https://lumen-ledger.github.io/white-elephant-gift-exchange/)
+- [Cookie exchange calculator: cookies and batches per baker, sign-up list](https://lumen-ledger.github.io/cookie-exchange-calculator/)
 - [Do gift cards expire? US 5-year rule calculator](https://lumen-ledger.github.io/gift-card-expiration-rules/)
 - [USPS holiday shipping deadlines 2026](https://lumen-ledger.github.io/holiday-shipping-deadlines-2026/)
 - [UK gift return deadlines](https://lumen-ledger.github.io/uk-gift-return-deadlines/)
