@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UK appliance running cost calculator (Ofgem cap Jan–Mar 2027)</title>
+<meta name="description" content="What a heater, kettle or any appliance costs per hour, day and month at the Ofgem price cap rate of 32.69p/kWh (Jan–Mar 2027). Electric heater vs gas boiler.">
+<link rel="canonical" href="https://lumen-ledger.github.io/uk-appliance-running-cost/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Lumen &amp; Ledger">
+<meta property="og:locale" content="en_GB">
+<meta property="og:title" content="UK appliance running cost calculator (Ofgem cap Jan–Mar 2027)">
+<meta property="og:description" content="What a heater, kettle or any appliance costs per hour, day and month at the Ofgem price cap rate of 32.69p/kWh (Jan–Mar 2027). Electric heater vs gas boiler.">
+<meta property="og:url" content="https://lumen-ledger.github.io/uk-appliance-running-cost/">
+<meta name="twitter:card" content="summary">
+<style>
+:root{--navy:#0F2A3D;--sun:#F2B33D;--paper:#F7F5EF;--line:#d9d4c7;--warn:#C2452D}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--navy)}
+header{background:var(--navy);color:#fff;padding:32px 20px}
+.wrap{max-width:760px;margin:0 auto}
+header h1{margin:0;font-size:1.7rem}
+header p{margin:8px 0 0;color:#d6dde2}
+nav{font-size:.9rem;margin-bottom:10px}nav a{color:var(--sun)}
+main{padding:24px 20px}
+h2{font-size:1.15rem;margin:28px 0 6px}
+ul,ol{padding-left:20px}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:10px 0}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#ece8dc}
+.note{border-left:4px solid var(--warn);background:#fff;padding:10px 14px;font-size:.93rem}
+.box{border:1px solid var(--line);background:#fff;padding:14px 16px}
+.box label{display:block;font-size:.9rem;margin-top:8px}
+.box input,.box select{width:100%;max-width:260px;padding:6px;font:inherit}
+.presets button{margin:4px 4px 0 0;padding:4px 8px;font:inherit;font-size:.85rem;border:1px solid var(--line);background:#f3f0e6;border-radius:4px;cursor:pointer}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.out{font-size:1.05rem;margin-top:12px}
+footer{padding:20px;font-size:.82rem;color:#5b6770}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <nav><a href="../">Lumen &amp; Ledger</a> · <a href="../uk-bank-holidays-2027-leave-planner/">UK bank holidays 2027</a> · <a href="#vs-gas">Electric heater vs gas</a> · <a href="#faq">FAQ</a></nav>
+  <h1>What does it cost to run a heater (or any appliance) in the UK?</h1>
+  <p>Cost = watts ÷ 1,000 × hours × your unit rate. At the Ofgem price cap average of 32.69p per kWh, a 2,000 W heater on full power costs <b>65.38p</b> per hour.</p>
+</div></header>
+<main class="wrap">
+<p class="note">General information, not financial or safety advice. Rates: Ofgem, energy price cap 1 January to 31 March 2027, average for Direct Debit customers in England, Scotland and Wales (published 2026-11-25, read 2026-11-27): electricity 32.69p/kWh with no VAT (the government removed VAT from electricity bills from 1 October 2026 to 30 June 2027), gas 10.96p/kWh including 5% VAT. Your rate depends on region, payment method and tariff: use the unit rate on your bill. The cap for April–June 2027 is due by 23 February 2027.</p>
+
+<h2>Calculator</h2>
+<div class="box">
+  <div class="presets">Example wattages (check the rating plate):
+    <button type="button" data-w="2000">Fan heater 2,000</button><button type="button" data-w="3000">Heater 3,000</button><button type="button" data-w="1000">Heater low 1,000</button><button type="button" data-w="100">Electric blanket 100</button><button type="button" data-w="3000">Kettle 3,000</button><button type="button" data-w="200">Dehumidifier 200</button><button type="button" data-w="1500">Air fryer 1,500</button>
+  </div>
+  <div class="grid">
+    <label>Power (watts)<input id="w" type="number" min="0" step="1" value="2000"></label>
+    <label>Unit rate (pence per kWh)<input id="r" type="number" min="0" step="0.01" value="32.69"></label>
+    <label>Hours used per day<input id="h" type="number" min="0" max="24" step="0.25" value="8"></label>
+    <label>Days per month<input id="d" type="number" min="0" max="31" step="1" value="30"></label>
+    <label>Share of time at full power (%)<input id="u" type="number" min="0" max="100" step="5" value="100"></label>
+  </div>
+  <div class="out" id="out" aria-live="polite"></div>
+</div>
+<p>Share of time at full power: 100% is the worst case. Appliances with a thermostat (heaters, fridges, ovens) switch their element on and off, so they use less than rating × hours. A plug-in energy monitor measures the real figure for any appliance with a 13 A plug.</p>
+
+<h2>Why the formula works</h2>
+<ul>
+<li>The wattage is on the rating plate (underneath or on the back). If only amps are given: watts = volts × amps; UK mains is nominally 230 V.</li>
+<li>kWh per day = watts × hours per day ÷ 1,000. Cost = kWh × unit rate. The rate is in pence per kWh: divide by 100 for pounds.</li>
+<li>The standing charge (54.77p a day for electricity on the average Direct Debit cap) is paid regardless of use, so it is left out of the cost of any single appliance.</li>
+<li>Every resistance heater turns 1 kWh of electricity into 1 kWh of heat. Two 2,000 W heaters on full power cost the same per hour, whatever the type (fan, convector, oil-filled).</li>
+</ul>
+
+<h2>Electric heater cost at the price cap rate</h2>
+<p>Element on all the time (100% share), 32.69p per kWh. Monthly column = 8 hours a day for 30 days.</p>
+<table>
+<tr><th>Heater setting</th><th>kWh per hour</th><th>Per hour</th><th>8 h/day, 30 days</th></tr>
+<tr><td>Low 1,000 W</td><td>1</td><td>32.69p</td><td>£78.46</td></tr>
+<tr><td>Oil-filled 1,500 W</td><td>1.5</td><td>49.03p</td><td>£117.68</td></tr>
+<tr><td>Fan / convector 2,000 W</td><td>2</td><td>65.38p</td><td>£156.91</td></tr>
+<tr><td>High 3,000 W</td><td>3</td><td>98.07p</td><td>£235.37</td></tr>
+</table>
+
+<h2 id="christmas-lights">Christmas lights cost at the price cap rate</h2>
+<p>Same formula: add up the watts printed on each set's box or plug tag, then multiply by hours and the unit rate. The table assumes lights on 6 hours a day for 40 days (240 hours) at 32.69p per kWh. For your own display, enter the total watts in the calculator above, the hours per day and 30 or 31 days per month.</p>
+<table>
+<tr><th>Total wattage of the display</th><th>Per hour</th><th>Per day (6 h)</th><th>Season (6 h × 40 days)</th></tr>
+<tr><td>50 W</td><td>1.63p</td><td>9.81p</td><td>£3.92</td></tr>
+<tr><td>100 W</td><td>3.27p</td><td>19.61p</td><td>£7.85</td></tr>
+<tr><td>500 W</td><td>16.34p</td><td>98.07p</td><td>£39.23</td></tr>
+<tr><td>1,500 W</td><td>49.03p</td><td>£2.94</td><td>£117.68</td></tr>
+</table>
+<p>LED sets usually list far fewer watts than incandescent sets of similar length: use the actual ratings rather than a rule of thumb. In the U.S.? See <a href="../christmas-lights-cost/">Christmas lights cost by state</a>.</p>
+
+<h2 id="vs-gas">Electric heater vs gas central heating: cost per kWh of heat</h2>
+<p>At the price cap averages 1 kWh of electricity costs 32.69p and 1 kWh of gas 10.96p: 3.0 times less before boiler losses. A boiler turns only part of the gas into heat in the home; enter its efficiency to compare the cost of the same 1 kWh of heat.</p>
+<div class="box">
+  <div class="grid">
+    <label>Electricity (p/kWh)<input id="er" type="number" min="0" step="0.01" value="32.69"></label>
+    <label>Gas (p/kWh)<input id="gr" type="number" min="0" step="0.01" value="10.96"></label>
+    <label>Boiler efficiency (%)<input id="ef" type="number" min="1" max="100" step="1" value="90"></label>
+  </div>
+  <div class="out" id="hout" aria-live="polite"></div>
+</div>
+<p>The 90% default is an example, not a measured figure for any boiler: older or badly set up boilers can be lower. Not included: the electricity used by the boiler and pump, and heat lost from pipes. Heat pumps deliver more than 1 kWh of heat per kWh of electricity and are not covered by this comparison.</p>
+
+<h2 id="your-bill">Your yearly bill at the price cap</h2>
+<p>The cap sets a maximum unit rate and daily standing charge, not a maximum bill. Ofgem's headline of £2,166 a year (Jan–Mar 2027, Direct Debit) is what 2,500 kWh of electricity and 9,500 kWh of gas cost at those rates: electricity £1,017.16 (including £199.91 of standing charges), gas £1,149.42 (including £108.22), £2,166.58 in total, about £180.55 a month on average. Enter the yearly kWh from your bills or annual statement to get your own figure.</p>
+<div class="box">
+  <div class="grid">
+    <label>Electricity used per year (kWh)<input id="ek" type="number" min="0" step="10" value="2500"></label>
+    <label>Electricity unit rate (p/kWh)<input id="br" type="number" min="0" step="0.01" value="32.69"></label>
+    <label>Electricity standing charge (p/day)<input id="bs" type="number" min="0" step="0.01" value="54.77"></label>
+    <label>Gas used per year (kWh, 0 if none)<input id="gk" type="number" min="0" step="10" value="9500"></label>
+    <label>Gas unit rate (p/kWh)<input id="bgr" type="number" min="0" step="0.01" value="10.96"></label>
+    <label>Gas standing charge (p/day)<input id="bgs" type="number" min="0" step="0.01" value="29.65"></label>
+  </div>
+  <div class="out" id="bout" aria-live="polite"></div>
+</div>
+<p>Defaults: Ofgem's GB average Direct Debit cap for 1 January to 31 March 2027 (electricity without VAT until 30 June 2027, gas including 5% VAT). Your region, payment method and tariff change the rates: copy them from your bill. With no gas supply, set gas to 0 kWh (its standing charge is then left out). Energy use is higher in winter, so a winter quarter usually costs more than a quarter of the yearly figure. The cap for April–June 2027 is due by 23 February 2027.</p>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much does it cost to run an electric heater for an hour in the UK?", "acceptedAnswer": {"@type": "Answer", "text": "A 2,000 W fan or convector heater on full power uses 2 kWh per hour. At the Ofgem price cap average of 32.69p per kWh (Direct Debit, 1 January to 31 March 2027) that is 65.38p per hour; a 3,000 W heater costs 98.07p and a 1,000 W setting 32.69p."}}, {"@type": "Question", "name": "How much does a 2 kW heater add to the monthly bill?", "acceptedAnswer": {"@type": "Answer", "text": "Eight hours a day for 30 days on full power is 480 kWh: £156.91 at 32.69p per kWh. A thermostat that switches the element off half the time halves that figure. The standing charge (54.77p a day on average) is paid whether or not the heater is on, so it is not part of the heater's cost."}}, {"@type": "Question", "name": "Is an electric heater cheaper than gas central heating?", "acceptedAnswer": {"@type": "Answer", "text": "Not per unit of heat at price cap averages. 1 kWh of electricity costs 32.69p and becomes 1 kWh of heat; 1 kWh of gas costs 10.96p. If your boiler turns 90% of the gas into heat, 1 kWh of heat from gas costs 12.18p, so electric resistance heat costs about 2.7 times as much. A plug-in heater lowers the total bill only if it lets you turn the central heating down by more than that difference, for example by heating one room instead of the whole house."}}, {"@type": "Question", "name": "How much does an electric blanket cost to run?", "acceptedAnswer": {"@type": "Answer", "text": "A 100 W electric blanket uses 0.1 kWh per hour: about 3.3p at 32.69p per kWh. Eight hours a night for 30 nights is 24 kWh, £7.85."}}, {"@type": "Question", "name": "How much does it cost to boil a kettle?", "acceptedAnswer": {"@type": "Answer", "text": "A 3,000 W kettle running for 3 minutes uses 0.15 kWh: about 4.9p at 32.69p per kWh. Boiling only the water you need shortens the time and the cost in proportion."}}, {"@type": "Question", "name": "Why is my unit rate different from 32.69p?", "acceptedAnswer": {"@type": "Answer", "text": "32.69p is Ofgem's average for Direct Debit customers across England, Scotland and Wales on a standard variable tariff. Rates differ by region, payment method and tariff (fixed deals, Economy 7, prepayment). Use the unit rate printed on your bill; Ofgem's site lists the cap by region. Northern Ireland is not covered by the Ofgem cap."}}, {"@type": "Question", "name": "How much do Christmas lights cost to run in the UK?", "acceptedAnswer": {"@type": "Answer", "text": "Cost = total watts ÷ 1,000 × hours × unit rate. At 32.69p per kWh, every 100 W of lights on for 6 hours a day over 40 days (24 kWh) costs £7.85; a 500 W display costs £39.23 over the same period. Use the watts printed on each set and the unit rate on your bill."}}, {"@type": "Question", "name": "What does the £2,166 typical bill mean?", "acceptedAnswer": {"@type": "Answer", "text": "It is Ofgem's figure for a year at the Jan–Mar 2027 cap rates for a household on Direct Debit using electricity and gas. 2,500 kWh of electricity and 9,500 kWh of gas a year reproduce it: £817.25 plus £199.91 of standing charges for electricity, £1,041.20 plus £108.22 for gas, £2,166.58 in total. The cap limits the unit rates and standing charges, not the total bill: using more energy costs more."}}, {"@type": "Question", "name": "Does the next price cap change these figures?", "acceptedAnswer": {"@type": "Answer", "text": "Ofgem publishes the cap for 1 April to 30 June 2027 by 23 February 2027. Until then the figures here use the 1 January to 31 March 2027 cap. Enter the new unit rate in the calculator: every result scales in proportion to it."}}]}</script>
+<h2 id="faq">Questions</h2>
+<h3>How much does it cost to run an electric heater for an hour in the UK?</h3>
+<p>A 2,000 W fan or convector heater on full power uses 2 kWh per hour. At the Ofgem price cap average of 32.69p per kWh (Direct Debit, 1 January to 31 March 2027) that is 65.38p per hour; a 3,000 W heater costs 98.07p and a 1,000 W setting 32.69p.</p>
+<h3>How much does a 2 kW heater add to the monthly bill?</h3>
+<p>Eight hours a day for 30 days on full power is 480 kWh: £156.91 at 32.69p per kWh. A thermostat that switches the element off half the time halves that figure. The standing charge (54.77p a day on average) is paid whether or not the heater is on, so it is not part of the heater's cost.</p>
+<h3>Is an electric heater cheaper than gas central heating?</h3>
+<p>Not per unit of heat at price cap averages. 1 kWh of electricity costs 32.69p and becomes 1 kWh of heat; 1 kWh of gas costs 10.96p. If your boiler turns 90% of the gas into heat, 1 kWh of heat from gas costs 12.18p, so electric resistance heat costs about 2.7 times as much. A plug-in heater lowers the total bill only if it lets you turn the central heating down by more than that difference, for example by heating one room instead of the whole house.</p>
+<h3>How much does an electric blanket cost to run?</h3>
+<p>A 100 W electric blanket uses 0.1 kWh per hour: about 3.3p at 32.69p per kWh. Eight hours a night for 30 nights is 24 kWh, £7.85.</p>
+<h3>How much does it cost to boil a kettle?</h3>
+<p>A 3,000 W kettle running for 3 minutes uses 0.15 kWh: about 4.9p at 32.69p per kWh. Boiling only the water you need shortens the time and the cost in proportion.</p>
+<h3>Why is my unit rate different from 32.69p?</h3>
+<p>32.69p is Ofgem's average for Direct Debit customers across England, Scotland and Wales on a standard variable tariff. Rates differ by region, payment method and tariff (fixed deals, Economy 7, prepayment). Use the unit rate printed on your bill; Ofgem's site lists the cap by region. Northern Ireland is not covered by the Ofgem cap.</p>
+<h3>How much do Christmas lights cost to run in the UK?</h3>
+<p>Cost = total watts ÷ 1,000 × hours × unit rate. At 32.69p per kWh, every 100 W of lights on for 6 hours a day over 40 days (24 kWh) costs £7.85; a 500 W display costs £39.23 over the same period. Use the watts printed on each set and the unit rate on your bill.</p>
+<h3>What does the £2,166 typical bill mean?</h3>
+<p>It is Ofgem's figure for a year at the Jan–Mar 2027 cap rates for a household on Direct Debit using electricity and gas. 2,500 kWh of electricity and 9,500 kWh of gas a year reproduce it: £817.25 plus £199.91 of standing charges for electricity, £1,041.20 plus £108.22 for gas, £2,166.58 in total. The cap limits the unit rates and standing charges, not the total bill: using more energy costs more.</p>
+<h3>Does the next price cap change these figures?</h3>
+<p>Ofgem publishes the cap for 1 April to 30 June 2027 by 23 February 2027. Until then the figures here use the 1 January to 31 March 2027 cap. Enter the new unit rate in the calculator: every result scales in proportion to it.</p>
+
+<h2>Sources</h2>
+<ul>
+<li>Ofgem, “Changes to energy price cap between 1 January and 31 March 2027”, published 2026-11-25: <a href="https://www.ofgem.gov.uk/news/changes-energy-price-cap-between-1-january-and-31-march-2027">ofgem.gov.uk</a>, read 2026-11-27 (unit rates, standing charges, VAT on electricity, next announcement date).</li>
+<li>Ofgem, “Average gas and electricity usage”: <a href="https://www.ofgem.gov.uk/information-consumers/energy-advice-households/average-gas-and-electricity-use-explained">ofgem.gov.uk</a>, read 2026-11-27 (typical bill £2,166 a year for Jan–Mar 2027; the 2,500 / 9,500 kWh split above is our calculation reproducing that figure).</li>
+<li>Ofgem, energy price cap unit rates and standing charges by region and payment method: <a href="https://www.ofgem.gov.uk/your-energy-supply/your-energy-bill/energy-price-cap-unit-rates-and-standing-charges">ofgem.gov.uk</a>, read 2026-11-27.</li>
+</ul>
+<p>US rates and space heater vs gas furnace: <a href="../appliance-running-cost/">appliance running cost by U.S. state</a>. Italy: <a href="../it/quanto-consuma-stufetta-elettrica/">quanto consuma una stufetta elettrica</a>. Track what your bills add up to with the free <a href="../">utility bill tracker</a>.</p>
+</main>
+<footer class="wrap">© 2026 Lumen &amp; Ledger · Texts CC BY 4.0 · <a href="../">Tools</a> · <a href="../about/">About</a> · <a href="../privacy/">Privacy</a> · Contact: lumenledger.tools@proton.me</footer>
+<script src="../scripts/appliance_cost.js"></script>
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)};
+  function gbp(p){return p<100?p.toFixed(p<10?1:0)+'p':'£'+(p/100).toFixed(2)}
+  function num(i){return parseFloat($(i).value)||0}
+  function calc(){
+    var r=ApplianceCost.run({watts:num('w'),hours:num('h'),days:num('d'),duty:num('u'),rate:num('r')});
+    $('out').innerHTML='Per hour: <b>'+gbp(r.hour.usd)+'</b> ('+r.hour.kwh.toFixed(2)+' kWh) · Per day: <b>'+gbp(r.day.usd)+'</b> ('+r.day.kwh.toFixed(1)+' kWh) · Per month: <b>'+gbp(r.month.usd)+'</b> ('+r.month.kwh.toFixed(0)+' kWh)';
+  }
+  function hcalc(){
+    var e=num('er'),g=num('gr')/((num('ef')||90)/100);
+    $('hout').innerHTML='1 kWh of heat: electric heater <b>'+e.toFixed(2)+'p</b> · gas boiler <b>'+g.toFixed(2)+'p</b>'+(g>0?' · electric resistance costs <b>'+(e/g).toFixed(1)+'×</b> as much':'');
+  }
+  function bcalc(){
+    var e=num('ek')*num('br')+365*num('bs'),g=num('gk')>0?num('gk')*num('bgr')+365*num('bgs'):0;
+    $('bout').innerHTML='Electricity <b>'+gbp(e)+'</b> · Gas <b>'+gbp(g)+'</b> · Total per year <b>'+gbp(e+g)+'</b> · Monthly average <b>'+gbp((e+g)/12)+'</b>';
+  }
+  ['ek','br','bs','gk','bgr','bgs'].forEach(function(i){$(i).addEventListener('input',bcalc)});
+  ['w','h','d','u','r'].forEach(function(i){$(i).addEventListener('input',calc)});
+  ['er','gr','ef'].forEach(function(i){$(i).addEventListener('input',hcalc)});
+  $('r').addEventListener('input',function(){$('er').value=$('r').value;hcalc()});
+  document.querySelectorAll('.presets button').forEach(function(b){b.addEventListener('click',function(){$('w').value=b.dataset.w;calc()})});
+  var q=new URLSearchParams(location.search),qr=parseFloat(q.get('rate')),qw=parseFloat(q.get('w'));
+  if(qr>=1&&qr<=200){$('r').value=qr;$('er').value=qr}
+  if(qw>0&&qw<=20000)$('w').value=qw;
+  calc();hcalc();bcalc();
+})();
+</script>
+</body>
+</html>
